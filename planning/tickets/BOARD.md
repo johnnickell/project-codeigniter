@@ -8,7 +8,8 @@ For an unqualified “what’s next?”, return the decision under **Now** and t
 
 ## Now
 
-Complete local build evidence for T-00001, then await the first hosted pull-request build and immutable clean-clone receipt before treating the bootstrap handoff as accepted.
+No local bootstrap action is pending. The governed CodeIgniter foundation is accepted; its repository now owns
+future local tickets, acceptance, and release decisions.
 
 ## Ready Frontier
 
@@ -17,3 +18,9 @@ No executable local ticket is planned.
 ## Waiting
 
 No ticket is currently waiting on an unfinished local dependency.
+
+## Recently Done
+
+| Ticket | Outcome |
+|--------|---------|
+| [T-00001 — Establish the Governed CodeIgniter Starter Foundation](00001-TICKET.md) | Established public Composer-only Fight package consumption, native CodeIgniter configuration and hello-world composition, canonical local and hosted builds, and an immutable clean-clone receipt without authorizing a release. |
