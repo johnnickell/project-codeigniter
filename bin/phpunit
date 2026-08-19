@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+cd "$(dirname "$0")/.."
+
+if [ "${PROJECT_CODEIGNITER_IN_BUILD:-0}" = "1" ]; then
+    exec php vendor/bin/phpunit --no-coverage "$@"
+fi
+
+exec docker compose run --rm app php vendor/bin/phpunit --no-coverage "$@"

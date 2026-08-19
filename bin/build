@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+set -eu
+
+image=project-codeigniter-build
+
+docker build --tag "$image" .
+docker run --rm --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
+    composer validate --strict
+    composer install --no-interaction --prefer-dist --no-progress
+    php scripts/governance-check.php
+    PROJECT_CODEIGNITER_IN_BUILD=1 ./bin/phpunit
+
+    production_root=$(mktemp -d)
+    trap "rm -rf \"$production_root\"" EXIT
+    cp -a . "$production_root"
+    cd "$production_root"
+    composer install --no-dev --no-interaction --prefer-dist --no-progress
+    php scripts/public-contract-check.php
+'
