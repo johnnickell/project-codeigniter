@@ -7,6 +7,7 @@ $required = [
     'ARCHITECTURE.md',
     'CONTRIBUTING.md',
     'SECURITY.md',
+    'planning/CONVENTIONS.md',
     'planning/README.md',
     'planning/tickets/BOARD.md',
     'planning/tickets/00001-TICKET.md',
