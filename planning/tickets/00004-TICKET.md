@@ -17,7 +17,8 @@ Domain/Application services, application configuration, routes, templates, and s
 ## Acceptance Criteria
 
 - [x] Composer resolves `johnnickell/fight-common` from the public VCS repository as `dev-develop` at
-  `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16`, with no local path repository or invented `1.2.0-dev` version.
+  `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16`, using the required `1.2.0-dev` candidate alias and no local
+  path repository.
 - [x] `Config\\Services` registers usable defaults for validation, security, cache, persistence/event store,
   Queue plus synchronous/async messaging, HTTP/PSR-18, request/response, filesystem/storage/transfer,
   process, scheduler, routing, mail, templating, observability, SMS, Mercure/private publication, and each
