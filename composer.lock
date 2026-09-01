@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd9ff850d8e8a8e2b8fc8e1c6cb41a7b",
+    "content-hash": "82d1343f3ac4fbec35b84527fc972cfc",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -5583,8 +5583,8 @@
         {
             "package": "johnnickell/fight-common",
             "version": "dev-develop",
-            "alias": "1.1.x-dev",
-            "alias_normalized": "1.1.9999999.9999999-dev"
+            "alias": "1.2.0-dev",
+            "alias_normalized": "1.2.0.0-dev"
         }
     ],
     "minimum-stability": "dev",
