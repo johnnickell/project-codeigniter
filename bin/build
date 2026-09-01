@@ -5,7 +5,9 @@ image=project-codeigniter-build
 
 docker build --file etc/docker/cli/Dockerfile --tag "$image" .
 docker run --rm --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
-    composer validate --strict
+    # This is an application, not a publishable package: Fight Common is deliberately
+    # pinned to an immutable VCS commit for the platform-profile receipt.
+    composer validate
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/governance-check.php
     PROJECT_CODEIGNITER_IN_BUILD=1 ./bin/phpunit

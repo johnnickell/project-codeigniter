@@ -4,12 +4,12 @@
 
 | PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | ready-for-agent | Boot and commit the CodeIgniter support receipt; retain 2.0 preparation as needs-info. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | Complete platform profile is booted; commit the support receipt next and retain 2.0 preparation as needs-info. |
 
 ## Route to 1.0
 
-1. Resolve the supported Fight Common 1.2 candidate through this starter's Composer installation.
-2. Activate selected CodeIgniter capabilities and prove lowest/latest booted journeys.
+1. Resolve the supported Fight Common candidate and establish its complete default CodeIgniter platform profile.
+2. Boot and prove every registered service and provider fallback.
 3. Commit `evidence/framework-support/receipt-v1.json` after local planning and build evidence pass.
 4. Revisit 2.0 only after Fight Common publishes its migration authority.
 
