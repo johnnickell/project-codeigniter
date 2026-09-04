@@ -21,8 +21,8 @@ profile in lowest/latest lanes, and commit an authority-validated canonical supp
 - [x] Lowest/latest journeys boot the selected service delegates, database Queue command/event delivery,
   transactions, response/routing, and provider-backed fallbacks.
 - [x] `evidence/framework-support/receipt-v1.json` records the actual latest lock SHA-256
-  `dbf4cb4e4917e5df8594cbd02c2881b28de813f551cc49231be5813f1c419dd8` and lowest lock SHA-256
-  `369ae17eebdccbdf501c075cf5ae0f1e6553af63c1830853ef578fc197d37f08`, with canonical content and receipt
+  `bdef44d0d3536b6ae4d4fd3346c948a01eb8a2e75743c0887bc949d1b71a9f83` and lowest lock SHA-256
+  `8c0027967f3a770bdcd77d20351118da4674edbd1c3ccce2e8c83623a3efc1fb`, with canonical content and receipt
   hashes, passed journeys, and no next action.
 - [x] The exact candidate's installed `StarterSupportReceiptAuthority`, `./bin/planning-check`, and
   `./bin/build` validate the committed receipt.
@@ -41,3 +41,9 @@ PRD-00002, the Specs index, and the Roadmap record this completed 1.2 adoption a
 
 Fight Common 2.0 migration discovery remains the separately deferred T-00003 `needs-info` ticket; this completed
 ticket neither defines that contract nor inventories its breaking changes.
+
+## Completion Notes
+
+The immutable Fight Common 1.2 adoption is complete. T-00002 retains ownership of the final
+authority-validated CodeIgniter default-profile receipt certification; T-00004 remains the completed preliminary
+profile foundation.

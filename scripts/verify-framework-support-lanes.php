@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 const FIGHT_COMMON_REFERENCE = '4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16';
 const FIGHT_COMMON_CONSTRAINT = 'dev-develop#4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 as 1.2.0-dev';
+const FLYSYSTEM_CONSTRAINT = '^3.36';
+const FLYSYSTEM_LOCAL_CONSTRAINT = '^3.35';
+const FLYSYSTEM_FLOOR = '3.36.0';
+const FLYSYSTEM_LOCAL_FLOOR = '3.35.0';
 
 const APPROVED_RUNTIME_REQUIREMENTS = [
     'codeigniter4/framework',
@@ -196,6 +200,10 @@ function verifyManifest(string $manifestPath): void
     if (($manifest['require']['johnnickell/fight-common'] ?? null) !== FIGHT_COMMON_CONSTRAINT) {
         throw new RuntimeException('Every dependency lane must retain the required immutable Fight Common candidate constraint.');
     }
+    if (($manifest['require']['league/flysystem'] ?? null) !== FLYSYSTEM_CONSTRAINT
+        || ($manifest['require']['league/flysystem-local'] ?? null) !== FLYSYSTEM_LOCAL_CONSTRAINT) {
+        throw new RuntimeException('Every dependency lane must require the non-overlapping Flysystem generation.');
+    }
 }
 
 function verifyLock(string $lockPath, string $name): void
@@ -203,11 +211,19 @@ function verifyLock(string $lockPath, string $name): void
     $lock = json_decode(file_get_contents($lockPath), true, flags: JSON_THROW_ON_ERROR);
     $packages = array_merge($lock['packages'] ?? [], $lock['packages-dev'] ?? []);
     $common = null;
+    $flysystem = null;
+    $flysystemLocal = null;
 
     foreach ($packages as $package) {
         $packageName = $package['name'] ?? '';
         if ($packageName === 'johnnickell/fight-common') {
             $common = $package;
+        }
+        if ($packageName === 'league/flysystem') {
+            $flysystem = $package;
+        }
+        if ($packageName === 'league/flysystem-local') {
+            $flysystemLocal = $package;
         }
         if (str_starts_with($packageName, 'symfony/') && ! isset(APPROVED_SYMFONY_PACKAGES[$packageName])) {
             throw new RuntimeException(sprintf('%s lane contains unsupported Symfony framework package %s.', $name, $packageName));
@@ -221,6 +237,10 @@ function verifyLock(string $lockPath, string $name): void
 
     if (($common['version'] ?? null) !== 'dev-develop' || ($common['source']['reference'] ?? null) !== FIGHT_COMMON_REFERENCE) {
         throw new RuntimeException(sprintf('%s lane does not lock the required Fight Common candidate identity.', $name));
+    }
+    if (version_compare((string) ($flysystem['version'] ?? ''), FLYSYSTEM_FLOOR, '<')
+        || version_compare((string) ($flysystemLocal['version'] ?? ''), FLYSYSTEM_LOCAL_FLOOR, '<')) {
+        throw new RuntimeException(sprintf('%s lane does not lock the required non-overlapping Flysystem floors.', $name));
     }
 }
 
@@ -249,6 +269,9 @@ function run(string $directory, array $command): void
     fwrite(STDOUT, $output);
     if ($status !== 0) {
         throw new RuntimeException(sprintf('Dependency-lane command failed: %s', implode(' ', $command)));
+    }
+    if (($command[0] ?? null) === 'composer' && str_contains($output, 'Ambiguous class resolution')) {
+        throw new RuntimeException(sprintf('Dependency-lane Composer command emitted an ambiguous class resolution warning: %s', implode(' ', $command)));
     }
 }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45b94746ba2f36efd23018704a96878b",
+    "content-hash": "23a5b3db4513217b5e9f68c78f4a2bea",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -1020,7 +1020,7 @@
                 "MIT"
             ],
             "description": "A shared PHP library for Hexagonal Architecture, CQRS, and reusable domain primitives",
-            "time": "2026-09-04T00:25:39+00:00"
+            "time": "2026-09-04T07:42:39+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
