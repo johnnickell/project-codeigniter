@@ -3,8 +3,10 @@
 declare(strict_types=1);
 
 use CodeIgniter\Config\Services as CoreServices;
+use CodeIgniter\Events\Events;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Queue\Payloads\Payload;
+use CodeIgniter\Queue\Events\QueueEvent;
+use CodeIgniter\Queue\Events\QueueEventManager;
 use CodeIgniter\Test\CIUnitTestCase;
 use Fight\Common\Adapter\HttpClient\Guzzle\GuzzleClient;
 use Fight\Common\Adapter\Http\CodeIgniter\JSendResponse;
@@ -247,6 +249,8 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
         $this->assertSame('receipt', $report->results()[0]->name());
         $this->assertSame('available', $report->results()[0]->message());
 
+        $this->assertInstanceOf(\Fight\Common\Adapter\Sms\Null\NullSmsTransport::class, service('fightSmsTransport', false));
+
         $sms = new RecordingProfileSmsTransport();
         CoreServices::injectMock('fightSmsTransport', $sms);
         service('fightSmsTransport')->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('safe fallback'));
@@ -262,10 +266,32 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
         ], $hub->updates);
     }
 
+    public function test_production_sms_profile_composes_the_twilio_adapter_without_a_network_request(): void
+    {
+        $environment = [
+            'CI_ENVIRONMENT=production',
+            'fightcommon_jwtSecret=' . escapeshellarg(str_repeat('a', 64)),
+            'fightcommon_mercureUrl=' . escapeshellarg('https://mercure.example.test/.well-known/mercure'),
+            'fightcommon_mercureJwt=' . escapeshellarg('header.payload.signature'),
+            'fightcommon_twilioAccountSid=' . escapeshellarg('AC00000000000000000000000000000000'),
+            'fightcommon_twilioAuthToken=' . escapeshellarg('test-auth-token'),
+        ];
+
+        exec(
+            implode(' ', $environment) . ' ' . escapeshellarg(PHP_BINARY) . ' scripts/verify-production-framework-support-profile.php --assert-twilio 2>&1',
+            $lines,
+            $status,
+        );
+
+        $this->assertSame(0, $status);
+        $this->assertContains('Production Twilio SMS adapter used the injected HTTP client.', $lines);
+    }
+
     public function test_database_queue_jobs_deliver_complete_command_and_retry_event_envelopes(): void
     {
         $commandBus = new RecordingSynchronousCommandBus();
         $eventDeliveries = [];
+        $queueEvents = [];
         $eventDispatcher = new SimpleEventDispatcher();
         $eventDispatcher->register(new RecordingReceiptEventSubscriber('first', $eventDeliveries));
         $eventDispatcher->register(new RecordingReceiptEventSubscriber('second', $eventDeliveries));
@@ -275,6 +301,27 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
 
         CoreServices::injectMock('fightCommandMessageHandler', new CommandMessageHandler($commandBus));
         CoreServices::injectMock('fightEventMessageHandler', new EventMessageHandler($eventDispatcher));
+
+        $queueEventListener = static function (QueueEvent $event) use (&$queueEvents): void {
+            $queueEvents[] = [
+                'type' => $event->getType(),
+                'queue' => $event->getQueue(),
+                'job_class' => $event->getJobClass(),
+                'exception' => $event->getExceptionMessage(),
+            ];
+        };
+        $queueEventTypes = [
+            QueueEventManager::JOB_PUSHED,
+            QueueEventManager::JOB_PROCESSING_STARTED,
+            QueueEventManager::JOB_PROCESSING_COMPLETED,
+            QueueEventManager::JOB_FAILED,
+            QueueEventManager::WORKER_STARTED,
+            QueueEventManager::WORKER_STOPPED,
+        ];
+
+        foreach ($queueEventTypes as $queueEventType) {
+            Events::on($queueEventType, $queueEventListener);
+        }
 
         $commandMessage = new CommandMessage(
             MessageId::fromString('11111111-1111-4111-8111-111111111111'),
@@ -289,14 +336,31 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
             Meta::create(['trace_id' => 'trace-event', 'attempt' => 1]),
         );
 
-        service('fightCommandBus')->dispatch($commandMessage);
-        service('fightEventDispatcher')->dispatch($eventMessage);
+        try {
+            service('fightCommandBus')->dispatch($commandMessage);
+            service('fightEventDispatcher')->dispatch($eventMessage);
 
-        $queue = service('queue');
-        $command = $queue->pop('fight', ['default']);
-        $this->assertNotNull($command);
-        $this->processQueuedJob($command);
-        $this->assertTrue($queue->done($command));
+            $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:work', [
+                'fight',
+                'max-jobs' => 2,
+            ]));
+            $this->assertSame(1, db_connect()->table('queue_jobs_failed')->where('queue', 'fight')->countAllResults());
+
+            $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:retry', [
+                'all',
+                'queue' => 'fight',
+            ]));
+            $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:work', [
+                'fight',
+                'max-jobs' => 1,
+            ]));
+            $this->assertSame(0, db_connect()->table('queue_jobs_failed')->where('queue', 'fight')->countAllResults());
+            $this->assertSame(0, db_connect()->table('queue_jobs')->where('queue', 'fight')->countAllResults());
+        } finally {
+            foreach ($queueEventTypes as $queueEventType) {
+                Events::removeListener($queueEventType, $queueEventListener);
+            }
+        }
 
         $this->assertSame([[
             'id' => '11111111-1111-4111-8111-111111111111',
@@ -306,36 +370,28 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
             'meta' => ['trace_id' => 'trace-command', 'source' => 'queue-journey'],
         ]], $commandBus->deliveries);
 
-        $event = $queue->pop('fight', ['default']);
-        $this->assertNotNull($event);
-        try {
-            $this->processQueuedJob($event);
-            self::fail('The first event worker attempt should fail after all subscribers receive the event.');
-        } catch (\Fight\Common\Application\Messaging\Event\EventDispatchFailed $exception) {
-            $this->assertCount(1, $exception->failures());
-        }
-        $this->assertTrue($queue->failed($event, new \RuntimeException('retry this event'), true));
-        $this->assertSame(1, $queue->retry(null, 'fight'));
-
-        $retriedEvent = $queue->pop('fight', ['default']);
-        $this->assertNotNull($retriedEvent);
-        $this->processQueuedJob($retriedEvent);
-        $this->assertTrue($queue->done($retriedEvent));
-
         $this->assertSame([
             ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
             ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
             ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
             ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
         ], $eventDeliveries);
-    }
 
-    private function processQueuedJob(\CodeIgniter\Queue\Entities\QueueJob $queueJob): void
-    {
-        $payload = Payload::fromArray($queueJob->payload);
-        $jobClass = config('Queue')->resolveJobClass($payload->getJob());
-
-        (new $jobClass($payload->getData()))->process();
+        $this->assertSame([
+            ['type' => QueueEventManager::JOB_PUSHED, 'queue' => 'fight', 'job_class' => 'fight-command', 'exception' => null],
+            ['type' => QueueEventManager::JOB_PUSHED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
+            ['type' => QueueEventManager::WORKER_STARTED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
+            ['type' => QueueEventManager::JOB_PROCESSING_STARTED, 'queue' => 'fight', 'job_class' => 'fight-command', 'exception' => null],
+            ['type' => QueueEventManager::JOB_PROCESSING_COMPLETED, 'queue' => 'fight', 'job_class' => 'fight-command', 'exception' => null],
+            ['type' => QueueEventManager::JOB_PROCESSING_STARTED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
+            ['type' => QueueEventManager::JOB_FAILED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => 'Event dispatch failed in 1 handler(s).'],
+            ['type' => QueueEventManager::WORKER_STOPPED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
+            ['type' => QueueEventManager::JOB_PUSHED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
+            ['type' => QueueEventManager::WORKER_STARTED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
+            ['type' => QueueEventManager::JOB_PROCESSING_STARTED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
+            ['type' => QueueEventManager::JOB_PROCESSING_COMPLETED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
+            ['type' => QueueEventManager::WORKER_STOPPED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
+        ], $queueEvents);
     }
 }
 

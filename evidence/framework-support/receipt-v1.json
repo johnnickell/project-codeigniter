@@ -1,6 +1,6 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "bef76cbb7bae7e8a2a830382549ba79f50971fe3910c9a420c033d509bb3998b",
+    "content_id": "b484ff4a373fa885d2a3554cbc91967cda355624d0a6579f8305bdf9b4baf956",
     "candidate": {
         "package": "johnnickell/fight-common",
         "version": "1.2.0-dev",
@@ -16,6 +16,7 @@
             "guzzlehttp/guzzle@7.15.5",
             "lcobucci/jwt@5.6.0",
             "league/flysystem@3.36.0",
+            "league/flysystem-local@3.35.3",
             "phpseclib/phpseclib@3.0.57",
             "symfony/filesystem@v8.1.6",
             "symfony/mailer@v8.1.5",
@@ -25,7 +26,7 @@
             "twilio/sdk@8.12.0"
         ]
     },
-    "lock_sha256": "81ef00c77c057ae6921cbcffb3619e9fa1aeb80399137395d55ca48118307ba9",
+    "lock_sha256": "dbf4cb4e4917e5df8594cbd02c2881b28de813f551cc49231be5813f1c419dd8",
     "capabilities": {
         "container.codeigniter_services": "ship",
         "validation.native_services": "wire",
@@ -52,19 +53,19 @@
         {
             "name": "lowest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=dd85773a8e0f97cf64ed501ce9388e4708b9ff7ecddbed6a1171017eaeac653e; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=369ae17eebdccbdf501c075cf5ae0f1e6553af63c1830853ef578fc197d37f08; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         },
         {
             "name": "latest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "composer.lock#sha256=81ef00c77c057ae6921cbcffb3619e9fa1aeb80399137395d55ca48118307ba9; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "composer.lock#sha256=dbf4cb4e4917e5df8594cbd02c2881b28de813f551cc49231be5813f1c419dd8; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         }
     ],
     "result": "passed",
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "0e6cb06c2ab18f4a04b25e48ebee5c34d76bb010dc888a88d20714b0ca124d48"
+        "receipt_sha256": "f4b66f2f16b2277b8b45e11627f38fe12d5246c312f9b865e97f7436f5972084"
     },
     "next_action": null
 }

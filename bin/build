@@ -9,6 +9,7 @@ docker run --rm --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/verify-composer-runtime-policy.php
     php scripts/governance-check.php
+    ./bin/planning-check
     PROJECT_CODEIGNITER_IN_BUILD=1 ./bin/phpunit
     php scripts/verify-framework-support-lanes.php
     php scripts/generate-framework-support-receipt.php

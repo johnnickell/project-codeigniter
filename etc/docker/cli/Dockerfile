@@ -1,7 +1,7 @@
 FROM php:8.5-cli-bookworm
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends --yes git libicu-dev unzip \
+    && apt-get install --no-install-recommends --yes git libicu-dev python3 unzip \
     && docker-php-ext-install intl \
     && rm -rf /var/lib/apt/lists/*
 

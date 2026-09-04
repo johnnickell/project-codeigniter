@@ -290,6 +290,11 @@ class Services extends BaseService
     public static function fightSmsTransport(bool $getShared = true): \Fight\Common\Application\Sms\Transport\SmsTransport
     {
         if ($getShared) return static::getSharedInstance('fightSmsTransport');
+
+        if (ENVIRONMENT === 'production') {
+            return new \Fight\Common\Adapter\Sms\Twilio\TwilioSmsTransport(static::fightTwilioClient());
+        }
+
         return new \Fight\Common\Adapter\Sms\Null\NullSmsTransport();
     }
 

@@ -2,7 +2,9 @@
 
 ## In progress
 
-No strategic delivery is currently in progress.
+| Epic | Target version | Status | Current outcome |
+| --- | --- | --- | --- |
+| — | — | — | No strategic delivery is currently in progress. |
 
 ## Route to 1.0
 

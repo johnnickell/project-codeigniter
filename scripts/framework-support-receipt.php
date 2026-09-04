@@ -83,7 +83,7 @@ function frameworkSupportReceipt(string $projectRoot): array
                 static fn (string $name): string => $name . '@' . $version($name),
                 [
                     'codeigniter4/queue', 'doctrine/dbal', 'dragonmantank/cron-expression',
-                    'guzzlehttp/guzzle', 'lcobucci/jwt', 'league/flysystem', 'phpseclib/phpseclib',
+                    'guzzlehttp/guzzle', 'lcobucci/jwt', 'league/flysystem', 'league/flysystem-local', 'phpseclib/phpseclib',
                     'symfony/filesystem', 'symfony/mailer', 'symfony/mercure', 'symfony/process',
                     'twig/twig', 'twilio/sdk',
                 ],

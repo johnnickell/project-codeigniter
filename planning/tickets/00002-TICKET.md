@@ -21,8 +21,8 @@ profile in lowest/latest lanes, and commit an authority-validated canonical supp
 - [x] Lowest/latest journeys boot the selected service delegates, database Queue command/event delivery,
   transactions, response/routing, and provider-backed fallbacks.
 - [x] `evidence/framework-support/receipt-v1.json` records the actual latest lock SHA-256
-  `81ef00c77c057ae6921cbcffb3619e9fa1aeb80399137395d55ca48118307ba9` and lowest lock SHA-256
-  `dd85773a8e0f97cf64ed501ce9388e4708b9ff7ecddbed6a1171017eaeac653e`, with canonical content and receipt
+  `dbf4cb4e4917e5df8594cbd02c2881b28de813f551cc49231be5813f1c419dd8` and lowest lock SHA-256
+  `369ae17eebdccbdf501c075cf5ae0f1e6553af63c1830853ef578fc197d37f08`, with canonical content and receipt
   hashes, passed journeys, and no next action.
 - [x] The exact candidate's installed `StarterSupportReceiptAuthority`, `./bin/planning-check`, and
   `./bin/build` validate the committed receipt.
@@ -32,3 +32,12 @@ profile in lowest/latest lanes, and commit an authority-validated canonical supp
 Verified through `php scripts/verify-framework-support-lanes.php`,
 `php scripts/generate-framework-support-receipt.php`,
 `php scripts/verify-framework-support-receipt.php`, `./bin/planning-check`, and `./bin/build`.
+
+## Documentation Impact
+
+PRD-00002, the Specs index, and the Roadmap record this completed 1.2 adoption and support-evidence outcome.
+
+## Exclusions
+
+Fight Common 2.0 migration discovery remains the separately deferred T-00003 `needs-info` ticket; this completed
+ticket neither defines that contract nor inventories its breaking changes.

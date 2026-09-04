@@ -9,7 +9,6 @@ use Fight\Common\Application\Observability\HealthCheck;
 use Fight\Common\Application\Observability\MetricsCollector;
 use Fight\Common\Application\Process\ProcessBuilder;
 use Fight\Common\Application\Sms\Message\SmsMessage;
-use Fight\Common\Application\Sms\Transport\SmsTransport;
 use Fight\Common\Domain\EventSourcing\Exception\EventMappingException;
 use Fight\Common\Domain\EventSourcing\StreamId;
 use Fight\Common\Domain\Exception\LookupException;
@@ -35,10 +34,11 @@ $paths = new Paths();
 require $paths->systemDirectory . '/Boot.php';
 Boot::bootConsole($paths);
 
+$assertTwilio = in_array('--assert-twilio', $argv, true);
+
 try {
     $jwtEncoder = service('fightJwtEncoder');
     $jwtDecoder = service('fightJwtDecoder');
-    service('fightTwilioClient');
     $configuredHub = service('fightMercureHub');
     productionAssert($configuredHub instanceof Hub, 'Production profile must construct a configured Mercure Hub.');
 
@@ -128,14 +128,55 @@ try {
     });
     productionAssert($health->report()->isHealthy(), 'Health reporter failed.');
 
-    $sms = new class implements SmsTransport {
-        /** @var list<string|null> */
-        public array $bodies = [];
-        public function send(SmsMessage $message): void { $this->bodies[] = $message->getBody(); }
+    $twilioRequests = [];
+    $twilioHttpClient = new class($twilioRequests) implements \Twilio\Http\Client {
+        /** @var list<array{method: string, data: array<string, mixed>}> */
+        private array $requests;
+
+        /** @param list<array{method: string, data: array<string, mixed>}> $requests */
+        public function __construct(array &$requests)
+        {
+            $this->requests =& $requests;
+        }
+
+        public function request(
+            string $method,
+            string $url,
+            array $params = [],
+            array $data = [],
+            array $headers = [],
+            ?string $user = null,
+            ?string $password = null,
+            ?int $timeout = null,
+            $authStrategy = null,
+        ): \Twilio\Http\Response {
+            $this->requests[] = ['method' => $method, 'data' => $data];
+
+            return new \Twilio\Http\Response(201, '{"sid":"SM00000000000000000000000000000000"}');
+        }
     };
-    CoreServices::injectMock('fightSmsTransport', $sms);
-    service('fightSmsTransport')->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('production fallback'));
-    productionAssert(['production fallback'] === $sms->bodies, 'SMS service did not receive the local message.');
+    $config = config('FightCommon');
+    CoreServices::injectMock('fightTwilioClient', new \Twilio\Rest\Client(
+        $config->twilioAccountSidForEnvironment(),
+        $config->twilioAuthTokenForEnvironment(),
+        null,
+        null,
+        $twilioHttpClient,
+    ));
+    $sms = service('fightSmsTransport');
+    productionAssert($sms instanceof \Fight\Common\Adapter\Sms\Twilio\TwilioSmsTransport, 'Production profile did not select the Twilio SMS transport.');
+    $sms->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('production profile'));
+    productionAssert([[
+        'method' => 'POST',
+        'data' => [
+            'To' => '+15550000001',
+            'From' => '+15550000002',
+            'Body' => 'production profile',
+        ],
+    ]] === $twilioRequests, 'Twilio SMS transport did not send the expected to, from, and body through the injected HTTP client.');
+    if ($assertTwilio) {
+        fwrite(STDOUT, "Production Twilio SMS adapter used the injected HTTP client.\n");
+    }
 
     try {
         service('fightEventStore')->append(new StreamId('profile', 'default'), 0, [EventMessage::create(new class('mapping-required') implements Event {

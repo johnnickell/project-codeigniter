@@ -15,6 +15,7 @@ const APPROVED_RUNTIME_REQUIREMENTS = [
     'johnnickell/fight-common',
     'lcobucci/jwt',
     'league/flysystem',
+    'league/flysystem-local',
     'php',
     'phpseclib/phpseclib',
     'symfony/filesystem',
