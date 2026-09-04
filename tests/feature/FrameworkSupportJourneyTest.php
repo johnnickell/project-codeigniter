@@ -2,16 +2,32 @@
 
 declare(strict_types=1);
 
-use CodeIgniter\Events\Events;
+use CodeIgniter\Config\Services as CoreServices;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Queue\Events\QueueEvent;
-use CodeIgniter\Queue\Events\QueueEventManager;
+use CodeIgniter\Queue\Payloads\Payload;
 use CodeIgniter\Test\CIUnitTestCase;
+use Fight\Common\Adapter\HttpClient\Guzzle\GuzzleClient;
 use Fight\Common\Adapter\Http\CodeIgniter\JSendResponse;
+use Fight\Common\Adapter\Messaging\Handler\CommandMessageHandler;
+use Fight\Common\Adapter\Messaging\Handler\EventMessageHandler;
+use Fight\Common\Adapter\Messaging\Event\Sync\SimpleEventDispatcher;
+use Fight\Common\Application\Observability\HealthCheck;
+use Fight\Common\Application\Process\ProcessBuilder;
+use Fight\Common\Application\Sms\Message\SmsMessage;
+use Fight\Common\Application\Messaging\Command\SynchronousCommandBus;
+use Fight\Common\Application\Messaging\Event\EventSubscriber;
+use Fight\Common\Domain\Observability\AuditEntry;
+use Fight\Common\Domain\Observability\HealthResult;
+use Fight\Common\Domain\Observability\HealthStatus;
 use Fight\Common\Domain\Messaging\Command\Command;
 use Fight\Common\Domain\Messaging\Command\CommandMessage;
 use Fight\Common\Domain\Messaging\Event\Event;
 use Fight\Common\Domain\Messaging\Event\EventMessage;
+use Fight\Common\Domain\Messaging\MessageId;
+use Fight\Common\Domain\Messaging\Meta;
+use Fight\Common\Domain\EventSourcing\Exception\EventMappingException;
+use Fight\Common\Domain\EventSourcing\StreamId;
+use Fight\Common\Domain\Exception\LookupException;
 
 /** @internal */
 final class FrameworkSupportJourneyTest extends CIUnitTestCase
@@ -93,70 +109,386 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
         $this->assertSame('success', json_decode((string) json_decode($response->getBody(), true), true)['status']);
     }
 
-    public function test_complete_platform_profile_defaults_boot_without_application_services(): void
+    public function test_default_request_event_store_and_synchronous_messaging_services_are_safe_and_configurable(): void
     {
-        $services = [
-            'fightPasswordHasher', 'fightPasswordValidator', 'fightJwtEncoder', 'fightJwtDecoder',
-            'fightValidation', 'fightRequest', 'fightResponse', 'fightEventMapper', 'fightEventStore',
-            'fightSynchronousCommandBus', 'fightSynchronousEventDispatcher', 'fightCommandMessageHandler',
-            'fightEventMessageHandler',
-            'fightHttpClient', 'fightPsr18Client', 'fightMessageFactory', 'fightUriFactory', 'fightFileStorage',
-            'fightFileTransfer', 'fightProcessRunner', 'fightScheduler', 'fightAuditLog', 'fightMetrics',
-            'fightHealthReporter', 'fightSmsTransport', 'fightTwilioClient', 'fightMercureHub', 'fightPublisher',
-            'fightPrivatePublisher',
-        ];
+        $request = service('fightRequest');
+        $this->assertSame('GET', $request->getMethod());
+        $this->assertSame('/', $request->getUri()->getPath());
 
-        foreach ($services as $service) {
-            $this->assertIsObject(service($service), $service);
+        $eventStore = service('fightEventStore');
+        $this->assertSame([], [...$eventStore->readAllAfter(0, 10)]);
+        try {
+            $eventStore->append(
+                new StreamId('receipt', 'unconfigured-domain'),
+                0,
+                [EventMessage::create(new ReceiptEvent('requires-project-mapping'))],
+            );
+            self::fail('The starter must require project-owned event mappings before persisting domain events.');
+        } catch (EventMappingException $exception) {
+            $this->assertSame('Unknown event class: ' . ReceiptEvent::class . '.', $exception->getMessage());
+        }
+        $this->assertSame([], [...$eventStore->readAllAfter(0, 10)]);
+
+        try {
+            service('fightSynchronousCommandBus')->execute(new ReceiptCommand('requires-project-handler'));
+            self::fail('The starter must require a project-owned command handler before dispatching a domain command.');
+        } catch (LookupException $exception) {
+            $this->assertSame('Handler not defined for command: ' . ReceiptCommand::class, $exception->getMessage());
+        }
+
+        service('fightSynchronousEventDispatcher')->trigger(new ReceiptEvent('no-project-subscribers'));
+        $this->addToAssertionCount(1);
+    }
+
+    public function test_security_validation_and_native_http_profile_services_have_consumer_outcomes(): void
+    {
+        $password = 'receipt-password';
+        $hash = service('fightPasswordHasher')->hash($password);
+        $this->assertTrue(service('fightPasswordValidator')->validate($password, $hash));
+        $this->assertFalse(service('fightPasswordValidator')->validate('wrong-password', $hash));
+
+        $token = service('fightJwtEncoder')->encode(
+            ['sub' => 'receipt-user', 'profile' => 'codeigniter'],
+            new \DateTimeImmutable('2030-01-01T00:00:00+00:00'),
+        );
+        $claims = service('fightJwtDecoder')->decode($token);
+        $this->assertSame('receipt-user', $claims['sub']);
+        $this->assertSame('codeigniter', $claims['profile']);
+
+        $validation = service('fightValidation');
+        $validation->setRules(['receipt' => 'required|min_length[7]']);
+        $this->assertTrue($validation->run(['receipt' => 'approved']));
+        $this->assertFalse($validation->run(['receipt' => 'no']));
+
+        $request = service('fightMessageFactory')->createRequest('GET', service('fightUriFactory')->createUri('https://profile.test/receipt'));
+        $mockTransport = new \GuzzleHttp\Handler\MockHandler([
+            new \GuzzleHttp\Psr7\Response(202, ['X-Profile' => 'native'], 'http-response'),
+            new \GuzzleHttp\Psr7\Response(203, ['X-Profile' => 'psr18'], 'psr18-response'),
+        ]);
+        CoreServices::injectMock('fightHttpClient', new GuzzleClient(new \GuzzleHttp\Client(['handler' => $mockTransport])));
+
+        $httpResponse = service('fightHttpClient')->send($request);
+        $this->assertSame(202, $httpResponse->getStatusCode());
+        $this->assertSame('native', $httpResponse->getHeaderLine('X-Profile'));
+        $this->assertSame('http-response', (string) $httpResponse->getBody());
+
+        $psr18Response = service('fightPsr18Client', false)->sendRequest($request);
+        $this->assertSame(203, $psr18Response->getStatusCode());
+        $this->assertSame('psr18-response', (string) $psr18Response->getBody());
+    }
+
+    public function test_storage_transfer_process_and_scheduler_profile_services_have_consumer_outcomes(): void
+    {
+        $storage = service('fightFileStorage');
+        $storage->putFile('journey/receipt.txt', 'stored');
+        $storage->copyFile('journey/receipt.txt', 'journey/copy.txt');
+        $storage->moveFile('journey/copy.txt', 'journey/moved.txt');
+        $this->assertTrue($storage->hasFile('journey/moved.txt'));
+        $this->assertSame('stored', $storage->getFileContents('journey/moved.txt'));
+        $this->assertSame(6, $storage->size('journey/moved.txt'));
+        $storage->removeFile('journey/receipt.txt');
+        $storage->removeFile('journey/moved.txt');
+
+        $transfer = service('fightFileTransfer');
+        $transfer->sendFile('/receipt.txt', 'ignored-by-null-fallback');
+        $this->assertSame('', $transfer->retrieveFileContents('/receipt.txt'));
+        $this->assertSame([], $transfer->readDirectory('/'));
+
+        $output = '';
+        $process = ProcessBuilder::create([PHP_BINARY, '-r', 'echo "process-complete";'])
+            ->stdout(static function (string $chunk) use (&$output): void { $output .= $chunk; })
+            ->getProcess();
+        service('fightProcessRunner')->attach($process);
+        service('fightProcessRunner')->run();
+        $this->assertSame('process-complete', $output);
+
+        $ran = false;
+        $scheduler = service('fightScheduler');
+        $lockPath = WRITEPATH . 'receipt-scheduled-job.lock';
+        @unlink($lockPath);
+        try {
+            $scheduler->addJob('receipt-scheduled-job', static fn (): bool => true, static function () use (&$ran): void { $ran = true; });
+            $scheduler->run();
+            $this->assertTrue($ran);
+        } finally {
+            @unlink($lockPath);
         }
     }
 
-    public function test_queue_command_event_failure_retry_and_completion_fan_out(): void
+    public function test_observability_sms_and_mercure_profile_services_have_safe_consumer_outcomes(): void
     {
-        $events = [];
-        foreach ([QueueEventManager::JOB_PUSHED, QueueEventManager::JOB_FAILED, QueueEventManager::JOB_PROCESSING_COMPLETED] as $eventName) {
-            Events::on($eventName, static function (QueueEvent $event) use (&$events): void {
-                $events[] = $event->getType();
-            });
-        }
+        $logger = new RecordingProfileLogger();
+        CoreServices::injectMock('logger', $logger);
+        service('fightAuditLog', false)->record(AuditEntry::record('receipt-user', 'profile-verified', ['source' => 'journey']));
+        $this->assertSame('info', $logger->entries[0]['level']);
+        $this->assertSame('audit', $logger->entries[0]['message']);
+        $this->assertSame('receipt-user', $logger->entries[0]['context']['actor']);
+        $this->assertSame('profile-verified', $logger->entries[0]['context']['action']);
+        $this->assertSame(['source' => 'journey'], $logger->entries[0]['context']['context']);
 
-        service('fightCommandBus')->dispatch(CommandMessage::create(new ReceiptCommand()));
-        service('fightEventDispatcher')->dispatch(EventMessage::create(new ReceiptEvent()));
+        $metrics = new RecordingProfileMetrics();
+        CoreServices::injectMock('fightMetrics', $metrics);
+        service('fightMetrics')->increment('profile.completed', ['framework' => 'codeigniter']);
+        service('fightMetrics')->gauge('profile.services', 1.0, ['framework' => 'codeigniter']);
+        service('fightMetrics')->histogram('profile.duration', 2.0, ['framework' => 'codeigniter']);
+        $this->assertSame([
+            ['increment', 'profile.completed', null, ['framework' => 'codeigniter']],
+            ['gauge', 'profile.services', 1.0, ['framework' => 'codeigniter']],
+            ['histogram', 'profile.duration', 2.0, ['framework' => 'codeigniter']],
+        ], $metrics->measurements);
+
+        $health = service('fightHealthReporter');
+        $health->addCheck(new class implements HealthCheck {
+            public function name(): string { return 'receipt'; }
+            public function check(): HealthResult { return new HealthResult('receipt', HealthStatus::healthy(), 'available'); }
+        });
+        $report = $health->report();
+        $this->assertTrue($report->isHealthy());
+        $this->assertSame('receipt', $report->results()[0]->name());
+        $this->assertSame('available', $report->results()[0]->message());
+
+        $sms = new RecordingProfileSmsTransport();
+        CoreServices::injectMock('fightSmsTransport', $sms);
+        service('fightSmsTransport')->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('safe fallback'));
+        $this->assertSame([['to' => '+15550000001', 'from' => '+15550000002', 'body' => 'safe fallback']], $sms->messages);
+
+        $hub = new RecordingProfileHub();
+        CoreServices::injectMock('fightMercureHub', $hub);
+        service('fightPublisher', false)->push('https://profile.test/public', 'public update');
+        service('fightPrivatePublisher', false)->pushPrivate('https://profile.test/private', 'private update');
+        $this->assertSame([
+            ['topics' => ['https://profile.test/public'], 'data' => 'public update', 'private' => false],
+            ['topics' => ['https://profile.test/private'], 'data' => 'private update', 'private' => true],
+        ], $hub->updates);
+    }
+
+    public function test_database_queue_jobs_deliver_complete_command_and_retry_event_envelopes(): void
+    {
+        $commandBus = new RecordingSynchronousCommandBus();
+        $eventDeliveries = [];
+        $eventDispatcher = new SimpleEventDispatcher();
+        $eventDispatcher->register(new RecordingReceiptEventSubscriber('first', $eventDeliveries));
+        $eventDispatcher->register(new RecordingReceiptEventSubscriber('second', $eventDeliveries));
+
+        $failFirstEventAttempt = true;
+        $eventDispatcher->register(new FailFirstReceiptEventSubscriber($failFirstEventAttempt));
+
+        CoreServices::injectMock('fightCommandMessageHandler', new CommandMessageHandler($commandBus));
+        CoreServices::injectMock('fightEventMessageHandler', new EventMessageHandler($eventDispatcher));
+
+        $commandMessage = new CommandMessage(
+            MessageId::fromString('11111111-1111-4111-8111-111111111111'),
+            new \DateTimeImmutable('2026-09-03T12:34:56+00:00'),
+            new ReceiptCommand('command-value'),
+            Meta::create(['trace_id' => 'trace-command', 'source' => 'queue-journey']),
+        );
+        $eventMessage = new EventMessage(
+            MessageId::fromString('22222222-2222-4222-8222-222222222222'),
+            new \DateTimeImmutable('2026-09-03T12:35:00+00:00'),
+            new ReceiptEvent('event-value'),
+            Meta::create(['trace_id' => 'trace-event', 'attempt' => 1]),
+        );
+
+        service('fightCommandBus')->dispatch($commandMessage);
+        service('fightEventDispatcher')->dispatch($eventMessage);
 
         $queue = service('queue');
         $command = $queue->pop('fight', ['default']);
         $this->assertNotNull($command);
-        $queue->failed($command, new \RuntimeException('expected failure'), true);
-        $this->assertSame(1, $queue->retry(null, 'fight'));
+        $this->processQueuedJob($command);
+        $this->assertTrue($queue->done($command));
 
-        $retried = $queue->pop('fight', ['default']);
-        $this->assertNotNull($retried);
-        QueueEventManager::jobFailed('database', 'fight', $retried, new \RuntimeException('expected failure'));
-        $queue->done($retried);
-        QueueEventManager::jobProcessingCompleted('database', 'fight', $retried, 0.01);
+        $this->assertSame([[
+            'id' => '11111111-1111-4111-8111-111111111111',
+            'timestamp' => '2026-09-03T12:34:56+00:00',
+            'payload_type' => ReceiptCommand::class,
+            'payload' => ['value' => 'command-value'],
+            'meta' => ['trace_id' => 'trace-command', 'source' => 'queue-journey'],
+        ]], $commandBus->deliveries);
 
         $event = $queue->pop('fight', ['default']);
         $this->assertNotNull($event);
-        $queue->done($event);
+        try {
+            $this->processQueuedJob($event);
+            self::fail('The first event worker attempt should fail after all subscribers receive the event.');
+        } catch (\Fight\Common\Application\Messaging\Event\EventDispatchFailed $exception) {
+            $this->assertCount(1, $exception->failures());
+        }
+        $this->assertTrue($queue->failed($event, new \RuntimeException('retry this event'), true));
+        $this->assertSame(1, $queue->retry(null, 'fight'));
+
+        $retriedEvent = $queue->pop('fight', ['default']);
+        $this->assertNotNull($retriedEvent);
+        $this->processQueuedJob($retriedEvent);
+        $this->assertTrue($queue->done($retriedEvent));
 
         $this->assertSame([
-            QueueEventManager::JOB_PUSHED,
-            QueueEventManager::JOB_PUSHED,
-            QueueEventManager::JOB_PUSHED,
-            QueueEventManager::JOB_FAILED,
-            QueueEventManager::JOB_PROCESSING_COMPLETED,
-        ], $events);
+            ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
+            ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
+            ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
+            ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
+        ], $eventDeliveries);
+    }
+
+    private function processQueuedJob(\CodeIgniter\Queue\Entities\QueueJob $queueJob): void
+    {
+        $payload = Payload::fromArray($queueJob->payload);
+        $jobClass = config('Queue')->resolveJobClass($payload->getJob());
+
+        (new $jobClass($payload->getData()))->process();
     }
 }
 
 final class ReceiptCommand implements Command
 {
-    public static function fromArray(array $data): static { return new self(); }
-    public function toArray(): array { return []; }
+    public function __construct(public readonly string $value) {}
+    public static function fromArray(array $data): static { return new self($data['value']); }
+    public function toArray(): array { return ['value' => $this->value]; }
 }
 
 final class ReceiptEvent implements Event
 {
-    public static function fromArray(array $data): static { return new self(); }
-    public function toArray(): array { return []; }
+    public function __construct(public readonly string $value) {}
+    public static function fromArray(array $data): static { return new self($data['value']); }
+    public function toArray(): array { return ['value' => $this->value]; }
+}
+
+final class RecordingSynchronousCommandBus implements SynchronousCommandBus
+{
+    /** @var list<array<string, mixed>> */
+    public array $deliveries = [];
+
+    public function execute(Command $command): void
+    {
+        $this->dispatch(CommandMessage::create($command));
+    }
+
+    public function dispatch(CommandMessage $commandMessage): void
+    {
+        $this->deliveries[] = receiptMessageSnapshot($commandMessage);
+    }
+}
+
+final class RecordingReceiptEventSubscriber implements EventSubscriber
+{
+    /** @param list<array<string, mixed>> $deliveries */
+    public function __construct(private readonly string $name, private array &$deliveries) {}
+
+    public static function eventRegistration(): array
+    {
+        return [ReceiptEvent::class => 'record'];
+    }
+
+    public function record(EventMessage $eventMessage): void
+    {
+        $this->deliveries[] = ['subscriber' => $this->name] + receiptMessageSnapshot($eventMessage);
+    }
+}
+
+final class FailFirstReceiptEventSubscriber implements EventSubscriber
+{
+    public function __construct(private bool &$failFirstAttempt) {}
+
+    public static function eventRegistration(): array
+    {
+        return [ReceiptEvent::class => ['fail', -100]];
+    }
+
+    public function fail(EventMessage $eventMessage): void
+    {
+        if ($this->failFirstAttempt) {
+            $this->failFirstAttempt = false;
+            throw new \RuntimeException('retry this event');
+        }
+    }
+}
+
+/** @return array<string, mixed> */
+function receiptMessageSnapshot(CommandMessage|EventMessage $message): array
+{
+    return [
+        'id' => $message->id()->toString(),
+        'timestamp' => $message->timestamp()->format('Y-m-d\\TH:i:sP'),
+        'payload_type' => $message->payloadType()->toClassName(),
+        'payload' => $message->payload()->toArray(),
+        'meta' => $message->meta()->toArray(),
+    ];
+}
+
+final class RecordingProfileLogger extends \Psr\Log\AbstractLogger
+{
+    /** @var list<array{level: mixed, message: string|\Stringable, context: array<mixed>}> */
+    public array $entries = [];
+
+    public function log($level, \Stringable|string $message, array $context = []): void
+    {
+        $this->entries[] = [
+            'level' => $level,
+            'message' => $message,
+            'context' => $context,
+        ];
+    }
+}
+
+final class RecordingProfileHub implements \Symfony\Component\Mercure\HubInterface
+{
+    /** @var list<array{topics: list<string>, data: string, private: bool}> */
+    public array $updates = [];
+
+    public function getPublicUrl(): string
+    {
+        return 'https://profile.test/.well-known/mercure';
+    }
+
+    public function getFactory(): ?\Symfony\Component\Mercure\Jwt\TokenFactoryInterface
+    {
+        return null;
+    }
+
+    public function publish(\Symfony\Component\Mercure\Update $update): string
+    {
+        $this->updates[] = [
+            'topics' => $update->getTopics(),
+            'data' => $update->getData(),
+            'private' => $update->isPrivate(),
+        ];
+
+        return 'profile-update';
+    }
+}
+
+final class RecordingProfileMetrics implements \Fight\Common\Application\Observability\MetricsCollector
+{
+    /** @var list<array{string, string, float|null, array<string, string>}> */
+    public array $measurements = [];
+
+    public function increment(string $metric, array $tags = []): void
+    {
+        $this->measurements[] = ['increment', $metric, null, $tags];
+    }
+
+    public function gauge(string $metric, float $value, array $tags = []): void
+    {
+        $this->measurements[] = ['gauge', $metric, $value, $tags];
+    }
+
+    public function histogram(string $metric, float $value, array $tags = []): void
+    {
+        $this->measurements[] = ['histogram', $metric, $value, $tags];
+    }
+}
+
+final class RecordingProfileSmsTransport implements \Fight\Common\Application\Sms\Transport\SmsTransport
+{
+    /** @var list<array{to: string, from: string, body: string|null}> */
+    public array $messages = [];
+
+    public function send(SmsMessage $message): void
+    {
+        $this->messages[] = [
+            'to' => $message->getTo(),
+            'from' => $message->getFrom(),
+            'body' => $message->getBody(),
+        ];
+    }
 }

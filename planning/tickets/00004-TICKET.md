@@ -10,9 +10,10 @@ blocked_by:
 
 ## Outcome
 
-A fresh CodeIgniter starter resolves the pinned Fight Common candidate and exposes every supported Common
-capability through project-owned `Config\\Services` defaults. Application developers supply only their
-Domain/Application services, application configuration, routes, templates, and secrets.
+This ticket established the preliminary project-owned `Config\\Services` foundation for the complete profile.
+T-00002 owns the completed, authority-validated receipt and lowest/latest certification. Application developers
+continue to supply only their Domain/Application services, application configuration, routes, templates, and
+secrets.
 
 ## Acceptance Criteria
 
@@ -29,8 +30,9 @@ Domain/Application services, application configuration, routes, templates, and s
 ## Verification
 
 Record the Composer-resolved package version and candidate reference, boot every registered service in focused
-coverage, then run the planning and canonical build gates. Verified with the focused profile suite (4 tests,
-48 assertions), `./bin/planning-check`, and `./bin/build` (10 tests, 57 assertions).
+coverage, then run the planning and canonical build gates. This preliminary foundation was verified with the
+focused profile suite (4 tests, 48 assertions), `./bin/planning-check`, and `./bin/build` (10 tests, 57 assertions).
+T-00002 records the subsequent complete-profile receipt evidence.
 
 ## Exclusions
 

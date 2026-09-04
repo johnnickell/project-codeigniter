@@ -86,7 +86,7 @@ class Services extends BaseService
         return service('validation');
     }
 
-    public static function fightRequest(bool $getShared = true): \CodeIgniter\HTTP\IncomingRequest
+    public static function fightRequest(bool $getShared = true): \CodeIgniter\HTTP\RequestInterface
     {
         if ($getShared) return static::getSharedInstance('fightRequest');
         return service('request');
@@ -187,13 +187,13 @@ class Services extends BaseService
     public static function fightJwtEncoder(bool $getShared = true): \Fight\Common\Adapter\Auth\Security\JwtEncoder
     {
         if ($getShared) return static::getSharedInstance('fightJwtEncoder');
-        return new \Fight\Common\Adapter\Auth\Security\JwtEncoder(config('FightCommon')->jwtSecret);
+        return new \Fight\Common\Adapter\Auth\Security\JwtEncoder(config('FightCommon')->jwtSecretForEnvironment());
     }
 
     public static function fightJwtDecoder(bool $getShared = true): \Fight\Common\Adapter\Auth\Security\JwtDecoder
     {
         if ($getShared) return static::getSharedInstance('fightJwtDecoder');
-        return new \Fight\Common\Adapter\Auth\Security\JwtDecoder(config('FightCommon')->jwtSecret);
+        return new \Fight\Common\Adapter\Auth\Security\JwtDecoder(config('FightCommon')->jwtSecretForEnvironment());
     }
 
     public static function fightEventMapper(bool $getShared = true): \Fight\Common\Domain\EventSourcing\EventMapper
@@ -229,7 +229,7 @@ class Services extends BaseService
     public static function fightPsr18Client(bool $getShared = true): \Psr\Http\Client\ClientInterface
     {
         if ($getShared) return static::getSharedInstance('fightPsr18Client');
-        return new \Fight\Common\Adapter\HttpClient\Psr18\Psr18Client(static::fightHttpClient());
+        return new \Fight\Common\Adapter\HttpClient\Psr18\Psr18Client(service('fightHttpClient'));
     }
 
     public static function fightMessageFactory(bool $getShared = true): \Fight\Common\Application\HttpClient\Message\MessageFactory
@@ -297,15 +297,23 @@ class Services extends BaseService
     {
         if ($getShared) return static::getSharedInstance('fightTwilioClient');
         $config = config('FightCommon');
-        return new \Twilio\Rest\Client($config->twilioAccountSid, $config->twilioAuthToken);
+        return new \Twilio\Rest\Client($config->twilioAccountSidForEnvironment(), $config->twilioAuthTokenForEnvironment());
     }
 
     public static function fightMercureHub(bool $getShared = true): \Symfony\Component\Mercure\HubInterface
     {
         if ($getShared) return static::getSharedInstance('fightMercureHub');
+        $config = config('FightCommon');
+        $url = $config->mercureUrlForEnvironment();
+        $tokenProvider = new \Symfony\Component\Mercure\Jwt\StaticTokenProvider($config->mercureJwtForEnvironment());
+
+        if (ENVIRONMENT === 'production') {
+            return new \Symfony\Component\Mercure\Hub($url, $tokenProvider);
+        }
+
         return new \Symfony\Component\Mercure\MockHub(
-            'http://localhost/.well-known/mercure',
-            new \Symfony\Component\Mercure\Jwt\StaticTokenProvider(''),
+            $url,
+            $tokenProvider,
             static fn (): string => 'local-profile',
         );
     }
@@ -313,13 +321,13 @@ class Services extends BaseService
     public static function fightPublisher(bool $getShared = true): \Fight\Common\Application\Socket\Publisher
     {
         if ($getShared) return static::getSharedInstance('fightPublisher');
-        return new \Fight\Common\Adapter\Socket\MercureHubPublisher(static::fightMercureHub());
+        return new \Fight\Common\Adapter\Socket\MercureHubPublisher(service('fightMercureHub'));
     }
 
     public static function fightPrivatePublisher(bool $getShared = true): \Fight\Common\Application\Socket\PrivatePublisher
     {
         if ($getShared) return static::getSharedInstance('fightPrivatePublisher');
-        return new \Fight\Common\Adapter\Socket\PrivateMercureHubPublisher(static::fightMercureHub());
+        return new \Fight\Common\Adapter\Socket\PrivateMercureHubPublisher(service('fightMercureHub'));
     }
 
     /*

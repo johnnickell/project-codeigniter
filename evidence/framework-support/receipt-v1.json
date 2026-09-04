@@ -1,0 +1,70 @@
+{
+    "schema_version": "fight-common.framework-support-receipt/v1",
+    "content_id": "bef76cbb7bae7e8a2a830382549ba79f50971fe3910c9a420c033d509bb3998b",
+    "candidate": {
+        "package": "johnnickell/fight-common",
+        "version": "1.2.0-dev",
+        "reference": "4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16"
+    },
+    "framework": {
+        "name": "codeigniter",
+        "version": "v4.7.4",
+        "providers": [
+            "codeigniter4/queue@v1.0.1",
+            "doctrine/dbal@4.4.4",
+            "dragonmantank/cron-expression@v3.6.0",
+            "guzzlehttp/guzzle@7.15.5",
+            "lcobucci/jwt@5.6.0",
+            "league/flysystem@3.36.0",
+            "phpseclib/phpseclib@3.0.57",
+            "symfony/filesystem@v8.1.6",
+            "symfony/mailer@v8.1.5",
+            "symfony/mercure@v0.7.2",
+            "symfony/process@v8.1.6",
+            "twig/twig@v3.28.0",
+            "twilio/sdk@8.12.0"
+        ]
+    },
+    "lock_sha256": "81ef00c77c057ae6921cbcffb3619e9fa1aeb80399137395d55ca48118307ba9",
+    "capabilities": {
+        "container.codeigniter_services": "ship",
+        "validation.native_services": "wire",
+        "security.php_password_and_jwt": "wire",
+        "cache.native": "ship",
+        "persistence.transactions": "ship",
+        "event_store.shared_provider": "wire",
+        "messaging.queue_delivery": "ship",
+        "messaging.synchronous": "wire",
+        "http.codeigniter_jsend_response": "ship",
+        "http.guzzle_and_psr18": "wire",
+        "filesystem.symfony_fallback": "wire",
+        "storage.flysystem_local": "wire",
+        "file_transfer.null_fallback": "wire",
+        "process_and_scheduler": "wire",
+        "routing.named_routes": "ship",
+        "mail.symfony_fallback": "wire",
+        "templating.twig_fallback": "wire",
+        "observability.native_and_null": "wire",
+        "sms.twilio_and_null_fallback": "wire",
+        "publication.mercure_private": "wire"
+    },
+    "journeys": [
+        {
+            "name": "lowest_booted_codeigniter_capabilities",
+            "status": "passed",
+            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=dd85773a8e0f97cf64ed501ce9388e4708b9ff7ecddbed6a1171017eaeac653e; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+        },
+        {
+            "name": "latest_booted_codeigniter_capabilities",
+            "status": "passed",
+            "evidence": "composer.lock#sha256=81ef00c77c057ae6921cbcffb3619e9fa1aeb80399137395d55ca48118307ba9; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+        }
+    ],
+    "result": "passed",
+    "evidence": {
+        "build": "./bin/build",
+        "planning_check": "./bin/planning-check",
+        "receipt_sha256": "0e6cb06c2ab18f4a04b25e48ebee5c34d76bb010dc888a88d20714b0ca124d48"
+    },
+    "next_action": null
+}
