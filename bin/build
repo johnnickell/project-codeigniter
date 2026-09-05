@@ -5,15 +5,28 @@ image=project-codeigniter-build
 
 docker build --file etc/docker/cli/Dockerfile --tag "$image" .
 docker run --rm --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
-    composer validate --strict
+    php scripts/validate-composer.php
     composer install --no-interaction --prefer-dist --no-progress
+    php scripts/verify-composer-runtime-policy.php
     php scripts/governance-check.php
+    ./bin/planning-check
     PROJECT_CODEIGNITER_IN_BUILD=1 ./bin/phpunit
+    php scripts/verify-framework-support-lanes.php
+    php scripts/generate-framework-support-receipt.php
+    php scripts/verify-framework-support-receipt.php
 
     production_root=$(mktemp -d)
     trap "rm -rf \"$production_root\"" EXIT
     cp -a . "$production_root"
     cd "$production_root"
+    rm -rf vendor
     composer install --no-dev --no-interaction --prefer-dist --no-progress
+    CI_ENVIRONMENT=production \
+    fightcommon_jwtSecret=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa \
+    fightcommon_mercureUrl=https://mercure.example.test/.well-known/mercure \
+    fightcommon_mercureJwt=header.payload.signature \
+    fightcommon_twilioAccountSid=AC00000000000000000000000000000000 \
+    fightcommon_twilioAuthToken=test-auth-token \
+    php scripts/verify-production-framework-support-profile.php
     php scripts/public-contract-check.php
 '

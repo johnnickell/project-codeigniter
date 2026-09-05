@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -eu
+
+cd "$(dirname "$0")/.."
+
+image=project-codeigniter-build
+docker build --file etc/docker/cli/Dockerfile --tag "$image" .
+docker run --rm --volume "$(pwd):/app" --workdir /app "$image" php scripts/verify-framework-support-lanes.php refresh
