@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-const FIGHT_COMMON_REFERENCE = '4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16';
-const FIGHT_COMMON_CONSTRAINT = 'dev-develop#4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 as 1.2.0-dev';
+const FIGHT_COMMON_REFERENCE = 'fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911';
+const FIGHT_COMMON_CONSTRAINT = 'dev-develop#fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911 as 1.2.0-dev';
 const FLYSYSTEM_CONSTRAINT = '^3.36';
 const FLYSYSTEM_LOCAL_CONSTRAINT = '^3.35';
 const FLYSYSTEM_FLOOR = '3.36.0';

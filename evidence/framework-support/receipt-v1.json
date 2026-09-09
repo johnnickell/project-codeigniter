@@ -1,10 +1,10 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "6b8e71456054721f1989043acb7a53738553f83daa5d0bcd793417922ec83124",
+    "content_id": "b3c25472a22f53dcc667ff4dedf63f2a2e11112bc46ce7d2c884319a836d09fd",
     "candidate": {
         "package": "johnnickell/fight-common",
         "version": "1.2.0-dev",
-        "reference": "4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16"
+        "reference": "fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911"
     },
     "framework": {
         "name": "codeigniter",
@@ -23,10 +23,10 @@
             "symfony/mercure@v0.7.2",
             "symfony/process@v8.1.6",
             "twig/twig@v3.28.0",
-            "twilio/sdk@8.12.0"
+            "twilio/sdk@8.12.1"
         ]
     },
-    "lock_sha256": "bdef44d0d3536b6ae4d4fd3346c948a01eb8a2e75743c0887bc949d1b71a9f83",
+    "lock_sha256": "b8c41c2672568f528d2fa67810fc866aa62572e14d0c0c5480fdf51e842dc43f",
     "capabilities": {
         "container.codeigniter_services": "ship",
         "validation.native_services": "wire",
@@ -53,19 +53,19 @@
         {
             "name": "lowest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=8c0027967f3a770bdcd77d20351118da4674edbd1c3ccce2e8c83623a3efc1fb; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=1f29a5eb225c29a40d7e796185ac32c3ec5287cc2dd14f4756cea5f754a5c0db; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         },
         {
             "name": "latest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "composer.lock#sha256=bdef44d0d3536b6ae4d4fd3346c948a01eb8a2e75743c0887bc949d1b71a9f83; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "composer.lock#sha256=b8c41c2672568f528d2fa67810fc866aa62572e14d0c0c5480fdf51e842dc43f; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         }
     ],
     "result": "passed",
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "02426b3ef7efbe8a29a293708a6ba9e3420c4ee728375c46eb84bd08a163e845"
+        "receipt_sha256": "ec7e414b7da1420fef3622fbf02822ccd674b04b4fcfe2ec87566b317edae978"
     },
     "next_action": null
 }

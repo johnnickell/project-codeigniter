@@ -2,9 +2,11 @@
 set -eu
 
 image=project-codeigniter-build
+git_common_dir=$(git rev-parse --path-format=absolute --git-common-dir)
 
 docker build --file etc/docker/cli/Dockerfile --tag "$image" .
-docker run --rm --volume "$(pwd):/app" --workdir /app "$image" sh -ec '
+docker run --rm --volume "$(pwd):/app" --volume "$git_common_dir:$git_common_dir:ro" \
+    --workdir /app "$image" sh -ec '
     php scripts/validate-composer.php
     composer install --no-interaction --prefer-dist --no-progress
     php scripts/verify-composer-runtime-policy.php
