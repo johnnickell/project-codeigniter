@@ -47,3 +47,8 @@ ticket neither defines that contract nor inventories its breaking changes.
 The immutable Fight Common 1.2 adoption is complete. T-00002 retains ownership of the final
 authority-validated CodeIgniter default-profile receipt certification; T-00004 remains the completed preliminary
 profile foundation.
+## Supersession
+
+Fight Common's 2026-09-09 authorship-only history rewrite supersedes the commit identity recorded above without
+changing its source tree: `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 -> fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911`. T-00006 owns the fresh consumer locks,
+receipt digests, and verification for the rewritten identity; the original certification remains historical fact.

@@ -38,6 +38,7 @@ No ticket is currently waiting on an unfinished local dependency.
 
 | Ticket | Parent PRD | Outcome |
 |--------|------------|---------|
+| [T-00006 — Re-certify Rewritten Fight Common Candidate](00006-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Re-certified the tree-equivalent rewritten Fight Common candidate with fresh latest/lowest locks, receipt digests, and the canonical build. |
 | [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Committed the canonical candidate receipt, exact authority validation, and lowest/latest boot evidence. |
 | [T-00004 — Establish the Complete CodeIgniter Platform Profile](00004-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Established the preliminary default profile foundation subsequently certified by T-00002. |
 | [T-00001 — Establish the Governed CodeIgniter Starter Foundation](00001-TICKET.md) | [PRD-00001](../specs/00001-PRD.md) | Local and hosted `./bin/build` receipts are green. The governed bootstrap handoff is accepted. |
