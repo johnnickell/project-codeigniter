@@ -816,12 +816,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnnickell/fight-access-control",
-                "reference": "4259ea0b77bc2e1d87e62ab70b64af63bae99477"
+                "reference": "ecc1c251db56a326c2f1053d20ab1bfc03b1045c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/4259ea0b77bc2e1d87e62ab70b64af63bae99477",
-                "reference": "4259ea0b77bc2e1d87e62ab70b64af63bae99477",
+                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/ecc1c251db56a326c2f1053d20ab1bfc03b1045c",
+                "reference": "ecc1c251db56a326c2f1053d20ab1bfc03b1045c",
                 "shasum": ""
             },
             "require": {
@@ -854,7 +854,7 @@
                 "MIT"
             ],
             "description": "Framework-neutral identity, credential, session, authorization, and account-lifecycle contracts",
-            "time": "2026-08-31T03:38:38+00:00"
+            "time": "2026-09-11T00:31:35+00:00"
         },
         {
             "name": "johnnickell/fight-common",
@@ -988,7 +988,7 @@
                 "MIT"
             ],
             "description": "A shared PHP library for Hexagonal Architecture, CQRS, and reusable domain primitives",
-            "time": "2026-09-09T18:43:20+00:00"
+            "time": "2026-09-11T03:53:52+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
