@@ -17,8 +17,10 @@ deprecation-removal inventory, and migration guide exist.
 
 ## Wayfinder Review
 
-No active Wayfinder map currently exists. When an active map has an unblocked frontier ticket, list it here.
-When asked for the next wayfinder target, offer to chart a new feature rather than fabricating one.
+[CodeIgniter AccessControl Starter Application](../wayfinder/codeigniter-access-control-application-map.md) is active.
+Its current unblocked review target is
+[WF-002 — CodeIgniter Local Development Runtime Contract](../wayfinder/tickets/WF-002-codeigniter-local-development-runtime-contract.md).
+Run `$aios /grill-with-docs WF-002`.
 
 ## Ready Frontier
 
