@@ -1,6 +1,6 @@
 {
     "schema_version": "fight-common.framework-support-receipt/v1",
-    "content_id": "877863c7a0bf963efeb4242a14a2cbf3e126d53da1e41dd05e4e73959f89e7be",
+    "content_id": "9d9d3af88767b7be9692ee126bd51a1d5753fba02266cc50651690270ba7d20d",
     "candidate": {
         "package": "johnnickell/fight-common",
         "version": "1.2.0-dev",
@@ -26,7 +26,7 @@
             "twilio/sdk@8.12.1"
         ]
     },
-    "lock_sha256": "66842ad6968a25a62fa52f73c9ceeefd346f7b4c48bc4d402816974a09715878",
+    "lock_sha256": "9c23f346d82e453fa6e56d523e8feb8fb85efc738c13ccb34eb4954ab2089ac4",
     "capabilities": {
         "container.codeigniter_services": "ship",
         "validation.native_services": "wire",
@@ -53,19 +53,19 @@
         {
             "name": "lowest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=177ff4842ed7dcf7ced81c8ea2b9ca0b3cf5c87ec8edc859ecaa1dac4378dbbd; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "evidence/framework-support/composer-lowest.lock#sha256=8cf0e45e000ad7b5e99ee74768af9f6e45d9ff66dd85bc893e5cfcecd907673e; evidence/framework-support/composer-lowest.lock.sha256; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         },
         {
             "name": "latest_booted_codeigniter_capabilities",
             "status": "passed",
-            "evidence": "composer.lock#sha256=66842ad6968a25a62fa52f73c9ceeefd346f7b4c48bc4d402816974a09715878; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
+            "evidence": "composer.lock#sha256=9c23f346d82e453fa6e56d523e8feb8fb85efc738c13ccb34eb4954ab2089ac4; johnnickell/fight-common@dev-develop; semantic-alias=1.2.0-dev; reference=fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911; scripts/verify-framework-support-lanes.php; tests/feature/FrameworkSupportJourneyTest.php"
         }
     ],
     "result": "passed",
     "evidence": {
         "build": "./bin/build",
         "planning_check": "./bin/planning-check",
-        "receipt_sha256": "563381fafe3a2224ac7cd334c4e4684cf76a83dfa9c307c5ced0cdef952a3e13"
+        "receipt_sha256": "26098e854bf60bc389001b5e00c129ebeb8687e0a22b8c804db12148b20e3c27"
     },
     "next_action": null
 }
