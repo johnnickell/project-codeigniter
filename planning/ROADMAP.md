@@ -2,13 +2,14 @@
 
 ## In progress
 
-| Epic | Target version | Status | Current outcome |
+| PRD | Target | Status | Current outcome |
 | --- | --- | --- | --- |
-| — | — | — | No strategic delivery is currently in progress. |
+| [PRD-00002](specs/00002-PRD.md) | Fight Common 1.2 | in-progress | T-00007 owns the lean CodeIgniter gate; profile and receipt certification remain historical and 2.0 remains needs-info. |
 
 ## Route to 1.0
 
-1. Revisit 2.0 only after Fight Common publishes its migration authority.
+1. Implement T-00007's one lean local and hosted `./bin/build` gate with direct Unit-only coverage and retained CodeIgniter journeys.
+2. Revisit 2.0 only after Fight Common publishes its migration authority.
 
 ## Completed / Released
 

@@ -24,7 +24,9 @@ Run `$aios /grill-with-docs WF-002`.
 
 ## Ready Frontier
 
-No ticket is currently ready for implementation.
+| Suggested Order | Ticket | Parent PRD | Why now |
+| --- | --- | --- | --- |
+| 1 | [T-00007 — Establish the Lean CodeIgniter Pre-Submit Quality Gate](00007-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Direct successor to Fight Common T-00087; replace stock and monolithic certification topology. |
 
 ## Waiting
 
