@@ -8,6 +8,10 @@ blocked_by:
 
 # Re-certify Rewritten Fight Common Candidate
 
+> Historical certification record. [T-00007](00007-TICKET.md) supersedes recurring receipt and lowest/latest
+> certification. The original result remains historical; its generated artifacts and commands are retired,
+> not requirements for future builds. The installed candidate and application lock remain unchanged.
+
 ## Outcome
 
 Re-certified the existing Fight Common 1.2 support profile against the tree-equivalent commit identity produced by

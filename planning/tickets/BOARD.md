@@ -40,6 +40,7 @@ No ticket is currently waiting on an unfinished local dependency.
 
 | Ticket | Parent PRD | Outcome |
 |--------|------------|---------|
+| [T-00007 — Retire Framework Support Certification](00007-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Retired recurring receipts, lowest/latest certification, and verifier-only tests; preserved native integrations and separated dependency preparation from the gate. Local verification passed; independent review and hosted verification pending. |
 | [T-00006 — Re-certify Rewritten Fight Common Candidate](00006-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Re-certified the tree-equivalent rewritten Fight Common candidate with fresh latest/lowest locks, receipt digests, and the canonical build. |
 | [T-00002 — Adopt Fight Common 1.2](00002-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Committed the canonical candidate receipt, exact authority validation, and lowest/latest boot evidence. |
 | [T-00004 — Establish the Complete CodeIgniter Platform Profile](00004-TICKET.md) | [PRD-00002](../specs/00002-PRD.md) | Established the preliminary default profile foundation subsequently certified by T-00002. |

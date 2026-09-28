@@ -8,6 +8,10 @@ blocked_by: T-00004
 
 # Adopt Fight Common 1.2
 
+> Historical certification record. [T-00007](00007-TICKET.md) supersedes the recurring receipt and lowest/latest
+> certification obligation. Evidence paths and commands below describe the completed adoption at that revision;
+> they are not current gate requirements. Package adoption and native service composition remain intact.
+
 ## Outcome
 
 Resolve the immutable 1.2 candidate through CodeIgniter's Composer installation, boot the complete default

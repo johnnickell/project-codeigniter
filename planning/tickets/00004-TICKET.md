@@ -8,6 +8,9 @@ blocked_by:
 
 # Establish the Complete CodeIgniter Platform Profile
 
+> Historical foundation record. [T-00007](00007-TICKET.md) retires the later receipt/lowest/latest certification
+> obligation without removing the CodeIgniter-native service profile established here.
+
 ## Outcome
 
 This ticket established the preliminary project-owned `Config\\Services` foundation for the complete profile.
