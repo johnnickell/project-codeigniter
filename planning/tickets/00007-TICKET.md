@@ -23,6 +23,15 @@ Keep the already approved exclusion of tool-self-tests, fabricated tool failures
 pre-submit dependency maintenance. Do not revive the separate legacy T-00005 proposal wholesale; its exact
 coverage and certification assumptions conflict with newer decisions and need explicit reconciliation.
 
+## Incoming upstream quality-gate handoff
+
+The maintainer authorized carrying `develop`'s independently created legacy T-00007 into this requirement for
+explicit reconciliation. [Provenance and requirement disposition](../UPSTREAM-RECONCILIATION.md) preserve its
+original `ready-for-agent` status, Common `^1.2`/FightCommon PHPCS requirement, full tooling phases, exact 100%
+Unit-only coverage proposal, `CoversClass`/`CoversNothing` metadata, native boundaries and cleanup exclusions.
+These are inputs TASK-00010 must resolve, not completed or newly accepted enforcement. This upstream identity
+is distinct from retirement TASK-00007; do not infer acceptance from the shared old number.
+
 ## Use cases and validation
 
 A maintainer chooses enforceable local engineering rules and their evidence before implementation decomposition.

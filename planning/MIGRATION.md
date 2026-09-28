@@ -20,7 +20,7 @@ metadata and this table preserve provenance; old Git revisions retain the origin
 | T-00004 · `tickets/00004-TICKET.md` | [TASK-00004](tasks/00004-TASK.md) | TICKET-00002; done, service-profile evidence preserved |
 | T-00005 in a separate unmerged worktree | TASK-00005 reserved; no canonical live record imported | Worktree untouched; scope/status/certification assumptions need explicit reconciliation |
 | T-00006 · `tickets/00006-TICKET.md` | [TASK-00006](tasks/00006-TASK.md) | TICKET-00002; done, historical re-certification preserved |
-| T-00007 · `tickets/00007-TICKET.md` | [TASK-00007](tasks/00007-TASK.md) | Reparented to TICKET-00004; approved retirement, local implementation done, review pending |
+| T-00007 from `2699ceb` · `tickets/00007-TICKET.md` | [TASK-00007](tasks/00007-TASK.md) | Reparented to TICKET-00004; approved retirement, local implementation done, review pending |
 | `tickets/BOARD.md` | [TASK Board](tasks/BOARD.md) | Generated from TASK metadata, not a hand-maintained frontier |
 
 Historical bodies retain old IDs/terms where they describe the original decision or verification. Their migration
@@ -31,6 +31,14 @@ Some old executable-ticket filenames are now occupied by requirement TICKETs in 
 the explicit old-ID mapping above—not an old path alone—to resolve historical references. Current repository
 links are migrated; external links must use their historical Git revision or the mapped canonical TASK.
 
+## Later upstream reconciliation
+
+Upstream `91734b8` independently used legacy T-00007 for a lean quality-gate handoff. It is **not** retirement
+TASK-00007. Its original identity/status and complete requirement disposition are preserved in
+[UPSTREAM-RECONCILIATION.md](UPSTREAM-RECONCILIATION.md), under TICKET-00007/TASK-00010 for pending decisions.
+The user authorized that reconciliation for publication after this migration; no incoming requirements were
+silently marked complete. The upstream dependency lock is preserved, not qualified as stable adoption.
+
 ## Current hierarchy
 
 - [EPIC-00001 — Governed starter and package integration](epics/00001-EPIC.md)
@@ -40,8 +48,8 @@ links are migrated; external links must use their historical Git revision or the
 - [EPIC-00002 — Fight packages and Agent OS conventions adoption](epics/00002-EPIC.md)
   - TICKET-00004 → TASK-00007: approved certification retirement, implemented; review pending.
   - TICKET-00005 → TASK-00008: approved first-priority planning migration.
-  - TICKET-00006: stable Common 1.2+/AccessControl 0.4+ qualification, needs-info; no executable TASK.
-  - TICKET-00007: remaining engineering alignment, needs-info; no executable TASK.
+  - TICKET-00006 → TASK-00009: qualification scope/creation approved; execution not started, requirement needs-info.
+  - TICKET-00007 → TASK-00010: engineering proposal scope/creation approved; waiting on TASK-00009, requirement needs-info.
 
 These relationships are recorded in frontmatter and projected into generated tables. This explanatory map does
 not replace record-owned status or authorize the unqualified requirements.

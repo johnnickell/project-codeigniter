@@ -51,5 +51,8 @@ for this TICKET. It is ready for an agent but has not started; execution require
 approval does not accept a release pair or authorize an upgrade TASK. Exact release/compatibility evidence and
 human acceptance of the migration scope remain outstanding, so this TICKET stays `needs-info`.
 
-The planning migration itself authorized no package research or upgrade. Current lock remains Common
-`dev-develop@fad24ae9fdcf` and AccessControl `dev-develop@ecc1c251db56`.
+The planning migration itself authorized no package research or upgrade. Subsequent maintainer-approved
+[upstream reconciliation](../UPSTREAM-RECONCILIATION.md) preserves `develop`'s lock: Common
+`dev-develop@fad24ae9fdcf` and AccessControl `dev-develop@7f55c0adb8fade`. The previous AccessControl
+`ecc1c251db56` signature sample is historical; TASK-00009 must inspect the actual current/released contracts.
+Neither development reference establishes the requested stable baseline.

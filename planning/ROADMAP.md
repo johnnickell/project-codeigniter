@@ -15,6 +15,10 @@ remain pending. Use the new hierarchy to keep remaining adoption explicit:
    release baseline before treating WF-001 as evidence for the newer adoption target.
 3. Revisit Common 2.0 only after its migration authority exists; [TASK-00003](tasks/00003-TASK.md) remains needs-info.
 
+The maintainer-approved [upstream reconciliation](UPSTREAM-RECONCILIATION.md) preserves `develop`'s dependency
+lock and carries its legacy lean-gate proposal into TICKET-00007/TASK-00010. Its unfinished coverage/tooling
+requirements are tracked, not marked complete or silently enforced.
+
 ## EPIC status
 
 <!-- planning:epics -->
