@@ -14,4 +14,6 @@ Legacy TASK-00005 is reserved; see [MIGRATION.md](../MIGRATION.md). [Archived TA
 | [TASK-00006](00006-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [TICKET-00002](../tickets/00002-TICKET.md) |
 | [TASK-00007](00007-TASK.md) | Retire Framework Support Certification | done | [TICKET-00004](../tickets/00004-TICKET.md) |
 | [TASK-00008](00008-TASK.md) | Migrate planning to the EPIC TICKET TASK structure | done | [TICKET-00005](../tickets/00005-TICKET.md) |
+| [TASK-00009](00009-TASK.md) | Qualify the stable Fight package baseline | ready-for-agent | [TICKET-00006](../tickets/00006-TICKET.md) |
+| [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent | [TICKET-00007](../tickets/00007-TICKET.md) |
 <!-- /planning:records -->

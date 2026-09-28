@@ -41,10 +41,16 @@ that absent static analysis or unmeasured unit coverage has been adopted.
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| None | — | — |
+| [TASK-00010](../tasks/00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent |
 <!-- /planning:children -->
 
 ## Decisions and progress
 
-Needs human acceptance of remaining scope and concrete contracts. No implementation TASKs are authorized yet;
-[TICKET-00004](00004-TICKET.md) and [TICKET-00005](00005-TICKET.md) track the only approved alignment slices.
+The maintainer approved creation of [TASK-00010](../tasks/00010-TASK.md), a decision/documentation chore blocked
+by [TASK-00009](../tasks/00009-TASK.md)'s qualification findings. Its scope is approved, but execution has not been
+authorized or started. No rule set, tooling/coverage policy or enforcement implementation is accepted by this
+record-creation approval; this TICKET remains `needs-info`.
+
+Review TASK-00010's proposal before allocating enforcement TASKs. If TASK-00009 cannot qualify a package pair,
+package-sensitive decisions remain unresolved rather than treating blocker completion as compatibility evidence.
+[TICKET-00004](00004-TICKET.md) and [TICKET-00005](00005-TICKET.md) remain the locally completed alignment slices.

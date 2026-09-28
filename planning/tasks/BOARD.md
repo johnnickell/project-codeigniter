@@ -5,10 +5,14 @@ See the [Roadmap Planning Frontier](../ROADMAP.md#planning-frontier) for undecid
 
 ## Current human decision
 
-Planning migration was the first priority and is locally complete in [TASK-00008](00008-TASK.md); independent
-review remains pending. Next, accept or refine the remaining [adoption EPIC](../epics/00002-EPIC.md) scope: qualify the stable package baseline and
-settle remaining engineering alignment before authorizing further TASKs. Those requirements remain `needs-info`;
-neither the completed retirement nor this migration means packages or all standards are adopted.
+[TASK-00009](00009-TASK.md) is the first ready TASK. Its stable-package qualification scope and record creation
+are approved; the next human decision is whether to authorize execution and which checkout/worktree to use.
+Accept its release/compatibility findings before creating an upgrade TASK. [TASK-00010](00010-TASK.md)'s engineering
+contract proposal scope/creation is also approved, but it is waiting on TASK-00009; execution and acceptance of
+its future recommendations remain separate. The [adoption EPIC](../epics/00002-EPIC.md) remains `needs-info`.
+
+Planning migration is locally complete in [TASK-00008](00008-TASK.md); independent review remains pending.
+Neither the completed retirement nor planning migration means packages or all standards are adopted.
 
 The existing application's independent planning frontier remains [WF-002](../wayfinder/tickets/WF-002-codeigniter-local-development-runtime-contract.md).
 Its release-audit baseline needs reconciliation under TICKET-00006; no Wayfinder decision was closed here.
@@ -24,13 +28,13 @@ Its release-audit baseline needs reconciliation under TICKET-00006; no Wayfinder
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| None | — | — | — | — | — | — |
+| 1 | [TASK-00009](00009-TASK.md) | Qualify the stable Fight package baseline | [TICKET-00006 — Qualify and adopt the current stable Fight package baseline](../tickets/00006-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| None | — | — | — | — | — | — |
+| 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Decide the remaining engineering and quality-gate alignment](../tickets/00007-TICKET.md) | ready-for-agent | [TASK-00009](00009-TASK.md) | — |
 
 ## Needs Info
 

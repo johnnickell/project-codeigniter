@@ -5,9 +5,11 @@
 Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; independent review and hosted verification
 remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
-1. Accept/refine the remaining [adoption EPIC](epics/00002-EPIC.md) requirements, especially exact stable Fight
-   Common 1.2+/AccessControl 0.4+ qualification and bounded engineering/quality alignment. No upgrade is done or
-   executable merely because the planning model changed.
+1. [TASK-00009](tasks/00009-TASK.md) has approved qualification scope and is ready, not started. Authorize its
+   execution and checkout choice separately, then review the exact stable Common 1.2+/AccessControl 0.4+ evidence
+   before creating an upgrade TASK. The [adoption EPIC](epics/00002-EPIC.md) remains `needs-info`. Engineering
+   contract proposal [TASK-00010](tasks/00010-TASK.md) has approved scope/creation and waits on TASK-00009's findings;
+   execution, policy acceptance and subsequent enforcement TASKs remain separate. No upgrade is authorized.
 2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
    through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
    release baseline before treating WF-001 as evidence for the newer adoption target.
@@ -38,8 +40,7 @@ implementation. A parent with terminal children requires explicit closeout rathe
 
 | TICKET ID | Title | Parent EPIC | Status |
 |---|---|---|---|
-| [TICKET-00006](tickets/00006-TICKET.md) | Qualify and adopt the current stable Fight package baseline | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
-| [TICKET-00007](tickets/00007-TICKET.md) | Decide the remaining engineering and quality-gate alignment | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+| None | — | — | — |
 
 ### Parents ready for closeout review
 

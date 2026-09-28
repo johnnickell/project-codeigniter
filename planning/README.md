@@ -20,4 +20,7 @@ without rewriting views. Archive only on explicit request; scratch remains under
 
 **Planning was the first priority and is now locally migrated—not evidence of completed adoption.** Stable Common
 1.2+/AccessControl 0.4+ qualification and remaining engineering alignment are unresolved requirements; no upgrade
-TASK is executable. TASK-00008 records local verification and outstanding independent review.
+TASK is executable. [TASK-00009](tasks/00009-TASK.md) has approved qualification scope and is ready for separately
+authorized execution. [TASK-00010](tasks/00010-TASK.md)'s engineering contract proposal scope is approved and waits
+on TASK-00009; neither policy acceptance nor enforcement is authorized. TASK-00008 records local verification and
+outstanding independent review.

@@ -41,11 +41,15 @@ consumer composition, and actual application journeys; no blanket full-capabilit
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| None | — | — |
+| [TASK-00009](../tasks/00009-TASK.md) | Qualify the stable Fight package baseline | ready-for-agent |
 <!-- /planning:children -->
 
 ## Decisions and progress
 
-Needs exact release/compatibility evidence and human acceptance of the bounded migration scope. No research or
-upgrade TASK has been authorized or executed by the planning migration. Current lock remains Common
+The maintainer approved creation of [TASK-00009](../tasks/00009-TASK.md), the bounded qualification chore proposed
+for this TICKET. It is ready for an agent but has not started; execution requires separate authorization. The
+approval does not accept a release pair or authorize an upgrade TASK. Exact release/compatibility evidence and
+human acceptance of the migration scope remain outstanding, so this TICKET stays `needs-info`.
+
+The planning migration itself authorized no package research or upgrade. Current lock remains Common
 `dev-develop@fad24ae9fdcf` and AccessControl `dev-develop@ecc1c251db56`.
