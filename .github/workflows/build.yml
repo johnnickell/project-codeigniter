@@ -11,4 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ./bin/build
+      - name: Prepare runtime
+        run: ./bin/up
+      - name: Install locked dependencies
+        run: ./bin/composer install --no-interaction --prefer-dist --no-progress
+      - name: Canonical gate
+        run: ./bin/build
+      - name: Stop runtime
+        if: always()
+        run: ./bin/down

@@ -34,9 +34,23 @@ $paths = new Paths();
 require $paths->systemDirectory . '/Boot.php';
 Boot::bootConsole($paths);
 
-$assertTwilio = in_array('--assert-twilio', $argv, true);
-
 try {
+    // Exercise application-owned credential guards directly, not this script's exit/output contract.
+    $config = config('FightCommon');
+    foreach (['jwtSecret', 'mercureUrl', 'mercureJwt', 'twilioAccountSid', 'twilioAuthToken'] as $property) {
+        $configured = $config->{$property};
+        $config->{$property} = '';
+        $rejected = false;
+        try {
+            $config->{$property . 'ForEnvironment'}();
+        } catch (RuntimeException $exception) {
+            $rejected = $exception->getMessage() === "FightCommon production configuration requires {$property}.";
+        } finally {
+            $config->{$property} = $configured;
+        }
+        productionAssert($rejected, "Production configuration accepted missing {$property}.");
+    }
+
     $jwtEncoder = service('fightJwtEncoder');
     $jwtDecoder = service('fightJwtDecoder');
     $configuredHub = service('fightMercureHub');
@@ -174,9 +188,6 @@ try {
             'Body' => 'production profile',
         ],
     ]] === $twilioRequests, 'Twilio SMS transport did not send the expected to, from, and body through the injected HTTP client.');
-    if ($assertTwilio) {
-        fwrite(STDOUT, "Production Twilio SMS adapter used the injected HTTP client.\n");
-    }
 
     try {
         service('fightEventStore')->append(new StreamId('profile', 'default'), 0, [EventMessage::create(new class('mapping-required') implements Event {
@@ -222,12 +233,12 @@ try {
         ['https://profile.test/private', 'private profile', true],
     ] === $recordingHub->updates, 'Publication services did not pass updates through the registered hub.');
 } catch (RuntimeException $exception) {
-    fwrite(STDOUT, "Production profile correctly rejected unsafe configuration: {$exception->getMessage()}\n");
+    fwrite(STDERR, "Production profile check failed: {$exception->getMessage()}\n");
 
     exit(1);
 }
 
-fwrite(STDOUT, "Production Fight Common profile booted and exercised with explicit safe configuration.\n");
+fwrite(STDOUT, "Production credential guards and safe provider integration checks passed.\n");
 
 function productionAssert(bool $condition, string $message): void
 {

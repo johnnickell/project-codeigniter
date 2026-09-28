@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Immutable accepted Symfony client reference
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-005, WF-008
+**Depends on:** [WF-005](WF-005-authentication-account-security-contract.md), [WF-008](WF-008-complete-api-cli-operation-matrix.md)
 
 ## Question
 

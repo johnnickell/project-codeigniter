@@ -32,7 +32,7 @@ use Fight\Common\Domain\EventSourcing\StreamId;
 use Fight\Common\Domain\Exception\LookupException;
 
 /** @internal */
-final class FrameworkSupportJourneyTest extends CIUnitTestCase
+final class FightCommonIntegrationTest extends CIUnitTestCase
 {
     private string $filesystemPath;
 
@@ -104,7 +104,7 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
         }
 
         $this->assertSame(1, db_connect()->table('receipt_transactions')->countAllResults());
-        $this->assertSame('/framework-support/receipt', service('fightUrlGenerator')->generate('framework-support-receipt'));
+        $this->assertSame('/', service('fightUrlGenerator')->generate('home'));
 
         $response = JSendResponse::success(service('response'));
         $this->assertSame(ResponseInterface::HTTP_OK, $response->getStatusCode());
@@ -264,27 +264,6 @@ final class FrameworkSupportJourneyTest extends CIUnitTestCase
             ['topics' => ['https://profile.test/public'], 'data' => 'public update', 'private' => false],
             ['topics' => ['https://profile.test/private'], 'data' => 'private update', 'private' => true],
         ], $hub->updates);
-    }
-
-    public function test_production_sms_profile_composes_the_twilio_adapter_without_a_network_request(): void
-    {
-        $environment = [
-            'CI_ENVIRONMENT=production',
-            'fightcommon_jwtSecret=' . escapeshellarg(str_repeat('a', 64)),
-            'fightcommon_mercureUrl=' . escapeshellarg('https://mercure.example.test/.well-known/mercure'),
-            'fightcommon_mercureJwt=' . escapeshellarg('header.payload.signature'),
-            'fightcommon_twilioAccountSid=' . escapeshellarg('AC00000000000000000000000000000000'),
-            'fightcommon_twilioAuthToken=' . escapeshellarg('test-auth-token'),
-        ];
-
-        exec(
-            implode(' ', $environment) . ' ' . escapeshellarg(PHP_BINARY) . ' scripts/verify-production-framework-support-profile.php --assert-twilio 2>&1',
-            $lines,
-            $status,
-        );
-
-        $this->assertSame(0, $status);
-        $this->assertContains('Production Twilio SMS adapter used the injected HTTP client.', $lines);
     }
 
     public function test_database_queue_jobs_deliver_complete_command_and_retry_event_envelopes(): void

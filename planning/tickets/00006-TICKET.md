@@ -1,39 +1,58 @@
 ---
-id: T-00006
-prd: PRD-00002
-title: Re-certify Rewritten Fight Common Candidate
-status: done
-blocked_by:
+id: TICKET-00006
+epic: EPIC-00002
+title: Qualify and adopt the current stable Fight package baseline
+status: needs-info
 ---
 
-# Re-certify Rewritten Fight Common Candidate
+# Qualify and adopt the current stable Fight package baseline
 
-## Outcome
+## Problem statement
 
-Re-certified the existing Fight Common 1.2 support profile against the tree-equivalent commit identity produced by
-the authorship-only history rewrite.
+The installed development candidates do not prove adoption of stable Fight Common 1.2+ or Fight AccessControl
+0.4+. A matching version label or branch name does not prove compatible public capabilities.
 
-## Scope
+## Proposed solution and boundaries
 
-- In scope: exact old-to-new candidate mapping, current Composer constraint, latest and lowest locks, executable
-  verification references, canonical receipt digests, planning provenance, and the complete local build.
-- Out of scope: runtime or public API changes, advancing to a newer Fight Common tree, Fight Common 2.0 migration,
-  release publication, and backup cleanup.
+Inspect installable stable artifacts and release/migration documentation; select exact mutually compatible
+versions, inspect public handler/capability signatures, and inventory changes to CodeIgniter composition and
+important consumer behavior. Obtain human acceptance before creating an upgrade implementation TASK.
 
-## Acceptance Criteria
+Reconcile the application Wayfinder's older v0.2.0 WF-001 gate with the requested 0.4+ baseline explicitly. Keep
+Common 2.0 research separate. Do not copy package source, add aliases to conceal incompatibilities, or claim a
+release is available merely because another consumer names it.
 
-- [x] The rewritten candidate mapping is `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16 -> fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911`, and both commits have the same tree.
-- [x] Composer latest and lowest lanes resolve the rewritten candidate without changing the certified Fight Common tree.
-- [x] The canonical support receipt records the rewritten reference and regenerated lock, content, and receipt digests.
-- [x] `./bin/planning-check` and `./bin/build` pass for the complete consumer profile.
+## Use cases and validation
 
-## Verification
+A maintainer qualifies a dependency baseline and reviews consumer migration consequences before approving it.
+Business commands/queries/events and runtime permissions remain package/use-case-specific and must be inventoried,
+not invented here. Check exact transaction contracts, shared-connection behavior, and failure/compatibility paths.
+Dependency installation/updates are explicit maintenance, not hidden pre-submit side effects.
 
-Regenerate the repository-owned latest and lowest dependency lanes, regenerate the canonical
-`fight-common.framework-support-receipt/v1` receipt, run `./bin/planning-check`, and run `./bin/build`.
+## Acceptance and evidence to settle
 
-## Completion Notes
+Record exact versions/references from the target installation and lock, release authority, public capability and
+migration inventory, safe consumer verification, and documentation impact. Resolve the sampled `UnitOfWork`
+versus `TransactionalUnitOfWork` binding against those releases. Acceptance must distinguish package support,
+consumer composition, and actual application journeys; no blanket full-capability claim is authorized.
 
-Verified 2026-09-09. The authorship-only Fight Common rewrite preserved the certified source tree; this ticket
-records the replacement commit identity and fresh consumer-owned dependency and receipt evidence. Historical
-certification statements remain intact in their original ticket.
+## TASKs
+
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| [TASK-00009](../tasks/00009-TASK.md) | Qualify the stable Fight package baseline | ready-for-agent |
+<!-- /planning:children -->
+
+## Decisions and progress
+
+The maintainer approved creation of [TASK-00009](../tasks/00009-TASK.md), the bounded qualification chore proposed
+for this TICKET. It is ready for an agent but has not started; execution requires separate authorization. The
+approval does not accept a release pair or authorize an upgrade TASK. Exact release/compatibility evidence and
+human acceptance of the migration scope remain outstanding, so this TICKET stays `needs-info`.
+
+The planning migration itself authorized no package research or upgrade. Subsequent maintainer-approved
+[upstream reconciliation](../UPSTREAM-RECONCILIATION.md) preserves `develop`'s lock: Common
+`dev-develop@fad24ae9fdcf` and AccessControl `dev-develop@7f55c0adb8fade`. The previous AccessControl
+`ecc1c251db56` signature sample is historical; TASK-00009 must inspect the actual current/released contracts.
+Neither development reference establishes the requested stable baseline.

@@ -1,48 +1,61 @@
 # AGENTS.md
 
-Repository-local instructions are canonical for implementation, planning, triage, and completion. Read `ARCHITECTURE.md`, `planning/README.md`, `planning/CONVENTIONS.md`, and the focused instructions in `planning/agents/` before changing behavior. Work in independently verifiable vertical slices. A slice is complete only when its local ticket, documentation, architecture boundaries, and `./bin/build` are green.
+Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/README.md`,
+`planning/CONVENTIONS.md`, and applicable focused instructions in `planning/agents/` before changing behavior.
 
-Use repository-owned commands: `./bin/composer`, `./bin/phpunit`, `./bin/up`, `./bin/down`, `./bin/exec`, and `./bin/build`. `./bin/build` is the single noninteractive local and hosted gate.
+## Planning and authority
 
-Do not copy Fight Common or Fight AccessControl source. They are public Composer dependencies only. CodeIgniter owns its configuration, services, HTTP, Spark console, views, and future adapters. Do not implement login, persistence, browser journeys, release distribution, or publication transitions without a local ticket.
+- Planning uses **EPIC → TICKET → TASK**: destination, requirements, then bounded implementation (normally one PR).
+- Grilling writes an EPIC; decomposition is separate. Follow local terminology when using external skills.
+- Use `planning/tasks/BOARD.md` for executable work and `planning/ROADMAP.md` for decomposition/closeout decisions.
+- Records own status, dependencies, and priority. Boards/indexes/child tables are generated; never hand-edit them.
+- Preserve existing IDs, gaps, historical evidence, and completed dependency edges. `planning/MIGRATION.md` maps
+  former PRDs/executable T-tickets; legacy TASK-00005 remains reserved for the separate, unmerged worktree.
+- A done TASK means accepted-scope implementation and required local verification, not independent review, hosted
+  verification, merge, deployment, or completion of its broader EPIC. Record those facts separately.
+- Planning alignment does not prove stable package adoption; EPIC-00002 tracks remaining package/engineering work.
 
-## Work Routing
+## Implementation boundary
 
-When asked "What's next?" or invoked without a task, read `planning/tickets/BOARD.md` and return the current human decision under **Now** and the first ticket under **Ready Frontier**. Use `planning/CONVENTIONS.md` to interpret ticket status and ordering.
+Work in independently verifiable vertical TASKs with explicit scope, verification, and documentation impact.
+CodeIgniter owns native configuration/discovery, HTTP, Spark, views, and future adapters; preserve `app/` layout.
+Fight Common and Fight AccessControl remain public Composer dependencies. Do not copy their source or implement
+login, persistence, browser journeys, distribution, or publication transitions without an approved local TASK.
 
-## Run and Worktree Isolation
+Use repository-owned `./bin/composer`, `./bin/phpunit`, `./bin/up`, `./bin/down`, `./bin/exec`, and `./bin/build`.
+Prepare runtime/dependencies explicitly; `./bin/build` is the complete noninteractive local/hosted gate.
+Test owned behavior and important integration contracts, not planning/build tools or deliberately invalid tool
+fixtures. Validate infrastructure and documentation directly with their owning tools.
 
-Coordinate-build scratch belongs in `.runs/<YYYY-MM-DD>-<slug>/`. It is gitignored and must never be staged.
+## Work routing
 
-## Branch Conventions
+For "What's next?" or an invocation without a task, report the current human decision/question and active TASK
+from `planning/tasks/BOARD.md`; otherwise return the first executable TASK in Ready Frontier. If none is executable,
+say so and consult the Roadmap Planning Frontier and Wayfinder index. Never choose by numeric ID alone or start
+another TASK merely because one is listed. Requirements and open Wayfinder decisions are not implementation authority.
 
-Create feature branches from `develop` as `feature/<description>`. Never commit directly to `develop` or `main`.
+## Checkout and isolation
 
-## Pre-Submit Gate
+Ask current checkout versus isolated worktree unless already chosen. New branches use
+`feature/task-NNNNN-<slug>` from `develop`; never commit directly to `develop` or `main`. Preserve established
+branches and unrelated work. Scratch belongs in `.runs/<YYYY-MM-DD>-<slug>/`, isolated worktrees in
+`.runs/worktrees/`; both are ignored and must not be staged.
 
-For a long non-interactive build, run `screen -dmS <ticket>-build /bin/zsh -lc './bin/build > /private/tmp/<ticket>-build.log 2>&1; print -r -- $? > /private/tmp/<ticket>-build.exit'`, then inspect the log and require an exit file containing `0`; never treat foreground timeout output as a build result.
+## Completion and pre-submit gate
 
-Always run before committing or creating a PR:
+Record verified acceptance and outstanding review in the TASK; update parent progress and strategic narrative
+when affected. Preserve blockers, refresh views with `./bin/planning-check --write`, then run read-only
+`./bin/planning-check`, inspect frontiers, and run `git diff --check`.
 
-```bash
-./bin/build
+Always run `./bin/build` before committing or creating a PR. For a long noninteractive run:
+
+```sh
+screen -dmS <task>-build /bin/zsh -lc './bin/build > /private/tmp/<task>-build.log 2>&1; print -r -- $? > /private/tmp/<task>-build.exit'
 ```
 
-## Planning
+Inspect the complete log and require an exit file containing `0`; foreground timeout output is not a build result.
+Surface warnings, incomplete checks, and the distinction between local and hosted evidence.
 
-See `planning/CONVENTIONS.md` for the canonical planning structure: ticket lifecycle, BOARD.md execution frontier,
-Wayfinder maps, PRD and epic conventions, file naming, templates, and explicit-only archive operations. Never
-archive planning records as a completion side effect; run `./bin/archive-planning` only on an explicit request,
-review its dry run, and then apply it.
-
-### Pre-PR Sync Checklist
-
-Before final commit and PR for any feature or bug fix:
-
-1. Mark the ticket `done` with verified acceptance criteria
-2. Move the ticket to **Recently Done** in `planning/tickets/BOARD.md`
-3. Recalculate the "What's Next?" contract if dependencies shifted
-4. Update parent PRD and epic progress sections
-5. Update `ROADMAP.md` if strategic progress changed
-6. Verify no downstream ticket still lists the completed ticket as `blocked_by`
-7. Run `./bin/planning-check`
+Archive only on explicit request using `./bin/archive-planning`: review its dry run before `--apply`.
+Do not archive on completion or hierarchy migration. Publishing, release, deployment, and enrollment remain
+separate operations; see `planning/CONVENTIONS.md` for canonical planning and pre-PR rules.

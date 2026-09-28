@@ -1,9 +1,8 @@
 # Decision title
 
-**Labels:** `wayfinder:grilling`
+**Labels:** `wayfinder:grill`
 **Mode:** HITL
 **Status:** Open
-**Gate:** —
 **Map:** [Wayfinder Map](../map-name-map.md)
 **Depends on:** —
 
@@ -15,15 +14,11 @@ State the decision question.
 
 - Decision boundary one.
 
-## Required evidence
-
-- Name the evidence that distinguishes a settled decision from an assumption.
-
 ## Resolution boundary
 
 State what this ticket may settle and what must remain downstream.
 
 ## Resolution
 
-Write this only when the decision is closed. Link the epic, PRD, or implementation-ticket handoff created by
+Write this only when the decision is closed. Link the EPIC, TICKET, or implementation TASK handoff created by
 the resolved map where relevant.

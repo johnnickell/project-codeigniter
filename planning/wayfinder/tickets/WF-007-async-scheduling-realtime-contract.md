@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Symfony realtime contract
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-002, WF-004, WF-005, WF-006
+**Depends on:** [WF-002](WF-002-codeigniter-local-development-runtime-contract.md), [WF-004](WF-004-mysql-persistence-bootstrap-contract.md), [WF-005](WF-005-authentication-account-security-contract.md), [WF-006](WF-006-principal-authorization-mapping.md)
 
 ## Question
 

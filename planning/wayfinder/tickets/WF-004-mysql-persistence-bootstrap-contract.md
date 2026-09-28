@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** —
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-001, WF-002
+**Depends on:** [WF-001](WF-001-released-package-contract-audit.md), [WF-002](WF-002-codeigniter-local-development-runtime-contract.md)
 
 ## Question
 

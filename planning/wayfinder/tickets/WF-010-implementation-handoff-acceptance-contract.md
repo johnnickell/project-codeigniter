@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Human approval of the handoff
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-002, WF-003, WF-004, WF-005, WF-006, WF-007, WF-008, WF-009
+**Depends on:** [WF-002](WF-002-codeigniter-local-development-runtime-contract.md), [WF-003](WF-003-adr-http-openapi-contract.md), [WF-004](WF-004-mysql-persistence-bootstrap-contract.md), [WF-005](WF-005-authentication-account-security-contract.md), [WF-006](WF-006-principal-authorization-mapping.md), [WF-007](WF-007-async-scheduling-realtime-contract.md), [WF-008](WF-008-complete-api-cli-operation-matrix.md), [WF-009](WF-009-react-spa-adaptation-journeys.md)
 
 ## Question
 
@@ -14,7 +14,7 @@ verifiable CodeIgniter reference starter rather than a collection of unproved co
 
 ## Must decide
 
-- Produce the eventual epic, coherent PRDs, independently verifiable vertical implementation tickets,
+- Produce the eventual EPIC, requirement TICKETs, independently verifiable vertical implementation TASKs,
   dependency order, documentation impact, acceptance demonstrations, and explicit exclusions.
 - Define exact production-code Unit coverage, meaningful Integration boundaries, limited high-value Functional
   and browser journeys, concurrency probes, negative security cases, and the boundary between behavioral tests

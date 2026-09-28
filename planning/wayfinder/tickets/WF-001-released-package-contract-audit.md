@@ -29,7 +29,7 @@ an HTTP, CLI, worker, or composition-only boundary in this CodeIgniter starter?
 
 This ticket may settle the authoritative released consumer surface and its initial boundary classification. It
 may not choose CodeIgniter routes, Spark commands, persistence mappings, filters, queue topology, UI coverage, or
-implementation tickets. It cannot close from a branch, alias, candidate commit, unpublished tree, or inferred
+implementation TASKs. It cannot close from a branch, alias, candidate commit, unpublished tree, or inferred
 future release contents.
 
 ## Resolution

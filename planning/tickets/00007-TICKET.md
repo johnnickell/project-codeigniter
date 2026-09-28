@@ -1,49 +1,65 @@
 ---
-id: T-00007
-prd: PRD-00002
-title: Establish the Lean CodeIgniter Pre-Submit Quality Gate
-status: ready-for-agent
-blocked_by:
+id: TICKET-00007
+epic: EPIC-00002
+title: Decide the remaining engineering and quality-gate alignment
+status: needs-info
 ---
 
-# Establish the Lean CodeIgniter Pre-Submit Quality Gate
+# Decide the remaining engineering and quality-gate alignment
 
-## Outcome
+## Problem statement
 
-Replace the certification-heavy topology with one CodeIgniter-owned `./bin/build` pre-submit gate, following
-Fight Common [T-00087](https://github.com/johnnickell/fight-common/blob/develop/planning/tickets/00087-TICKET.md)
-and [ADR 0026](https://github.com/johnnickell/fight-common/blob/develop/planning/adr/0026-lean-pre-submit-and-release-qualification.md).
+The initial comparison and certification retirement do not establish complete adoption of Agent OS ownership,
+PHP, testing, coverage, static-analysis, HTTP, and delivery practices.
 
-## Scope
+## Proposed solution and boundaries
 
-- Require `johnnickell/fight-common:^1.2`, the installed `FightCommon` PHPCS standard, and repository-owned scan
-  paths/exclusions.
-- `./bin/build` is the sole local and hosted pre-submit gate: each retained Unit, Integration, Functional,
-  frontend, and browser suite runs once alongside Composer validation, syntax/formatting, PHPCS, PHPStan,
-  Deptrac, and Rector dry-run.
-- Direct Unit tests use `#[CoversClass]` and alone provide exact 100% owned-production statement coverage;
-  retained boundary and journey suites use `#[CoversNothing]`.
-- Retain framework-native CodeIgniter boundary coverage and valuable application journeys; framework types stay in
-  Adapter/composition under Adapter -> Application -> Domain.
+After planning is trustworthy, settle target-owned decisions for direct package use, genuine orchestration,
+inward dependency boundaries, PHP/naming conventions, meaningful unit/integration/functional coverage, and
+appropriate PHPCS/PHPStan/Deptrac/Rector/build phases. Preserve CodeIgniter-native discovery, `app/` layout, HTTP
+and Spark seams. Use the qualified package baseline rather than importing another application's concrete stack.
 
-## Exclusions and Cleanup
+Keep the already approved exclusion of tool-self-tests, fabricated tool failures, recurring receipts, and
+pre-submit dependency maintenance. Do not revive the separate legacy T-00005 proposal wholesale; its exact
+coverage and certification assumptions conflict with newer decisions and need explicit reconciliation.
 
-- Replace the monolithic test topology and remove stock framework, receipt, and profile tests that certify rather
-  than protect owned behavior.
-- Remove candidate validation, lowest/latest lanes, receipt authorities, auxiliary locks/digests, clean
-  production-install inspection, and Fight Common certification journeys from ordinary builds.
-- Do not test build scripts, CI, configuration, coverage tooling, certification-only fixtures, receipts, or docs.
-  Hosted CI calls `./bin/build` only and hosted status is separately recorded.
+## Incoming upstream quality-gate handoff
 
-## Acceptance Criteria
+The maintainer authorized carrying `develop`'s independently created legacy T-00007 into this requirement for
+explicit reconciliation. [Provenance and requirement disposition](../UPSTREAM-RECONCILIATION.md) preserve its
+original `ready-for-agent` status, Common `^1.2`/FightCommon PHPCS requirement, full tooling phases, exact 100%
+Unit-only coverage proposal, `CoversClass`/`CoversNothing` metadata, native boundaries and cleanup exclusions.
+These are inputs TASK-00010 must resolve, not completed or newly accepted enforcement. This upstream identity
+is distinct from retirement TASK-00007; do not infer acceptance from the shared old number.
 
-- [ ] One canonical gate runs retained suites once and all retained quality checks.
-- [ ] Package/standard integration, local paths/exclusions, and direct Unit-only exact coverage are enforced.
-- [ ] Coverage metadata differentiates direct units from retained boundary/journey suites without masking gaps.
-- [ ] The CodeIgniter-native boundaries and useful journeys remain while stock, receipt, profile, and monolithic
-      certification topology is gone from ordinary builds.
+## Use cases and validation
 
-## Verification
+A maintainer chooses enforceable local engineering rules and their evidence before implementation decomposition.
+No business commands/queries/events or runtime permissions are introduced here. HTTP/authorization decisions
+remain in their Wayfinder/use-case owners; no speculative handlers, test-only routes, or bulk source moves.
 
-- Run focused retained checks, then `./bin/build`.
-- Verify hosted CI delegates only to that command and report its result separately.
+## Acceptance and evidence to settle
+
+Define the accepted rule set, applicability/exceptions, compatible tooling versions, meaningful coverage denominator
+and driver, enforcement versus review responsibilities, migration/backward-compatibility cost, and independently
+verifiable TASK boundaries. Keep hosted gate parity and report warnings/limits. A green current gate is not proof
+that absent static analysis or unmeasured unit coverage has been adopted.
+
+## TASKs
+
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| [TASK-00010](../tasks/00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent |
+<!-- /planning:children -->
+
+## Decisions and progress
+
+The maintainer approved creation of [TASK-00010](../tasks/00010-TASK.md), a decision/documentation chore blocked
+by [TASK-00009](../tasks/00009-TASK.md)'s qualification findings. Its scope is approved, but execution has not been
+authorized or started. No rule set, tooling/coverage policy or enforcement implementation is accepted by this
+record-creation approval; this TICKET remains `needs-info`.
+
+Review TASK-00010's proposal before allocating enforcement TASKs. If TASK-00009 cannot qualify a package pair,
+package-sensitive decisions remain unresolved rather than treating blocker completion as compatibility evidence.
+[TICKET-00004](00004-TICKET.md) and [TICKET-00005](00005-TICKET.md) remain the locally completed alignment slices.

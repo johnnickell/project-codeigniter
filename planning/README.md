@@ -1,24 +1,26 @@
 # Planning
 
-This directory is the committed source of truth for Fight CodeIgniter Starter planning.
+Markdown is the committed source of truth for Fight CodeIgniter Starter planning.
 
-- `ROADMAP.md` records strategic progress.
-- `epics/` describes destinations.
-- `specs/` describes coherent product requirements.
-- `tickets/` contains executable work; each ticket is canonical for its own status and dependencies.
-- `tickets/BOARD.md` ranks the current execution frontier.
-- `adr/` records architectural decisions.
-- `agents/` contains focused working instructions.
-- `wayfinder/` contains planning-only investigation maps and decision tickets for efforts whose
-  implementation route is not clear enough for an epic or PRD yet.
+- [Conventions](CONVENTIONS.md): EPIC → TICKET → TASK, lifecycle, priority, generation, and archives
+- [TASK Board](tasks/BOARD.md): active and executable work, blockers, and human action
+- [Roadmap](ROADMAP.md): strategy, EPIC status, and decomposition/closeout frontier
+- [EPICs](epics/README.md), [TICKETs](tickets/README.md), [TASKs](tasks/README.md)
+- [Adoption EPIC](epics/00002-EPIC.md): completed/approved slices versus unfinished package and engineering adoption
+- [Migration map](MIGRATION.md): old PRD/T identities, preserved history, and the reserved legacy T-00005 gap
+- [Wayfinder](wayfinder/README.md), [ADRs](adr/README.md), and [focused instructions](agents/issue-tracker.md)
+- [Baseline and license notice](SOURCE-NOTICE.md)
 
-Every artifact directory keeps a `_…_TEMPLATE.md` copy-ready starting point. `wayfinder/README.md` is the
-continuity index for charting work and its next decision frontier. Archives remain part of this committed
-planning record: use `./bin/archive-planning` only when explicitly asked, review its dry run, then use `--apply`
-to move eligible terminal records and repair local Markdown links.
+Grill an EPIC before decomposing accepted scope into requirement TICKETs and implementation TASKs. Repository
+terminology and templates govern external skills; do not treat a TASK as a TICKET. Keep one writable source of
+truth: records own state, generated views project it, and historical prose does not override current metadata.
 
-Identifiers are independent five-digit sequences. Ticket identifiers are displayed as `T-NNNNN`. Valid statuses are `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `in-progress`, `done`, and `wontfix`. Blocking is derived from unfinished `blocked_by` edges and is not stored as a status.
+Run `./bin/planning-check --write`, then `./bin/planning-check` after editing records. The canonical build checks
+without rewriting views. Archive only on explicit request; scratch remains under ignored `.runs/`.
 
-`CONVENTIONS.md` is the canonical reference for planning structure, file naming, ticket lifecycle, BOARD.md, wayfinder maps, epics, PRDs, and pre-PR synchronization.
-
-Run `./bin/planning-check` after changing planning files. Coordinate-build scratch belongs in gitignored `.runs/`, never here.
+**Planning was the first priority and is now locally migrated—not evidence of completed adoption.** Stable Common
+1.2+/AccessControl 0.4+ qualification and remaining engineering alignment are unresolved requirements; no upgrade
+TASK is executable. [TASK-00009](tasks/00009-TASK.md) has approved qualification scope and is ready for separately
+authorized execution. [TASK-00010](tasks/00010-TASK.md)'s engineering contract proposal scope is approved and waits
+on TASK-00009; neither policy acceptance nor enforcement is authorized. TASK-00008 records local verification and
+outstanding independent review.

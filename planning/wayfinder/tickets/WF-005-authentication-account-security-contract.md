@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Symfony authentication contract
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-003, WF-004
+**Depends on:** [WF-003](WF-003-adr-http-openapi-contract.md), [WF-004](WF-004-mysql-persistence-bootstrap-contract.md)
 
 ## Question
 
