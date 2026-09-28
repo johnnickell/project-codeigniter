@@ -27,7 +27,16 @@ targeting `develop`, `main`, and `release/**`.
 
 Dependency upgrades and compatibility exploration are explicit maintenance operations, not pre-submit tests.
 Framework-support receipts and their certification machinery were retired by
-[T-00007](planning/tickets/00007-TICKET.md); historical adoption records do not impose ongoing certification.
+[TASK-00007](planning/tasks/00007-TASK.md); historical adoption records do not impose ongoing certification.
 The gate no longer certifies a separate `--no-dev` installation or lowest/latest package resolutions.
 
-This repository is MIT-licensed source, not a release or package-distribution claim. Do not add copied shared source, credentials, production data, login, persistence, browser journeys, tags, Packagist publication, template enablement, or create-project distribution without a separately adopted local ticket.
+## Planning and unfinished adoption
+
+Planning uses **EPIC → TICKET → TASK**. Start with the [TASK Board](planning/tasks/BOARD.md) for executable work
+and the [adoption EPIC](planning/epics/00002-EPIC.md) for scope and unresolved decisions. The
+[migration map](planning/MIGRATION.md) preserves former PRD/T identities.
+
+Stable Fight Common 1.2+/AccessControl 0.4+ qualification and remaining engineering alignment are **not complete**.
+Planning migration and certification removal do not upgrade the development candidates in `composer.lock`.
+
+This repository is MIT-licensed source, not a release or package-distribution claim. Do not add copied shared source, credentials, production data, login, persistence, browser journeys, tags, Packagist publication, template enablement, or create-project distribution without a separately approved local TASK.

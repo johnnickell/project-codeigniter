@@ -9,8 +9,8 @@ $required = [
     'SECURITY.md',
     'planning/CONVENTIONS.md',
     'planning/README.md',
-    'planning/tickets/BOARD.md',
-    'planning/tickets/00001-TICKET.md',
+    'planning/tasks/BOARD.md',
+    'planning/tasks/00001-TASK.md',
 ];
 
 foreach ($required as $path) {

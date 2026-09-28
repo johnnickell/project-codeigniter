@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Symfony operation matrix
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-003, WF-005, WF-006, WF-007
+**Depends on:** [WF-003](WF-003-adr-http-openapi-contract.md), [WF-005](WF-005-authentication-account-security-contract.md), [WF-006](WF-006-principal-authorization-mapping.md), [WF-007](WF-007-async-scheduling-realtime-contract.md)
 
 ## Question
 

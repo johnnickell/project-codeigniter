@@ -22,7 +22,7 @@ command/event envelopes and retries, local storage/process/scheduling effects, a
 certification-only production route.
 
 Do not test receipt machinery, Composer output parsing, quality-tool behavior, build wrappers, or tests themselves
-in the product suite. Do not manufacture fake Composer executables or invalid tool fixtures. T-00007 removes the
+in the product suite. Do not manufacture fake Composer executables or invalid tool fixtures. TASK-00007 removes the
 framework-support receipt and verifier-wrapper tests rather than moving them to another test suite.
 
 The gate invokes `scripts/verify-production-profile.php` directly to check production credential rejection and

@@ -11,18 +11,12 @@
 Describe the implementation-ready planning result.
 
 **Done** = every linked decision ticket is closed, the remaining fog is resolved or excluded, and the map links
-to its resulting epic, PRDs, and/or implementation tickets.
+to its resulting epic, TICKETs, and/or implementation TASKs.
 
 ## Notes
 
 - State evidence, boundaries, and default working modes.
 - Link existing planning artifacts that are navigation evidence rather than settled authority.
-- Use exactly one canonical Wayfinder type per ticket: Research, Prototype, Grilling, or Task. Research is AFK;
-  Prototype and Grilling are HITL; Task is AFK or HITL according to who must act.
-- Keep ticket status exactly `Open` or `Closed`. Show `frontier`, `waiting`, or `gated` as derived map/Board state,
-  never as part of ticket status.
-- Put only local Wayfinder-ticket prerequisites in `Depends On`. Put releases, external repositories, human approval,
-  credentials, or other outside authority in `Gate`.
 
 ## Decisions so far
 
@@ -30,9 +24,8 @@ to its resulting epic, PRDs, and/or implementation tickets.
 
 ## Tickets
 
-| Ticket | Type | Mode | Status | Depends On | Gate |
-|---|---|---|---|---|---|
-| [Decision title](tickets/WF-NNN-decision.md) | Grilling | HITL | **Open** | — | — |
+<!-- planning:decisions -->
+<!-- /planning:decisions -->
 
 ## Blocking relationships
 

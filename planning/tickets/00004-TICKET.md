@@ -1,54 +1,47 @@
 ---
-id: T-00004
-prd: PRD-00002
-title: Establish the Complete CodeIgniter Platform Profile
+id: TICKET-00004
+epic: EPIC-00002
+title: Retire recurring framework-support certification
 status: done
-blocked_by:
 ---
 
-# Establish the Complete CodeIgniter Platform Profile
+# Retire recurring framework-support certification
 
-> Historical foundation record. [T-00007](00007-TICKET.md) retires the later receipt/lowest/latest certification
-> obligation without removing the CodeIgniter-native service profile established here.
+## Problem statement
 
-## Outcome
+Receipt machinery, dependency-lane certification, and tests of verifiers distract from application and important
+consumer integration behavior. The maintainer explicitly approved retiring that obligation rather than moving
+its tests elsewhere.
 
-This ticket established the preliminary project-owned `Config\\Services` foundation for the complete profile.
-T-00002 owns the completed, authority-validated receipt and lowest/latest certification. Application developers
-continue to supply only their Domain/Application services, application configuration, routes, templates, and
-secrets.
+## Solution and boundaries
 
-## Acceptance Criteria
+Remove recurring receipt generation/validation and lowest/latest certification, keep dependency preparation
+outside `./bin/build`, and retain meaningful behavior and direct safe runtime checks. Preserve CodeIgniter-native
+layout/discovery and the application Composer manifest/lock. This requirement does not upgrade packages or
+introduce new coverage/static-analysis policy.
 
-- [x] Composer resolves `johnnickell/fight-common` from the public VCS repository as `dev-develop` at
-  `4a798b1db8fdb5e4af7d0ba8c98a88ac53c50c16`, using the required `1.2.0-dev` candidate alias and no local
-  path repository.
-- [x] `Config\\Services` registers usable defaults for validation, security, cache, persistence/event store,
-  Queue plus synchronous/async messaging, HTTP/PSR-18, request/response, filesystem/storage/transfer,
-  process, scheduler, routing, mail, templating, observability, SMS, Mercure/private publication, and each
-  selected provider fallback.
-- [x] Project-owned defaults keep credentials, routes, templates, and Domain/Application behavior configurable.
-- [x] Focused profile tests, `./bin/planning-check`, and `./bin/build` pass.
+## Use cases and validation
 
-## Verification
+The developer prepares dependencies explicitly and runs the same canonical gate locally and in CI. Commands
+are repository tools, not business messages; queries/events and new runtime permissions are N/A. Invalid metadata
+or failed behavior still fails the gate. Do not add fake Composer fixtures or tests of gate scripts.
 
-Record the Composer-resolved package version and candidate reference, boot every registered service in focused
-coverage, then run the planning and canonical build gates. This preliminary foundation was verified with the
-focused profile suite (4 tests, 48 assertions), `./bin/planning-check`, and `./bin/build` (10 tests, 57 assertions).
-T-00002 records the subsequent complete-profile receipt evidence.
+## Acceptance and evidence
 
-## Exclusions
+No active receipt/lane pipeline or verifier-only tests remain; home, transaction, queue, and important provider
+integration evidence remains. The gate does not install/update dependencies. Historical certification is clearly
+superseded rather than rewritten as a current result.
 
-Do not copy Fight Common source, use a local path repository, create a runtime bridge, publish a package, or
-embed application secrets or application-specific Domain/Application behavior.
+## TASKs
 
-## Documentation Impact
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| [TASK-00007](../tasks/00007-TASK.md) | Retire Framework Support Certification | done |
+<!-- /planning:children -->
 
-This ticket documents the preliminary, project-owned `Config\\Services` profile foundation. The completed
-receipt authority and final lowest/latest dependency-lane certification remain documented by T-00002.
+## Decisions and progress
 
-## Completion Notes
-
-Completed as the preliminary CodeIgniter profile foundation. Its focused profile coverage, planning gate, and
-canonical build were green at completion; final immutable 1.2 receipt and dependency-lane evidence are owned
-by T-00002.
+[TASK-00007](../tasks/00007-TASK.md) delivered this approved slice in commit `2699ceb`: local gate green with
+13 tests / 69 assertions. Its independent review and hosted verification remain pending. `done` does not mean
+merged, released, or broader Agent OS adoption completed.

@@ -20,10 +20,13 @@ Fight packages only through their public Composer contracts; it never copies pac
 
 **Done** = every linked decision ticket is closed, the operation matrix accounts for every released public
 AccessControl command, query, and service or explicitly classifies it as unsupported, all remaining fog is
-resolved or excluded, and the map links to its resulting epic, PRDs, and executable vertical-slice tickets.
+resolved or excluded, and the map links to its resulting EPIC, requirement TICKETs, and executable vertical-slice TASKs.
 
 ## Notes
 
+- Planning hierarchy migration closes no decision. The newer Common 1.2+/AccessControl 0.4+ adoption target in
+  [TICKET-00006](../tickets/00006-TICKET.md) must explicitly reconcile this map's older v0.2.0 evidence gate;
+  the baseline below is preserved pending that decision, not claimed current.
 - This is a decision-only map. It introduces no application API, database schema, environment variable, package
   dependency, runtime behavior, or release claim.
 - The Compose topology is certified for local development only. Production deployment and availability are
@@ -64,22 +67,24 @@ resolved or excluded, and the map links to its resulting epic, PRDs, and executa
 9. **[React SPA Adaptation and Journeys](tickets/WF-009-react-spa-adaptation-journeys.md) is open and externally
    gated.** Adapt the completed Symfony client evidence to portable CodeIgniter-owned frontend seams.
 10. **[Implementation Handoff Acceptance Contract](tickets/WF-010-implementation-handoff-acceptance-contract.md) is
-    open.** Define the epic, PRDs, vertical slices, documentation, and verification gates.
+    open.** Define the EPIC, TICKETs, vertical TASKs, documentation, and verification gates.
 
 ## Tickets
 
-| Ticket | Type | Mode | Status | Depends On | Gate |
-|---|---|---|---|---|---|
-| [WF-001 — Released Package Contract Audit](tickets/WF-001-released-package-contract-audit.md) | Research | AFK | **Open** | — | Installable Fight Common 1.2.0 and Fight AccessControl 0.2.0 |
-| [WF-002 — CodeIgniter Local Development Runtime Contract](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | Grilling | HITL | **Open** | — | — |
-| [WF-003 — ADR HTTP and OpenAPI Contract](tickets/WF-003-adr-http-openapi-contract.md) | Prototype | HITL | **Open** | WF-001 | Symfony canonical wire contract |
-| [WF-004 — MySQL Persistence and Bootstrap Contract](tickets/WF-004-mysql-persistence-bootstrap-contract.md) | Prototype | HITL | **Open** | WF-001, WF-002 | — |
-| [WF-005 — Authentication and Account Security Contract](tickets/WF-005-authentication-account-security-contract.md) | Grilling | HITL | **Open** | WF-003, WF-004 | Symfony authentication contract |
-| [WF-006 — Principal and Authorization Mapping](tickets/WF-006-principal-authorization-mapping.md) | Grilling | HITL | **Open** | WF-001, WF-004, WF-005 | — |
-| [WF-007 — Async, Scheduling, and Realtime Contract](tickets/WF-007-async-scheduling-realtime-contract.md) | Grilling | HITL | **Open** | WF-002, WF-004, WF-005, WF-006 | Symfony realtime contract |
-| [WF-008 — Complete API and CLI Operation Matrix](tickets/WF-008-complete-api-cli-operation-matrix.md) | Grilling | HITL | **Open** | WF-003, WF-005, WF-006, WF-007 | Symfony operation matrix |
-| [WF-009 — React SPA Adaptation and Journeys](tickets/WF-009-react-spa-adaptation-journeys.md) | Prototype | HITL | **Open** | WF-005, WF-008 | Immutable accepted Symfony client reference |
-| [WF-010 — Implementation Handoff Acceptance Contract](tickets/WF-010-implementation-handoff-acceptance-contract.md) | Grilling | HITL | **Open** | WF-002 through WF-009 | Human approval of the handoff |
+<!-- planning:decisions -->
+| Decision ID | Title | Type | Mode | Status | Depends on | Gate |
+|---|---|---|---|---|---|---|
+| [WF-001](tickets/WF-001-released-package-contract-audit.md) | WF-001 — Released Package Contract Audit | wayfinder:research | AFK | Open | — | Installable Fight Common v1.2.0 and Fight AccessControl v0.2.0 release tags |
+| [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | WF-002 — CodeIgniter Local Development Runtime Contract | wayfinder:grilling | HITL | Open | — | — |
+| [WF-003](tickets/WF-003-adr-http-openapi-contract.md) | WF-003 — ADR HTTP and OpenAPI Contract | wayfinder:prototype | HITL | Open | [WF-001](tickets/WF-001-released-package-contract-audit.md) | Symfony canonical wire contract |
+| [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md) | WF-004 — MySQL Persistence and Bootstrap Contract | wayfinder:prototype | HITL | Open | [WF-001](tickets/WF-001-released-package-contract-audit.md), [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | — |
+| [WF-005](tickets/WF-005-authentication-account-security-contract.md) | WF-005 — Authentication and Account Security Contract | wayfinder:grilling | HITL | Open | [WF-003](tickets/WF-003-adr-http-openapi-contract.md), [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md) | Symfony authentication contract |
+| [WF-006](tickets/WF-006-principal-authorization-mapping.md) | WF-006 — Principal and Authorization Mapping | wayfinder:grilling | HITL | Open | [WF-001](tickets/WF-001-released-package-contract-audit.md), [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md), [WF-005](tickets/WF-005-authentication-account-security-contract.md) | — |
+| [WF-007](tickets/WF-007-async-scheduling-realtime-contract.md) | WF-007 — Async, Scheduling, and Realtime Contract | wayfinder:grilling | HITL | Open | [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md), [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md), [WF-005](tickets/WF-005-authentication-account-security-contract.md), [WF-006](tickets/WF-006-principal-authorization-mapping.md) | Symfony realtime contract |
+| [WF-008](tickets/WF-008-complete-api-cli-operation-matrix.md) | WF-008 — Complete API and CLI Operation Matrix | wayfinder:grilling | HITL | Open | [WF-003](tickets/WF-003-adr-http-openapi-contract.md), [WF-005](tickets/WF-005-authentication-account-security-contract.md), [WF-006](tickets/WF-006-principal-authorization-mapping.md), [WF-007](tickets/WF-007-async-scheduling-realtime-contract.md) | Symfony operation matrix |
+| [WF-009](tickets/WF-009-react-spa-adaptation-journeys.md) | WF-009 — React SPA Adaptation and Journeys | wayfinder:prototype | HITL | Open | [WF-005](tickets/WF-005-authentication-account-security-contract.md), [WF-008](tickets/WF-008-complete-api-cli-operation-matrix.md) | Immutable accepted Symfony client reference |
+| [WF-010](tickets/WF-010-implementation-handoff-acceptance-contract.md) | WF-010 — Implementation Handoff Acceptance Contract | wayfinder:grilling | HITL | Open | [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md), [WF-003](tickets/WF-003-adr-http-openapi-contract.md), [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md), [WF-005](tickets/WF-005-authentication-account-security-contract.md), [WF-006](tickets/WF-006-principal-authorization-mapping.md), [WF-007](tickets/WF-007-async-scheduling-realtime-contract.md), [WF-008](tickets/WF-008-complete-api-cli-operation-matrix.md), [WF-009](tickets/WF-009-react-spa-adaptation-journeys.md) | Human approval of the handoff |
+<!-- /planning:decisions -->
 
 ## Blocking relationships
 
@@ -92,7 +97,7 @@ WF-004 + WF-005 + WF-006 ─────────────────→ 
                                                                           └──→ WF-008 ──┐
 completed Symfony AccessControl client ────────────────────────────────────────────────→ WF-009
 WF-002 through WF-009 ─────────────────────────────────────────────────────────────────→ WF-010
-WF-010 ──→ epic, PRDs, and executable vertical-slice tickets
+WF-010 ──→ EPIC, requirement TICKETs, and executable vertical-slice TASKs
 ```
 
 WF-002 is independently takeable. WF-001 remains gated until both requested release tags are installable, and

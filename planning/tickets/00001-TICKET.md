@@ -1,44 +1,55 @@
 ---
-id: T-00001
-prd: PRD-00001
-title: Establish the Governed CodeIgniter Starter Foundation
+id: TICKET-00001
+epic: EPIC-00001
+legacy_id: PRD-00001
+title: CodeIgniter Starter Product and Walking-Slice Acceptance
 status: done
-blocked_by:
 ---
 
-# Establish the Governed CodeIgniter Starter Foundation
+# CodeIgniter Starter Product and Walking-Slice Acceptance
 
-## Outcome
+Migrated from PRD-00001 under [TASK-00008](../tasks/00008-TASK.md); the accepted foundation scope is unchanged.
 
-Repository-local planning, architecture, triage, and public-source guidance are canonical. Docker-backed Composer, PHPUnit, lifecycle, exec, and Spark wrappers exist. `./bin/build` validates governance and the hello-world foundation; hosted CI invokes that exact command for push and pull-request events on `develop`, `main`, and `release/**`.
+## Problem Statement
 
-## Scope
+A new CodeIgniter starter project needs governed boundaries: native configuration, service discovery, HTTP, Spark console, presentation composition, and explicit Fight Common/Fight AccessControl Composer dependencies.
 
-- In scope: local planning authority, Docker-backed tooling, `./bin/build` gate, hosted CI, MIT/CONTRIBUTING/SECURITY policies.
-- Out of scope: login, persistence, browser UAT, client, realtime, release, tag, Packagist publication, template enablement, create-project distribution.
+## Solution
 
-## Acceptance Criteria
+The bootstrap establishes a governed hello-world foundation with Docker-backed tooling, a canonical `./bin/build` gate, hosted CI, and public-source guidance.
 
-- [x] Repository-local planning, architecture, triage, and public-source guidance are canonical.
-- [x] Docker-backed Composer, PHPUnit, lifecycle, exec, and Spark wrappers exist.
-- [x] `./bin/build` validates governance and the hello-world foundation; hosted CI invokes that exact command.
-- [x] MIT, contribution, and security policies are present.
+## Implementation Decisions
 
-## Verification
+- Repository-local planning, architecture, triage, and public-source guidance are canonical.
+- Docker-backed Composer, PHPUnit, lifecycle, and build wrappers exist.
+- `./bin/build` is the single noninteractive local and hosted gate.
+- MIT, contribution, and security policies are present.
 
-- `./bin/build` passes locally and in hosted CI.
+## Testing Decisions
 
-## Bootstrap receipt
+- `./bin/build` validates governance and the hello-world foundation; hosted CI invokes that exact command.
+- A native controller/view integration check verifies the CodeIgniter composition seam.
 
-`johnnickell/project-codeigniter` is public source. Foundation commit
-`fadb34e245007f159085ab40cc75b6810e700010` supplies the canonical local planning, native CodeIgniter
-composition, and production-install verification. The canonical `./bin/build` passed from an independent clean
-clone at that commit on 2026-08-19, including governance, six PHPUnit tests with nine assertions, and the
-production Composer public-dependency contract. Hosted [Build run 32234095998](https://github.com/johnnickell/project-codeigniter/actions/runs/32234095998)
-passed on the `develop` merge commit; [project-codeigniter PR #1](https://github.com/johnnickell/project-codeigniter/pull/1)
-records the merged handoff. This bootstrap does not authorize a release tag, Packagist publication, template
-enablement, or create-project distribution.
+## Out of Scope
 
-## Completion Notes
+- Login, persistence, browser journeys, releases, tags, Packagist publication, template enablement, create-project distribution.
 
-Local and hosted `./bin/build` receipts are green. The governed bootstrap handoff is accepted.
+## Further Notes
+
+## Use cases and validation
+
+The public hello-world request must render through native CodeIgniter routing, services, and views. Business
+commands, events, authentication, and persistence are N/A for this bootstrap. Tooling must fail closed on invalid
+planning/governance; it does not establish production deployment or package publication authority.
+
+## TASKs
+
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| [TASK-00001](../tasks/00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | done |
+<!-- /planning:children -->
+
+## Progress
+
+[TASK-00001](../tasks/00001-TASK.md) preserves the original local/hosted verification and merged bootstrap evidence.

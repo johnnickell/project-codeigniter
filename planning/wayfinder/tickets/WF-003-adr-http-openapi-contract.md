@@ -5,7 +5,7 @@
 **Status:** Open
 **Gate:** Symfony canonical wire contract
 **Map:** [CodeIgniter AccessControl Starter Application](../codeigniter-access-control-application-map.md)
-**Depends on:** WF-001
+**Depends on:** [WF-001](WF-001-released-package-contract-audit.md)
 
 ## Question
 

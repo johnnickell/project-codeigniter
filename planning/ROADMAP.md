@@ -1,24 +1,63 @@
 # Roadmap
 
-## In progress
+## Current priorities
 
-| Epic | Target version | Status | Current outcome |
-| --- | --- | --- | --- |
-| — | — | — | No strategic delivery is currently in progress. |
+Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; independent review and hosted verification
+remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
-## Route to 1.0
+1. Accept/refine the remaining [adoption EPIC](epics/00002-EPIC.md) requirements, especially exact stable Fight
+   Common 1.2+/AccessControl 0.4+ qualification and bounded engineering/quality alignment. No upgrade is done or
+   executable merely because the planning model changed.
+2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
+   through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
+   release baseline before treating WF-001 as evidence for the newer adoption target.
+3. Revisit Common 2.0 only after its migration authority exists; [TASK-00003](tasks/00003-TASK.md) remains needs-info.
 
-1. Revisit 2.0 only after Fight Common publishes its migration authority.
+## EPIC status
 
-## Completed / Released
+<!-- planning:epics -->
+| EPIC ID | Title | Target | Status |
+|---|---|---|---|
+| [EPIC-00001](epics/00001-EPIC.md) | Maintain the governed CodeIgniter starter and package integration | starter-foundation | needs-info |
+| [EPIC-00002](epics/00002-EPIC.md) | Adopt current Fight packages and Agent OS engineering conventions | qualified-codeigniter-adoption | needs-info |
+<!-- /planning:epics -->
 
-The governed CodeIgniter Starter Foundation is complete: T-00001 has successful repository-local and hosted `./bin/build` receipts.
+## Planning Frontier
 
-Fight Common 1.2 candidate adoption is complete: T-00002 recorded the immutable candidate receipt, exact candidate
-authority validation, and lowest/latest boot evidence; T-00006 re-certified the rewritten identity. T-00007
-supersedes their ongoing certification obligation, not those historical outcomes or the installed package baseline.
+These are decomposition or closeout decisions, not executable TASKs. Use the [TASK Board](tasks/BOARD.md) for
+implementation. A parent with terminal children requires explicit closeout rather than automatic completion.
 
-[T-00007](tickets/00007-TICKET.md) retired recurring receipts, lowest/latest certification, and verifier-only tests.
-The canonical gate now checks the prepared CodeIgniter runtime with meaningful integration evidence; dependency
-installation and updates are explicit preparation/maintenance. Local verification passed; independent review and
-hosted verification remain pending. No release or publication is claimed.
+<!-- planning:frontier -->
+### EPICs without TICKETs
+
+| EPIC ID | Title | Status |
+|---|---|---|
+| None | — | — |
+
+### TICKETs without TASKs
+
+| TICKET ID | Title | Parent EPIC | Status |
+|---|---|---|---|
+| [TICKET-00006](tickets/00006-TICKET.md) | Qualify and adopt the current stable Fight package baseline | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+| [TICKET-00007](tickets/00007-TICKET.md) | Decide the remaining engineering and quality-gate alignment | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+
+### Parents ready for closeout review
+
+| Type | ID | Title | Status | Children |
+|---|---|---|---|---|
+| None | — | — | — | — |
+<!-- /planning:frontier -->
+
+## Historical outcomes
+
+[TASK-00001](tasks/00001-TASK.md) preserves local/hosted foundation and merged bootstrap evidence.
+[TASK-00002](tasks/00002-TASK.md), [TASK-00004](tasks/00004-TASK.md), and [TASK-00006](tasks/00006-TASK.md) preserve
+candidate integration and historical certification—not stable 1.2+/0.4+ adoption.
+
+[TASK-00007](tasks/00007-TASK.md) retired recurring receipts, lowest/latest certification, and verifier-only tests
+in commit `2699ceb`. Its local gate passed; independent review and hosted verification remain pending. Dependency
+installation/updates are explicit preparation/maintenance, not pre-submit tests. No release or publication is claimed.
+
+[TASK-00008](tasks/00008-TASK.md) migrated planning to EPIC → TICKET → TASK and generated views, with a green local
+gate. [MIGRATION.md](MIGRATION.md) maps the old surface without archiving or losing history. Broader adoption remains
+`needs-info`; neither the current package baseline nor all engineering practices have been adopted.

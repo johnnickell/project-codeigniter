@@ -1,22 +1,43 @@
 ---
-id: T-00003
-prd: PRD-00002
-title: Prepare Fight Common 2.0 Migration
+id: TICKET-00003
+epic: EPIC-00001
+title: Qualify a future Fight Common 2.0 migration
 status: needs-info
-blocked_by:
 ---
 
-# Prepare Fight Common 2.0 Migration
+# Qualify a future Fight Common 2.0 migration
 
-## Outcome
+## Problem statement
 
-Keep the migration visible without defining or implementing speculative breaking changes.
+The pre-existing T-00003 investigation must remain visible without extending a completed 1.2 candidate adoption
+or inventing a future public package contract.
 
-## Acceptance Criteria
+## Solution and boundaries
 
-- [ ] Wait for the Fight Common 2.0 contract, deprecation-removal inventory, and migration guide.
-- [ ] Then inventory CodeIgniter-local changes and create bounded executable slices.
+Wait for Fight Common's 2.0 contract, deprecation-removal inventory, and migration guide. Only then inventory
+CodeIgniter-local changes and propose bounded executable work. This is not the current stable 1.2+/0.4+
+qualification under [TICKET-00006](00006-TICKET.md).
 
-## Verification
+## Use cases and validation
 
-Confirm all three owning Fight Common artifacts exist before changing this ticket to `ready-for-agent`.
+The operator locates authoritative package migration evidence before any consumer upgrade. Domain commands,
+queries, events, runtime permissions, and side effects are N/A until an accepted migration use case exists.
+Reject branch inference or speculative breaking changes as release authority.
+
+## Acceptance and evidence
+
+All three owning artifacts must exist and be inspected before marking the child executable. No implementation,
+package-version change, or completed-adoption claim follows from the hierarchy migration.
+
+## TASKs
+
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| [TASK-00003](../tasks/00003-TASK.md) | Prepare Fight Common 2.0 Migration | needs-info |
+<!-- /planning:children -->
+
+## Decisions and progress
+
+[TASK-00003](../tasks/00003-TASK.md) preserves the original unresolved scope and status. This requirement was
+separated from legacy PRD-00002 to keep that completed candidate-integration record truthful.

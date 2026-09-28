@@ -1,87 +1,50 @@
 ---
-id: T-00007
-prd: PRD-00002
-title: Retire Framework Support Certification
-status: done
-blocked_by:
+id: TICKET-00007
+epic: EPIC-00002
+title: Decide the remaining engineering and quality-gate alignment
+status: needs-info
 ---
 
-# Retire Framework Support Certification
+# Decide the remaining engineering and quality-gate alignment
 
-## Outcome
+## Problem statement
 
-Retire the starter's recurring framework-support certification workflow in favor of application and important
-package-integration behavior checks, while preserving CodeIgniter-native discovery and the `app/` layout.
+The initial comparison and certification retirement do not establish complete adoption of Agent OS ownership,
+PHP, testing, coverage, static-analysis, HTTP, and delivery practices.
 
-## Authority
+## Proposed solution and boundaries
 
-The maintainer explicitly approved stronger Agent OS alignment and implementation in the current checkout on
-2026-09-27. This decision supersedes the ongoing receipt and lowest/latest certification obligations of
-T-00002/T-00006; their completed adoption evidence remains historical, not a continuing gate requirement.
-Repository-local ticket conventions remain authoritative; no Agent OS planning hierarchy is imported.
+After planning is trustworthy, settle target-owned decisions for direct package use, genuine orchestration,
+inward dependency boundaries, PHP/naming conventions, meaningful unit/integration/functional coverage, and
+appropriate PHPCS/PHPStan/Deptrac/Rector/build phases. Preserve CodeIgniter-native discovery, `app/` layout, HTTP
+and Spark seams. Use the qualified package baseline rather than importing another application's concrete stack.
 
-## Scope
+Keep the already approved exclusion of tool-self-tests, fabricated tool failures, recurring receipts, and
+pre-submit dependency maintenance. Do not revive the separate legacy T-00005 proposal wholesale; its exact
+coverage and certification assumptions conflict with newer decisions and need explicit reconciliation.
 
-- In scope: retire receipt generation/validation, committed certification artifacts, lowest/latest lane scripts,
-  fake-Composer and certification-only PHPUnit checks; remove dependency installation from the pre-submit gate;
-  make dependency preparation explicit locally and in CI; retain real integration outcomes and direct runtime
-  smoke checks without testing those checks; remove the certification-only HTTP alias; update local guidance.
-- Out of scope: dependency/version changes, package modifications, new application features, production
-  deployment, new static-analysis or coverage policy, wholesale test cleanup, publication, or modification of
-  the separate T-00005 worktree. That unmerged work must reconcile with this retirement before reuse.
+## Use cases and validation
 
-## Acceptance Criteria
+A maintainer chooses enforceable local engineering rules and their evidence before implementation decomposition.
+No business commands/queries/events or runtime permissions are introduced here. HTTP/authorization decisions
+remain in their Wayfinder/use-case owners; no speculative handlers, test-only routes, or bulk source moves.
 
-- [x] No active receipt authority, generator, validator, evidence files, lane refresh command, or fake-Composer
-      PHPUnit test remains. Historical planning records are preserved with explicit supersession notices.
-- [x] `./bin/build` neither installs nor updates dependencies and does not resolve lowest/latest lanes. It uses
-      the prepared CodeIgniter runtime; CI prepares dependencies explicitly and invokes the same canonical gate.
-- [x] Hello-world, transaction commit/rollback, queue delivery/retry, and meaningful provider integration outcomes
-      remain verified. Production credential rejection and safe configured behavior are checked directly, not
-      through PHPUnit assertions about verifier scripts or output.
-- [x] CodeIgniter discovery, `App\\` mapping to `app/`, public Fight dependencies, and the application
-      `composer.json`/`composer.lock` are unchanged. The synthetic `/framework-support/receipt` alias is retired; named URL coverage uses the real home route.
-- [x] Documentation describes the new preparation/gate boundary and no longer demands recurring certification.
-      Planning validation, focused integration tests, `git diff --check`, and `./bin/build` pass.
+## Acceptance and evidence to settle
 
-## Verification
+Define the accepted rule set, applicability/exceptions, compatible tooling versions, meaningful coverage denominator
+and driver, enforcement versus review responsibilities, migration/backward-compatibility cost, and independently
+verifiable TASK boundaries. Keep hosted gate parity and report warnings/limits. A green current gate is not proof
+that absent static analysis or unmeasured unit coverage has been adopted.
 
-Verified locally on 2026-09-27 with PHP 8.5.11 and PHPUnit 10.5.64:
+## TASKs
 
-- `./bin/up` and `./bin/composer install --no-interaction --prefer-dist --no-progress`: exit 0; no package changes.
-- `./bin/phpunit --filter 'FightCommonIntegrationTest|HelloWorldTest'`: exit 0, 8 tests / 63 assertions.
-- `./bin/planning-check` and `git diff --check`: exit 0.
-- `./bin/build`: detached `screen` execution; `/private/tmp/t-00007-build.exit` contains `0` and the complete
-  log is `/private/tmp/t-00007-build.log`. Full suite: 13 tests / 69 assertions. Direct production credential
-  guards, safe provider integrations, Composer/platform/runtime, governance, and public dependency checks pass.
-- PHP syntax checks for the renamed production checker and integration test: exit 0.
-- `./bin/exec php spark routes`: only GET `/`, named `home`. Actual HTTP probes: `/` returns 200;
-  `/framework-support/receipt` returns 404.
-- Direct reference/diff inspection: no active retired scripts, receipt authority, fake-Composer fixture, or
-  PHPUnit-to-verifier calls; Composer manifest/lock, autoload mapping, and service factories unchanged.
+<!-- planning:children -->
+| ID | Title | Status |
+|---|---|---|
+| None | — | — |
+<!-- /planning:children -->
 
-Warnings/limits: Composer retains its allowlisted existing commit-ref warning. Queue output reports missing
-PCNTL/signal handling; the intentional event failure is followed by successful retry. No PHPUnit failures,
-skips, or deprecations were reported. Coverage remains disabled; no numeric result is claimed. This gate does
-not certify separate `--no-dev` installs, lowest/latest resolutions, real provider delivery, or production
-readiness. Hosted CI is updated but has not been run; independent review remains pending.
+## Decisions and progress
 
-## Documentation Impact
-
-Update README, CONTRIBUTING, ARCHITECTURE, testing documentation, PRD-00002, historical ticket supersession
-notices, Board, and Roadmap. No parent epic exists. Keep Wayfinder release audit and runtime decisions open.
-
-## Completion Notes
-
-Retired receipt/lane scripts and artifacts, their refresh wrapper/build image, and certification/verifier-only
-PHPUnit tests. Retained and renamed the behavioral integration suite and direct production-profile checker;
-the checker now directly verifies all five production credential rejection paths without tests of its output.
-The gate uses the prepared Compose service, runs PHPUnit once, and leaves installs/updates outside verification.
-CI preparation and local instructions match; historical T-00002/T-00004/T-00006 records have supersession notices.
-No planning artifacts were archived and no dependency or framework-discovery changes were made.
-
-The existing dirty T-00005 worktree was inspected read-only and left untouched. Its unmerged certification and
-clean-clone gate assumptions conflict with this approved retirement and must be reconciled before reuse.
-No ticket depends on T-00007; the implementation frontier returns to empty and WF-002 remains the planning
-frontier. No parent epic exists. This `done` records implementation/local verification, not independent review,
-hosted verification, publication, or merge.
+Needs human acceptance of remaining scope and concrete contracts. No implementation TASKs are authorized yet;
+[TICKET-00004](00004-TICKET.md) and [TICKET-00005](00005-TICKET.md) track the only approved alignment slices.
