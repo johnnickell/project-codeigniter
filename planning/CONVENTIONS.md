@@ -31,6 +31,22 @@ TASK retains complete acceptance. Record any deliberately separate SUBTASK PRs a
 may be standalone TASKs with `kind: bug` or `kind: chore` and an empty `ticket` field. Do not invent an EPIC or
 reopen an archived parent for unrelated work.
 
+## Automatic parent completion
+
+When a TASK becomes `done` or `wontfix`, complete eligible parent TICKETs and then EPICs in the same operation.
+Count live and archived children. A live, non-terminal parent with at least one child closes when every child
+is terminal: use `wontfix` if every child is `wontfix`, otherwise `done`. Parents without children or with an
+unfinished child remain open. Preserve already-terminal and archived parents.
+
+Child acceptance and intentional `wontfix` decisions remain with the child records. Parent completion requires
+no separate assessment, independent review, QA, confirmation, or skill invocation. Record any remaining work as
+an unfinished child rather than a separate parent-closeout gate. Parent status does not assert review, merge,
+release, deployment or publication, and completion never archives records automatically.
+
+Run `./bin/planning-check --write` during completion; it closes eligible parents and refreshes views.
+Then run the read-only `./bin/planning-check`. Read-only validation never writes completion metadata.
+
+
 ## Metadata and lifecycle
 
 ```yaml
@@ -78,8 +94,8 @@ is lower. If no TASK is executable, say so and consult the Roadmap Planning Fron
 next planning decision. Authored priority belongs in record metadata, not edited generated rows.
 
 `ROADMAP.md` retains strategy and milestone narrative with generated EPIC status and Planning Frontier sections.
-The frontier shows non-terminal EPICs without TICKETs, TICKETs without TASKs, and parents whose children are all
-terminal and need explicit closeout review. Planning operations are not fabricated executable Board rows.
+The frontier shows non-terminal EPICs without TICKETs and TICKETs without TASKs. Eligible parents close under
+[Automatic parent completion](#automatic-parent-completion). Planning operations are not fabricated executable Board rows.
 Live EPICs/TICKETs have generated child tables. Historical completion prose is evidence, not a second status store.
 
 Generated sections use `<!-- planning:NAME -->` and `<!-- /planning:NAME -->`. After source-record edits:
@@ -136,7 +152,7 @@ Scratch belongs in gitignored `.runs/<YYYY-MM-DD>-<slug>/`; isolated worktrees b
 Before final commit/PR:
 
 1. Record verified TASK acceptance, warnings/limits, and outstanding independent/hosted review honestly.
-2. Update parent requirement/EPIC progress and strategic narrative if affected; do not infer parent completion.
+2. Update parent requirement/EPIC progress and strategic narrative if affected; apply automatic parent completion in the same operation.
 3. Record the PR URL if known and preserve dependency edges.
 4. Refresh views with `./bin/planning-check --write`; verify with `./bin/planning-check`.
 5. Check the execution/planning frontiers and Wayfinder continuity; no silent scope or approval changes.

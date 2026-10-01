@@ -7,7 +7,7 @@ Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/R
 
 - Planning uses **EPIC → TICKET → TASK**: destination, requirements, then bounded implementation (normally one PR).
 - Grilling writes an EPIC; decomposition is separate. Follow local terminology when using external skills.
-- Use `planning/tasks/BOARD.md` for executable work and `planning/ROADMAP.md` for decomposition/closeout decisions.
+- Use `planning/tasks/BOARD.md` for executable work and `planning/ROADMAP.md` for decomposition decisions.
 - Records own status, dependencies, and priority. Boards/indexes/child tables are generated; never hand-edit them.
 - Preserve existing IDs, gaps, historical evidence, and completed dependency edges. `planning/MIGRATION.md` maps
   former PRDs/executable T-tickets; legacy TASK-00005 remains reserved for the separate, unmerged worktree.
@@ -59,3 +59,13 @@ Surface warnings, incomplete checks, and the distinction between local and hoste
 Archive only on explicit request using `./bin/archive-planning`: review its dry run before `--apply`.
 Do not archive on completion or hierarchy migration. Publishing, release, deployment, and enrollment remain
 separate operations; see `planning/CONVENTIONS.md` for canonical planning and pre-PR rules.
+
+When completing a TASK, apply [Automatic parent completion](planning/CONVENTIONS.md#automatic-parent-completion)
+in the same operation; do not leave a separate parent assessment or closeout action for the user.
+
+## Certification retirement
+
+Test owned application behavior and meaningful package integrations. Do not create or restore framework-support
+certification files, receipt readers/generators, dependency certification matrices, or tests of those mechanisms.
+Validate build, configuration and planning tools directly with their owning commands, outside product suites.
+Historical certification notes remain history, not current gates.
