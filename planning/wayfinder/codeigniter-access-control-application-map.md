@@ -29,8 +29,8 @@ resolved or excluded, and the map links to its resulting EPIC, requirement TICKE
   the baseline below is preserved pending that decision, not claimed current.
 - This is a decision-only map. It introduces no application API, database schema, environment variable, package
   dependency, runtime behavior, or release claim.
-- The Compose topology is certified for local development only. Production deployment and availability are
-  separate concerns.
+- The runtime policy targets local development only; it is not implemented or certified by this map.
+  Production deployment and availability are separate concerns.
 - Initial administration is invitation-led, with an idempotent Spark bootstrap and no public first-user or
   self-registration backdoor.
 - Mercure is the selected server-push transport. The SPA remains editable starter source rather than a shared
@@ -51,7 +51,10 @@ resolved or excluded, and the map links to its resulting EPIC, requirement TICKE
 1. **[Released Package Contract Audit](tickets/WF-001-released-package-contract-audit.md) is open and gated.**
    Inventory and classify the complete released public surface without reaching into package internals.
 2. **[CodeIgniter Local Development Runtime Contract](tickets/WF-002-codeigniter-local-development-runtime-contract.md)
-   is open.** Define the isolated Docker topology and operator contract independently of the package audit.
+   is open and externally gated.** Runtime policy is accepted for one project runtime behind the planned
+   Fight Agent OS proxy; its ingress-network, hostname, and TLS contract remains outstanding. Special
+   worktree runtimes are deferred. The owning decision records the accepted startup, persistence, setup,
+   security, failure-handling, tooling, and image-version policies; no runtime implementation is claimed.
 3. **[ADR HTTP and OpenAPI Contract](tickets/WF-003-adr-http-openapi-contract.md) is open.** Set the Action,
    Responder, request, validation, error, versioning, and documentation authority.
 4. **[MySQL Persistence and Bootstrap Contract](tickets/WF-004-mysql-persistence-bootstrap-contract.md) is open.**
@@ -75,7 +78,7 @@ resolved or excluded, and the map links to its resulting EPIC, requirement TICKE
 | Decision ID | Title | Type | Mode | Status | Depends on | Gate |
 |---|---|---|---|---|---|---|
 | [WF-001](tickets/WF-001-released-package-contract-audit.md) | WF-001 — Released Package Contract Audit | wayfinder:research | AFK | Open | — | Installable Fight Common v1.2.0 and Fight AccessControl v0.2.0 release tags |
-| [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | WF-002 — CodeIgniter Local Development Runtime Contract | wayfinder:grilling | HITL | Open | — | — |
+| [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | WF-002 — CodeIgniter Local Development Runtime Contract | wayfinder:grilling | HITL | Open | — | Fight Agent OS proxy contract: ingress network, hostname conventions, and TLS ownership |
 | [WF-003](tickets/WF-003-adr-http-openapi-contract.md) | WF-003 — ADR HTTP and OpenAPI Contract | wayfinder:prototype | HITL | Open | [WF-001](tickets/WF-001-released-package-contract-audit.md) | Symfony canonical wire contract |
 | [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md) | WF-004 — MySQL Persistence and Bootstrap Contract | wayfinder:prototype | HITL | Open | [WF-001](tickets/WF-001-released-package-contract-audit.md), [WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md) | — |
 | [WF-005](tickets/WF-005-authentication-account-security-contract.md) | WF-005 — Authentication and Account Security Contract | wayfinder:grilling | HITL | Open | [WF-003](tickets/WF-003-adr-http-openapi-contract.md), [WF-004](tickets/WF-004-mysql-persistence-bootstrap-contract.md) | Symfony authentication contract |
@@ -100,21 +103,26 @@ WF-002 through WF-009 ───────────────────�
 WF-010 ──→ EPIC, requirement TICKETs, and executable vertical-slice TASKs
 ```
 
-WF-002 is independently takeable. WF-001 remains gated until both requested release tags are installable, and
-WF-009 additionally waits for the completed Symfony AccessControl client rather than designing against an
-unfinished reference.
+WF-002 remains independent of the package audit but now awaits the Fight Agent OS proxy contract before
+closure. WF-001 remains gated until both requested release tags are installable, and WF-009 additionally waits
+for the completed Symfony AccessControl client rather than designing against an unfinished reference.
 
 ## Frontier
 
 [WF-002 — CodeIgniter Local Development Runtime Contract](tickets/WF-002-codeigniter-local-development-runtime-contract.md)
-is the one next grillable decision. Run `$aios /grill-with-docs WF-002`.
+remains the authored frontier. Its policy checkpoint is accepted, but the decision stays Open pending the
+Fight Agent OS proxy contract: ingress-network naming, hostname conventions, and TLS ownership. Resume with
+`/skill:wayfinder work WF-002` when that contract is available; do not treat this checkpoint as closure or
+implementation authority.
 
 ## Not yet specified (fog)
 
 - Exact released package capabilities, signatures, semantic guarantees, and extension points remain unknown
   until WF-001 audits the installable tags.
-- Exact container versions, host ports, health thresholds, volume policy, and parallel-worktree project naming
-  remain for WF-002.
+- WF-002 awaits the external Fight Agent OS proxy contract. Its accepted runtime policy delegates exact image
+  pins, environment names, mounts/ownership mechanics, setup/cleanup commands, and health timings to later
+  authorized implementation and verification. Redis durability remains with WF-007; worktree-specific
+  runtime isolation is excluded from the current handoff rather than unresolved fog.
 - Exact routes, schemas, permission names, pagination defaults, idempotency keys, throttles, and OpenAPI generation
   mechanism remain downstream decisions.
 - Exact tables, indexes, lock strategies, transaction boundaries, migration sequence, and managed-policy
@@ -127,6 +135,9 @@ is the one next grillable decision. Run `$aios /grill-with-docs WF-002`.
 ## Out of scope
 
 - Runtime or application implementation while this map is being charted.
+- Implementing the Fight Agent OS shared proxy in this project, or claiming its contract is already available.
+- Special worktree containers, identities, hostnames, ports, and data isolation; deferred to a future upgrade
+  under WF-002's accepted scope reduction.
 - Copying or modifying Fight Common or Fight AccessControl source, copying another starter's backend, publishing
   either Fight package, or substituting an unreleased revision for a required release. The reviewed Symfony client
   source copy defined by WF-009 is the explicit exception.

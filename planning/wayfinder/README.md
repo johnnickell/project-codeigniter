@@ -11,9 +11,11 @@ second store of decisions. Start with its authored Frontier; generated state bel
 
 ## Current frontier and adoption context
 
-The CodeIgniter AccessControl application's unblocked runtime-decision frontier remains
-[WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md). Planning migration closes no decision.
-Its older v0.2.0 package-audit baseline needs explicit reconciliation with the newer 0.4+ adoption target under
+The CodeIgniter AccessControl application's authored runtime-decision frontier remains
+[WF-002](tickets/WF-002-codeigniter-local-development-runtime-contract.md). Its runtime policy checkpoint is
+accepted, but it remains Open pending the Fight Agent OS proxy contract (ingress network, hostnames, and TLS
+ownership). Worktree-specific runtimes are deferred; no implementation or decision closure is claimed.
+The map's older v0.2.0 package-audit baseline needs explicit reconciliation with the newer 0.4+ adoption target under
 [TICKET-00006](../tickets/00006-TICKET.md); do not treat either as already qualified. Repository-wide current
 priority and unfinished adoption are visible on the [TASK Board](../tasks/BOARD.md) and [Roadmap](../ROADMAP.md).
 

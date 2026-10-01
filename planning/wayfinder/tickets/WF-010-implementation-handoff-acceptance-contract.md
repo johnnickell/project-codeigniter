@@ -22,7 +22,9 @@ verifiable CodeIgniter reference starter rather than a collection of unproved co
 - Define static analysis, architecture, formatting, migration, frontend, OpenAPI, dependency, secret-scan, and
   vulnerability gates, including honest handling of warnings, skips, and unavailable infrastructure.
 - Define clean-clone setup, deterministic Compose boot, migrations, administrator bootstrap, worker/task/hub
-  health, build, teardown, intended persistence, worktree isolation, and human UAT evidence.
+  health, build, teardown, intended persistence, and human UAT evidence. Follow
+  [WF-002's runtime scope](WF-002-codeigniter-local-development-runtime-contract.md): special worktree
+  runtimes and their isolation evidence are deferred to a future upgrade, not required for this handoff.
 - Define complete documentation for environment variables, URLs, credentials/bootstrap, API/OpenAPI, workers,
   schedules, failures, Mercure subscriptions, SPA development, troubleshooting, and safe cleanup.
 - Define security acceptance for tokens, cookies, origin/CSRF, principals, authorization, enumeration,

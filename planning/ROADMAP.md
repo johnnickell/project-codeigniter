@@ -30,8 +30,9 @@ requirements are tracked, not marked complete or silently enforced.
 
 ## Planning Frontier
 
-These are decomposition or closeout decisions, not executable TASKs. Use the [TASK Board](tasks/BOARD.md) for
-implementation. A parent with terminal children requires explicit closeout rather than automatic completion.
+These are decomposition decisions, not executable TASKs. Use the [TASK Board](tasks/BOARD.md) for
+implementation. [Automatic parent completion](CONVENTIONS.md#automatic-parent-completion) closes eligible parents
+in the same operation that completes their children.
 
 <!-- planning:frontier -->
 ### EPICs without TICKETs
@@ -45,12 +46,6 @@ implementation. A parent with terminal children requires explicit closeout rathe
 | TICKET ID | Title | Parent EPIC | Status |
 |---|---|---|---|
 | None | — | — | — |
-
-### Parents ready for closeout review
-
-| Type | ID | Title | Status | Children |
-|---|---|---|---|---|
-| None | — | — | — | — |
 <!-- /planning:frontier -->
 
 ## Historical outcomes
