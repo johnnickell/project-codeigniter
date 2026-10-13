@@ -1,5 +1,19 @@
 # AGENTS.md
 
+## Work routing
+
+For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to the [Board](planning/tasks/BOARD.md)
+before general project orientation. Read its current human decision and active work; otherwise select the first
+executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
+Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
+bounded evidence reads and planning handoffs. Recommend and stop; load execution guidance when work is invoked.
+This routing path does not require reading README, architecture, full project context, task history or receiving skills.
+
+## Project guidance
+
+For execution or substantive planning changes, load the applicable guidance below. The read-only routing
+path above takes precedence over broad orientation reads; it does not waive engineering or delivery rules.
+
 Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/README.md`,
 `planning/CONVENTIONS.md`, and applicable focused instructions in `planning/agents/` before changing behavior.
 
@@ -26,13 +40,6 @@ Use repository-owned `./bin/composer`, `./bin/phpunit`, `./bin/up`, `./bin/down`
 Prepare runtime/dependencies explicitly; `./bin/build` is the complete noninteractive local/hosted gate.
 Test owned behavior and important integration contracts, not planning/build tools or deliberately invalid tool
 fixtures. Validate infrastructure and documentation directly with their owning tools.
-
-## Work routing
-
-For "What's next?" or an invocation without a task, report the current human decision/question and active TASK
-from `planning/tasks/BOARD.md`; otherwise return the first executable TASK in Ready Frontier. If none is executable,
-say so and consult the Roadmap Planning Frontier and Wayfinder index. Never choose by numeric ID alone or start
-another TASK merely because one is listed. Requirements and open Wayfinder decisions are not implementation authority.
 
 ## Checkout and isolation
 
