@@ -9,9 +9,11 @@ status: ready-for-agent
 
 ## Problem statement
 
-The installed shared skills and native Pi already operate in this checkout, but harness runtime files are not
-ignored and target substitutions are scattered. Shared workflows must preserve CodeIgniter rules, execution
-authority and truthful routing without copying the provider suite or importing its product/runtime assumptions.
+The installed shared skills and native Pi already operate in this checkout, but target substitutions are
+scattered and runtime ignores are too broad. Decomposition inspection found that `.gitignore` already excludes
+all of `/var`; the earlier claim that harness runtime files were unignored was inaccurate for this checkout.
+Shared workflows must preserve CodeIgniter rules, execution authority and truthful routing without copying
+the provider suite or importing its product/runtime assumptions.
 
 ## Solution and boundaries
 
@@ -72,13 +74,20 @@ certification assumptions remain non-applicable to this starter unless separatel
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| None | — | — |
+| [TASK-00013](../tasks/00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | ready-for-agent |
 <!-- /planning:children -->
 
 ## Decisions and progress
 
-Requirement scope is approved through [TASK-00011](../tasks/00011-TASK.md)'s planning amendment; implementation
-has not started. The next planning phase is `/skill:to-tasks TICKET-00010`, with a proposed bounded compatibility
-slice combining runtime ignores, target binding, routing walkthroughs and documentation. Present that TASK
-scope for acceptance before creating/executing it. This requirement is independent of package release research;
-package-specific engineering policy still belongs to TICKET-00007/00009.
+Requirement scope is approved through [TASK-00011](../tasks/00011-TASK.md)'s planning amendment. The maintainer
+accepted the single compatibility slice and selected the main checkout for recording
+[TASK-00013](../tasks/00013-TASK.md): runtime-ignore narrowing, target binding, routing walkthroughs and
+documentation. Decomposition of this requirement is complete; implementation has not started and requires
+separate execution authority and checkout confirmation. The existing blanket `/var` rule will be reconciled
+without deleting operator files or exposing other required runtime material to staging.
+
+Use `/skill:next` for Board-based execution selection; TASK-00010 is first ready after TASK-00009's locally
+verified investigation. The seven approved TASK-00013 planning paths are included in that commit by explicit
+maintainer instruction, not implemented. This requirement is
+independent of package release research; package-specific engineering policy still belongs to TICKET-00007/00009.
+Completing this TASK may complete this TICKET under automatic parent completion, not the broader adoption EPIC.

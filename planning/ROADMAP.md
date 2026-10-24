@@ -7,10 +7,12 @@ remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
 1. [TASK-00011](tasks/00011-TASK.md)'s 2026-10-24 adoption-by-default amendment has independent review acceptance
    and QA PASS; [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) awaits human review/merge,
-   with final delivery verification retained in its landing evidence. Separately authorize
-   [TASK-00009](tasks/00009-TASK.md)'s latest-stable qualification; [TASK-00010](tasks/00010-TASK.md)'s concrete
-   engineering contract remains blocked on those findings. Preserve CodeIgniter's standard approach and justify
-   deviations. Broad direction is approved, not exact releases, an unexamined coverage metric or implementation.
+   with final delivery verification retained in its landing evidence. The maintainer subsequently authorized
+   [TASK-00009](tasks/00009-TASK.md) in the main checkout; its locally verified
+   [qualification report](wayfinder/research/2026-10-24-latest-stable-fight-baseline.md) recommends Common v1.4.0 /
+   AccessControl v0.8.0 and a narrow HttpFoundation 8.1.9 security refresh. Independent review/QA and concrete
+   migration acceptance remain outstanding. [TASK-00010](tasks/00010-TASK.md) is now first ready to specify the
+   engineering contract with those findings, not permission to upgrade packages or enforce undecided policy.
 2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
    through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
    release baseline before treating WF-001 as evidence for the newer adoption target.
@@ -25,16 +27,20 @@ requirements are tracked, not marked complete or silently enforced.
 ## Current decomposition handoffs
 
 - [TICKET-00008](tickets/00008-TICKET.md#decisions-and-progress): actual package upgrade. TASK decomposition
-  awaits TASK-00009's dated latest-release findings and the maintainer's concrete migration acceptance.
+  awaits the maintainer's acceptance of TASK-00009's dated v1.4.0/v0.8.0 migration and narrow security-refresh
+  proposal; the report is delivered, the project installation is unchanged and adoption remains unfinished.
 - [TICKET-00009](tickets/00009-TICKET.md#decisions-and-progress): actual engineering enforcement. TASK
   decomposition awaits TASK-00010's contract, coverage choices, compatible tools and accepted exceptions.
-- [TICKET-00010](tickets/00010-TICKET.md#decisions-and-progress): approved Pi/skill compatibility requirement.
-  Next planning phase: `/skill:to-tasks TICKET-00010`; present the bounded ignore/binding/routing-verification
-  slice for acceptance before creating or executing it. This choice is independent of package qualification.
+- [TICKET-00010](tickets/00010-TICKET.md#decisions-and-progress): decomposition complete through approved
+  [TASK-00013](tasks/00013-TASK.md), the bounded runtime-ignore/binding/routing-verification chore. Implementation
+  remains unstarted and requires separate authorization. The seven approved planning paths are included with
+  TASK-00009 by explicit instruction, not implemented. Use `/skill:next` for Board-based selection; TASK-00010 is
+  now first ready and TASK-00013 remains independent at order 3.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
-Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. These handoffs are
-not executable Board rows or a claim of full decomposition; the unrelated application Wayfinder stays gated.
+Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00013 is now an
+executable Board row, but package/enforcement handoffs remain planning prerequisites rather than ready TASKs.
+No full adoption decomposition or completion is claimed; the unrelated application Wayfinder stays gated.
 
 ## EPIC status
 
@@ -64,7 +70,6 @@ in the same operation that completes their children.
 |---|---|---|---|
 | [TICKET-00008](tickets/00008-TICKET.md) | Upgrade both Fight packages to the qualified latest stable releases | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
 | [TICKET-00009](tickets/00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
-| [TICKET-00010](tickets/00010-TICKET.md) | Integrate the shared Pi skills and next-work conventions | [EPIC-00002](epics/00002-EPIC.md) | ready-for-agent |
 <!-- /planning:frontier -->
 
 ## Historical outcomes

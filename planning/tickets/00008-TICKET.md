@@ -67,9 +67,17 @@ repository-owned tooling; safe intercepted transports only, no production creden
 
 Created by the approved [TASK-00011](../tasks/00011-TASK.md) planning amendment. This TICKET takes the actual
 upgrade destination formerly combined with TICKET-00006's investigation scope; no requirement is discarded.
-It remains `needs-info` until TASK-00009 supplies release evidence and the maintainer accepts the concrete
-migration. Then use TASK decomposition for a complete upgrade slice, splitting only for evidenced compatibility
-boundaries. No implementation TASK or package update is authorized by record creation.
+TASK-00009 now supplies the locally verified
+[2026-10-24 report](../wayfinder/research/2026-10-24-latest-stable-fight-baseline.md): latest Common v1.4.0 and
+AccessControl v0.8.0 install together, with released transaction type fit and bounded migration/verification scope.
+The two-package-only copied-lock solve retains inherited HttpFoundation 8.1.6 / CVE-2026-108082; a narrow targeted
+8.1.9 refresh resolves that advisory without other package changes. Project dependencies remain unchanged.
+Independent review/QA of the investigation remain outstanding, not acceptance of a migration.
+
+This TICKET remains `needs-info` until the maintainer accepts the exact pair, narrow security refresh and
+consumer scope. Then use TASK decomposition for a complete upgrade slice, splitting only for evidenced
+compatibility boundaries and rechecking release availability. No upgrade TASK or package update is authorized
+by investigation completion; broader application journeys and Wayfinder decisions remain separate.
 
 Keeping this unfinished TICKET without children prevents investigation rollup from closing EPIC-00002; automatic
 parent completion is not waived. A blocked qualification result leaves this requirement unresolved.
