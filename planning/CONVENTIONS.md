@@ -75,6 +75,12 @@ Count live and archived children. A live, non-terminal parent with at least one 
 is terminal: use `wontfix` if every child is `wontfix`, otherwise `done`. Parents without children or with an
 unfinished child remain open. Preserve already-terminal and archived parents.
 
+Scope parents to their children's actual outcomes. An investigation-only TASK can complete a qualification or
+proposal requirement, not an unimplemented adoption destination. When implementation cannot yet be decomposed,
+retain it in an explicit unfinished requirement TICKET under the EPIC; parents without children stay open.
+Do not fabricate ready TASKs, keep a finished investigation artificially active, or disable rollup to compensate
+for missing scope. Current decomposition handoffs must name the evidence/acceptance still needed.
+
 Child acceptance and intentional `wontfix` decisions remain with the child records. Parent completion requires
 no separate assessment, independent review, QA, confirmation, or skill invocation. Record any remaining work as
 an unfinished child rather than a separate parent-closeout gate. Parent status does not assert review, merge,

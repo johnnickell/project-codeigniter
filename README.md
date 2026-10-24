@@ -83,7 +83,11 @@ Planning uses **EPIC → TICKET → TASK**. Start with the [TASK Board](planning
 and the [adoption EPIC](planning/epics/00002-EPIC.md) for scope and unresolved decisions. The
 [migration map](planning/MIGRATION.md) preserves former PRD/T identities.
 
-Stable Fight Common 1.2+/AccessControl 0.4+ qualification and remaining engineering alignment are **not complete**.
-Planning migration and certification removal do not upgrade the development candidates in `composer.lock`.
+Adoption of shared engineering, delivery and Pi/skill conventions is approved by default, with explicit
+CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutually compatible stable releases**
+is the destination; exact releases must be qualified before implementation. Package upgrades, engineering
+enforcement and Pi compatibility work are **not complete**. The [current planning handoffs](planning/ROADMAP.md#current-decomposition-handoffs)
+separate investigation from implementation. Planning migration and certification removal do not upgrade the
+development candidates in `composer.lock`.
 
 This repository is MIT-licensed source, not a release or package-distribution claim. Do not add copied shared source, credentials, production data, login, persistence, browser journeys, tags, Packagist publication, template enablement, or create-project distribution without a separately approved local TASK.
