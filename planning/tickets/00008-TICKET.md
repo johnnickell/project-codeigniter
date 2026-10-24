@@ -72,7 +72,7 @@ TASK-00009 now supplies the locally verified
 AccessControl v0.8.0 install together, with released transaction type fit and bounded migration/verification scope.
 The two-package-only copied-lock solve retains inherited HttpFoundation 8.1.6 / CVE-2026-108082; a narrow targeted
 8.1.9 refresh resolves that advisory without other package changes. Project dependencies remain unchanged.
-Independent review/QA of the investigation remain outstanding, not acceptance of a migration.
+Independent review accepted and applicable QA passed for the investigation; neither is acceptance of a migration.
 
 This TICKET remains `needs-info` until the maintainer accepts the exact pair, narrow security refresh and
 consumer scope. Then use TASK decomposition for a complete upgrade slice, splitting only for evidenced

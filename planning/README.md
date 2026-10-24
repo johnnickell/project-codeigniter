@@ -24,7 +24,7 @@ mutually compatible stable Fight packages, not merely the former Common 1.2+/Acc
 Explicitly authorized [TASK-00009](tasks/00009-TASK.md) now supplies the locally verified
 [dated qualification](wayfinder/research/2026-10-24-latest-stable-fight-baseline.md): Common v1.4.0 and
 AccessControl v0.8.0 install together; an inherited HttpFoundation advisory needs a narrow 8.1.9 refresh in the
-future upgrade. Independent review/QA and maintainer acceptance of the migration remain outstanding.
+future upgrade. Independent review accepted and applicable QA passed; maintainer acceptance of the migration remains outstanding.
 [TASK-00010](tasks/00010-TASK.md) is now first ready to specify the adapted engineering contract using those findings.
 
 Actual upgrade, engineering enforcement and shared Pi/skill compatibility remain in

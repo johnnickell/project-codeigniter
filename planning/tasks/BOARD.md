@@ -18,8 +18,8 @@ PASS; [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) is pu
 Final delivery verification is recorded in the TASK's landing evidence. The maintainer subsequently authorized
 [TASK-00009](00009-TASK.md) execution through Build in the main checkout. Its locally verified
 [qualification report](../wayfinder/research/2026-10-24-latest-stable-fight-baseline.md) recommends Common v1.4.0 /
-AccessControl v0.8.0 and a narrow inherited-advisory refresh to HttpFoundation 8.1.9. Independent review/QA remain
-outstanding. The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending maintainer acceptance
+AccessControl v0.8.0 and a narrow inherited-advisory refresh to HttpFoundation 8.1.9. Independent review accepted
+and applicable QA passed; PR publication remains separate. The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending maintainer acceptance
 of the exact release/migration/security scope; dependencies and runtime source remain unchanged.
 
 [TASK-00010](00010-TASK.md) is now first ready to specify the CodeIgniter-adapted engineering contract using

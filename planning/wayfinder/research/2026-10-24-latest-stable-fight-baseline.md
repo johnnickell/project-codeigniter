@@ -290,8 +290,9 @@ gates and all other independent prerequisites are unchanged.
   manifest and receipt checks validate these documentation corrections; no product regression test or runtime
   repair is appropriate or authorized. Original receipts and independent reports remain unchanged.
 - The canonical local gate runs the **unchanged project installation**, not this scratch installation. Its results
-  and warnings are recorded in [TASK-00009](../../tasks/00009-TASK.md); independent review, QA and hosted evidence
-  remain separate. SHA-256 inventories protect dependency-state claims, not provenance/signature attestation.
+  and warnings are recorded in [TASK-00009](../../tasks/00009-TASK.md); independent review acceptance and applicable
+  QA PASS are recorded there, while hosted evidence remains separate. SHA-256 inventories protect dependency-state
+  claims, not provenance/signature attestation.
 
 ## Sources
 
