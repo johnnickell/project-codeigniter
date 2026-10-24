@@ -2,7 +2,7 @@
 id: TICKET-00007
 epic: EPIC-00002
 title: Specify the CodeIgniter-adapted engineering contract
-status: needs-info
+status: done
 ---
 
 # Specify the CodeIgniter-adapted engineering contract
@@ -45,6 +45,9 @@ remain in their Wayfinder/use-case owners; no speculative handlers, test-only ro
 
 ## Acceptance and evidence to settle
 
+Delivered artifact: [CodeIgniter engineering alignment proposal](../engineering-alignment-proposal.md),
+2026-10-24. This is a sourced proposal, not concrete-policy acceptance or enforcement.
+
 Deliver the proposed rule set, applicability/exceptions, compatible tooling versions, meaningful coverage
 denominator and driver, enforcement versus review responsibilities, migration/backward-compatibility cost and
 independently verifiable follow-on boundaries. Identify any missing compatibility evidence or human choice
@@ -56,15 +59,16 @@ static analysis or unmeasured unit coverage has been adopted.
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| [TASK-00010](../tasks/00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent |
+| [TASK-00010](../tasks/00010-TASK.md) | Define the CodeIgniter engineering alignment contract | done |
 <!-- /planning:children -->
 
 ## Decisions and progress
 
 The maintainer approved creation of [TASK-00010](../tasks/00010-TASK.md), a decision/documentation chore blocked
-by [TASK-00009](../tasks/00009-TASK.md)'s qualification findings. Its scope is approved, but execution has not been
-authorized or started. No concrete tooling/coverage choices or enforcement implementation were accepted by that
-original record-creation approval; this TICKET remains `needs-info` pending the amended proposal below.
+by [TASK-00009](../tasks/00009-TASK.md)'s qualification findings. That original record-creation approval did not
+authorize execution or accept concrete tooling/coverage choices. The operator subsequently authorized TASK-00010
+through Build in the selected main checkout after TASK-00009 merged; its completed dependency edge is retained.
+The proposal is now delivered; required local verification and independent-review state are recorded in TASK-00010.
 
 The 2026-10-24 amendment approves adoption by default, not an unexamined coverage metric, tooling version or
 framework transplant. Review TASK-00010's concrete proposal under TICKET-00009 before allocating enforcement
@@ -72,3 +76,10 @@ TASKs. A completed proposal can close this artifact requirement while TICKET-000
 parent-completion exemption is needed. If TASK-00009 cannot qualify a package pair, package-sensitive decisions
 remain unresolved rather than treating blocker completion as compatibility evidence. TICKET-00004 and
 TICKET-00005 remain the locally completed retirement/planning slices.
+
+The proposal cites clean Agent OS revision `d70253377033e852d0281c1066f47f49504a42d6`, observed native practice,
+the qualified stable-pair report and primary tooling/driver contracts. It explicitly compares Unit-only exact
+100% with meaningful all-suite Domain/Application coverage and separate unit attribution, dispositions both
+legacy inputs, and records unavailable dirty T-00005 evidence. D1–D4 in the proposal require maintainer acceptance
+under TICKET-00009 before enforcement TASK allocation. Closing this artifact requirement does not accept those
+choices, adopt packages, finish EPIC-00002 or assert review, QA, hosted CI, PR or merge of TASK-00010.

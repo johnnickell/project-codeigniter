@@ -19,18 +19,22 @@ Final delivery verification is recorded in the TASK's landing evidence. The main
 [TASK-00009](00009-TASK.md) execution through Build in the main checkout. Its locally verified
 [qualification report](../wayfinder/research/2026-10-24-latest-stable-fight-baseline.md) recommends Common v1.4.0 /
 AccessControl v0.8.0 and a narrow inherited-advisory refresh to HttpFoundation 8.1.9. Independent review accepted
-and applicable QA passed; [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) is published for
-human review/merge. The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending maintainer acceptance
+and applicable QA passed; [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) is merged in the
+selected TASK-00010 base. The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending maintainer acceptance
 of the exact release/migration/security scope; dependencies and runtime source remain unchanged.
 
-[TASK-00010](00010-TASK.md) is now first ready to specify the CodeIgniter-adapted engineering contract using
-TASK-00009's findings; its completed dependency edge is preserved.
-[TICKET-00009](../tickets/00009-TICKET.md) retains concrete contract acceptance and enforcement implementation.
+Separately authorized [TASK-00010](00010-TASK.md) delivers the
+[CodeIgniter engineering proposal](../engineering-alignment-proposal.md) using TASK-00009's findings; its
+completed dependency edge is preserved. Local verification is recorded in the TASK; independent review/QA
+remain outstanding, with no TASK-00010 hosted run, PR or merge claimed.
+[TICKET-00009](../tickets/00009-TICKET.md) retains maintainer acceptance of proposal decisions D1–D4 and actual
+enforcement. Exact Unit-only versus meaningful all-suite coverage remains a human choice, not an enforced rule.
 The approved [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#decisions-and-progress) is
 now decomposed into [TASK-00013](00013-TASK.md), an independent ready compatibility chore at order 3. Its scope
 and main-checkout planning operation are approved, not implementation execution. Its seven approved planning
 paths are included in TASK-00009's commit by explicit instruction; scope/status/order are unchanged.
-Package/enforcement decomposition still awaits the named acceptances and engineering contract.
+Package/enforcement decomposition still awaits the named migration acceptance and delivered proposal's D1–D4
+contract decisions. No enforcement TASKs were allocated.
 The [adoption EPIC](../epics/00002-EPIC.md) remains `needs-info`, even when its investigation artifacts complete.
 
 Planning migration is locally complete in [TASK-00008](00008-TASK.md); independent review remains pending.
@@ -51,7 +55,6 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Specify the CodeIgniter-adapted engineering contract](../tickets/00007-TICKET.md) | ready-for-agent | — | — |
 | 3 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | [TICKET-00010 — Integrate the shared Pi skills and next-work conventions](../tickets/00010-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
@@ -85,6 +88,7 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 | 1 | [TASK-00008](00008-TASK.md) | Migrate planning to the EPIC TICKET TASK structure | [TICKET-00005 — Adopt the EPIC TICKET TASK planning structure](../tickets/00005-TICKET.md) | done | — | [PR #9](https://github.com/johnnickell/project-codeigniter/pull/9) |
 | 1 | [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | [TICKET-00006 — Qualify the latest stable Fight package upgrade](../tickets/00006-TICKET.md) | done | — | [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) |
 | 1 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | — (standalone bug) | done | — | [PR #13](https://github.com/johnnickell/project-codeigniter/pull/13) |
+| 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Specify the CodeIgniter-adapted engineering contract](../tickets/00007-TICKET.md) | done | — | — |
 | — | [TASK-00001](00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | [TICKET-00001 — CodeIgniter Starter Product and Walking-Slice Acceptance](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00002](00002-TASK.md) | Adopt the historical Fight Common 1.2 candidate | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Complete CodeIgniter Platform Profile | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
