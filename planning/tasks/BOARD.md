@@ -14,8 +14,8 @@ See the [Roadmap Planning Frontier](../ROADMAP.md#planning-frontier) for undecid
 ## Current human decision
 
 [TASK-00011](00011-TASK.md)'s adoption-by-default planning amendment has independent review acceptance and QA
-PASS; authorized landing is in progress on its main-checkout feature branch. Human PR review/merge follows
-publication. [TASK-00009](00009-TASK.md) remains first ready for latest-stable qualification, with separately
+PASS; [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) is published for human review/merge.
+Final delivery verification is recorded in the TASK's landing evidence. [TASK-00009](00009-TASK.md) remains first ready for latest-stable qualification, with separately
 authorized execution and checkout choice.
 The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending exact release/migration acceptance.
 
@@ -79,5 +79,5 @@ Its release-audit baseline needs reconciliation under TICKET-00006; no Wayfinder
 | — | [TASK-00004](00004-TASK.md) | Establish the Complete CodeIgniter Platform Profile | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00006](00006-TASK.md) | Re-certify Rewritten Fight Common Candidate | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00007](00007-TASK.md) | Retire Framework Support Certification | [TICKET-00004 — Retire recurring framework-support certification](../tickets/00004-TICKET.md) | done | — | [PR #9](https://github.com/johnnickell/project-codeigniter/pull/9) |
-| — | [TASK-00011](00011-TASK.md) | Amend the CodeIgniter adoption plan | — (standalone chore) | done | — | — |
+| — | [TASK-00011](00011-TASK.md) | Amend the CodeIgniter adoption plan | — (standalone chore) | done | — | [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) |
 <!-- /planning:board -->

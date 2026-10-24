@@ -6,7 +6,8 @@ Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; indepe
 remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
 1. [TASK-00011](tasks/00011-TASK.md)'s 2026-10-24 adoption-by-default amendment has independent review acceptance
-   and QA PASS; authorized landing is in progress, with human PR review/merge to follow publication. Separately authorize
+   and QA PASS; [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) awaits human review/merge,
+   with final delivery verification retained in its landing evidence. Separately authorize
    [TASK-00009](tasks/00009-TASK.md)'s latest-stable qualification; [TASK-00010](tasks/00010-TASK.md)'s concrete
    engineering contract remains blocked on those findings. Preserve CodeIgniter's standard approach and justify
    deviations. Broad direction is approved, not exact releases, an unexamined coverage metric or implementation.
