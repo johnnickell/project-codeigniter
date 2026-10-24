@@ -86,8 +86,10 @@ documentation. Decomposition of this requirement is complete; implementation has
 separate execution authority and checkout confirmation. The existing blanket `/var` rule will be reconciled
 without deleting operator files or exposing other required runtime material to staging.
 
-Use `/skill:next` for Board-based execution selection; TASK-00010 is first ready after TASK-00009's locally
-verified investigation. The seven approved TASK-00013 planning paths are included in that commit by explicit
-maintainer instruction, not implemented. This requirement is
-independent of package release research; package-specific engineering policy still belongs to TICKET-00007/00009.
+Use `/skill:next` for [Board-based selection](../tasks/BOARD.md#ready-frontier); TASK-00010's proposal is delivered,
+with independent review acceptance and applicable QA PASS recorded in its TASK. TASK-00013 is the sole ready TASK, independent at order 3;
+selection does not grant its separate execution authority or checkout confirmation. The seven approved
+TASK-00013 planning paths are included in TASK-00009's commit by explicit maintainer instruction, not implemented.
+This requirement is independent of package release research; package-specific engineering policy still belongs
+to TICKET-00007/00009.
 Completing this TASK may complete this TICKET under automatic parent completion, not the broader adoption EPIC.

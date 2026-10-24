@@ -10,9 +10,12 @@ remain pending. Use the new hierarchy to keep remaining adoption explicit:
    with final delivery verification retained in its landing evidence. The maintainer subsequently authorized
    [TASK-00009](tasks/00009-TASK.md) in the main checkout; its locally verified
    [qualification report](wayfinder/research/2026-10-24-latest-stable-fight-baseline.md) recommends Common v1.4.0 /
-   AccessControl v0.8.0 and a narrow HttpFoundation 8.1.9 security refresh. Independent review/QA and concrete
-   migration acceptance remain outstanding. [TASK-00010](tasks/00010-TASK.md) is now first ready to specify the
-   engineering contract with those findings, not permission to upgrade packages or enforce undecided policy.
+   AccessControl v0.8.0 and a narrow HttpFoundation 8.1.9 security refresh. TASK-00009 has independent review
+   acceptance, QA PASS and is merged in the selected base; concrete migration acceptance remains outstanding.
+   Separately authorized [TASK-00010](tasks/00010-TASK.md) delivers the
+   [engineering proposal](engineering-alignment-proposal.md), not permission to upgrade packages or enforce
+   undecided policy. Its local verification, independent review acceptance and applicable QA PASS are recorded in
+   the TASK; PR publication and human review/merge remain separate delivery facts.
 2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
    through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
    release baseline before treating WF-001 as evidence for the newer adoption target.
@@ -30,12 +33,15 @@ requirements are tracked, not marked complete or silently enforced.
   awaits the maintainer's acceptance of TASK-00009's dated v1.4.0/v0.8.0 migration and narrow security-refresh
   proposal; the report is delivered, the project installation is unchanged and adoption remains unfinished.
 - [TICKET-00009](tickets/00009-TICKET.md#decisions-and-progress): actual engineering enforcement. TASK
-  decomposition awaits TASK-00010's contract, coverage choices, compatible tools and accepted exceptions.
+  decomposition awaits maintainer acceptance of TASK-00010's delivered proposal decisions D1–D4: competing
+  coverage policies, native scope/exceptions, sourced candidate tools/gate phases and coordination. Target tool
+  installation/scans and numeric coverage remain unverified, not implied by the current gate.
 - [TICKET-00010](tickets/00010-TICKET.md#decisions-and-progress): decomposition complete through approved
   [TASK-00013](tasks/00013-TASK.md), the bounded runtime-ignore/binding/routing-verification chore. Implementation
   remains unstarted and requires separate authorization. The seven approved planning paths are included with
-  TASK-00009 by explicit instruction, not implemented. Use `/skill:next` for Board-based selection; TASK-00010 is
-  now first ready and TASK-00013 remains independent at order 3.
+  TASK-00009 by explicit instruction, not implemented. Use `/skill:next` for Board-based selection;
+  TASK-00013 remains independent at order 3 and unstarted. Do not substitute it for TASK-00010's independent
+  review/QA or the maintainer's package/enforcement decisions.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
 Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00013 is now an

@@ -67,8 +67,12 @@ HTTP/authentication/authorization journeys remain with the open Wayfinder owners
 ## Decisions and progress
 
 Created by the approved [TASK-00011](../tasks/00011-TASK.md) amendment. This TICKET owns contract acceptance and
-implemented enforcement, distinct from TICKET-00007's proposal artifact (not yet delivered). It remains `needs-info` until
-TASK-00010 provides compatible versions, coverage choices, exceptions and evidence-based vertical slices.
+implemented enforcement, distinct from TICKET-00007's now-delivered
+[proposal artifact](../engineering-alignment-proposal.md). It remains `needs-info` pending maintainer acceptance
+of decisions D1–D4: Unit-only versus all-suite coverage/attribution, native exceptions/test responsibilities,
+sourced candidate tools/nonmutating phases, and package/binding coordination. Exact proposed versions have
+primary constraint evidence, not a target installation/scan result. Coverage is unmeasured; legacy dirty T-00005
+content was unavailable. TASK-00010's local gate verifies the unchanged starter, not policy/tool adoption.
 Package-sensitive work also depends on the qualified baseline and its actual installation under
 [TICKET-00008](00008-TICKET.md); a blocked investigation does not satisfy that prerequisite.
 
