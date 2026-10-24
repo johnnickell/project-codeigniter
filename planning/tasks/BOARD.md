@@ -13,9 +13,10 @@ See the [Roadmap Planning Frontier](../ROADMAP.md#planning-frontier) for undecid
 
 ## Current human decision
 
-[TASK-00011](00011-TASK.md)'s adoption-by-default planning amendment is locally verified in the main checkout on
-its feature branch; local commit is authorized and independent review remains outstanding. [TASK-00009](00009-TASK.md)
-remains first ready for latest-stable qualification, with separately authorized execution and checkout choice.
+[TASK-00011](00011-TASK.md)'s adoption-by-default planning amendment has independent review acceptance and QA
+PASS; authorized landing is in progress on its main-checkout feature branch. Human PR review/merge follows
+publication. [TASK-00009](00009-TASK.md) remains first ready for latest-stable qualification, with separately
+authorized execution and checkout choice.
 The actual upgrade belongs to [TICKET-00008](../tickets/00008-TICKET.md), pending exact release/migration acceptance.
 
 [TASK-00010](00010-TASK.md) waits on TASK-00009 and specifies the CodeIgniter-adapted engineering contract.

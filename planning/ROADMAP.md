@@ -5,8 +5,8 @@
 Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; independent review and hosted verification
 remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
-1. [TASK-00011](tasks/00011-TASK.md)'s 2026-10-24 adoption-by-default amendment is locally verified in the selected
-   main checkout/feature branch; local commit is authorized and independent review remains outstanding. Separately authorize
+1. [TASK-00011](tasks/00011-TASK.md)'s 2026-10-24 adoption-by-default amendment has independent review acceptance
+   and QA PASS; authorized landing is in progress, with human PR review/merge to follow publication. Separately authorize
    [TASK-00009](tasks/00009-TASK.md)'s latest-stable qualification; [TASK-00010](tasks/00010-TASK.md)'s concrete
    engineering contract remains blocked on those findings. Preserve CodeIgniter's standard approach and justify
    deviations. Broad direction is approved, not exact releases, an unexamined coverage metric or implementation.
