@@ -2,7 +2,7 @@
 id: TICKET-00006
 epic: EPIC-00002
 title: Qualify the latest stable Fight package upgrade
-status: needs-info
+status: done
 ---
 
 # Qualify the latest stable Fight package upgrade
@@ -49,17 +49,23 @@ consumer composition, and actual application journeys; no blanket full-capabilit
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| [TASK-00009](../tasks/00009-TASK.md) | Qualify the latest stable Fight package baseline | ready-for-agent |
+| [TASK-00009](../tasks/00009-TASK.md) | Qualify the latest stable Fight package baseline | done |
 <!-- /planning:children -->
 
 ## Decisions and progress
 
-The maintainer approved creation of [TASK-00009](../tasks/00009-TASK.md), the bounded qualification chore.
-The 2026-10-24 amendment updates its research destination to latest stable and separates actual upgrade delivery
-into TICKET-00008. TASK-00009 remains ready, not started; this planning approval does not execute it, accept a
-release pair or authorize dependency changes. Exact evidence is outstanding, so this TICKET remains `needs-info`
-until its investigation is complete. A verified blocked report can close this investigation while TICKET-00008
-and EPIC-00002 remain unfinished.
+The maintainer explicitly authorized [TASK-00009](../tasks/00009-TASK.md) execution through Build and selected
+the main checkout. Its [2026-10-24 qualification report](../wayfinder/research/2026-10-24-latest-stable-fight-baseline.md)
+locally completes this narrowed investigation: latest stable Common v1.4.0 / AccessControl v0.8.0 install together;
+released `TransactionalUnitOfWork` contracts fit the native adapter. Relevant capability/migration inventory,
+transaction semantics, consumer verification and the proposed WF-001 reconciliation are recorded. This TICKET
+closes under automatic parent completion, not independent review or acceptance of an actual upgrade.
+
+The maintainer must accept the exact pair, bounded consumer scope and narrow HttpFoundation 8.1.9 security refresh
+before upgrade TASK decomposition under TICKET-00008. The two-package-only copied-lock solve retains an inherited
+CVE-2026-108082 advisory; it is not silently waived or repaired here. Project dependencies/runtime source are
+unchanged. TICKET-00008 and EPIC-00002 remain unfinished; independent review/QA and hosted evidence are separate.
+No Wayfinder decision closes from this report, and no Common 2.x investigation was expanded.
 
 The planning migration itself authorized no package research or upgrade. Subsequent maintainer-approved
 [upstream reconciliation](../UPSTREAM-RECONCILIATION.md) preserves `develop`'s lock: Common

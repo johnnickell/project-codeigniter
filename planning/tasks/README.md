@@ -14,8 +14,9 @@ Legacy TASK-00005 is reserved; see [MIGRATION.md](../MIGRATION.md). [Archived TA
 | [TASK-00006](00006-TASK.md) | Re-certify Rewritten Fight Common Candidate | done | [TICKET-00002](../tickets/00002-TICKET.md) |
 | [TASK-00007](00007-TASK.md) | Retire Framework Support Certification | done | [TICKET-00004](../tickets/00004-TICKET.md) |
 | [TASK-00008](00008-TASK.md) | Migrate planning to the EPIC TICKET TASK structure | done | [TICKET-00005](../tickets/00005-TICKET.md) |
-| [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | ready-for-agent | [TICKET-00006](../tickets/00006-TICKET.md) |
+| [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | done | [TICKET-00006](../tickets/00006-TICKET.md) |
 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent | [TICKET-00007](../tickets/00007-TICKET.md) |
 | [TASK-00011](00011-TASK.md) | Amend the CodeIgniter adoption plan | done | — |
 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | done | — |
+| [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | ready-for-agent | [TICKET-00010](../tickets/00010-TICKET.md) |
 <!-- /planning:records -->

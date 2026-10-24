@@ -35,3 +35,9 @@ future release contents.
 ## Resolution
 
 Open. Begin only after both requested release tags are installable.
+
+The [2026-10-24 TASK-00009 report](../research/2026-10-24-latest-stable-fight-baseline.md) supplies an explicit
+proposal to replace this historical v1.2.0/v0.2.0 baseline with exact Common v1.4.0 / AccessControl v0.8.0.
+Isolated installation and bounded contract findings are evidence, not the map owner's acceptance or this complete
+public-surface audit. The Gate, Open state, broader audit scope and downstream dependencies remain unchanged
+pending that separate decision; WF-002 remains the map's independent gated frontier.

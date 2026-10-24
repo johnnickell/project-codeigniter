@@ -21,13 +21,18 @@ without rewriting views. Archive only on explicit request; scratch remains under
 **Adoption by default is approved; implementation is incomplete.** The 2026-10-24
 [TASK-00011 amendment](tasks/00011-TASK.md) preserves CodeIgniter's standard approach and requires the latest
 mutually compatible stable Fight packages, not merely the former Common 1.2+/AccessControl 0.4+ floors.
-[TASK-00009](tasks/00009-TASK.md) qualifies exact releases; [TASK-00010](tasks/00010-TASK.md) specifies the adapted
-engineering contract after those findings. Their execution remains separate from this planning operation.
+Explicitly authorized [TASK-00009](tasks/00009-TASK.md) now supplies the locally verified
+[dated qualification](wayfinder/research/2026-10-24-latest-stable-fight-baseline.md): Common v1.4.0 and
+AccessControl v0.8.0 install together; an inherited HttpFoundation advisory needs a narrow 8.1.9 refresh in the
+future upgrade. Independent review accepted and applicable QA passed; maintainer acceptance of the migration remains outstanding.
+[TASK-00010](tasks/00010-TASK.md) is now first ready to specify the adapted engineering contract using those findings.
 
 Actual upgrade, engineering enforcement and shared Pi/skill compatibility remain in
 [TICKET-00008](tickets/00008-TICKET.md), [TICKET-00009](tickets/00009-TICKET.md) and
-[TICKET-00010](tickets/00010-TICKET.md). The first two await concrete evidence/acceptance; the third is ready for
-TASK decomposition. No upgrade/enforcement TASK is executable. Investigation completion may close its narrowed
-parent, but cannot close the broader adoption EPIC while these requirements remain unfinished. Use the
+[TICKET-00010](tickets/00010-TICKET.md). The first awaits acceptance of the exact release/migration/security
+proposal; the second awaits the concrete engineering contract and its acceptance; the third is decomposed into
+approved [TASK-00013](tasks/00013-TASK.md), with implementation still unstarted. No upgrade/enforcement TASK
+is executable. Investigation completion may close its narrowed parent, but cannot close the broader adoption
+EPIC while these requirements remain unfinished. Use the
 [Roadmap handoffs](ROADMAP.md#current-decomposition-handoffs), not child counts, to select the planning phase.
 TASK-00008 retains its historical verification and outstanding independent review.
