@@ -27,8 +27,9 @@ AccessControl v0.8.0 install together; an inherited HttpFoundation advisory need
 future upgrade. Independent review accepted and applicable QA passed; maintainer acceptance of the migration remains outstanding.
 Separately authorized [TASK-00010](tasks/00010-TASK.md) now delivers the sourced
 [engineering alignment proposal](engineering-alignment-proposal.md), using those findings without changing
-packages, tools, runtime or gates. Its local verification is recorded in the TASK; independent review/QA remain
-outstanding. TASK-00009 is merged in the selected base.
+packages, tools, runtime or gates. Its local verification, independent review acceptance and applicable QA PASS
+are recorded in the TASK; PR publication and human review/merge remain separate delivery facts. TASK-00009 is
+merged in the selected base.
 
 Actual upgrade, engineering enforcement and shared Pi/skill compatibility remain in
 [TICKET-00008](tickets/00008-TICKET.md), [TICKET-00009](tickets/00009-TICKET.md) and

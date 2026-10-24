@@ -87,7 +87,7 @@ separate execution authority and checkout confirmation. The existing blanket `/v
 without deleting operator files or exposing other required runtime material to staging.
 
 Use `/skill:next` for [Board-based selection](../tasks/BOARD.md#ready-frontier); TASK-00010's proposal is delivered,
-with independent review/QA still outstanding. TASK-00013 is the sole ready TASK, independent at order 3;
+with independent review acceptance and applicable QA PASS recorded in its TASK. TASK-00013 is the sole ready TASK, independent at order 3;
 selection does not grant its separate execution authority or checkout confirmation. The seven approved
 TASK-00013 planning paths are included in TASK-00009's commit by explicit maintainer instruction, not implemented.
 This requirement is independent of package release research; package-specific engineering policy still belongs

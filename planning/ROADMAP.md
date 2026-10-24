@@ -14,7 +14,8 @@ remain pending. Use the new hierarchy to keep remaining adoption explicit:
    acceptance, QA PASS and is merged in the selected base; concrete migration acceptance remains outstanding.
    Separately authorized [TASK-00010](tasks/00010-TASK.md) delivers the
    [engineering proposal](engineering-alignment-proposal.md), not permission to upgrade packages or enforce
-   undecided policy. Its local verification is recorded in the TASK; independent review/QA remain outstanding.
+   undecided policy. Its local verification, independent review acceptance and applicable QA PASS are recorded in
+   the TASK; PR publication and human review/merge remain separate delivery facts.
 2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
    through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
    release baseline before treating WF-001 as evidence for the newer adoption target.

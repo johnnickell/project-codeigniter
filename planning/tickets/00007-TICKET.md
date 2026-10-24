@@ -82,4 +82,5 @@ the qualified stable-pair report and primary tooling/driver contracts. It explic
 100% with meaningful all-suite Domain/Application coverage and separate unit attribution, dispositions both
 legacy inputs, and records unavailable dirty T-00005 evidence. D1–D4 in the proposal require maintainer acceptance
 under TICKET-00009 before enforcement TASK allocation. Closing this artifact requirement does not accept those
-choices, adopt packages, finish EPIC-00002 or assert review, QA, hosted CI, PR or merge of TASK-00010.
+choices, adopt packages or finish EPIC-00002; independent review acceptance and applicable QA PASS are separately
+recorded in TASK-00010, while hosted CI, PR and merge remain separate delivery facts.

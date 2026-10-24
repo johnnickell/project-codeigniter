@@ -25,8 +25,9 @@ of the exact release/migration/security scope; dependencies and runtime source r
 
 Separately authorized [TASK-00010](00010-TASK.md) delivers the
 [CodeIgniter engineering proposal](../engineering-alignment-proposal.md) using TASK-00009's findings; its
-completed dependency edge is preserved. Local verification is recorded in the TASK; independent review/QA
-remain outstanding, with no TASK-00010 hosted run, PR or merge claimed.
+completed dependency edge is preserved. Local verification, independent review acceptance and applicable QA PASS
+are recorded in the TASK; PR publication and human review/merge remain separate delivery facts. Hosted checks are
+optional for this TASK and have not been run.
 [TICKET-00009](../tickets/00009-TICKET.md) retains maintainer acceptance of proposal decisions D1–D4 and actual
 enforcement. Exact Unit-only versus meaningful all-suite coverage remains a human choice, not an enforced rule.
 The approved [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#decisions-and-progress) is
