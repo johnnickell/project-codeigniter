@@ -23,7 +23,7 @@ Packagist's source-commit `time`. Stable metadata, published releases and downlo
 
 | Package | Latest stable / GitHub publication | Source and distribution commit | Runtime requirements |
 | --- | --- | --- | --- |
-| `johnnickell/fight-common` | v1.4.0 / 2026-10-12 15:10:25Z | `87b9580c072f3149d574e09865daa79620c92118` | PHP `>=8.5`; PSR cache `^3.0`, container `^2.0`, HTTP client/factory/server-handler/server-middleware `^1.0`, HTTP message `^2.0`, log `^3.0` |
+| `johnnickell/fight-common` | v1.4.0 / 2026-10-12 15:10:25Z | `87b9580c072f3149d574e09865daa79620c92118` | PHP `>=8.5`; PSR cache `^3.0`, container `^2.0`, HTTP client/server-handler/server-middleware `^1.0`, HTTP factory `^1.1`, HTTP message `^2.0`, log `^3.0` |
 | `johnnickell/fight-access-control` | v0.8.0 / 2026-10-21 18:19:50Z | `319738255e682d587642b67856039f882b9588d6` | PHP `>=8.5`; Common `^1.3` |
 
 Sources: [release authorities][C-release], [AccessControl authority][A-release], registry metadata [registries],
@@ -76,7 +76,8 @@ release facts remain reproducible through the URLs below; private logs are not r
 
    Exit **0**, archives downloaded/extracted, lock and installed source/dist references match the table. No
    advisory reported; 51 suggestions and 54 funding notices are informational. `check-platform-reqs` on this
-   same scratch installation passed **16 rows**, exit **0**, including actual PHP 8.5.12 (not only platform emulation).
+   same scratch installation passed **15 requirement-result rows**, exit **0**, including actual PHP 8.5.12
+   (not only platform emulation).
    This freely resolved other dependencies too; it is not evidence of a two-package-only project upgrade.
 3. `locked-probe/` copied that probe manifest plus the **root lock**, without vendor. A targeted wrapper command
    `update johnnickell/fight-common johnnickell/fight-access-control --no-install --no-scripts --no-interaction
@@ -120,10 +121,17 @@ This is a resolved type question, not evidence of a working login or Role endpoi
 Adapter semantics from the exact source [ci-uow]:
 
 - Reject a closed connection and nested adapter execution or an already active CodeIgniter transaction.
-- Begin explicitly; invoke the callback and return its value only after a successful transaction status and commit.
-- On callback failure, attempt rollback/reset status and rethrow the original throwable. Failed status or commit
-  also attempts rollback and throws. Rollback/reset failures are swallowed; the adapter does not prove the
-  database's outcome after an uncertain acknowledgement or failed rollback.
+- Begin explicitly; a false `transBegin()` throws without rollback/reset. Invoke the callback only after begin
+  succeeds and return its value only after a successful transaction status and commit.
+- On callback failure, attempt rollback and status reset, then rethrow the original throwable. False returns from
+  `transStatus()` or `transCommit()` also attempt rollback/reset and then throw a `RuntimeException`.
+- A throwable from `transBegin()`, `transStatus()` or `transCommit()` propagates without an adapter rollback/reset
+  attempt. In particular, a thrown commit bypasses cleanup; `finally` clears only the adapter's internal active
+  flag, not the connection's transaction state.
+- The rollback helper ignores rollback's false return and swallows rollback/reset throwables, attempting reset
+  even if rollback throws. Neither cleanup attempts nor the internal flag prove the database's outcome after an
+  uncertain acknowledgement or failed rollback. Connection recovery and authorized authoritative-state
+  reconciliation remain necessary; no automatic connection recovery or safe replay guarantee is established.
 - Track whether a connection was established; an unopened connection is not yet considered closed.
 
 AccessControl owns the callback's coupled business mutation and required audit, not the consumer's outer HTTP
@@ -236,9 +244,11 @@ For [TICKET-00008](../../tickets/00008-TICKET.md), after maintainer acceptance a
    envelopes/retry fan-out, intercepted production profile, unmapped handler/event rejection and provider failure
    paths. Existing integration tests are useful starting coverage, not release adoption evidence until run on the
    upgraded installation. Do not instantiate new AccessControl journeys solely to make an upgrade look broader.
-3. Verify callback return/commit, original-error rollback, closed/nested/failed-commit behavior and publication
-   ordering at the owned integration boundary. Type-fit reflection here is not that behavioral proof. If later
-   persistence is selected, bind real shared-connection Role/recovery conformance, both concurrent winner orders,
+3. Verify callback return/commit, original-error rollback, closed/nested rejection, false-return versus thrown
+   transaction-method/commit failures and publication ordering at the owned integration boundary. Do not expect
+   rollback/reset for a thrown commit; retain connection-recovery and authoritative-state reconciliation limits.
+   Type-fit reflection here is not that behavioral proof. If later persistence is selected, bind real
+   shared-connection Role/recovery conformance, both concurrent winner orders,
    no-op fences, stale revisions, uncertain commits, restart/hydration and delayed provider outcomes. Such future
    application work remains outside this dependency-only scope and the current green starter baseline.
 4. Update README, relevant composition/testing docs and planning with exact supported versions, StreamId exception,
@@ -272,6 +282,13 @@ gates and all other independent prerequisites are unchanged.
   browser journeys, deployment, or Common/AccessControl upstream tests. AccessControl test namespaces are dev
   autoload only; using conformance support later requires an explicit supported consumer test-loading/tool decision,
   not an assumed production autoload or automatic PHPUnit 13 upgrade.
+- Repair-cycle counterchecks for REV-01/02/03 are retained under
+  `.runs/tasks/TASK-00009/runs/repair-1-20261024T2149/`: freshly fetched pinned adapter/manifest bytes match the
+  inspected release; registry constraints agree; an 11-scenario disposable connection double confirms branching
+  and original-throwable preservation. It executes no SQL and proves no real database outcome. Original platform
+  receipts each contain 14 extension results plus PHP, **15 total**, excluding the heading. Direct source,
+  manifest and receipt checks validate these documentation corrections; no product regression test or runtime
+  repair is appropriate or authorized. Original receipts and independent reports remain unchanged.
 - The canonical local gate runs the **unchanged project installation**, not this scratch installation. Its results
   and warnings are recorded in [TASK-00009](../../tasks/00009-TASK.md); independent review, QA and hosted evidence
   remain separate. SHA-256 inventories protect dependency-state claims, not provenance/signature attestation.
