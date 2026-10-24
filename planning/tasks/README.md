@@ -17,4 +17,5 @@ Legacy TASK-00005 is reserved; see [MIGRATION.md](../MIGRATION.md). [Archived TA
 | [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | ready-for-agent | [TICKET-00006](../tickets/00006-TICKET.md) |
 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | ready-for-agent | [TICKET-00007](../tickets/00007-TICKET.md) |
 | [TASK-00011](00011-TASK.md) | Amend the CodeIgniter adoption plan | done | — |
+| [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | done | — |
 <!-- /planning:records -->
