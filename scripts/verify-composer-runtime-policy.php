@@ -5,12 +5,18 @@ declare(strict_types=1);
 $manifest = json_decode(file_get_contents('composer.json'), true, flags: JSON_THROW_ON_ERROR);
 $lock = json_decode(file_get_contents('composer.lock'), true, flags: JSON_THROW_ON_ERROR);
 
-if (($manifest['require']['php'] ?? null) !== '^8.5') {
-    throw new RuntimeException('The declared PHP support floor must be ^8.5.');
+if (($manifest['require']['php'] ?? null) !== '^8.5.12'
+    || ($lock['platform']['php'] ?? null) !== '^8.5.12') {
+    throw new RuntimeException('The declared and locked PHP support floor must be ^8.5.12.');
 }
 
-if (($manifest['config']['platform']['php'] ?? null) !== '8.5.4') {
-    throw new RuntimeException('The Composer platform PHP policy must be 8.5.4.');
+if (($manifest['config']['platform']['php'] ?? null) !== '8.5.12'
+    || ($lock['platform-overrides']['php'] ?? null) !== '8.5.12') {
+    throw new RuntimeException('The declared and locked Composer platform PHP policy must be 8.5.12.');
+}
+
+if (PHP_VERSION_ID < 80512 || PHP_VERSION_ID >= 90000) {
+    throw new RuntimeException('The actual PHP runtime must satisfy ^8.5.12.');
 }
 
 $requirements = [];
@@ -27,26 +33,28 @@ if ($requirements !== [
     throw new RuntimeException('The locked Fight packages must both require PHP >=8.5.');
 }
 
-$process = proc_open(
-    ['composer', 'prohibits', 'php', '8.4', '--locked', '--no-interaction'],
-    [
-        0 => ['file', '/dev/null', 'r'],
-        1 => ['pipe', 'w'],
-        2 => ['pipe', 'w'],
-    ],
-    $pipes,
-);
+foreach (['8.4', '8.5.11'] as $unsupportedVersion) {
+    $process = proc_open(
+        ['composer', 'prohibits', 'php', $unsupportedVersion, '--locked', '--no-interaction'],
+        [
+            0 => ['file', '/dev/null', 'r'],
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ],
+        $pipes,
+    );
 
-if (! is_resource($process)) {
-    throw new RuntimeException('Could not start Composer prohibits.');
-}
+    if (! is_resource($process)) {
+        throw new RuntimeException('Could not start Composer prohibits.');
+    }
 
-$output = stream_get_contents($pipes[1]) . stream_get_contents($pipes[2]);
-fclose($pipes[1]);
-fclose($pipes[2]);
+    $output = stream_get_contents($pipes[1]) . stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
 
-if (proc_close($process) !== 1 || ! str_contains($output, 'requires php (^8.5)')) {
-    throw new RuntimeException('Composer prohibits must reject PHP 8.4 through the declared ^8.5 floor.');
+    if (proc_close($process) !== 1 || ! str_contains($output, 'requires php (^8.5.12)')) {
+        throw new RuntimeException("Composer prohibits must reject PHP {$unsupportedVersion} through the declared ^8.5.12 floor.");
+    }
 }
 
 fwrite(STDOUT, "Composer runtime policy passed.\n");

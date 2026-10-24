@@ -13,6 +13,11 @@ See the [Roadmap Planning Frontier](../ROADMAP.md#planning-frontier) for undecid
 
 ## Current human decision
 
+[TASK-00012](00012-TASK.md)'s PHP/NGINX security-baseline repair is locally implemented and verified in the
+approved isolated checkout at `.runs/worktrees/task-00012-runtime-security-baseline/`. Independent review and QA
+are pending; no publication or deployment is asserted. This standalone security slice does not upgrade Fight
+packages or replace the separate adoption investigations below.
+
 [TASK-00009](00009-TASK.md) is the first ready TASK. Its stable-package qualification scope and record creation
 are approved; the next human decision is whether to authorize execution and which checkout/worktree to use.
 Accept its release/compatibility findings before creating an upgrade TASK. [TASK-00010](00010-TASK.md)'s engineering
@@ -67,6 +72,7 @@ Its release-audit baseline needs reconciliation under TICKET-00006; no Wayfinder
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
 | 1 | [TASK-00008](00008-TASK.md) | Migrate planning to the EPIC TICKET TASK structure | [TICKET-00005 — Adopt the EPIC TICKET TASK planning structure](../tickets/00005-TICKET.md) | done | — | [PR #9](https://github.com/johnnickell/project-codeigniter/pull/9) |
+| 1 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | — (standalone bug) | done | — | — |
 | — | [TASK-00001](00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | [TICKET-00001 — CodeIgniter Starter Product and Walking-Slice Acceptance](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00002](00002-TASK.md) | Adopt the historical Fight Common 1.2 candidate | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Complete CodeIgniter Platform Profile | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
