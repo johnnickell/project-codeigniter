@@ -5,19 +5,35 @@
 Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; independent review and hosted verification
 remain pending. Use the new hierarchy to keep remaining adoption explicit:
 
-1. [TASK-00009](tasks/00009-TASK.md) has approved qualification scope and is ready, not started. Authorize its
-   execution and checkout choice separately, then review the exact stable Common 1.2+/AccessControl 0.4+ evidence
-   before creating an upgrade TASK. The [adoption EPIC](epics/00002-EPIC.md) remains `needs-info`. Engineering
-   contract proposal [TASK-00010](tasks/00010-TASK.md) has approved scope/creation and waits on TASK-00009's findings;
-   execution, policy acceptance and subsequent enforcement TASKs remain separate. No upgrade is authorized.
+1. [TASK-00011](tasks/00011-TASK.md)'s 2026-10-24 adoption-by-default amendment is locally verified in the selected
+   main checkout/feature branch; local commit is authorized and independent review remains outstanding. Separately authorize
+   [TASK-00009](tasks/00009-TASK.md)'s latest-stable qualification; [TASK-00010](tasks/00010-TASK.md)'s concrete
+   engineering contract remains blocked on those findings. Preserve CodeIgniter's standard approach and justify
+   deviations. Broad direction is approved, not exact releases, an unexamined coverage metric or implementation.
 2. Continue the [AccessControl application Wayfinder](wayfinder/codeigniter-access-control-application-map.md)
    through its own decision authority; WF-002 is still its independent runtime frontier. Reconcile its older
    release baseline before treating WF-001 as evidence for the newer adoption target.
-3. Revisit Common 2.0 only after its migration authority exists; [TASK-00003](tasks/00003-TASK.md) remains needs-info.
+3. [TASK-00003](tasks/00003-TASK.md) remains `needs-info`. Latest-stable qualification must inspect actual release
+   lines; if a newest major overlaps that migration, reconcile its existing owner/artifact requirements rather
+   than silently excluding the release or starting competing implementation.
 
 The maintainer-approved [upstream reconciliation](UPSTREAM-RECONCILIATION.md) preserves `develop`'s dependency
 lock and carries its legacy lean-gate proposal into TICKET-00007/TASK-00010. Its unfinished coverage/tooling
 requirements are tracked, not marked complete or silently enforced.
+
+## Current decomposition handoffs
+
+- [TICKET-00008](tickets/00008-TICKET.md#decisions-and-progress): actual package upgrade. TASK decomposition
+  awaits TASK-00009's dated latest-release findings and the maintainer's concrete migration acceptance.
+- [TICKET-00009](tickets/00009-TICKET.md#decisions-and-progress): actual engineering enforcement. TASK
+  decomposition awaits TASK-00010's contract, coverage choices, compatible tools and accepted exceptions.
+- [TICKET-00010](tickets/00010-TICKET.md#decisions-and-progress): approved Pi/skill compatibility requirement.
+  Next planning phase: `/skill:to-tasks TICKET-00010`; present the bounded ignore/binding/routing-verification
+  slice for acceptance before creating or executing it. This choice is independent of package qualification.
+
+The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
+Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. These handoffs are
+not executable Board rows or a claim of full decomposition; the unrelated application Wayfinder stays gated.
 
 ## EPIC status
 
@@ -45,7 +61,9 @@ in the same operation that completes their children.
 
 | TICKET ID | Title | Parent EPIC | Status |
 |---|---|---|---|
-| None | — | — | — |
+| [TICKET-00008](tickets/00008-TICKET.md) | Upgrade both Fight packages to the qualified latest stable releases | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+| [TICKET-00009](tickets/00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+| [TICKET-00010](tickets/00010-TICKET.md) | Integrate the shared Pi skills and next-work conventions | [EPIC-00002](epics/00002-EPIC.md) | ready-for-agent |
 <!-- /planning:frontier -->
 
 ## Historical outcomes

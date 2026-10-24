@@ -24,9 +24,11 @@ resolved or excluded, and the map links to its resulting EPIC, requirement TICKE
 
 ## Notes
 
-- Planning hierarchy migration closes no decision. The newer Common 1.2+/AccessControl 0.4+ adoption target in
-  [TICKET-00006](../tickets/00006-TICKET.md) must explicitly reconcile this map's older v0.2.0 evidence gate;
-  the baseline below is preserved pending that decision, not claimed current.
+- Planning amendments close no decision. The latest-stable qualification target in
+  [TICKET-00006](../tickets/00006-TICKET.md), superseding the former Common 1.2+/AccessControl 0.4+ floors,
+  must explicitly reconcile this map's older v0.2.0 evidence gate. Actual upgrade delivery belongs to
+  [TICKET-00008](../tickets/00008-TICKET.md); the baseline below is preserved pending the owning decision,
+  not claimed current or qualified.
 - This is a decision-only map. It introduces no application API, database schema, environment variable, package
   dependency, runtime behavior, or release claim.
 - The runtime policy targets local development only; it is not implemented or certified by this map.

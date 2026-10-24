@@ -11,6 +11,9 @@ these records. Use `_TICKET_TEMPLATE.md`; [archived TICKETs](archive/README.md) 
 | [TICKET-00003](00003-TICKET.md) | Qualify a future Fight Common 2.0 migration | needs-info | [EPIC-00001](../epics/00001-EPIC.md) |
 | [TICKET-00004](00004-TICKET.md) | Retire recurring framework-support certification | done | [EPIC-00002](../epics/00002-EPIC.md) |
 | [TICKET-00005](00005-TICKET.md) | Adopt the EPIC TICKET TASK planning structure | done | [EPIC-00002](../epics/00002-EPIC.md) |
-| [TICKET-00006](00006-TICKET.md) | Qualify and adopt the current stable Fight package baseline | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
-| [TICKET-00007](00007-TICKET.md) | Decide the remaining engineering and quality-gate alignment | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00006](00006-TICKET.md) | Qualify the latest stable Fight package upgrade | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00007](00007-TICKET.md) | Specify the CodeIgniter-adapted engineering contract | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00008](00008-TICKET.md) | Upgrade both Fight packages to the qualified latest stable releases | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00009](00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00010](00010-TICKET.md) | Integrate the shared Pi skills and next-work conventions | ready-for-agent | [EPIC-00002](../epics/00002-EPIC.md) |
 <!-- /planning:records -->
