@@ -15,8 +15,10 @@ or inventing a future public package contract.
 ## Solution and boundaries
 
 Wait for Fight Common's 2.0 contract, deprecation-removal inventory, and migration guide. Only then inventory
-CodeIgniter-local changes and propose bounded executable work. This is not the current stable 1.2+/0.4+
-qualification under [TICKET-00006](00006-TICKET.md).
+CodeIgniter-local changes and propose bounded executable work. This remains distinct from the current
+latest-stable qualification under [TICKET-00006](00006-TICKET.md). If that qualification identifies Common 2.0
+as the latest stable line, reconcile this existing migration owner and its required artifacts before execution;
+do not silently choose an older major or duplicate the migration.
 
 ## Use cases and validation
 

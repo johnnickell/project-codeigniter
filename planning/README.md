@@ -18,9 +18,16 @@ truth: records own state, generated views project it, and historical prose does 
 Run `./bin/planning-check --write`, then `./bin/planning-check` after editing records. The canonical build checks
 without rewriting views. Archive only on explicit request; scratch remains under ignored `.runs/`.
 
-**Planning was the first priority and is now locally migrated—not evidence of completed adoption.** Stable Common
-1.2+/AccessControl 0.4+ qualification and remaining engineering alignment are unresolved requirements; no upgrade
-TASK is executable. [TASK-00009](tasks/00009-TASK.md) has approved qualification scope and is ready for separately
-authorized execution. [TASK-00010](tasks/00010-TASK.md)'s engineering contract proposal scope is approved and waits
-on TASK-00009; neither policy acceptance nor enforcement is authorized. TASK-00008 records local verification and
-outstanding independent review.
+**Adoption by default is approved; implementation is incomplete.** The 2026-10-24
+[TASK-00011 amendment](tasks/00011-TASK.md) preserves CodeIgniter's standard approach and requires the latest
+mutually compatible stable Fight packages, not merely the former Common 1.2+/AccessControl 0.4+ floors.
+[TASK-00009](tasks/00009-TASK.md) qualifies exact releases; [TASK-00010](tasks/00010-TASK.md) specifies the adapted
+engineering contract after those findings. Their execution remains separate from this planning operation.
+
+Actual upgrade, engineering enforcement and shared Pi/skill compatibility remain in
+[TICKET-00008](tickets/00008-TICKET.md), [TICKET-00009](tickets/00009-TICKET.md) and
+[TICKET-00010](tickets/00010-TICKET.md). The first two await concrete evidence/acceptance; the third is ready for
+TASK decomposition. No upgrade/enforcement TASK is executable. Investigation completion may close its narrowed
+parent, but cannot close the broader adoption EPIC while these requirements remain unfinished. Use the
+[Roadmap handoffs](ROADMAP.md#current-decomposition-handoffs), not child counts, to select the planning phase.
+TASK-00008 retains its historical verification and outstanding independent review.
