@@ -17,6 +17,16 @@ policy acceptance, independent review, PR approval or merge into `develop`.
   with no blockers. Its source linked Fight Common T-00087 and ADR 0026; those references are provenance, not proof
   of package release availability or current local acceptance.
 
+## Current engineering decision
+
+The reconciliation below preserves historical inputs, not current unresolved questions. The maintainer's later
+[decision under TICKET-00009](tickets/00009-TICKET.md#maintainer-decision--recorded-2026-10-24) supersedes the
+Unit-only coverage proposal: run the complete suite exactly once and collect coverage in that run, aiming for
+100% meaningful owned behavior primarily through unit tests with integration contribution allowed. Keep separate
+attribution. Native CodeIgniter remains; Fight Common PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned
+Agent OS checks are the accepted direction. TASK decomposition and target qualification/enforcement remain next,
+not another approval of those broad choices. The original requirement disposition follows as historical evidence.
+
 ## Identity collision and requirement disposition
 
 That upstream legacy T-00007 is distinct from this branch's legacy retirement T-00007, created in `2699ceb` and

@@ -38,10 +38,13 @@ requirements are tracked, not marked complete or silently enforced.
   verification/documentation slice locally; automatic parent completion closes TICKET-00008. Exactly three package
   entries changed; native factories remain compatible. Candidate A has independent Review acceptance and applicable
   non-visual QA PASS; [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Broader engineering adoption remains unfinished.
-- [TICKET-00009](tickets/00009-TICKET.md#decisions-and-progress): actual engineering enforcement. TASK
-  decomposition awaits maintainer acceptance of TASK-00010's delivered proposal decisions D1–D4: competing
-  coverage policies, native scope/exceptions, sourced candidate tools/gate phases and coordination. Target tool
-  installation/scans and numeric coverage remain unverified, not implied by the current gate.
+- [TICKET-00009](tickets/00009-TICKET.md#maintainer-decision--recorded-2026-10-24): engineering direction is
+  accepted and ready for TASK decomposition. Run the complete suite once and collect coverage during that run;
+  aim for 100% meaningful owned-behavior coverage, primarily from units with integration contribution. Keep
+  CodeIgniter native. Adopt Fight Common PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned Agent OS
+  checks, with a current inventory and justified adaptations. Build on the implemented package baseline/binding.
+  Concrete versions/configuration, target scans and measured coverage still need implementation evidence;
+  this operation only records decisions and allocates no TASKs.
 - [TICKET-00010](tickets/00010-TICKET.md#current-delivery-handoff): separately authorized
   [TASK-00013](tasks/00013-TASK.md#current-delivery-status) delivered the bounded runtime-ignore/binding/
   routing-verification slice and closes its parent automatically. Independent Review accepted and applicable QA
@@ -52,7 +55,7 @@ requirements are tracked, not marked complete or silently enforced.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
 Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00014 candidate A
-has independent Review acceptance and applicable non-visual QA PASS; [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering-enforcement decomposition still requires TICKET-00009's D1–D4 decisions.
+has independent Review acceptance and applicable non-visual QA PASS; [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering-enforcement direction is now accepted under TICKET-00009; TASK decomposition is next.
 No full adoption decomposition or completion is claimed; the unrelated application Wayfinder stays gated.
 
 ## EPIC status
@@ -81,7 +84,7 @@ in the same operation that completes their children.
 
 | TICKET ID | Title | Parent EPIC | Status |
 |---|---|---|---|
-| [TICKET-00009](tickets/00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | [EPIC-00002](epics/00002-EPIC.md) | needs-info |
+| [TICKET-00009](tickets/00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | [EPIC-00002](epics/00002-EPIC.md) | ready-for-agent |
 <!-- /planning:frontier -->
 
 ## Historical outcomes
