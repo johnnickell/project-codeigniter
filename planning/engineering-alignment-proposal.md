@@ -14,13 +14,17 @@ Build on the already implemented package baseline and shared binding rather than
 That decision supersedes this proposal's unresolved coverage choice and acceptance questions. In particular,
 exact Unit-only 100% and a separate hard Domain/Application-only threshold are not the selected policy. Concrete
 versions, driver, analysis settings and exceptions below remain recommendations to qualify, not individually
-approved facts. TASK decomposition is next; neither implementation nor decomposition is performed by recording
-this decision. The original proposal below is retained as evidence of its original scope and recommendations.
+approved facts. The maintainer subsequently approved
+[TASK-00015/00016/00017](tickets/00009-TICKET.md#approved-task-decomposition), now written for coding checks,
+single-run coverage and complete read-only orchestration respectively. Implementation has not started; select
+execution through the TASK Board. The original proposal below is retained as evidence of its original scope and
+recommendations.
 
 Read this with [TICKET-00009](tickets/00009-TICKET.md)'s current engineering contract, not as permission to
 change code or install tools. At proposal delivery, adoption by default was approved but concrete choices awaited
 maintainer acceptance. [TICKET-00007](tickets/00007-TICKET.md) owns this artifact;
-[TASK-00010](tasks/00010-TASK.md) records its local verification. No new enforcement TASKs are allocated.
+[TASK-00010](tasks/00010-TASK.md) records its original local verification; current enforcement planning is owned
+by TICKET-00009 and its new TASKs.
 Local [architecture](../ARCHITECTURE.md), [instructions](../AGENTS.md) and
 [planning conventions](CONVENTIONS.md) remain canonical.
 

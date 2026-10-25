@@ -38,17 +38,20 @@ merged in the selected base.
 Package adoption, engineering enforcement and the bounded shared Pi/skill compatibility requirement are tracked in
 [TICKET-00008](tickets/00008-TICKET.md), [TICKET-00009](tickets/00009-TICKET.md) and
 [TICKET-00010](tickets/00010-TICKET.md). The first closes automatically with locally completed TASK-00014 for the accepted
-stable pair and security refresh; the second now records the maintainer's accepted engineering direction and is
-ready for TASK decomposition: one complete test run collecting coverage, aiming for 100% primarily through units
-with integration contribution; native CodeIgniter; Fight Common PHPCS, Deptrac, PHPStan, Rector and applicable
-existing/planned Agent OS checks. Exact tools/configuration still need target qualification. The third is locally
-implemented through [TASK-00013](tasks/00013-TASK.md) and the [target binding](agents/shared-workflows.md). Its parent closes
+stable pair and security refresh; the second now has an approved three-TASK decomposition:
+[TASK-00015](tasks/00015-TASK.md) for native PHP coding/architecture checks,
+[TASK-00016](tasks/00016-TASK.md) for one complete test run collecting coverage, aiming for 100% primarily through
+units with integration contribution, and [TASK-00017](tasks/00017-TASK.md) for complete once-only read-only gate
+orchestration after both. Its provider-check inventory explicitly assigns applicable checks, N/A and deferred
+upstream advisors. No enforcement implementation has started; use the Board for execution selection, with exact
+tools/configuration and coverage still requiring target evidence. The third is locally implemented through
+[TASK-00013](tasks/00013-TASK.md) and the [target binding](agents/shared-workflows.md). Its parent closes
 automatically; independent Review accepted and applicable QA passed for the accepted candidate, and
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Hosted checks
 are optional and unrun. Source walkthroughs and safe discovery/status checks are labeled separately from
 unavailable live native selection/resume and child/log qualification; this is not full Pi capability certification.
-TASK-00014 awaits independent Review and QA; no enforcement TASK is allocated. Dependencies changed only in
-that accepted implementation slice, not the preceding planning operation.
+Enforcement TASK-00015/00016/00017 are allocated but not implemented; decomposition is not adoption completion.
+Package dependencies changed in TASK-00014, not in these planning operations.
 Investigation completion may close its narrowed parent, but cannot close the broader adoption EPIC while these
 requirements remain unfinished. Use the
 [Roadmap handoffs](ROADMAP.md#current-decomposition-handoffs), not child counts, to select the planning phase.

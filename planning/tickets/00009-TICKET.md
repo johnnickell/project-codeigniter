@@ -70,7 +70,9 @@ HTTP/authentication/authorization journeys remain with the open Wayfinder owners
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| None | — | — |
+| [TASK-00015](../tasks/00015-TASK.md) | Enforce native PHP coding and architecture standards | ready-for-agent |
+| [TASK-00016](../tasks/00016-TASK.md) | Collect meaningful coverage in one complete test run | ready-for-agent |
+| [TASK-00017](../tasks/00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | ready-for-agent |
 <!-- /planning:children -->
 
 ## Decisions and progress
@@ -102,9 +104,58 @@ in the main checkout on a feature branch:
    [TICKET-00008](00008-TICKET.md) and shared-workflow binding under [TICKET-00010](00010-TICKET.md), without
    redoing either or adding product features. The maintainer then instructed “record it.”
 
-This makes the requirement `ready-for-agent` for TASK decomposition, not done or executable implementation.
-Next: decompose complete enforceable outcomes combining necessary source/tests, tool/runtime configuration,
-documentation and checks. No TASKs are allocated by this recording operation; execution needs separate authority.
+This made the requirement `ready-for-agent` for TASK decomposition, not done or executable implementation.
+The decision-recording operation allocated no TASKs; the subsequent approved decomposition is recorded below.
+Execution needs separate authority.
 Coverage remains unmeasured and proposed analysis tools remain unqualified in this target. The unavailable dirty
 legacy T-00005 evidence remains a limit. Existing local gate results do not prove adoption of absent tools.
 This unfinished requirement keeps EPIC-00002 open; parent automation and the separate Wayfinder gates stay unchanged.
+
+### Approved TASK decomposition
+
+The maintainer explicitly approved the three-outcome draft in the current conversation. Live and archived TASK
+inventories were checked before allocating TASK-00015 through TASK-00017; reserved TASK-00005 remains untouched.
+Each TASK includes necessary configuration, source/tests, documentation and direct verification in a passing
+outcome, normally one PR:
+
+1. [TASK-00015](../tasks/00015-TASK.md): enforce native PHP coding and architecture standards, including actual
+   tool resolution/scans and necessary behavior-preserving fixes. Its TASK-00014 baseline dependency is already
+   complete and remains recorded.
+2. [TASK-00016](../tasks/00016-TASK.md): prepare coverage and deliver useful tests/reports from one complete
+   suite execution, aiming for 100% with primarily unit coverage and integration contribution. No outstanding
+   TASK blocker; it can be developed independently of TASK-00015. Board order prefers the tooling outcome first.
+3. [TASK-00017](../tasks/00017-TASK.md): strengthen the complete once-only read-only gate and local/hosted caller
+   parity, blocked by TASK-00015 and TASK-00016. Both predecessors must already pass their own canonical build;
+   this is not a deferred integration rescue.
+
+Decomposition of this accepted requirement is complete; implementation has not started. Use the TASK Board for
+execution selection. The current main checkout/feature branch hosts planning only; the implementation workflow
+must confirm its checkout choice and accepted planning availability in its selected base. No commit, publication
+or execution authority is added by approval of this decomposition. The unrelated application Wayfinder remains
+Open at WF-002 with its external proxy prerequisite unchanged.
+
+### Existing and planned provider-check inventory
+
+Inspected provider: Fight Agent OS at
+[`9ae7681b13c7a4e9ca38218f3576fef838e5973d`](https://github.com/johnnickell/fight-agent-os/tree/9ae7681b13c7a4e9ca38218f3576fef838e5973d).
+The inspected files had no local changes. Sources: its `docs/engineering/BUILD.md`, `BACKEND_TESTS.md`,
+`STANDARDS.md`, `QUALITY.md`, `scripts/build.php`, and planned assessment requirements
+`planning/tickets/00044-TICKET.md` / `00045-TICKET.md`. This is a bounded inventory of the canonical gate and
+identified planned engineering assessments, not an audit of every provider capability. Recheck changes at
+implementation and explain any additional applicable checks before claiming full alignment.
+
+| Provider check or planned capability | Accepted CodeIgniter disposition / owner |
+|---|---|
+| Composer version/manifest/lock/platform checks; read-only planning | Retain existing target checks and explicit warning policy; complete phase/availability and no-registry-access behavior in TASK-00017. No dependency updates or audits hidden in acceptance. |
+| PHP syntax/namespaces, installed Fight Common PHPCS, PHPStan level-7 intent, Deptrac, Rector dry-run | Implement/qualify in TASK-00015 with native paths, actual package contracts, explicit plugin policy and narrow exceptions. Exact versions/resource limits require target evidence. |
+| One complete backend run with coverage and separate suite attribution | Implement in TASK-00016; TASK-00017 retains exactly one invocation. Adapt to the maintainer's combined 100% goal, not the provider's hard inner-layer threshold. |
+| Source/index/content/mode stability on success/failure; concurrency protection; setup checks and diagnostic logs | Implement in TASK-00017 without copying provider gate source or introducing certification authorities. |
+| OpenAPI/public-validation freshness | N/A for this starter: no owned exported metadata/API contract. Revisit with an approved API TASK, not by creating one here. |
+| PostgreSQL identity/reset/migration/concurrency phase | Provider-specific, not transplanted. Preserve current safe SQLite transaction integration and native configuration; future persistence requirements belong to the application Wayfinder. |
+| Pi presentation tests; frontend lock/runtime, TypeScript, lint/format, Vitest, production build, Storybook, browser/a11y/captures | N/A: the target does not own the provider's Pi extension/frontend/catalog source or browser journey. Shared-skill consumption does not make provider suites local product tests. Revisit if an approved owned capability requires these checks. |
+| Planned AI change-quality and PHPUnit-usefulness assessments | Track as deferred upstream shared-workflow capabilities, not an installed target gate. Current review/test-quality criteria still apply. The workflow maintainer revisits integration when the provider ships qualified support; do not duplicate the service, add score gates, claim a pass, or authorize paid calls here. |
+| Target governance, public Composer boundary and safe production-profile checks | Preserve target-specific checks in every rollout; they are not replaced by the provider's different application phases. |
+
+No new framework-support certification, recurring audit lane, deliberately invalid tool fixture, product test of
+tooling, or provider suite is authorized. Planned assessments remain explicit deferrals; completion of the three
+TASKs will not claim that those unavailable upstream services were delivered.

@@ -20,4 +20,7 @@ Legacy TASK-00005 is reserved; see [MIGRATION.md](../MIGRATION.md). [Archived TA
 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | done | — |
 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | done | [TICKET-00010](../tickets/00010-TICKET.md) |
 | [TASK-00014](00014-TASK.md) | Adopt the qualified stable Fight package baseline | done | [TICKET-00008](../tickets/00008-TICKET.md) |
+| [TASK-00015](00015-TASK.md) | Enforce native PHP coding and architecture standards | ready-for-agent | [TICKET-00009](../tickets/00009-TICKET.md) |
+| [TASK-00016](00016-TASK.md) | Collect meaningful coverage in one complete test run | ready-for-agent | [TICKET-00009](../tickets/00009-TICKET.md) |
+| [TASK-00017](00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | ready-for-agent | [TICKET-00009](../tickets/00009-TICKET.md) |
 <!-- /planning:records -->

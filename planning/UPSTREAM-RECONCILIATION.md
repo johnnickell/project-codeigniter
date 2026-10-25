@@ -24,8 +24,9 @@ The reconciliation below preserves historical inputs, not current unresolved que
 Unit-only coverage proposal: run the complete suite exactly once and collect coverage in that run, aiming for
 100% meaningful owned behavior primarily through unit tests with integration contribution allowed. Keep separate
 attribution. Native CodeIgniter remains; Fight Common PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned
-Agent OS checks are the accepted direction. TASK decomposition and target qualification/enforcement remain next,
-not another approval of those broad choices. The original requirement disposition follows as historical evidence.
+Agent OS checks are the accepted direction. Approved TASK-00015/00016/00017 now own target qualification and
+enforcement; decomposition is complete, implementation is not. The original requirement disposition follows as
+historical evidence.
 
 ## Identity collision and requirement disposition
 
