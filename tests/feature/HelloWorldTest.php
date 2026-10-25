@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
+namespace Tests\Feature;
+
 use App\Controllers\Home;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTestTrait;
 
+/**
+ * Class HelloWorldTest
+ */
 final class HelloWorldTest extends CIUnitTestCase
 {
     use ControllerTestTrait;

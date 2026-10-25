@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+/**
+ * Class CURLRequest
+ */
 class CURLRequest extends BaseConfig
 {
     /**
@@ -19,9 +24,8 @@ class CURLRequest extends BaseConfig
      */
     public array $shareConnectionOptions = [
         CURL_LOCK_DATA_CONNECT,
-        CURL_LOCK_DATA_DNS,
+        CURL_LOCK_DATA_DNS
     ];
-
     /**
      * --------------------------------------------------------------------------
      * CURLRequest Share Options

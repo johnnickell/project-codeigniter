@@ -1,3 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var string $title */
+/** @var string $message */
+?>
 <!doctype html>
 <html lang="en">
 <head>

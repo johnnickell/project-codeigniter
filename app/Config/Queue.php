@@ -8,10 +8,13 @@ use CodeIgniter\Queue\Config\Queue as BaseQueue;
 use Fight\Common\Adapter\Messaging\CodeIgniter\CommandMessageJob;
 use Fight\Common\Adapter\Messaging\CodeIgniter\EventMessageJob;
 
+/**
+ * Class Queue
+ */
 final class Queue extends BaseQueue
 {
     public array $jobHandlers = [
         'fight-command' => CommandMessageJob::class,
-        'fight-event'   => EventMessageJob::class,
+        'fight-event'   => EventMessageJob::class
     ];
 }

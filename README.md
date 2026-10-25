@@ -88,9 +88,17 @@ These local checks are not deployment, external exposure, incident-response, or 
 - `./bin/phpunit` runs the PHPUnit application/integration suite in the prepared runtime.
 - `./bin/exec php spark list` runs the CodeIgniter-native Spark console.
 - `./bin/build` is the complete noninteractive quality gate used locally and by GitHub Actions. It checks
-  planning, Composer metadata/platform/runtime policy, governance, application/integration behavior, the safe
-  production profile, and public dependency boundaries.
+  planning, Composer metadata/platform/runtime policy, governance, PHP syntax/strict-types/namespaces, installed
+  Fight Common PHPCS, PHPStan level 7, Deptrac (including unassigned tokens), narrow Rector dry-run, one complete
+  PHPUnit execution, the safe production profile, and public dependency boundaries.
 - `./bin/down` stops the complete Compose runtime.
+
+PHP contributors: read [maintained PHP standards](planning/agents/php-standards.md) for qualified versions,
+scan paths, focused commands, plugin/discovery policy and exact native exceptions. Install the committed dev lock
+explicitly; a production-only installation cannot run the quality gate. The gate never runs `phpcbf` or applies
+Rector changes. It retains exactly one complete PHPUnit invocation; do not prepend focused test runs as phases.
+Coverage remains TASK-00016's outcome and stronger orchestration remains TASK-00017's, not prerequisites deferred
+to rescue these coding checks.
 
 Dependency upgrades and compatibility exploration are explicit maintenance operations, not pre-submit tests.
 Framework-support receipts and their certification machinery were retired by
@@ -107,7 +115,10 @@ Adoption of shared engineering, delivery and Pi/skill conventions is approved by
 CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutually compatible stable releases**
 is the destination; exact releases must be qualified before implementation. TASK-00014 implements the accepted
 stable pair and security refresh with local consumer verification; candidate A has independent Review acceptance
-and applicable non-visual QA PASS, while [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering enforcement is **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
+and applicable non-visual QA PASS, while [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering enforcement is **not complete**:
+[TASK-00015](planning/tasks/00015-TASK.md) now implements locally passing native coding/architecture checks
+(26 tests / 130 assertions); independent Review and applicable QA remain pending. Coverage and stronger
+orchestration remain TASK-00016/00017. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
 substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
 [TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability

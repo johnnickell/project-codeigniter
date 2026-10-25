@@ -15,6 +15,12 @@ cd "$(dirname "$0")/.."
     composer check-platform-reqs --no-interaction
     php scripts/verify-composer-runtime-policy.php
     php scripts/governance-check.php
+    php scripts/check-php.php
+    php vendor/bin/phpcs -s
+    php vendor/bin/phpstan analyse --no-progress --memory-limit=512M
+    php vendor/bin/deptrac analyse --no-progress --report-uncovered --fail-on-uncovered --cache-file=.runs/cache/deptrac.cache
+    php vendor/bin/deptrac debug:unassigned --cache-file=.runs/cache/deptrac.cache
+    php vendor/bin/rector process --dry-run --no-progress-bar
     php vendor/bin/phpunit --no-coverage
 
     CI_ENVIRONMENT=production \

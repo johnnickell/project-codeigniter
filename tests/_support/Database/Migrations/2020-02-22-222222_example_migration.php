@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
+/**
+ * Class ExampleMigration
+ */
 class ExampleMigration extends Migration
 {
     protected $DBGroup = 'tests';
 
+    /**
+     * @inheritDoc
+     */
     public function up(): void
     {
         $this->forge->addField('id');
@@ -19,7 +27,7 @@ class ExampleMigration extends Migration
             'summary'    => ['type' => 'varchar', 'constraint' => 255],
             'created_at' => ['type' => 'datetime', 'null' => true],
             'updated_at' => ['type' => 'datetime', 'null' => true],
-            'deleted_at' => ['type' => 'datetime', 'null' => true],
+            'deleted_at' => ['type' => 'datetime', 'null' => true]
         ]);
 
         $this->forge->addKey('name');
@@ -30,6 +38,9 @@ class ExampleMigration extends Migration
         $this->forge->createTable('factories');
     }
 
+    /**
+     * @inheritDoc
+     */
     public function down(): void
     {
         $this->forge->dropTable('factories');

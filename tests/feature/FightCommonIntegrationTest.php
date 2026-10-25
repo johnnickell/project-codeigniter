@@ -2,33 +2,35 @@
 
 declare(strict_types=1);
 
+namespace Tests\Feature;
+
 use CodeIgniter\Config\Services as CoreServices;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Queue\Events\QueueEvent;
 use CodeIgniter\Queue\Events\QueueEventManager;
 use CodeIgniter\Test\CIUnitTestCase;
-use Fight\Common\Adapter\HttpClient\Guzzle\GuzzleClient;
 use Fight\Common\Adapter\Http\CodeIgniter\JSendResponse;
+use Fight\Common\Adapter\HttpClient\Guzzle\GuzzleClient;
+use Fight\Common\Adapter\Messaging\Event\Sync\SimpleEventDispatcher;
 use Fight\Common\Adapter\Messaging\Handler\CommandMessageHandler;
 use Fight\Common\Adapter\Messaging\Handler\EventMessageHandler;
-use Fight\Common\Adapter\Messaging\Event\Sync\SimpleEventDispatcher;
+use Fight\Common\Application\Messaging\Command\SynchronousCommandBus;
+use Fight\Common\Application\Messaging\Event\EventSubscriber;
 use Fight\Common\Application\Observability\HealthCheck;
 use Fight\Common\Application\Process\ProcessBuilder;
 use Fight\Common\Application\Sms\Message\SmsMessage;
-use Fight\Common\Application\Messaging\Command\SynchronousCommandBus;
-use Fight\Common\Application\Messaging\Event\EventSubscriber;
-use Fight\Common\Domain\Observability\AuditEntry;
-use Fight\Common\Domain\Observability\HealthResult;
-use Fight\Common\Domain\Observability\HealthStatus;
+use Fight\Common\Domain\EventSourcing\Exception\EventMappingException;
+use Fight\Common\Domain\EventSourcing\StreamId;
+use Fight\Common\Domain\Exception\LookupException;
 use Fight\Common\Domain\Messaging\Command\Command;
 use Fight\Common\Domain\Messaging\Command\CommandMessage;
 use Fight\Common\Domain\Messaging\Event\Event;
 use Fight\Common\Domain\Messaging\Event\EventMessage;
 use Fight\Common\Domain\Messaging\MessageId;
 use Fight\Common\Domain\Messaging\Meta;
-use Fight\Common\Domain\EventSourcing\Exception\EventMappingException;
-use Fight\Common\Domain\EventSourcing\StreamId;
-use Fight\Common\Domain\Exception\LookupException;
+use Fight\Common\Domain\Observability\AuditEntry;
+use Fight\Common\Domain\Observability\HealthResult;
+use Fight\Common\Domain\Observability\HealthStatus;
 
 /** @internal */
 final class FightCommonIntegrationTest extends CIUnitTestCase
@@ -40,11 +42,14 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         parent::setUp();
 
         $db = db_connect();
+        // Literal SQLite fixture definitions stay comparable to the queue schema.
+        // phpcs:disable Generic.Files.LineLength
         $db->query('CREATE TABLE IF NOT EXISTS db_queue_jobs (id INTEGER PRIMARY KEY AUTOINCREMENT, queue TEXT NOT NULL, payload TEXT NOT NULL, priority TEXT NOT NULL DEFAULT "default", status INTEGER NOT NULL DEFAULT 0, attempts INTEGER NOT NULL DEFAULT 0, available_at INTEGER NOT NULL, created_at INTEGER NOT NULL)');
         $db->query('CREATE TABLE IF NOT EXISTS db_queue_jobs_failed (id INTEGER PRIMARY KEY AUTOINCREMENT, connection TEXT NOT NULL, queue TEXT NOT NULL, payload TEXT NOT NULL, priority TEXT NOT NULL DEFAULT "default", exception TEXT NOT NULL, failed_at INTEGER NOT NULL)');
         $db->query('CREATE TABLE IF NOT EXISTS db_receipt_transactions (value TEXT NOT NULL)');
+        // phpcs:enable Generic.Files.LineLength
 
-        $this->filesystemPath = WRITEPATH . 'framework-support-journey-' . bin2hex(random_bytes(4));
+        $this->filesystemPath = WRITEPATH.'framework-support-journey-'.bin2hex(random_bytes(4));
     }
 
     protected function tearDown(): void
@@ -73,14 +78,20 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         }, 60));
         $this->assertSame(1, $loads);
 
-        $this->assertSame('Fight CodeIgniter receipt', service('fightTemplateEngine')->render('receipt.twig', ['framework' => 'CodeIgniter']));
+        $this->assertSame(
+            'Fight CodeIgniter receipt',
+            service('fightTemplateEngine')->render('receipt.twig', ['framework' => 'CodeIgniter'])
+        );
         $this->assertNotEmpty(service('fightMailFactory')->generateEmbedId());
         $this->assertInstanceOf(\Symfony\Component\Mailer\MailerInterface::class, service('fightMailer'));
-        $this->assertInstanceOf(\Fight\Common\Application\Mail\Transport\MailTransport::class, service('fightMailTransport'));
+        $this->assertInstanceOf(
+            \Fight\Common\Application\Mail\Transport\MailTransport::class,
+            service('fightMailTransport')
+        );
 
         service('fightFilesystem')->mkdir($this->filesystemPath);
-        service('fightFilesystem')->put($this->filesystemPath . '/receipt.txt', 'passed');
-        $this->assertSame('passed', service('fightFilesystem')->get($this->filesystemPath . '/receipt.txt'));
+        service('fightFilesystem')->put($this->filesystemPath.'/receipt.txt', 'passed');
+        $this->assertSame('passed', service('fightFilesystem')->get($this->filesystemPath.'/receipt.txt'));
     }
 
     public function test_native_transaction_jsend_and_named_route_seams(): void
@@ -105,7 +116,11 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         $this->assertSame(1, db_connect()->table('receipt_transactions')->countAllResults());
         $this->assertSame('/', service('fightUrlGenerator')->generate('home'));
 
-        $response = JSendResponse::success(service('fightResponse'), statusCode: 202, headers: ['X-Consumer' => 'starter']);
+        $response = JSendResponse::success(
+            service('fightResponse'),
+            statusCode: 202,
+            headers: ['X-Consumer' => 'starter']
+        );
         $this->assertSame(202, $response->getStatusCode());
         $this->assertSame('starter', $response->getHeaderLine('X-Consumer'));
         $this->assertSame('application/json; charset=UTF-8', $response->getHeaderLine('Content-Type'));
@@ -113,10 +128,13 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         // This is a composition limitation, not an enabled public API contract.
         $envelopeJson = json_decode($response->getBody(), true, flags: JSON_THROW_ON_ERROR);
         $this->assertSame('{"status":"success","data":null}', $envelopeJson);
-        $this->assertSame(['status' => 'success', 'data' => null], json_decode($envelopeJson, true, flags: JSON_THROW_ON_ERROR));
+        $this->assertSame(
+            ['status' => 'success', 'data' => null],
+            json_decode($envelopeJson, true, flags: JSON_THROW_ON_ERROR)
+        );
     }
 
-    public function test_default_request_event_store_and_synchronous_messaging_services_are_safe_and_configurable(): void
+    public function test_default_request_event_store_and_messaging_require_project_configuration(): void
     {
         $request = service('fightRequest');
         $this->assertSame('GET', $request->getMethod());
@@ -128,11 +146,11 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             $eventStore->append(
                 new StreamId('receipt', 'unconfigured-domain'),
                 0,
-                [EventMessage::create(new ReceiptEvent('requires-project-mapping'))],
+                [EventMessage::create(new ReceiptEvent('requires-project-mapping'))]
             );
             self::fail('The starter must require project-owned event mappings before persisting domain events.');
         } catch (EventMappingException $exception) {
-            $this->assertSame('Unknown event class: ' . ReceiptEvent::class . '.', $exception->getMessage());
+            $this->assertSame('Unknown event class: '.ReceiptEvent::class.'.', $exception->getMessage());
         }
         $this->assertSame([], [...$eventStore->readAllAfter(0, 10)]);
 
@@ -140,7 +158,7 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             service('fightSynchronousCommandBus')->execute(new ReceiptCommand('requires-project-handler'));
             self::fail('The starter must require a project-owned command handler before dispatching a domain command.');
         } catch (LookupException $exception) {
-            $this->assertSame('Handler not defined for command: ' . ReceiptCommand::class, $exception->getMessage());
+            $this->assertSame('Handler not defined for command: '.ReceiptCommand::class, $exception->getMessage());
         }
 
         service('fightSynchronousEventDispatcher')->trigger(new ReceiptEvent('no-project-subscribers'));
@@ -156,7 +174,7 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
 
         $token = service('fightJwtEncoder')->encode(
             ['sub' => 'receipt-user', 'profile' => 'codeigniter'],
-            new \DateTimeImmutable('2030-01-01T00:00:00+00:00'),
+            new \DateTimeImmutable('2030-01-01T00:00:00+00:00')
         );
         $claims = service('fightJwtDecoder')->decode($token);
         $this->assertSame('receipt-user', $claims['sub']);
@@ -167,12 +185,18 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         $this->assertTrue($validation->run(['receipt' => 'approved']));
         $this->assertFalse($validation->run(['receipt' => 'no']));
 
-        $request = service('fightMessageFactory')->createRequest('GET', service('fightUriFactory')->createUri('https://profile.test/receipt'));
+        $request = service('fightMessageFactory')->createRequest(
+            'GET',
+            service('fightUriFactory')->createUri('https://profile.test/receipt')
+        );
         $mockTransport = new \GuzzleHttp\Handler\MockHandler([
             new \GuzzleHttp\Psr7\Response(202, ['X-Profile' => 'native'], 'http-response'),
-            new \GuzzleHttp\Psr7\Response(203, ['X-Profile' => 'psr18'], 'psr18-response'),
+            new \GuzzleHttp\Psr7\Response(203, ['X-Profile' => 'psr18'], 'psr18-response')
         ]);
-        CoreServices::injectMock('fightHttpClient', new GuzzleClient(new \GuzzleHttp\Client(['handler' => $mockTransport])));
+        CoreServices::injectMock(
+            'fightHttpClient',
+            new GuzzleClient(new \GuzzleHttp\Client(['handler' => $mockTransport]))
+        );
 
         $httpResponse = service('fightHttpClient')->send($request);
         $this->assertSame(202, $httpResponse->getStatusCode());
@@ -203,7 +227,9 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
 
         $output = '';
         $process = ProcessBuilder::create([PHP_BINARY, '-r', 'echo "process-complete";'])
-            ->stdout(static function (string $chunk) use (&$output): void { $output .= $chunk; })
+            ->stdout(static function (string $chunk) use (&$output): void {
+                $output .= $chunk;
+            })
             ->getProcess();
         service('fightProcessRunner')->attach($process);
         service('fightProcessRunner')->run();
@@ -211,10 +237,16 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
 
         $ran = false;
         $scheduler = service('fightScheduler');
-        $lockPath = WRITEPATH . 'receipt-scheduled-job.lock';
+        $lockPath = WRITEPATH.'receipt-scheduled-job.lock';
         @unlink($lockPath);
         try {
-            $scheduler->addJob('receipt-scheduled-job', static fn (): bool => true, static function () use (&$ran): void { $ran = true; });
+            $scheduler->addJob(
+                'receipt-scheduled-job',
+                static fn (): bool => true,
+                static function () use (&$ran): void {
+                    $ran = true;
+                }
+            );
             $scheduler->run();
             $this->assertTrue($ran);
         } finally {
@@ -226,7 +258,9 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
     {
         $logger = new RecordingProfileLogger();
         CoreServices::injectMock('logger', $logger);
-        service('fightAuditLog', false)->record(AuditEntry::record('receipt-user', 'profile-verified', ['source' => 'journey']));
+        service('fightAuditLog', false)->record(
+            AuditEntry::record('receipt-user', 'profile-verified', ['source' => 'journey'])
+        );
         $this->assertSame('info', $logger->entries[0]['level']);
         $this->assertSame('audit', $logger->entries[0]['message']);
         $this->assertSame('receipt-user', $logger->entries[0]['context']['actor']);
@@ -241,25 +275,39 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         $this->assertSame([
             ['increment', 'profile.completed', null, ['framework' => 'codeigniter']],
             ['gauge', 'profile.services', 1.0, ['framework' => 'codeigniter']],
-            ['histogram', 'profile.duration', 2.0, ['framework' => 'codeigniter']],
+            ['histogram', 'profile.duration', 2.0, ['framework' => 'codeigniter']]
         ], $metrics->measurements);
 
         $health = service('fightHealthReporter');
         $health->addCheck(new class implements HealthCheck {
-            public function name(): string { return 'receipt'; }
-            public function check(): HealthResult { return new HealthResult('receipt', HealthStatus::healthy(), 'available'); }
+            public function name(): string
+            {
+                return 'receipt';
+            }
+            public function check(): HealthResult
+            {
+                return new HealthResult('receipt', HealthStatus::healthy(), 'available');
+            }
         });
         $report = $health->report();
         $this->assertTrue($report->isHealthy());
         $this->assertSame('receipt', $report->results()[0]->name());
         $this->assertSame('available', $report->results()[0]->message());
 
-        $this->assertInstanceOf(\Fight\Common\Adapter\Sms\Null\NullSmsTransport::class, service('fightSmsTransport', false));
+        $this->assertInstanceOf(
+            \Fight\Common\Adapter\Sms\Null\NullSmsTransport::class,
+            service('fightSmsTransport', false)
+        );
 
         $sms = new RecordingProfileSmsTransport();
         CoreServices::injectMock('fightSmsTransport', $sms);
-        service('fightSmsTransport')->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('safe fallback'));
-        $this->assertSame([['to' => '+15550000001', 'from' => '+15550000002', 'body' => 'safe fallback']], $sms->messages);
+        service('fightSmsTransport')->send(
+            SmsMessage::create('+15550000001', '+15550000002')->setBody('safe fallback')
+        );
+        $this->assertSame(
+            [['to' => '+15550000001', 'from' => '+15550000002', 'body' => 'safe fallback']],
+            $sms->messages
+        );
 
         $hub = new RecordingProfileHub();
         CoreServices::injectMock('fightMercureHub', $hub);
@@ -267,7 +315,7 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         service('fightPrivatePublisher', false)->pushPrivate('https://profile.test/private', 'private update');
         $this->assertSame([
             ['topics' => ['https://profile.test/public'], 'data' => 'public update', 'private' => false],
-            ['topics' => ['https://profile.test/private'], 'data' => 'private update', 'private' => true],
+            ['topics' => ['https://profile.test/private'], 'data' => 'private update', 'private' => true]
         ], $hub->updates);
     }
 
@@ -299,7 +347,7 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         $request = new \GuzzleHttp\Psr7\Request('GET', 'https://profile.test/unavailable');
         $failure = new \GuzzleHttp\Exception\ConnectException('test connection unavailable', $request);
         CoreServices::injectMock('fightHttpClient', new GuzzleClient(new \GuzzleHttp\Client([
-            'handler' => new \GuzzleHttp\Handler\MockHandler([$failure]),
+            'handler' => new \GuzzleHttp\Handler\MockHandler([$failure])
         ])));
         $this->expectException(\Psr\Http\Client\NetworkExceptionInterface::class);
         service('fightPsr18Client', false)->sendRequest($request);
@@ -322,10 +370,10 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
 
         $queueEventListener = static function (QueueEvent $event) use (&$queueEvents): void {
             $queueEvents[] = [
-                'type' => $event->getType(),
-                'queue' => $event->getQueue(),
+                'type'      => $event->getType(),
+                'queue'     => $event->getQueue(),
                 'job_class' => $event->getJobClass(),
-                'exception' => $event->getExceptionMessage(),
+                'exception' => $event->getExceptionMessage()
             ];
         };
         $queueEventTypes = [
@@ -334,7 +382,7 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             QueueEventManager::JOB_PROCESSING_COMPLETED,
             QueueEventManager::JOB_FAILED,
             QueueEventManager::WORKER_STARTED,
-            QueueEventManager::WORKER_STOPPED,
+            QueueEventManager::WORKER_STOPPED
         ];
 
         foreach ($queueEventTypes as $queueEventType) {
@@ -345,13 +393,13 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             MessageId::fromString('11111111-1111-4111-8111-111111111111'),
             new \DateTimeImmutable('2026-09-03T12:34:56+00:00'),
             new ReceiptCommand('command-value'),
-            Meta::create(['trace_id' => 'trace-command', 'source' => 'queue-journey']),
+            Meta::create(['trace_id' => 'trace-command', 'source' => 'queue-journey'])
         );
         $eventMessage = new EventMessage(
             MessageId::fromString('22222222-2222-4222-8222-222222222222'),
             new \DateTimeImmutable('2026-09-03T12:35:00+00:00'),
             new ReceiptEvent('event-value'),
-            Meta::create(['trace_id' => 'trace-event', 'attempt' => 1]),
+            Meta::create(['trace_id' => 'trace-event', 'attempt' => 1])
         );
 
         try {
@@ -360,17 +408,17 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
 
             $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:work', [
                 'fight',
-                'max-jobs' => 2,
+                'max-jobs' => '2'
             ]));
             $this->assertSame(1, db_connect()->table('queue_jobs_failed')->where('queue', 'fight')->countAllResults());
 
             $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:retry', [
                 'all',
-                'queue' => 'fight',
+                'queue' => 'fight'
             ]));
             $this->assertSame(EXIT_SUCCESS, service('commands')->run('queue:work', [
                 'fight',
-                'max-jobs' => 1,
+                'max-jobs' => '1'
             ]));
             $this->assertSame(0, db_connect()->table('queue_jobs_failed')->where('queue', 'fight')->countAllResults());
             $this->assertSame(0, db_connect()->table('queue_jobs')->where('queue', 'fight')->countAllResults());
@@ -380,19 +428,21 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             }
         }
 
+        // Literal envelope/lifecycle tables retain one row per observed delivery.
+        // phpcs:disable Generic.Files.LineLength
         $this->assertSame([[
-            'id' => '11111111-1111-4111-8111-111111111111',
-            'timestamp' => '2026-09-03T12:34:56+00:00',
+            'id'           => '11111111-1111-4111-8111-111111111111',
+            'timestamp'    => '2026-09-03T12:34:56+00:00',
             'payload_type' => ReceiptCommand::class,
-            'payload' => ['value' => 'command-value'],
-            'meta' => ['trace_id' => 'trace-command', 'source' => 'queue-journey'],
+            'payload'      => ['value' => 'command-value'],
+            'meta'         => ['trace_id' => 'trace-command', 'source' => 'queue-journey']
         ]], $commandBus->deliveries);
 
         $this->assertSame([
             ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
             ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
             ['subscriber' => 'first', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
-            ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]],
+            ['subscriber' => 'second', 'id' => '22222222-2222-4222-8222-222222222222', 'timestamp' => '2026-09-03T12:35:00+00:00', 'payload_type' => ReceiptEvent::class, 'payload' => ['value' => 'event-value'], 'meta' => ['trace_id' => 'trace-event', 'attempt' => 1]]
         ], $eventDeliveries);
 
         $this->assertSame([
@@ -408,66 +458,153 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             ['type' => QueueEventManager::WORKER_STARTED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
             ['type' => QueueEventManager::JOB_PROCESSING_STARTED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
             ['type' => QueueEventManager::JOB_PROCESSING_COMPLETED, 'queue' => 'fight', 'job_class' => 'fight-event', 'exception' => null],
-            ['type' => QueueEventManager::WORKER_STOPPED, 'queue' => 'fight', 'job_class' => null, 'exception' => null],
+            ['type' => QueueEventManager::WORKER_STOPPED, 'queue' => 'fight', 'job_class' => null, 'exception' => null]
         ], $queueEvents);
+        // phpcs:enable Generic.Files.LineLength
     }
 }
 
+/**
+ * Class ReceiptCommand
+ */
 final class ReceiptCommand implements Command
 {
-    public function __construct(public readonly string $value) {}
-    public static function fromArray(array $data): static { return new self($data['value']); }
-    public function toArray(): array { return ['value' => $this->value]; }
+    /**
+     * Constructs ReceiptCommand
+     */
+    public function __construct(public readonly string $value)
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function fromArray(array $data): static
+    {
+        return new self($data['value']);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return ['value' => $this->value];
+    }
 }
 
+/**
+ * Class ReceiptEvent
+ */
 final class ReceiptEvent implements Event
 {
-    public function __construct(public readonly string $value) {}
-    public static function fromArray(array $data): static { return new self($data['value']); }
-    public function toArray(): array { return ['value' => $this->value]; }
+    /**
+     * Constructs ReceiptEvent
+     */
+    public function __construct(public readonly string $value)
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public static function fromArray(array $data): static
+    {
+        return new self($data['value']);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return ['value' => $this->value];
+    }
 }
 
+/**
+ * Class RecordingSynchronousCommandBus
+ */
 final class RecordingSynchronousCommandBus implements SynchronousCommandBus
 {
     /** @var list<array<string, mixed>> */
     public array $deliveries = [];
 
+    /**
+     * @inheritDoc
+     */
     public function execute(Command $command): void
     {
         $this->dispatch(CommandMessage::create($command));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function dispatch(CommandMessage $commandMessage): void
     {
         $this->deliveries[] = receiptMessageSnapshot($commandMessage);
     }
 }
 
+/**
+ * Class RecordingReceiptEventSubscriber
+ */
 final class RecordingReceiptEventSubscriber implements EventSubscriber
 {
-    /** @param list<array<string, mixed>> $deliveries */
-    public function __construct(private readonly string $name, private array &$deliveries) {}
+    /**
+     * Constructs RecordingReceiptEventSubscriber
+     *
+     * @param string $name
+     * @param list<array<string, mixed>> $deliveries
+     */
+    public function __construct(
+        private readonly string $name,
+        // External assertions read the referenced array, not the private property.
+        private array &$deliveries // @phpstan-ignore property.onlyWritten
+    ) {
+    }
 
+    /**
+     * @inheritDoc
+     */
     public static function eventRegistration(): array
     {
         return [ReceiptEvent::class => 'record'];
     }
 
+    /**
+     * Records delivered envelopes in the externally asserted collection
+     */
     public function record(EventMessage $eventMessage): void
     {
         $this->deliveries[] = ['subscriber' => $this->name] + receiptMessageSnapshot($eventMessage);
     }
 }
 
+/**
+ * Class FailFirstReceiptEventSubscriber
+ */
 final class FailFirstReceiptEventSubscriber implements EventSubscriber
 {
-    public function __construct(private bool &$failFirstAttempt) {}
+    /**
+     * Constructs FailFirstReceiptEventSubscriber
+     */
+    public function __construct(private bool &$failFirstAttempt)
+    {
+    }
 
+    /**
+     * @inheritDoc
+     */
     public static function eventRegistration(): array
     {
         return [ReceiptEvent::class => ['fail', -100]];
     }
 
+    /**
+     * Rejects the first delivery to exercise retry fan-out
+     */
     public function fail(EventMessage $eventMessage): void
     {
         if ($this->failFirstAttempt) {
@@ -481,88 +618,124 @@ final class FailFirstReceiptEventSubscriber implements EventSubscriber
 function receiptMessageSnapshot(CommandMessage|EventMessage $message): array
 {
     return [
-        'id' => $message->id()->toString(),
-        'timestamp' => $message->timestamp()->format('Y-m-d\\TH:i:sP'),
+        'id'           => $message->id()->toString(),
+        'timestamp'    => $message->timestamp()->format('Y-m-d\\TH:i:sP'),
         'payload_type' => $message->payloadType()->toClassName(),
-        'payload' => $message->payload()->toArray(),
-        'meta' => $message->meta()->toArray(),
+        'payload'      => $message->payload()->toArray(),
+        'meta'         => $message->meta()->toArray()
     ];
 }
 
+/**
+ * Class RecordingProfileLogger
+ */
 final class RecordingProfileLogger extends \Psr\Log\AbstractLogger
 {
     /** @var list<array{level: mixed, message: string|\Stringable, context: array<mixed>}> */
     public array $entries = [];
 
+    /**
+     * @inheritDoc
+     */
     public function log($level, \Stringable|string $message, array $context = []): void
     {
         $this->entries[] = [
-            'level' => $level,
+            'level'   => $level,
             'message' => $message,
-            'context' => $context,
+            'context' => $context
         ];
     }
 }
 
+/**
+ * Class RecordingProfileHub
+ */
 final class RecordingProfileHub implements \Symfony\Component\Mercure\HubInterface
 {
-    /** @var list<array{topics: list<string>, data: string, private: bool}> */
+    /** @var list<array{topics: array<string>, data: string, private: bool}> */
     public array $updates = [];
 
+    /**
+     * @inheritDoc
+     */
     public function getPublicUrl(): string
     {
         return 'https://profile.test/.well-known/mercure';
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getFactory(): ?\Symfony\Component\Mercure\Jwt\TokenFactoryInterface
     {
         return null;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function publish(\Symfony\Component\Mercure\Update $update): string
     {
         $this->updates[] = [
-            'topics' => $update->getTopics(),
-            'data' => $update->getData(),
-            'private' => $update->isPrivate(),
+            'topics'  => $update->getTopics(),
+            'data'    => $update->getData(),
+            'private' => $update->isPrivate()
         ];
 
         return 'profile-update';
     }
 }
 
+/**
+ * Class RecordingProfileMetrics
+ */
 final class RecordingProfileMetrics implements \Fight\Common\Application\Observability\MetricsCollector
 {
     /** @var list<array{string, string, float|null, array<string, string>}> */
     public array $measurements = [];
 
+    /**
+     * @inheritDoc
+     */
     public function increment(string $metric, array $tags = []): void
     {
         $this->measurements[] = ['increment', $metric, null, $tags];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function gauge(string $metric, float $value, array $tags = []): void
     {
         $this->measurements[] = ['gauge', $metric, $value, $tags];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function histogram(string $metric, float $value, array $tags = []): void
     {
         $this->measurements[] = ['histogram', $metric, $value, $tags];
     }
 }
 
+/**
+ * Class RecordingProfileSmsTransport
+ */
 final class RecordingProfileSmsTransport implements \Fight\Common\Application\Sms\Transport\SmsTransport
 {
     /** @var list<array{to: string, from: string, body: string|null}> */
     public array $messages = [];
 
+    /**
+     * @inheritDoc
+     */
     public function send(SmsMessage $message): void
     {
         $this->messages[] = [
-            'to' => $message->getTo(),
+            'to'   => $message->getTo(),
             'from' => $message->getFrom(),
-            'body' => $message->getBody(),
+            'body' => $message->getBody()
         ];
     }
 }

@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 /**
+ * Class WorkerMode
+ *
  * This configuration controls how CodeIgniter behaves when running
  * in worker mode (with FrankenPHP).
  */
@@ -37,9 +41,8 @@ class WorkerMode
         'codeigniter',
         'superglobals',
         'routes',
-        'cache',
+        'cache'
     ];
-
     /**
      * Reset Event Listeners
      *
@@ -51,7 +54,6 @@ class WorkerMode
      * @var list<string>
      */
     public array $resetEventListeners = [];
-
     /**
      * Force Garbage Collection
      *

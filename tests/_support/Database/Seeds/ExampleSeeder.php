@@ -1,11 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
+/**
+ * Class ExampleSeeder
+ */
 class ExampleSeeder extends Seeder
 {
+    /**
+     * @inheritDoc
+     */
     public function run(): void
     {
         $factories = [
@@ -14,22 +22,22 @@ class ExampleSeeder extends Seeder
                 'uid'     => 'test001',
                 'class'   => 'Factories\Tests\NewFactory',
                 'icon'    => 'fas fa-puzzle-piece',
-                'summary' => 'Longer sample text for testing',
+                'summary' => 'Longer sample text for testing'
             ],
             [
                 'name'    => 'Widget Factory',
                 'uid'     => 'widget',
                 'class'   => 'Factories\Tests\WidgetPlant',
                 'icon'    => 'fas fa-puzzle-piece',
-                'summary' => 'Create widgets in your factory',
+                'summary' => 'Create widgets in your factory'
             ],
             [
                 'name'    => 'Evil Factory',
                 'uid'     => 'evil-maker',
                 'class'   => 'Factories\Evil\MyFactory',
                 'icon'    => 'fas fa-book-dead',
-                'summary' => 'Abandon all hope, ye who enter here',
-            ],
+                'summary' => 'Abandon all hope, ye who enter here'
+            ]
         ];
 
         $builder = $this->db->table('factories');

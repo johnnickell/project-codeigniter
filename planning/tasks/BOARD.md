@@ -39,7 +39,9 @@ PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned Agent OS checks.
 [three-TASK decomposition](../tickets/00009-TICKET.md#approved-task-decomposition):
 [TASK-00015](00015-TASK.md) delivers coding/architecture checks, [TASK-00016](00016-TASK.md) delivers single-run
 coverage, and [TASK-00017](00017-TASK.md) strengthens the complete read-only gate after both. Implementation
-has not started; TASK-00015 is first in Board order and its TASK-00014 prerequisite is complete.
+now includes TASK-00015's locally passing coding/architecture rollout (26 tests / 130 assertions), pending
+independent Review and applicable QA. TASK-00016 is the next executable implementation; TASK-00017 remains
+blocked on its coverage outcome. TASK-00014's completed prerequisite edge is preserved.
 The separately authorized [TASK-00013](00013-TASK.md#current-delivery-status) delivered the
 [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#current-delivery-handoff) in the selected
 main checkout; automatic parent completion closes TICKET-00010. Independent Review accepted and applicable QA
@@ -71,14 +73,13 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| 1 | [TASK-00015](00015-TASK.md) | Enforce native PHP coding and architecture standards | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | — | — |
 | 2 | [TASK-00016](00016-TASK.md) | Collect meaningful coverage in one complete test run | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| 3 | [TASK-00017](00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | [TASK-00015](00015-TASK.md), [TASK-00016](00016-TASK.md) | — |
+| 3 | [TASK-00017](00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | [TASK-00016](00016-TASK.md) | — |
 
 ## Needs Info
 
@@ -106,6 +107,7 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 | 1 | [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | [TICKET-00006 — Qualify the latest stable Fight package upgrade](../tickets/00006-TICKET.md) | done | — | [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) |
 | 1 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | — (standalone bug) | done | — | [PR #13](https://github.com/johnnickell/project-codeigniter/pull/13) |
 | 1 | [TASK-00014](00014-TASK.md) | Adopt the qualified stable Fight package baseline | [TICKET-00008 — Upgrade both Fight packages to the qualified latest stable releases](../tickets/00008-TICKET.md) | done | — | [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) |
+| 1 | [TASK-00015](00015-TASK.md) | Enforce native PHP coding and architecture standards | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | done | — | — |
 | 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Specify the CodeIgniter-adapted engineering contract](../tickets/00007-TICKET.md) | done | — | [PR #15](https://github.com/johnnickell/project-codeigniter/pull/15) |
 | 3 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | [TICKET-00010 — Integrate the shared Pi skills and next-work conventions](../tickets/00010-TICKET.md) | done | — | [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) |
 | — | [TASK-00001](00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | [TICKET-00001 — CodeIgniter Starter Product and Walking-Slice Acceptance](../tickets/00001-TICKET.md) | done | — | — |

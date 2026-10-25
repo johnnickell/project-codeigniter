@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 use DateTimeInterface;
 
+/**
+ * Class Cookie
+ */
 class Cookie extends BaseConfig
 {
     /**
@@ -15,7 +20,6 @@ class Cookie extends BaseConfig
      * Set a cookie name prefix if you need to avoid collisions.
      */
     public string $prefix = '';
-
     /**
      * --------------------------------------------------------------------------
      * Cookie Expires Timestamp
@@ -28,7 +32,6 @@ class Cookie extends BaseConfig
      * @var DateTimeInterface|int|string
      */
     public $expires = 0;
-
     /**
      * --------------------------------------------------------------------------
      * Cookie Path
@@ -37,7 +40,6 @@ class Cookie extends BaseConfig
      * Typically will be a forward slash.
      */
     public string $path = '/';
-
     /**
      * --------------------------------------------------------------------------
      * Cookie Domain
@@ -46,7 +48,6 @@ class Cookie extends BaseConfig
      * Set to `.your-domain.com` for site-wide cookies.
      */
     public string $domain = '';
-
     /**
      * --------------------------------------------------------------------------
      * Cookie Secure
@@ -55,7 +56,6 @@ class Cookie extends BaseConfig
      * Cookie will only be set if a secure HTTPS connection exists.
      */
     public bool $secure = false;
-
     /**
      * --------------------------------------------------------------------------
      * Cookie HTTPOnly
@@ -64,7 +64,6 @@ class Cookie extends BaseConfig
      * Cookie will only be accessible via HTTP(S) (no JavaScript).
      */
     public bool $httponly = true;
-
     /**
      * --------------------------------------------------------------------------
      * Cookie SameSite
@@ -88,7 +87,6 @@ class Cookie extends BaseConfig
      * @var ''|'Lax'|'None'|'Strict'
      */
     public string $samesite = 'Lax';
-
     /**
      * --------------------------------------------------------------------------
      * Cookie Raw

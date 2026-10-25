@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\AutoloadConfig;
 
 /**
+ * Class Autoload
+ *
  * -------------------------------------------------------------------
  * AUTOLOADER CONFIGURATION
  * -------------------------------------------------------------------
@@ -38,9 +42,8 @@ class Autoload extends AutoloadConfig
      * @var array<string, list<string>|string>
      */
     public $psr4 = [
-        APP_NAMESPACE => APPPATH,
+        APP_NAMESPACE => APPPATH
     ];
-
     /**
      * -------------------------------------------------------------------
      * Class Map
@@ -59,7 +62,6 @@ class Autoload extends AutoloadConfig
      * @var array<string, string>
      */
     public $classmap = [];
-
     /**
      * -------------------------------------------------------------------
      * Files
@@ -76,7 +78,6 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $files = [];
-
     /**
      * -------------------------------------------------------------------
      * Helpers

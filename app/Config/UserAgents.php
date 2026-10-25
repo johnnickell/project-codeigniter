@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
 /**
+ * Class UserAgents
+ *
  * -------------------------------------------------------------------
  * User Agents
  * -------------------------------------------------------------------
@@ -65,9 +69,8 @@ class UserAgents extends BaseConfig
         'openbsd'         => 'OpenBSD',
         'gnu'             => 'GNU/Linux',
         'unix'            => 'Unknown Unix OS',
-        'symbian'         => 'Symbian OS',
+        'symbian'         => 'Symbian OS'
     ];
-
     /**
      * -------------------------------------------------------------------
      * Browsers
@@ -79,11 +82,11 @@ class UserAgents extends BaseConfig
      * @var array<string, string>
      */
     public array $browsers = [
-        'OPR'    => 'Opera',
-        'Flock'  => 'Flock',
-        'Edge'   => 'Spartan',
-        'Edg'    => 'Edge',
-        'Chrome' => 'Chrome',
+        'OPR'               => 'Opera',
+        'Flock'             => 'Flock',
+        'Edge'              => 'Spartan',
+        'Edg'               => 'Edge',
+        'Chrome'            => 'Chrome',
         // Opera 10+ always reports Opera/9.80 and appends Version/<real version> to the user agent string
         'Opera.*?Version'   => 'Opera',
         'Opera'             => 'Opera',
@@ -109,9 +112,8 @@ class UserAgents extends BaseConfig
         'IBrowse'           => 'IBrowse',
         'Maxthon'           => 'Maxthon',
         'Ubuntu'            => 'Ubuntu Web Browser',
-        'Vivaldi'           => 'Vivaldi',
+        'Vivaldi'           => 'Vivaldi'
     ];
-
     /**
      * -------------------------------------------------------------------
      * Mobiles
@@ -121,16 +123,16 @@ class UserAgents extends BaseConfig
      */
     public array $mobiles = [
         // legacy array, old values commented out
-        'mobileexplorer' => 'Mobile Explorer',
+        'mobileexplorer'       => 'Mobile Explorer',
         // 'openwave'             => 'Open Wave',
         // 'opera mini'           => 'Opera Mini',
         // 'operamini'            => 'Opera Mini',
         // 'elaine'               => 'Palm',
-        'palmsource' => 'Palm',
+        'palmsource'           => 'Palm',
         // 'digital paths'        => 'Palm',
         // 'avantgo'              => 'Avantgo',
         // 'xiino'                => 'Xiino',
-        'palmscape' => 'Palmscape',
+        'palmscape'            => 'Palmscape',
         // 'nokia'                => 'Nokia',
         // 'ericsson'             => 'Ericsson',
         // 'blackberry'           => 'BlackBerry',
@@ -181,44 +183,43 @@ class UserAgents extends BaseConfig
         'openweb'              => 'OpenWeb',
 
         // Operating Systems
-        'android'    => 'Android',
-        'symbian'    => 'Symbian',
-        'SymbianOS'  => 'SymbianOS',
-        'elaine'     => 'Palm',
-        'series60'   => 'Symbian S60',
-        'windows ce' => 'Windows CE',
+        'android'              => 'Android',
+        'symbian'              => 'Symbian',
+        'SymbianOS'            => 'SymbianOS',
+        'elaine'               => 'Palm',
+        'series60'             => 'Symbian S60',
+        'windows ce'           => 'Windows CE',
 
         // Browsers
-        'obigo'         => 'Obigo',
-        'netfront'      => 'Netfront Browser',
-        'openwave'      => 'Openwave Browser',
-        'mobilexplorer' => 'Mobile Explorer',
-        'operamini'     => 'Opera Mini',
-        'opera mini'    => 'Opera Mini',
-        'opera mobi'    => 'Opera Mobile',
-        'fennec'        => 'Firefox Mobile',
+        'obigo'                => 'Obigo',
+        'netfront'             => 'Netfront Browser',
+        'openwave'             => 'Openwave Browser',
+        'mobilexplorer'        => 'Mobile Explorer',
+        'operamini'            => 'Opera Mini',
+        'opera mini'           => 'Opera Mini',
+        'opera mobi'           => 'Opera Mobile',
+        'fennec'               => 'Firefox Mobile',
 
         // Other
-        'digital paths' => 'Digital Paths',
-        'avantgo'       => 'AvantGo',
-        'xiino'         => 'Xiino',
-        'novarra'       => 'Novarra Transcoder',
-        'vodafone'      => 'Vodafone',
-        'docomo'        => 'NTT DoCoMo',
-        'o2'            => 'O2',
+        'digital paths'        => 'Digital Paths',
+        'avantgo'              => 'AvantGo',
+        'xiino'                => 'Xiino',
+        'novarra'              => 'Novarra Transcoder',
+        'vodafone'             => 'Vodafone',
+        'docomo'               => 'NTT DoCoMo',
+        'o2'                   => 'O2',
 
         // Fallback
-        'mobile'     => 'Generic Mobile',
-        'wireless'   => 'Generic Mobile',
-        'j2me'       => 'Generic Mobile',
-        'midp'       => 'Generic Mobile',
-        'cldc'       => 'Generic Mobile',
-        'up.link'    => 'Generic Mobile',
-        'up.browser' => 'Generic Mobile',
-        'smartphone' => 'Generic Mobile',
-        'cellphone'  => 'Generic Mobile',
+        'mobile'               => 'Generic Mobile',
+        'wireless'             => 'Generic Mobile',
+        'j2me'                 => 'Generic Mobile',
+        'midp'                 => 'Generic Mobile',
+        'cldc'                 => 'Generic Mobile',
+        'up.link'              => 'Generic Mobile',
+        'up.browser'           => 'Generic Mobile',
+        'smartphone'           => 'Generic Mobile',
+        'cellphone'            => 'Generic Mobile'
     ];
-
     /**
      * -------------------------------------------------------------------
      * Robots
@@ -257,6 +258,6 @@ class UserAgents extends BaseConfig
         'exabot'               => 'Exabot',
         'bot'                  => 'Generic Bot',
         'crawler'              => 'Generic Crawler',
-        'spider'               => 'Generic Spider',
+        'spider'               => 'Generic Spider'
     ];
 }

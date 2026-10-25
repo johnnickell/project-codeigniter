@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
@@ -9,6 +11,8 @@ use Psr\Log\LogLevel;
 use Throwable;
 
 /**
+ * Class Exceptions
+ *
  * Setup how the exception handler works.
  */
 class Exceptions extends BaseConfig
@@ -23,7 +27,6 @@ class Exceptions extends BaseConfig
      * Default: true
      */
     public bool $log = true;
-
     /**
      * --------------------------------------------------------------------------
      * DO NOT LOG STATUS CODES
@@ -34,7 +37,6 @@ class Exceptions extends BaseConfig
      * @var list<int>
      */
     public array $ignoreCodes = [404];
-
     /**
      * --------------------------------------------------------------------------
      * Error Views Path
@@ -44,8 +46,7 @@ class Exceptions extends BaseConfig
      *
      * Default: APPPATH.'Views/errors'
      */
-    public string $errorViewPath = APPPATH . 'Views/errors';
-
+    public string $errorViewPath = APPPATH.'Views/errors';
     /**
      * --------------------------------------------------------------------------
      * HIDE FROM DEBUG TRACE
@@ -57,7 +58,6 @@ class Exceptions extends BaseConfig
      * @var list<string>
      */
     public array $sensitiveDataInTrace = [];
-
     /**
      * --------------------------------------------------------------------------
      * WHETHER TO THROW AN EXCEPTION ON DEPRECATED ERRORS
@@ -66,7 +66,6 @@ class Exceptions extends BaseConfig
      * thrown. This option also works for user deprecations.
      */
     public bool $logDeprecations = true;
-
     /**
      * --------------------------------------------------------------------------
      * LOG LEVEL THRESHOLD FOR DEPRECATIONS
@@ -98,6 +97,9 @@ class Exceptions extends BaseConfig
      *      if ($exception instanceOf PageNotFoundException) {
      *          return new \App\Libraries\MyExceptionHandler();
      *      }
+     */
+    /**
+     * @inheritDoc
      */
     public function handler(int $statusCode, Throwable $exception): ExceptionHandlerInterface
     {

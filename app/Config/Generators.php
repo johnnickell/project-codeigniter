@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+/**
+ * Class Generators
+ */
 class Generators extends BaseConfig
 {
     /**
@@ -26,9 +31,9 @@ class Generators extends BaseConfig
      * @var array<string, array<string, string>|string>
      */
     public array $views = [
-        'make:cell' => [
+        'make:cell'         => [
             'class' => 'CodeIgniter\Commands\Generators\Views\cell.tpl.php',
-            'view'  => 'CodeIgniter\Commands\Generators\Views\cell_view.tpl.php',
+            'view'  => 'CodeIgniter\Commands\Generators\Views\cell_view.tpl.php'
         ],
         'make:command'      => 'CodeIgniter\Commands\Generators\Views\command.tpl.php',
         'make:config'       => 'CodeIgniter\Commands\Generators\Views\config.tpl.php',
@@ -39,6 +44,6 @@ class Generators extends BaseConfig
         'make:model'        => 'CodeIgniter\Commands\Generators\Views\model.tpl.php',
         'make:seeder'       => 'CodeIgniter\Commands\Generators\Views\seeder.tpl.php',
         'make:validation'   => 'CodeIgniter\Commands\Generators\Views\validation.tpl.php',
-        'session:migration' => 'CodeIgniter\Commands\Generators\Views\migration.tpl.php',
+        'session:migration' => 'CodeIgniter\Commands\Generators\Views\migration.tpl.php'
     ];
 }

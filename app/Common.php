@@ -13,3 +13,5 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+declare(strict_types=1);

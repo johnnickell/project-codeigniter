@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\Filters as BaseFilters;
@@ -13,6 +15,9 @@ use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
 
+/**
+ * Class Filters
+ */
 class Filters extends BaseFilters
 {
     /**
@@ -33,9 +38,8 @@ class Filters extends BaseFilters
         'cors'          => Cors::class,
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
-        'performance'   => PerformanceMetrics::class,
+        'performance'   => PerformanceMetrics::class
     ];
-
     /**
      * List of special required filters.
      *
@@ -52,15 +56,14 @@ class Filters extends BaseFilters
     public array $required = [
         'before' => [
             'forcehttps', // Force Global Secure Requests
-            'pagecache',  // Web Page Caching
+            'pagecache'  // Web Page Caching
         ],
-        'after' => [
+        'after'  => [
             'pagecache',   // Web Page Caching
             'performance', // Performance Metrics
-            'toolbar',     // Debug Toolbar
-        ],
+            'toolbar'     // Debug Toolbar
+        ]
     ];
-
     /**
      * List of filter aliases that are always
      * applied before and after every request.
@@ -76,12 +79,11 @@ class Filters extends BaseFilters
             // 'csrf',
             // 'invalidchars',
         ],
-        'after' => [
+        'after'  => [
             // 'honeypot',
             // 'secureheaders',
-        ],
+        ]
     ];
-
     /**
      * List of filter aliases that works on a
      * particular HTTP method (GET, POST, etc.).
@@ -96,7 +98,6 @@ class Filters extends BaseFilters
      * @var array<string, list<string>>
      */
     public array $methods = [];
-
     /**
      * List of filter aliases that should run on any
      * before or after URI patterns.

@@ -2,7 +2,7 @@
 id: TICKET-00009
 epic: EPIC-00002
 title: Enforce the CodeIgniter-adapted Agent OS engineering contract
-status: ready-for-agent
+status: in-progress
 ---
 
 # Enforce the CodeIgniter-adapted Agent OS engineering contract
@@ -70,7 +70,7 @@ HTTP/authentication/authorization journeys remain with the open Wayfinder owners
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| [TASK-00015](../tasks/00015-TASK.md) | Enforce native PHP coding and architecture standards | ready-for-agent |
+| [TASK-00015](../tasks/00015-TASK.md) | Enforce native PHP coding and architecture standards | done |
 | [TASK-00016](../tasks/00016-TASK.md) | Collect meaningful coverage in one complete test run | ready-for-agent |
 | [TASK-00017](../tasks/00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | ready-for-agent |
 <!-- /planning:children -->
@@ -107,8 +107,9 @@ in the main checkout on a feature branch:
 This made the requirement `ready-for-agent` for TASK decomposition, not done or executable implementation.
 The decision-recording operation allocated no TASKs; the subsequent approved decomposition is recorded below.
 Execution needs separate authority.
-Coverage remains unmeasured and proposed analysis tools remain unqualified in this target. The unavailable dirty
-legacy T-00005 evidence remains a limit. Existing local gate results do not prove adoption of absent tools.
+At this decision's intake, coverage was unmeasured and analysis tools were unqualified. TASK-00015's current
+implementation evidence below now qualifies the coding tools; coverage remains TASK-00016's unfinished outcome.
+The unavailable dirty legacy T-00005 evidence remains a limit. Existing local gate results do not prove adoption of absent tools.
 This unfinished requirement keeps EPIC-00002 open; parent automation and the separate Wayfinder gates stay unchanged.
 
 ### Approved TASK decomposition
@@ -128,9 +129,10 @@ outcome, normally one PR:
    parity, blocked by TASK-00015 and TASK-00016. Both predecessors must already pass their own canonical build;
    this is not a deferred integration rescue.
 
-Decomposition of this accepted requirement is complete; implementation has not started. Use the TASK Board for
-execution selection. The current main checkout/feature branch hosts planning only; the implementation workflow
-must confirm its checkout choice and accepted planning availability in its selected base. No commit, publication
+Decomposition of this accepted requirement is complete. The maintainer subsequently invoked Build for
+TASK-00015 in the main checkout; it now delivers locally passing coding checks on its feature branch, pending
+independent Review and applicable QA. TASK-00016/00017 remain unfinished. Use the TASK Board for execution
+selection; do not treat this first implementation as completion of the requirement. No commit, publication
 or execution authority is added by approval of this decomposition. The unrelated application Wayfinder remains
 Open at WF-002 with its external proxy prerequisite unchanged.
 
@@ -147,7 +149,7 @@ implementation and explain any additional applicable checks before claiming full
 | Provider check or planned capability | Accepted CodeIgniter disposition / owner |
 |---|---|
 | Composer version/manifest/lock/platform checks; read-only planning | Retain existing target checks and explicit warning policy; complete phase/availability and no-registry-access behavior in TASK-00017. No dependency updates or audits hidden in acceptance. |
-| PHP syntax/namespaces, installed Fight Common PHPCS, PHPStan level-7 intent, Deptrac, Rector dry-run | Implement/qualify in TASK-00015 with native paths, actual package contracts, explicit plugin policy and narrow exceptions. Exact versions/resource limits require target evidence. |
+| PHP syntax/namespaces, installed Fight Common PHPCS, PHPStan level-7 intent, Deptrac, Rector dry-run | Implemented and locally passing through TASK-00015 and the canonical gate: actual shipped rules, level 7, native collectors plus unassigned-token rejection, one narrow Rector rule. [Versions, paths, resources and exceptions](../agents/php-standards.md) are qualified; independent Review/QA remain pending. |
 | One complete backend run with coverage and separate suite attribution | Implement in TASK-00016; TASK-00017 retains exactly one invocation. Adapt to the maintainer's combined 100% goal, not the provider's hard inner-layer threshold. |
 | Source/index/content/mode stability on success/failure; concurrency protection; setup checks and diagnostic logs | Implement in TASK-00017 without copying provider gate source or introducing certification authorities. |
 | OpenAPI/public-validation freshness | N/A for this starter: no owned exported metadata/API contract. Revisit with an approved API TASK, not by creating one here. |
@@ -155,6 +157,24 @@ implementation and explain any additional applicable checks before claiming full
 | Pi presentation tests; frontend lock/runtime, TypeScript, lint/format, Vitest, production build, Storybook, browser/a11y/captures | N/A: the target does not own the provider's Pi extension/frontend/catalog source or browser journey. Shared-skill consumption does not make provider suites local product tests. Revisit if an approved owned capability requires these checks. |
 | Planned AI change-quality and PHPUnit-usefulness assessments | Track as deferred upstream shared-workflow capabilities, not an installed target gate. Current review/test-quality criteria still apply. The workflow maintainer revisits integration when the provider ships qualified support; do not duplicate the service, add score gates, claim a pass, or authorize paid calls here. |
 | Target governance, public Composer boundary and safe production-profile checks | Preserve target-specific checks in every rollout; they are not replaced by the provider's different application phases. |
+
+### TASK-00015 implementation recheck — 2026-10-25
+
+Rechecked the inventory's current provider sources at clean
+[`642ba907f4c2cfbf651ffc2fafb9038f8286085d`](https://github.com/johnnickell/fight-agent-os/tree/642ba907f4c2cfbf651ffc2fafb9038f8286085d):
+`BUILD.md`, `BACKEND_TESTS.md`, `STANDARDS.md`, `QUALITY.md`, `scripts/build.php` and TICKET-00044/00045.
+The coding phases remain applicable and are now implemented, not only proposed. The provider's finite PHPStan
+memory policy is retained as a 512M allowance, with an actual target cold peak of 172.5 MB. Native framework and
+public-package boundary checks remain target-specific. Current provider infrastructure/frontend/Pi/PostgreSQL
+phases and planned advisors do not change the table's N/A/deferred ownership. No paid advisor call was made;
+TICKET-00044/00045 remain planned capabilities, not missing mandatory local tools.
+
+TASK-00015 resolves 23 added dev/transitive packages without changing any of the 80 baseline package entries.
+Native shared composition and all existing tests remain, with 26 tests / 130 assertions in the full gate. It adds
+no coverage driver or percentage claim. TASK-00016 still owns the single coverage-producing suite execution;
+TASK-00017 owns stronger orchestration/nonmutation/concurrency, and depends on both completed implementations.
+This TICKET stays unfinished and EPIC-00002 stays `needs-info`. Independent acceptance, hosted checks and delivery
+remain separate from TASK-00015's local implementation.
 
 No new framework-support certification, recurring audit lane, deliberately invalid tool fixture, product test of
 tooling, or provider suite is authorized. Planned assessments remain explicit deferrals; completion of the three

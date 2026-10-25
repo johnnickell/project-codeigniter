@@ -1,0 +1,76 @@
+services:
+    -
+        class: Quality\NativeServiceTypes
+        tags: [phpstan.broker.dynamicFunctionReturnTypeExtension]
+    -
+        class: Quality\SharedServiceTypes
+        tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+parameters:
+    dynamicConstantNames:
+        - ENVIRONMENT
+        - CI_DEBUG
+        - PHP_VERSION_ID
+        - SHOW_DEBUG_BACKTRACE
+    excludePaths:
+        analyse:
+            - app/Views/errors/html/error_exception.php
+            - app/Views/errors/html/error_400.php
+            - app/Views/errors/html/error_404.php
+            - app/Views/errors/html/production.php
+    ignoreErrors:
+        # Native Throwable trace rows carry paired file/line and class/type fields at runtime.
+        -
+            identifier: offsetAccess.notFound
+            path: app/Views/errors/cli/error_exception.php
+            count: 2
+        # Retain native defensive rendering for absent fields / non-list historical traces.
+        -
+            identifier: isset.offset
+            path: app/Views/errors/cli/error_exception.php
+            count: 1
+        -
+            identifier: arrayValues.list
+            path: app/Views/errors/cli/error_exception.php
+            count: 1
+        # Native compatibility guards intentionally also work below this locked runtime.
+        -
+            identifier: if.alwaysFalse
+            path: public/index.php
+            count: 1
+        -
+            identifier: if.alwaysFalse
+            path: spark
+            count: 1
+        -
+            identifier: smaller.alwaysFalse
+            path: scripts/verify-composer-runtime-policy.php
+            count: 1
+        -
+            identifier: greaterOrEqual.alwaysFalse
+            path: scripts/verify-composer-runtime-policy.php
+            count: 1
+        -
+            identifier: booleanOr.alwaysFalse
+            path: scripts/verify-composer-runtime-policy.php
+            count: 1
+        # The scaffold explicitly checks runtime bootstrap; static constants already exist.
+        -
+            identifier: method.alreadyNarrowedType
+            path: tests/unit/HealthTest.php
+            count: 1
+    level: 7
+    paths:
+        - app
+        - tests
+        - scripts
+        - public/index.php
+        - spark
+        - preload.php
+        - rector.php
+    tmpDir: .runs/cache/phpstan
+    scanFiles:
+        - vendor/codeigniter4/framework/system/Common.php
+    scanDirectories:
+        - vendor/codeigniter4/framework/system/ThirdParty/Kint
+    bootstrapFiles:
+        - scripts/analysis-bootstrap.php
