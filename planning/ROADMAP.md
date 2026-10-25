@@ -36,16 +36,17 @@ requirements are tracked, not marked complete or silently enforced.
   decomposition awaits maintainer acceptance of TASK-00010's delivered proposal decisions D1–D4: competing
   coverage policies, native scope/exceptions, sourced candidate tools/gate phases and coordination. Target tool
   installation/scans and numeric coverage remain unverified, not implied by the current gate.
-- [TICKET-00010](tickets/00010-TICKET.md#decisions-and-progress): decomposition complete through approved
-  [TASK-00013](tasks/00013-TASK.md), the bounded runtime-ignore/binding/routing-verification chore. Implementation
-  remains unstarted and requires separate authorization. The seven approved planning paths are included with
-  TASK-00009 by explicit instruction, not implemented. Use `/skill:next` for Board-based selection;
-  TASK-00013 remains independent at order 3 and unstarted. Do not substitute it for TASK-00010's independent
-  review/QA or the maintainer's package/enforcement decisions.
+- [TICKET-00010](tickets/00010-TICKET.md#current-delivery-handoff): separately authorized
+  [TASK-00013](tasks/00013-TASK.md#current-delivery-status) delivered the bounded runtime-ignore/binding/
+  routing-verification slice and closes its parent automatically. Independent Review accepted and applicable QA
+  passed the acceptance candidate; [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) is open
+  against `develop` for human review/merge. Hosted checks are optional and unrun. Native selection/resume and
+  Herdr child/log qualification were not performed. The original seven planning paths were included with
+  TASK-00009 by explicit instruction; implementation authority came later from the user's Build invocation.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
-Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00013 is now an
-executable Board row, but package/enforcement handoffs remain planning prerequisites rather than ready TASKs.
+Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00013's local
+completion leaves no ready implementation TASK; package/enforcement handoffs remain planning prerequisites.
 No full adoption decomposition or completion is claimed; the unrelated application Wayfinder stays gated.
 
 ## EPIC status

@@ -15,5 +15,5 @@ these records. Use `_TICKET_TEMPLATE.md`; [archived TICKETs](archive/README.md) 
 | [TICKET-00007](00007-TICKET.md) | Specify the CodeIgniter-adapted engineering contract | done | [EPIC-00002](../epics/00002-EPIC.md) |
 | [TICKET-00008](00008-TICKET.md) | Upgrade both Fight packages to the qualified latest stable releases | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
 | [TICKET-00009](00009-TICKET.md) | Enforce the CodeIgniter-adapted Agent OS engineering contract | needs-info | [EPIC-00002](../epics/00002-EPIC.md) |
-| [TICKET-00010](00010-TICKET.md) | Integrate the shared Pi skills and next-work conventions | ready-for-agent | [EPIC-00002](../epics/00002-EPIC.md) |
+| [TICKET-00010](00010-TICKET.md) | Integrate the shared Pi skills and next-work conventions | done | [EPIC-00002](../epics/00002-EPIC.md) |
 <!-- /planning:records -->

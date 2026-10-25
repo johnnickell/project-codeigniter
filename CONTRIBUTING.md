@@ -5,6 +5,11 @@ Create or update the approved TASK, update behavior documentation, and run `./bi
 Record status/priority in metadata, then run `./bin/planning-check --write` and `./bin/planning-check`; do not edit
 generated Board/index rows. See `planning/tasks/BOARD.md` for execution and `planning/MIGRATION.md` for old IDs.
 
+For shared Pi skills, use the [target workflow binding](planning/agents/shared-workflows.md) for capability
+resolution, native selection, retained RPC resume and independent delivery boundaries. `next` recommends only;
+explicit `/skill:build` coordinates delivery, while `./bin/build` only verifies locally. Runtime observations are
+not canonical Review/QA evidence. Do not install resources, enroll or run paid probes as implicit setup.
+
 For a fresh checkout, use `./bin/up` followed by `./bin/composer install`; PHP and Composer run in the repository
 Docker service, so host PHP and Composer versions are not prerequisites. The host planning check requires Python 3
 and Git. Keep the runtime running for `./bin/phpunit` and `./bin/build`; neither command installs dependencies.

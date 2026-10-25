@@ -85,8 +85,13 @@ and the [adoption EPIC](planning/epics/00002-EPIC.md) for scope and unresolved d
 
 Adoption of shared engineering, delivery and Pi/skill conventions is approved by default, with explicit
 CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutually compatible stable releases**
-is the destination; exact releases must be qualified before implementation. Package upgrades, engineering
-enforcement and Pi compatibility work are **not complete**. The [current planning handoffs](planning/ROADMAP.md#current-decomposition-handoffs)
+is the destination; exact releases must be qualified before implementation. Package upgrades and engineering
+enforcement are **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
+substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
+[TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability
+qualification remains limited as recorded there.
+The [current planning handoffs](planning/ROADMAP.md#current-decomposition-handoffs)
 separate investigation from implementation. Planning migration and certification removal do not upgrade the
 development candidates in `composer.lock`.
 

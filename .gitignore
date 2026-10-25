@@ -63,7 +63,9 @@ Vagrantfile
 /writable/debugbar/*
 !/writable/debugbar/index.html
 
-/var
+# Pi operator sessions and optional native workspace ownership (not application var/).
+/var/terminal/
+/var/herdr-workspace/
 php_errors.log
 
 #-------------------------

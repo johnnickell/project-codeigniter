@@ -31,12 +31,17 @@ packages, tools, runtime or gates. Its local verification, independent review ac
 are recorded in the TASK; PR publication and human review/merge remain separate delivery facts. TASK-00009 is
 merged in the selected base.
 
-Actual upgrade, engineering enforcement and shared Pi/skill compatibility remain in
+Actual upgrade, engineering enforcement and the bounded shared Pi/skill compatibility requirement are tracked in
 [TICKET-00008](tickets/00008-TICKET.md), [TICKET-00009](tickets/00009-TICKET.md) and
 [TICKET-00010](tickets/00010-TICKET.md). The first awaits acceptance of the exact release/migration/security
 proposal; the second awaits maintainer acceptance of the delivered contract's explicit D1–D4 choices before
-implementation decomposition; the third is decomposed into
-approved [TASK-00013](tasks/00013-TASK.md), with implementation still unstarted. No upgrade/enforcement TASK
+implementation decomposition; the third is locally implemented through
+[TASK-00013](tasks/00013-TASK.md) and the [target binding](agents/shared-workflows.md). Its parent closes
+automatically; independent Review accepted and applicable QA passed for the accepted candidate, and
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Hosted checks
+are optional and unrun. Source walkthroughs and safe discovery/status checks are labeled separately from
+unavailable live native selection/resume and child/log qualification; this is not full Pi capability certification.
+No upgrade/enforcement TASK
 is executable. Investigation completion may close its narrowed parent, but cannot close the broader adoption
 EPIC while these requirements remain unfinished. Use the
 [Roadmap handoffs](ROADMAP.md#current-decomposition-handoffs), not child counts, to select the planning phase.

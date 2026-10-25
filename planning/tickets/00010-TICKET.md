@@ -2,7 +2,7 @@
 id: TICKET-00010
 epic: EPIC-00002
 title: Integrate the shared Pi skills and next-work conventions
-status: ready-for-agent
+status: done
 ---
 
 # Integrate the shared Pi skills and next-work conventions
@@ -74,10 +74,31 @@ certification assumptions remain non-applicable to this starter unless separatel
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| [TASK-00013](../tasks/00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | ready-for-agent |
+| [TASK-00013](../tasks/00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | done |
 <!-- /planning:children -->
 
 ## Decisions and progress
+
+### Current delivery handoff
+
+[TASK-00013](../tasks/00013-TASK.md#current-delivery-status) has independent technical Review acceptance and
+applicable QA PASS for acceptance candidate `dffd95ad9595d0bf49ab86539dcde058654b2de8`.
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) is open against `develop` and awaits human
+review and merge. Hosted checks are optional and unrun. This records delivery separately from the requirement's
+automatic completion; no merge, release, deployment, native child/log qualification, or broader EPIC completion
+is implied. EPIC-00002 remains needs-info under the unfinished TICKET-00008/00009 decisions.
+
+### Historical implementation handoff
+
+Separately authorized Build TASK-00013 used the selected main checkout and delivers the
+[target binding](../agents/shared-workflows.md), narrow runtime ignores and labeled routing/observation evidence.
+[TASK-00013](../tasks/00013-TASK.md#current-implementation-and-local-verification) records implementation/local
+verification; automatic parent completion closes this requirement in the same operation. Independent Review,
+applicable QA and publication remain outstanding, with hosted checks optional and unrun. No live native
+selection/resume, Herdr child/log or visual qualification is claimed. EPIC-00002 remains needs-info under the
+unfinished TICKET-00008/00009 decisions. Next: independent `/skill:review TASK-00013`, not a parent assessment.
+
+### Historical decomposition checkpoint
 
 Requirement scope is approved through [TASK-00011](../tasks/00011-TASK.md)'s planning amendment. The maintainer
 accepted the single compatibility slice and selected the main checkout for recording
