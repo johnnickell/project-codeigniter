@@ -16,6 +16,8 @@ path above takes precedence over broad orientation reads; it does not waive engi
 
 Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/README.md`,
 `planning/CONVENTIONS.md`, and applicable focused instructions in `planning/agents/` before changing behavior.
+For installed shared Pi skills, apply the concise [target workflow binding](planning/agents/shared-workflows.md)
+through provider references; resolve resources from actual session metadata/settings, not private paths.
 
 ## Planning and authority
 

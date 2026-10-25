@@ -18,5 +18,5 @@ Legacy TASK-00005 is reserved; see [MIGRATION.md](../MIGRATION.md). [Archived TA
 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | done | [TICKET-00007](../tickets/00007-TICKET.md) |
 | [TASK-00011](00011-TASK.md) | Amend the CodeIgniter adoption plan | done | — |
 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | done | — |
-| [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | ready-for-agent | [TICKET-00010](../tickets/00010-TICKET.md) |
+| [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | done | [TICKET-00010](../tickets/00010-TICKET.md) |
 <!-- /planning:records -->
