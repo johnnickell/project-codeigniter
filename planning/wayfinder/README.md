@@ -17,9 +17,10 @@ accepted, but it remains Open pending the Fight Agent OS proxy contract (ingress
 ownership). Worktree-specific runtimes are deferred; no implementation or decision closure is claimed.
 The map's older v0.2.0 package-audit baseline needs its owner's acceptance of the
 [dated reconciliation proposal](research/2026-10-24-latest-stable-fight-baseline.md) from completed investigation
-[TICKET-00006](../tickets/00006-TICKET.md). Common v1.4.0 / AccessControl v0.8.0 installability is qualified in
-isolated scratch, not adopted by this project or accepted as the map's new baseline. Actual upgrade remains
-[TICKET-00008](../tickets/00008-TICKET.md), including the narrow security-refresh decision. No Wayfinder gate,
+[TICKET-00006](../tickets/00006-TICKET.md). The maintainer subsequently accepted Common v1.4.0 / AccessControl
+v0.8.0 and the narrow HttpFoundation 8.1.9 refresh under [TICKET-00008](../tickets/00008-TICKET.md).
+[TASK-00014](../tasks/00014-TASK.md) implements that baseline with local consumer verification; independent
+Review and applicable QA remain outstanding. This is not acceptance of the map's new audit baseline. No Wayfinder gate,
 status, dependency or frontier changes. Repository-wide current priority and unfinished adoption are visible on
 the [TASK Board](../tasks/BOARD.md) and [Roadmap](../ROADMAP.md).
 

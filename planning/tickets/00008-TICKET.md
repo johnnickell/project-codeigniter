@@ -2,7 +2,7 @@
 id: TICKET-00008
 epic: EPIC-00002
 title: Upgrade both Fight packages to the qualified latest stable releases
-status: needs-info
+status: done
 ---
 
 # Upgrade both Fight packages to the qualified latest stable releases
@@ -40,10 +40,13 @@ migration evidence before execution; preserve its identity and do not run compet
 
 ## Validation and permissions
 
-Exact versions, migration scope and executable TASK acceptance remain pending qualification. The approved
-planning direction is not permission to modify dependencies in TASK-00009 or this planning amendment. Reject
-unsatisfied platform constraints, incompatible transaction capabilities and unsupported behavior claims. Use
-repository-owned tooling; safe intercepted transports only, no production credentials or live provider effects.
+The maintainer accepted Common 1.4.0 / AccessControl 0.8.0, the narrow HttpFoundation 8.1.9 refresh and the
+bounded consumer upgrade/verification scope through approval of the single-TASK decomposition. Execution
+belongs to [TASK-00014](../tasks/00014-TASK.md), not TASK-00009 or the preceding planning operation. TASK-00014
+now records completed implementation and required local verification; independent Review and QA remain pending.
+Reject unsatisfied platform constraints, incompatible transaction capabilities and unsupported behavior claims.
+Recheck releases before implementation and obtain a decision for material scope changes. Use repository-owned
+tooling; safe intercepted transports only, no production credentials or live provider effects.
 
 ## Acceptance and evidence
 
@@ -60,7 +63,7 @@ repository-owned tooling; safe intercepted transports only, no production creden
 <!-- planning:children -->
 | ID | Title | Status |
 |---|---|---|
-| None | — | — |
+| [TASK-00014](../tasks/00014-TASK.md) | Adopt the qualified stable Fight package baseline | done |
 <!-- /planning:children -->
 
 ## Decisions and progress
@@ -71,13 +74,19 @@ TASK-00009 now supplies the locally verified
 [2026-10-24 report](../wayfinder/research/2026-10-24-latest-stable-fight-baseline.md): latest Common v1.4.0 and
 AccessControl v0.8.0 install together, with released transaction type fit and bounded migration/verification scope.
 The two-package-only copied-lock solve retains inherited HttpFoundation 8.1.6 / CVE-2026-108082; a narrow targeted
-8.1.9 refresh resolves that advisory without other package changes. Project dependencies remain unchanged.
+8.1.9 refresh resolves that advisory without other package changes. Project dependencies remained unchanged by that investigation.
 Independent review accepted and applicable QA passed for the investigation; neither is acceptance of a migration.
 
-This TICKET remains `needs-info` until the maintainer accepts the exact pair, narrow security refresh and
-consumer scope. Then use TASK decomposition for a complete upgrade slice, splitting only for evidenced
-compatibility boundaries and rechecking release availability. No upgrade TASK or package update is authorized
-by investigation completion; broader application journeys and Wayfinder decisions remain separate.
+The maintainer subsequently approved the one-TASK draft, including the exact pair, narrow security refresh and
+consumer scope, and selected the current checkout for recording it. [TASK-00014](../tasks/00014-TASK.md) is the
+complete upgrade slice: stable manifest/lock, necessary native composition, meaningful integration/failure-path
+verification and documentation in one PR. No evidenced compatibility boundary warrants a split. Its completed
+TASK-00009 dependency is preserved. TASK-00014 subsequently rechecked releases on 2026-10-25 and installed the exact stable pair plus HttpFoundation
+8.1.9, with exactly three updated package entries and no other dependency drift. Focused tests and the full local
+gate pass (26 tests / 127 assertions), with explicit transaction/provider/JSend/StreamId limits in the TASK.
+Native service factories need no adaptation. Candidate A has independent Review acceptance and applicable non-visual QA PASS; [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Broader application journeys and Wayfinder decisions remain separate.
 
-Keeping this unfinished TICKET without children prevents investigation rollup from closing EPIC-00002; automatic
-parent completion is not waived. A blocked qualification result leaves this requirement unresolved.
+TASK decomposition and accepted-scope local implementation/verification are complete. Automatic parent
+completion closes this TICKET with TASK-00014 in the same operation; that does not assert independent acceptance
+or delivery. EPIC-00002 remains open while TICKET-00009's engineering enforcement is unfinished.
+Planning approval is not execution, independent Review, QA or publication authority.

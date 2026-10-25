@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-$expectedWarning = '- The package "johnnickell/fight-common" is pointing to a commit-ref, this is bad practice and can cause unforeseen issues.';
+// TASK-00014 deliberately pins the qualified release; do not hide other warnings.
+$expectedWarning = '- require.johnnickell/fight-common : exact version constraints (1.4.0) should be avoided if the package follows semantic versioning';
 
 $process = proc_open(
     ['composer', 'validate'],
@@ -46,7 +47,7 @@ foreach (preg_split('/\R/', $output) as $line) {
 
 if ($warnings !== [$expectedWarning]) {
     throw new RuntimeException(sprintf(
-        'Composer validation warnings must contain only the temporary Fight Common candidate pin warning; received: %s',
+        'Composer validation warnings must contain only the accepted Fight Common exact stable version warning; received: %s',
         json_encode($warnings, JSON_THROW_ON_ERROR),
     ));
 }

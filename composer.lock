@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94ea223f52be471a3b6e4ca1781344bc",
+    "content-hash": "b712c12249af4b042e20f605fe01c0bf",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -843,20 +843,20 @@
         },
         {
             "name": "johnnickell/fight-access-control",
-            "version": "dev-develop",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/johnnickell/fight-access-control",
-                "reference": "7f55c0adb8fade06d03ec92212111eb6060d48ec"
+                "url": "https://github.com/johnnickell/fight-access-control.git",
+                "reference": "319738255e682d587642b67856039f882b9588d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/7f55c0adb8fade06d03ec92212111eb6060d48ec",
-                "reference": "7f55c0adb8fade06d03ec92212111eb6060d48ec",
+                "url": "https://api.github.com/repos/johnnickell/fight-access-control/zipball/319738255e682d587642b67856039f882b9588d6",
+                "reference": "319738255e682d587642b67856039f882b9588d6",
                 "shasum": ""
             },
             "require": {
-                "johnnickell/fight-common": "^1.1",
+                "johnnickell/fight-common": "^1.3",
                 "php": ">=8.5"
             },
             "require-dev": {
@@ -866,9 +866,12 @@
                 "rector/rector": "^2.4",
                 "slevomat/coding-standard": "^8.27",
                 "squizlabs/php_codesniffer": "^4.0",
-                "symfony/process": "^7.0"
+                "symfony/process": "^7.0",
+                "zircote/swagger-php": "^6.5"
             },
-            "default-branch": true,
+            "suggest": {
+                "zircote/swagger-php": "Generate a consumer-owned OpenAPI document from the opt-in openapi/ component catalog."
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -876,29 +879,29 @@
                     "Fight\\AccessControl\\Application\\": "src/Application"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Fight\\Test\\AccessControl\\": "tests"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "Framework-neutral identity, credential, session, authorization, and account-lifecycle contracts",
-            "time": "2026-09-11T05:15:03+00:00"
+            "support": {
+                "issues": "https://github.com/johnnickell/fight-access-control/issues",
+                "source": "https://github.com/johnnickell/fight-access-control/tree/v0.8.0"
+            },
+            "time": "2026-10-21T17:59:41+00:00"
         },
         {
             "name": "johnnickell/fight-common",
-            "version": "dev-develop",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/johnnickell/fight-common",
-                "reference": "fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911"
+                "url": "https://github.com/johnnickell/fight-common.git",
+                "reference": "87b9580c072f3149d574e09865daa79620c92118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911",
-                "reference": "fad24ae9fdcf4ac00fa55c59ef7d35f7c7531911",
+                "url": "https://api.github.com/repos/johnnickell/fight-common/zipball/87b9580c072f3149d574e09865daa79620c92118",
+                "reference": "87b9580c072f3149d574e09865daa79620c92118",
                 "shasum": ""
             },
             "require": {
@@ -946,6 +949,7 @@
                 "symfony/messenger": "^8.1",
                 "symfony/process": "^8.1",
                 "symfony/routing": "^8.1",
+                "symfony/yaml": "^8.1",
                 "twig/twig": "^3.0",
                 "twilio/sdk": "^8.0",
                 "yiisoft/db": "^2.0",
@@ -964,6 +968,7 @@
                 "doctrine/dbal": "Required by the custom doctrine data types",
                 "doctrine/orm": "Required by the canonical Doctrine transactional unit of work, legacy 1.x unit of work, audit repository, and base repository",
                 "dragonmantank/cron-expression": "Required by the Scheduler for cron expression parsing",
+                "ext-sodium": "Required by the optional Sodium MCP ordinary interaction state protector",
                 "guzzlehttp/guzzle": "Required by the guzzle http client adapter",
                 "guzzlehttp/promises": "Required by the guzzle http client adapter",
                 "guzzlehttp/psr7": "Required by the guzzle http client adapter",
@@ -985,6 +990,7 @@
                 "symfony/messenger": "Required by the async messenger command bus and event dispatcher",
                 "symfony/process": "Required by the Symfony process runner adapter",
                 "symfony/routing": "Required for the URL generator",
+                "symfony/yaml": "Required by the optional bounded MCP Skill frontmatter parser (8.1 or later)",
                 "twig/twig": "Required by the Twig template engine adapter",
                 "twilio/sdk": "Required by the Twilio SMS transport adapter",
                 "yiisoft/db": "Required by the Yii DB transactional unit of work adapter",
@@ -996,28 +1002,26 @@
                 "yiisoft/router-fastroute": "Required to run the Yii URL generator adapter conformance tests",
                 "yiisoft/view": "Required to evaluate Yii View against the shared Fight templating conformance suite"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/Domain/functions.php"
+                ],
                 "psr-4": {
                     "Fight\\Common\\": "src",
                     "Fight\\Test\\Common\\TestCase\\": "tests/TestCase"
-                },
-                "files": [
-                    "src/Domain/functions.php"
-                ]
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Fight\\Release\\": "release/src",
-                    "Fight\\Test\\Common\\": "tests"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "A shared PHP library for Hexagonal Architecture, CQRS, and reusable domain primitives",
-            "time": "2026-09-13T02:46:17+00:00"
+            "support": {
+                "issues": "https://github.com/johnnickell/fight-common/issues",
+                "source": "https://github.com/johnnickell/fight-common/tree/v1.4.0"
+            },
+            "time": "2026-10-12T02:51:09+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -2682,16 +2686,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v8.1.6",
+            "version": "v8.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "093b78326f649c3a9db922b9f17123b6aeb3b8fb"
+                "reference": "7850897fb8659f98491b03be79ac48600bdaf9ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/093b78326f649c3a9db922b9f17123b6aeb3b8fb",
-                "reference": "093b78326f649c3a9db922b9f17123b6aeb3b8fb",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/7850897fb8659f98491b03be79ac48600bdaf9ab",
+                "reference": "7850897fb8659f98491b03be79ac48600bdaf9ab",
                 "shasum": ""
             },
             "require": {
@@ -2739,7 +2743,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v8.1.6"
+                "source": "https://github.com/symfony/http-foundation/tree/v8.1.9"
             },
             "funding": [
                 {
@@ -2759,7 +2763,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-30T20:10:55+00:00"
+            "time": "2026-10-08T16:57:43+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -5572,19 +5576,9 @@
             "time": "2025-11-17T20:03:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "johnnickell/fight-common",
-            "version": "dev-develop",
-            "alias": "1.2.0-dev",
-            "alias_normalized": "1.2.0.0-dev"
-        }
-    ],
-    "minimum-stability": "dev",
-    "stability-flags": {
-        "johnnickell/fight-access-control": 20,
-        "johnnickell/fight-common": 20
-    },
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -6,7 +6,7 @@ Prepare the CodeIgniter runtime and locked dependencies before testing:
 ./bin/up
 ./bin/composer install --no-interaction --prefer-dist --no-progress
 ./bin/phpunit
-./bin/phpunit --filter FightCommonIntegrationTest
+./bin/phpunit --filter 'FightCommonIntegrationTest|FightTransactionIntegrationTest|HelloWorldTest'
 ./bin/build
 ```
 
@@ -19,7 +19,18 @@ Keep tests of application behavior and important consumer/package integration ou
 `FightCommonIntegrationTest` exercises configured services, transaction commit/rollback, database queue
 command/event envelopes and retries, local storage/process/scheduling effects, and safe provider transports.
 `HelloWorldTest` proves the public home response. Named URL generation uses the real `home` route, not a
-certification-only production route.
+certification-only production route. On Common 1.4.0 / AccessControl 0.8.0 / HttpFoundation 8.1.9, the
+consumer tests also verify StreamId tuple deduplication/key replacement and canonical JSON, selected JSend
+status/headers/body, and intercepted PSR-18 network failure. The released JSend adapter double-encodes its envelope
+with this CodeIgniter version; tests disclose that inherited limitation, not a top-level JSend object guarantee.
+
+`FightTransactionIntegrationTest` uses the real selected SQLite connection to prove the factory's connection
+choice, callback result after commit, original-error rollback, nested rejection, and synchronous publication after
+commit (subscriber failure leaves committed state intact). Connection doubles separately cover false versus
+thrown begin/status/commit, closed rejection, and cleanup failures without masking the original error. They prove
+adapter branching only, not database commit uncertainty, SQL concurrency, shared AccessControl repositories or
+safe retry. A thrown commit does not guarantee rollback/reset; connection recovery and authoritative-state
+reconciliation remain required. No AccessControl handler/repository journey is composed or accepted.
 
 Do not test receipt machinery, Composer output parsing, quality-tool behavior, build wrappers, or tests themselves
 in the product suite. Do not manufacture fake Composer executables or invalid tool fixtures. TASK-00007 removes the
@@ -27,7 +38,9 @@ framework-support receipt and verifier-wrapper tests rather than moving them to 
 
 The gate invokes `scripts/verify-production-profile.php` directly to check production credential rejection and
 safe configured provider behavior. Its transports are intercepted/local: no external provider delivery is
-claimed. PHPUnit does not invoke that checker to assert its stdout or exit status. Composer/runtime policy,
+claimed. The production check also verifies intercepted Twilio 503 and public/private Mercure failures propagate
+with their causes rather than being reported as success. These errors are not approved public diagnostics.
+PHPUnit does not invoke that checker to assert its stdout or exit status. Composer/runtime policy,
 governance, planning, and public dependency boundaries are likewise checked by their owning tools.
 
 ## Coverage and limits

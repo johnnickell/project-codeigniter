@@ -15,6 +15,26 @@ it does not build images, install/update dependencies, or certify lowest/latest 
 performs the same preparation and delegates verification to that exact command for pushes and pull requests
 targeting `develop`, `main`, and `release/**`.
 
+## Stable package baseline
+
+TASK-00014 adopts exact `johnnickell/fight-common` **1.4.0** and `johnnickell/fight-access-control` **0.8.0**,
+rechecked against GitHub releases/tags and Packagist on 2026-10-25. The lock also narrowly refreshes
+`symfony/http-foundation` **8.1.6 → 8.1.9** for CVE-2026-108082 and its follow-up parsing correction; no other
+package entries change. Composer audit reported no advisories at that check, not a permanent security guarantee.
+Registry packages replace the development VCS overrides/alias; `minimum-stability: stable` now rejects accidental
+development selections. Exact pins intentionally require a separately reviewed refresh. Composer warns about
+the Common exact constraint; the existing validator now recognizes that warning instead of the obsolete commit pin.
+
+Native `app/`, service discovery, HTTP/routes/views and Spark stay unchanged. Existing factories fit the released
+public contracts; installation does **not** enable AccessControl handlers, repositories, login or authorization
+journeys. See [composition limits](ARCHITECTURE.md) and [consumer verification](tests/README.md).
+
+**Migration exception:** Common's `StreamId` now compares/hashes the full tuple and JSON-encodes as a canonical
+`stream:v1:<base64 aggregate>:<base64 identifier>` string instead of `{}`. Equal tuples deduplicate/replace keys
+in hash collections. Rebuild legacy serialized hash collections where present; persisted stream-name/ID columns
+are unchanged. This starter has no owned persisted AccessControl data/schema to migrate. Data-bearing deployments
+need a separately accepted migration design, not a destructive reset or compatibility shim.
+
 ## Runtime security baseline and refresh
 
 The owned images select PHP `8.5.12-fpm-bookworm` and NGINX `1.30.6-alpine`. Composer requires PHP
@@ -85,14 +105,15 @@ and the [adoption EPIC](planning/epics/00002-EPIC.md) for scope and unresolved d
 
 Adoption of shared engineering, delivery and Pi/skill conventions is approved by default, with explicit
 CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutually compatible stable releases**
-is the destination; exact releases must be qualified before implementation. Package upgrades and engineering
-enforcement are **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
+is the destination; exact releases must be qualified before implementation. TASK-00014 implements the accepted
+stable pair and security refresh with local consumer verification; candidate A has independent Review acceptance
+and applicable non-visual QA PASS, while [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering enforcement is **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
 substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
 [TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability
 qualification remains limited as recorded there.
 The [current planning handoffs](planning/ROADMAP.md#current-decomposition-handoffs)
-separate investigation from implementation. Planning migration and certification removal do not upgrade the
-development candidates in `composer.lock`.
+separate completed package implementation from unfinished engineering decisions. Planning migration and
+certification removal alone were not package adoption.
 
 This repository is MIT-licensed source, not a release or package-distribution claim. Do not add copied shared source, credentials, production data, login, persistence, browser journeys, tags, Packagist publication, template enablement, or create-project distribution without a separately approved local TASK.
