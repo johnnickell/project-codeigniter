@@ -116,9 +116,9 @@ CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutuall
 is the destination; exact releases must be qualified before implementation. TASK-00014 implements the accepted
 stable pair and security refresh with local consumer verification; candidate A has independent Review acceptance
 and applicable non-visual QA PASS, while [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Engineering enforcement is **not complete**:
-[TASK-00015](planning/tasks/00015-TASK.md) now implements locally passing native coding/architecture checks
-(26 tests / 130 assertions); independent Review and applicable QA remain pending. Coverage and stronger
-orchestration remain TASK-00016/00017. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
+[TASK-00015](planning/tasks/00015-TASK.md)'s candidate A has independent Review acceptance and applicable
+non-visual QA PASS; at the administrative-closeout checkpoint, publication and final remote-head verification
+remain pending in its [durable Land receipt](.runs/tasks/TASK-00015/runs/2026-10-25-land-20261025T105102-0500/receipt.md). Coverage and stronger orchestration remain TASK-00016/00017. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
 substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
 [TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability

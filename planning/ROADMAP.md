@@ -45,8 +45,10 @@ requirements are tracked, not marked complete or silently enforced.
   strengthens complete read-only local/hosted orchestration. The provider-check inventory assigns applicable
   checks, capability-specific N/A and deferred upstream advisors. TASK-00015 now implements locally passing
   coding checks on the native source (26 tests / 130 assertions), with qualified versions/scan paths/exceptions
-  in [PHP standards](agents/php-standards.md); independent Review and applicable QA remain pending. TASK-00016
-  is the next implementation frontier. Coverage and stronger gate safeguards remain unfinished; this requirement
+  in [PHP standards](agents/php-standards.md). Candidate A has independent Review acceptance and applicable
+  non-visual QA PASS; at the administrative-closeout checkpoint, publication and final remote-head verification
+  remain pending in the TASK's durable Land receipt. TASK-00016 is the next implementation frontier. Coverage
+  and stronger gate safeguards remain unfinished; this requirement
   and EPIC-00002 do not close.
 - [TICKET-00010](tickets/00010-TICKET.md#current-delivery-handoff): separately authorized
   [TASK-00013](tasks/00013-TASK.md#current-delivery-status) delivered the bounded runtime-ignore/binding/

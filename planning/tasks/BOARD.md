@@ -39,8 +39,9 @@ PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned Agent OS checks.
 [three-TASK decomposition](../tickets/00009-TICKET.md#approved-task-decomposition):
 [TASK-00015](00015-TASK.md) delivers coding/architecture checks, [TASK-00016](00016-TASK.md) delivers single-run
 coverage, and [TASK-00017](00017-TASK.md) strengthens the complete read-only gate after both. Implementation
-now includes TASK-00015's locally passing coding/architecture rollout (26 tests / 130 assertions), pending
-independent Review and applicable QA. TASK-00016 is the next executable implementation; TASK-00017 remains
+includes TASK-00015 candidate A's independent Review acceptance and applicable non-visual QA PASS. At this
+administrative-closeout checkpoint, publication and final remote-head verification remain pending in the TASK's
+durable Land receipt. TASK-00016 is the next executable implementation; TASK-00017 remains
 blocked on its coverage outcome. TASK-00014's completed prerequisite edge is preserved.
 The separately authorized [TASK-00013](00013-TASK.md#current-delivery-status) delivered the
 [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#current-delivery-handoff) in the selected

@@ -130,8 +130,9 @@ outcome, normally one PR:
    this is not a deferred integration rescue.
 
 Decomposition of this accepted requirement is complete. The maintainer subsequently invoked Build for
-TASK-00015 in the main checkout; it now delivers locally passing coding checks on its feature branch, pending
-independent Review and applicable QA. TASK-00016/00017 remain unfinished. Use the TASK Board for execution
+TASK-00015 in the main checkout; it delivered locally passing coding checks on its feature branch. Its later
+independent Review acceptance and applicable QA PASS are recorded in the current delivery handoff below.
+TASK-00016/00017 remain unfinished. Use the TASK Board for execution
 selection; do not treat this first implementation as completion of the requirement. No commit, publication
 or execution authority is added by approval of this decomposition. The unrelated application Wayfinder remains
 Open at WF-002 with its external proxy prerequisite unchanged.
@@ -149,7 +150,7 @@ implementation and explain any additional applicable checks before claiming full
 | Provider check or planned capability | Accepted CodeIgniter disposition / owner |
 |---|---|
 | Composer version/manifest/lock/platform checks; read-only planning | Retain existing target checks and explicit warning policy; complete phase/availability and no-registry-access behavior in TASK-00017. No dependency updates or audits hidden in acceptance. |
-| PHP syntax/namespaces, installed Fight Common PHPCS, PHPStan level-7 intent, Deptrac, Rector dry-run | Implemented and locally passing through TASK-00015 and the canonical gate: actual shipped rules, level 7, native collectors plus unassigned-token rejection, one narrow Rector rule. [Versions, paths, resources and exceptions](../agents/php-standards.md) are qualified; independent Review/QA remain pending. |
+| PHP syntax/namespaces, installed Fight Common PHPCS, PHPStan level-7 intent, Deptrac, Rector dry-run | Implemented and locally passing through TASK-00015 and the canonical gate: actual shipped rules, level 7, native collectors plus unassigned-token rejection, one narrow Rector rule. [Versions, paths, resources and exceptions](../agents/php-standards.md) are qualified; candidate A has independent Review acceptance and applicable non-visual QA PASS. |
 | One complete backend run with coverage and separate suite attribution | Implement in TASK-00016; TASK-00017 retains exactly one invocation. Adapt to the maintainer's combined 100% goal, not the provider's hard inner-layer threshold. |
 | Source/index/content/mode stability on success/failure; concurrency protection; setup checks and diagnostic logs | Implement in TASK-00017 without copying provider gate source or introducing certification authorities. |
 | OpenAPI/public-validation freshness | N/A for this starter: no owned exported metadata/API contract. Revisit with an approved API TASK, not by creating one here. |
@@ -179,3 +180,12 @@ remain separate from TASK-00015's local implementation.
 No new framework-support certification, recurring audit lane, deliberately invalid tool fixture, product test of
 tooling, or provider suite is authorized. Planned assessments remain explicit deferrals; completion of the three
 TASKs will not claim that those unavailable upstream services were delivered.
+
+### Current TASK-00015 delivery handoff — 2026-10-25
+
+Candidate A `377806f486532dd1910ed39a9a2fa98bfb7a91d4`, against reviewed base
+`21b8f73420a26dad52c08fa87f09ae6be4119f96`, has independent Review acceptance and applicable non-visual
+QA PASS with no findings. At the administrative-closeout checkpoint, publication and final remote-head
+verification remain pending in `.runs/tasks/TASK-00015/runs/2026-10-25-land-20261025T105102-0500/receipt.md`.
+TASK-00016 and TASK-00017 remain unfinished, so this TICKET stays `in-progress` and EPIC-00002 stays
+`needs-info`; use the Board for the next implementation selection.
