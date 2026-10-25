@@ -13,3 +13,28 @@ and important public-package integrations, not a separate package-release receip
 preparation is explicit; `./bin/build` checks the prepared runtime without installing or updating packages.
 Production-profile checks use safe test credentials and intercepted provider transports; they are not evidence
 of live delivery, deployment readiness, or a clean `--no-dev` installation.
+
+## Stable consumer composition
+
+The selected baseline is Common **1.4.0** / AccessControl **0.8.0**, with HttpFoundation **8.1.9**.
+`Config\\Services::fightTransactionalUnitOfWork()` passes the selected shared `db_connect()` connection to the
+released `TransactionalUnitOfWork` adapter; no legacy `UnitOfWork` shim is needed. The tests demonstrate actual
+SQLite commit/rollback and selected-connection transaction depth, not shared AccessControl repositories (none
+are composed), SQL concurrency, or production database guarantees. Do not nest future AccessControl handlers
+inside another transaction: their required mutations/audit must use the same actual connection and fences.
+
+Only publish success after confirmed commit. Subscriber failure after commit cannot undo committed state.
+The released adapter attempts rollback/status reset on callback failures and false status/commit returns,
+preserving the original callback throwable even when cleanup fails. Thrown begin/status/commit errors propagate
+without rollback/reset; a thrown commit clears only adapter activity, not connection state or an uncertain
+outcome. Failed cleanup or lost acknowledgement requires connection recovery and authorized authoritative-state
+reconciliation, not blind replay. Queue submission is not an atomic outbox; retries repeat full event fan-out.
+
+The released native JSend adapter preserves selected status/headers, but with this CodeIgniter version its body
+is a JSON **string containing the envelope**, not a top-level object. This inherited limitation is explicitly
+verified, not repaired with a shim or exposed as a new API. Only hello-world is public. A future API task must
+resolve the representation contract and sanitize arbitrary diagnostics before exposing errors. Provider wrappers
+preserve causes and can retain diagnostic text; intercepted failure tests do not establish safe public errors.
+
+StreamId tuple/hash/JSON migration consequences are documented in the [README](README.md#stable-package-baseline).
+No repositories, schema/data migrations, new package capabilities or Wayfinder decisions are selected here.

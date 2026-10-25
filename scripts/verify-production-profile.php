@@ -144,6 +144,7 @@ try {
 
     $twilioRequests = [];
     $twilioHttpClient = new class($twilioRequests) implements \Twilio\Http\Client {
+        public bool $fail = false;
         /** @var list<array{method: string, data: array<string, mixed>}> */
         private array $requests;
 
@@ -165,6 +166,9 @@ try {
             $authStrategy = null,
         ): \Twilio\Http\Response {
             $this->requests[] = ['method' => $method, 'data' => $data];
+            if ($this->fail) {
+                return new \Twilio\Http\Response(503, '{"code":20500,"message":"test provider unavailable"}');
+            }
 
             return new \Twilio\Http\Response(201, '{"sid":"SM00000000000000000000000000000000"}');
         }
@@ -188,6 +192,16 @@ try {
             'Body' => 'production profile',
         ],
     ]] === $twilioRequests, 'Twilio SMS transport did not send the expected to, from, and body through the injected HTTP client.');
+
+    $twilioHttpClient->fail = true;
+    $smsFailure = null;
+    try {
+        $sms->send(SmsMessage::create('+15550000001', '+15550000002')->setBody('intercepted failure'));
+    } catch (\Fight\Common\Application\Sms\Exception\SmsException $failure) {
+        $smsFailure = $failure;
+    }
+    productionAssert($smsFailure?->getPrevious() instanceof \Twilio\Exceptions\RestException, 'SMS provider failure lost its cause or was swallowed.');
+    productionAssert(count($twilioRequests) === 2, 'SMS failure did not use the intercepted transport.');
 
     try {
         service('fightEventStore')->append(new StreamId('profile', 'default'), 0, [EventMessage::create(new class('mapping-required') implements Event {
@@ -215,12 +229,16 @@ try {
     });
 
     $recordingHub = new class implements HubInterface {
+        public ?Throwable $failure = null;
         /** @var list<array{string, string, bool}> */
         public array $updates = [];
         public function getPublicUrl(): string { return 'https://profile.test/.well-known/mercure'; }
         public function getFactory(): ?Symfony\Component\Mercure\Jwt\TokenFactoryInterface { return null; }
         public function publish(Update $update): string
         {
+            if ($this->failure !== null) {
+                throw $this->failure;
+            }
             $this->updates[] = [$update->getTopics()[0], $update->getData(), $update->isPrivate()];
             return 'production-profile-update';
         }
@@ -232,6 +250,21 @@ try {
         ['https://profile.test/public', 'public profile', false],
         ['https://profile.test/private', 'private profile', true],
     ] === $recordingHub->updates, 'Publication services did not pass updates through the registered hub.');
+    $recordingHub->failure = new RuntimeException('test hub unavailable');
+    foreach (['fightPublisher', 'fightPrivatePublisher'] as $publisher) {
+        $publicationFailure = null;
+        try {
+            if ($publisher === 'fightPublisher') {
+                service($publisher)->push('https://profile.test/public', 'intercepted failure');
+            } else {
+                service($publisher)->pushPrivate('https://profile.test/private', 'intercepted failure');
+            }
+        } catch (\Fight\Common\Application\Socket\Exception\SocketException $failure) {
+            $publicationFailure = $failure;
+        }
+        productionAssert($publicationFailure?->getPrevious() === $recordingHub->failure, 'Publication failure lost its cause or was swallowed.');
+    }
+    productionAssert(count($recordingHub->updates) === 2, 'Failed publication was recorded as successful.');
 } catch (RuntimeException $exception) {
     fwrite(STDERR, "Production profile check failed: {$exception->getMessage()}\n");
 

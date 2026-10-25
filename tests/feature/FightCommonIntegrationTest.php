@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use CodeIgniter\Config\Services as CoreServices;
 use CodeIgniter\Events\Events;
-use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Queue\Events\QueueEvent;
 use CodeIgniter\Queue\Events\QueueEventManager;
 use CodeIgniter\Test\CIUnitTestCase;
@@ -106,9 +105,15 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
         $this->assertSame(1, db_connect()->table('receipt_transactions')->countAllResults());
         $this->assertSame('/', service('fightUrlGenerator')->generate('home'));
 
-        $response = JSendResponse::success(service('response'));
-        $this->assertSame(ResponseInterface::HTTP_OK, $response->getStatusCode());
-        $this->assertSame('success', json_decode((string) json_decode($response->getBody(), true), true)['status']);
+        $response = JSendResponse::success(service('fightResponse'), statusCode: 202, headers: ['X-Consumer' => 'starter']);
+        $this->assertSame(202, $response->getStatusCode());
+        $this->assertSame('starter', $response->getHeaderLine('X-Consumer'));
+        $this->assertSame('application/json; charset=UTF-8', $response->getHeaderLine('Content-Type'));
+        // Released adapter + CI 4.7 encode the envelope as a JSON string, not an object.
+        // This is a composition limitation, not an enabled public API contract.
+        $envelopeJson = json_decode($response->getBody(), true, flags: JSON_THROW_ON_ERROR);
+        $this->assertSame('{"status":"success","data":null}', $envelopeJson);
+        $this->assertSame(['status' => 'success', 'data' => null], json_decode($envelopeJson, true, flags: JSON_THROW_ON_ERROR));
     }
 
     public function test_default_request_event_store_and_synchronous_messaging_services_are_safe_and_configurable(): void
@@ -264,6 +269,40 @@ final class FightCommonIntegrationTest extends CIUnitTestCase
             ['topics' => ['https://profile.test/public'], 'data' => 'public update', 'private' => false],
             ['topics' => ['https://profile.test/private'], 'data' => 'private update', 'private' => true],
         ], $hub->updates);
+    }
+
+    public function test_stream_identity_preserves_tuple_boundaries_in_hash_collections_and_json(): void
+    {
+        $stream = new StreamId('receipt', '42');
+        $same = new StreamId('receipt', '42');
+        $other = new StreamId('receipt', '43');
+        $this->assertTrue($stream->equals($same));
+        $this->assertFalse($stream->equals($other));
+        $this->assertFalse((new StreamId('a:b', 'c'))->equals(new StreamId('a', 'b:c')));
+        $this->assertSame('stream:v1:cmVjZWlwdA==:NDI=', $stream->hashValue());
+        $this->assertSame('"stream:v1:cmVjZWlwdA==:NDI="', json_encode($stream, JSON_THROW_ON_ERROR));
+        $this->assertTrue($stream->equals(StreamId::fromString('stream:v1:cmVjZWlwdA==:NDI=')));
+        $set = new \Fight\Common\Domain\Collection\HashSet(StreamId::class);
+        $set->add($stream);
+        $set->add($same);
+        $set->add($other);
+        $this->assertSame(2, $set->count());
+        $table = new \Fight\Common\Domain\Collection\HashTable(StreamId::class, 'string');
+        $table->set($stream, 'old');
+        $table->set($same, 'replacement');
+        $this->assertSame(1, $table->count());
+        $this->assertSame('replacement', $table->get($stream));
+    }
+
+    public function test_selected_http_client_propagates_intercepted_provider_failure(): void
+    {
+        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://profile.test/unavailable');
+        $failure = new \GuzzleHttp\Exception\ConnectException('test connection unavailable', $request);
+        CoreServices::injectMock('fightHttpClient', new GuzzleClient(new \GuzzleHttp\Client([
+            'handler' => new \GuzzleHttp\Handler\MockHandler([$failure]),
+        ])));
+        $this->expectException(\Psr\Http\Client\NetworkExceptionInterface::class);
+        service('fightPsr18Client', false)->sendRequest($request);
     }
 
     public function test_database_queue_jobs_deliver_complete_command_and_retry_event_envelopes(): void
