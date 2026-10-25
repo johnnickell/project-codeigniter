@@ -79,7 +79,16 @@ certification assumptions remain non-applicable to this starter unless separatel
 
 ## Decisions and progress
 
-### Current implementation handoff
+### Current delivery handoff
+
+[TASK-00013](../tasks/00013-TASK.md#current-delivery-status) has independent technical Review acceptance and
+applicable QA PASS for acceptance candidate `dffd95ad9595d0bf49ab86539dcde058654b2de8`.
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) is open against `develop` and awaits human
+review and merge. Hosted checks are optional and unrun. This records delivery separately from the requirement's
+automatic completion; no merge, release, deployment, native child/log qualification, or broader EPIC completion
+is implied. EPIC-00002 remains needs-info under the unfinished TICKET-00008/00009 decisions.
+
+### Historical implementation handoff
 
 Separately authorized Build TASK-00013 used the selected main checkout and delivers the
 [target binding](../agents/shared-workflows.md), narrow runtime ignores and labeled routing/observation evidence.

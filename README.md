@@ -88,8 +88,9 @@ CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutuall
 is the destination; exact releases must be qualified before implementation. Package upgrades and engineering
 enforcement are **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
 substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
-[TASK-00013](planning/tasks/00013-TASK.md#current-implementation-and-local-verification) records local verification
-and remaining independent delivery/qualification limits, not full native capability certification.
+[TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability
+qualification remains limited as recorded there.
 The [current planning handoffs](planning/ROADMAP.md#current-decomposition-handoffs)
 separate investigation from implementation. Planning migration and certification removal do not upgrade the
 development candidates in `composer.lock`.

@@ -37,9 +37,11 @@ Actual upgrade, engineering enforcement and the bounded shared Pi/skill compatib
 proposal; the second awaits maintainer acceptance of the delivered contract's explicit D1–D4 choices before
 implementation decomposition; the third is locally implemented through
 [TASK-00013](tasks/00013-TASK.md) and the [target binding](agents/shared-workflows.md). Its parent closes
-automatically; independent Review, applicable QA and publication are outstanding. Source walkthroughs and
-safe discovery/status checks are labeled separately from unavailable live native selection/resume and child/log
-qualification; this is not full Pi capability certification. No upgrade/enforcement TASK
+automatically; independent Review accepted and applicable QA passed for the accepted candidate, and
+[PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Hosted checks
+are optional and unrun. Source walkthroughs and safe discovery/status checks are labeled separately from
+unavailable live native selection/resume and child/log qualification; this is not full Pi capability certification.
+No upgrade/enforcement TASK
 is executable. Investigation completion may close its narrowed parent, but cannot close the broader adoption
 EPIC while these requirements remain unfinished. Use the
 [Roadmap handoffs](ROADMAP.md#current-decomposition-handoffs), not child counts, to select the planning phase.

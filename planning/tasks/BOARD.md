@@ -30,12 +30,13 @@ are recorded in the TASK; PR publication and human review/merge remain separate 
 optional for this TASK and have not been run.
 [TICKET-00009](../tickets/00009-TICKET.md) retains maintainer acceptance of proposal decisions D1–D4 and actual
 enforcement. Exact Unit-only versus meaningful all-suite coverage remains a human choice, not an enforced rule.
-The separately authorized [TASK-00013](00013-TASK.md#current-implementation-and-local-verification) now locally
-implements the [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#current-implementation-handoff)
-in the selected main checkout; automatic parent completion closes TICKET-00010. Next: independent
-`/skill:review TASK-00013`, then applicable QA and authorized publication. None is implied by `done`; native
-selection/resume and Herdr child/log qualification remain unperformed. Its original seven planning paths were
-included in TASK-00009's commit by explicit instruction before the later Build implementation authority.
+The separately authorized [TASK-00013](00013-TASK.md#current-delivery-status) delivered the
+[Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#current-delivery-handoff) in the selected
+main checkout; automatic parent completion closes TICKET-00010. Independent Review accepted and applicable QA
+passed the acceptance candidate. [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) is open
+against `develop` and awaits human review/merge; hosted checks are optional and unrun. None is implied by `done`;
+native selection/resume and Herdr child/log qualification remain unperformed. Its original seven planning paths
+were included in TASK-00009's commit by explicit instruction before the later Build implementation authority.
 Package/enforcement decomposition still awaits the named migration acceptance and delivered proposal's D1–D4
 contract decisions. No enforcement TASKs were allocated.
 The [adoption EPIC](../epics/00002-EPIC.md) remains `needs-info`, even when its investigation artifacts complete.
@@ -92,7 +93,7 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 | 1 | [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | [TICKET-00006 — Qualify the latest stable Fight package upgrade](../tickets/00006-TICKET.md) | done | — | [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) |
 | 1 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | — (standalone bug) | done | — | [PR #13](https://github.com/johnnickell/project-codeigniter/pull/13) |
 | 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Specify the CodeIgniter-adapted engineering contract](../tickets/00007-TICKET.md) | done | — | [PR #15](https://github.com/johnnickell/project-codeigniter/pull/15) |
-| 3 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | [TICKET-00010 — Integrate the shared Pi skills and next-work conventions](../tickets/00010-TICKET.md) | done | — | — |
+| 3 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | [TICKET-00010 — Integrate the shared Pi skills and next-work conventions](../tickets/00010-TICKET.md) | done | — | [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) |
 | — | [TASK-00001](00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | [TICKET-00001 — CodeIgniter Starter Product and Walking-Slice Acceptance](../tickets/00001-TICKET.md) | done | — | — |
 | — | [TASK-00002](00002-TASK.md) | Adopt the historical Fight Common 1.2 candidate | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |
 | — | [TASK-00004](00004-TASK.md) | Establish the Complete CodeIgniter Platform Profile | [TICKET-00002 — Fight Common Version Adoption and Support Evidence](../tickets/00002-TICKET.md) | done | — | — |

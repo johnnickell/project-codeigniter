@@ -36,12 +36,13 @@ requirements are tracked, not marked complete or silently enforced.
   decomposition awaits maintainer acceptance of TASK-00010's delivered proposal decisions D1–D4: competing
   coverage policies, native scope/exceptions, sourced candidate tools/gate phases and coordination. Target tool
   installation/scans and numeric coverage remain unverified, not implied by the current gate.
-- [TICKET-00010](tickets/00010-TICKET.md#current-implementation-handoff): separately authorized
-  [TASK-00013](tasks/00013-TASK.md) locally implements the bounded runtime-ignore/binding/routing-verification
-  slice and closes its parent automatically. Next is independent `/skill:review TASK-00013`, then applicable QA
-  and authorized publication; none is implied by local completion. Native selection/resume and Herdr child/log
-  qualification were not performed. The original seven planning paths were included with TASK-00009 by explicit
-  instruction; implementation authority came later from the user's Build invocation.
+- [TICKET-00010](tickets/00010-TICKET.md#current-delivery-handoff): separately authorized
+  [TASK-00013](tasks/00013-TASK.md#current-delivery-status) delivered the bounded runtime-ignore/binding/
+  routing-verification slice and closes its parent automatically. Independent Review accepted and applicable QA
+  passed the acceptance candidate; [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) is open
+  against `develop` for human review/merge. Hosted checks are optional and unrun. Native selection/resume and
+  Herdr child/log qualification were not performed. The original seven planning paths were included with
+  TASK-00009 by explicit instruction; implementation authority came later from the user's Build invocation.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
 Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00013's local
