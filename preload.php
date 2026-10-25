@@ -9,6 +9,8 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 use CodeIgniter\Boot;
 use Config\Paths;
 
@@ -27,19 +29,23 @@ use Config\Paths;
  */
 
 // Load the paths config file
-require __DIR__ . '/app/Config/Paths.php';
+require __DIR__.'/app/Config/Paths.php';
 
 // Path to the front controller
-define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+define('FCPATH', __DIR__.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR);
 
+/**
+ * Class preload
+ */
 class preload
 {
     /**
-     * @var array Paths to preload.
+     * @var list<array{include: string, exclude: list<string>}> Paths to preload
      */
     private array $paths = [
         [
-            'include' => __DIR__ . '/vendor/codeigniter4/framework/system', // Change this path if using manual installation
+            // Change this path if using manual installation.
+            'include' => __DIR__.'/vendor/codeigniter4/framework/system',
             'exclude' => [
                 // Not needed if you don't use them.
                 '/system/Database/OCI8/',
@@ -61,26 +67,21 @@ class preload
                 '/system/rewrite.php',
                 '/Views/',
                 // Errors occur.
-                '/system/ThirdParty/',
-            ],
-        ],
+                '/system/ThirdParty/'
+            ]
+        ]
     ];
 
+    /**
+     * Constructs preload
+     */
     public function __construct()
     {
         $this->loadAutoloader();
     }
 
-    private function loadAutoloader(): void
-    {
-        $paths = new Paths();
-        require rtrim($paths->systemDirectory, '\\/ ') . DIRECTORY_SEPARATOR . 'Boot.php';
-
-        Boot::preload($paths);
-    }
-
     /**
-     * Load PHP files.
+     * Loads PHP files
      */
     public function load(): void
     {
@@ -90,7 +91,7 @@ class preload
             $phpFiles  = new RegexIterator(
                 $fullTree,
                 '/.+((?<!Test)+\.php$)/i',
-                RecursiveRegexIterator::GET_MATCH,
+                RecursiveRegexIterator::GET_MATCH
             );
 
             foreach ($phpFiles as $key => $file) {
@@ -106,6 +107,17 @@ class preload
                 // echo 'Loaded: ' . $file[0] . "\n";
             }
         }
+    }
+
+    /**
+     * Loads the native preload autoloader
+     */
+    private function loadAutoloader(): void
+    {
+        $paths = new Paths();
+        require rtrim($paths->systemDirectory, '\\/ ').DIRECTORY_SEPARATOR.'Boot.php';
+
+        Boot::preload($paths);
     }
 }
 

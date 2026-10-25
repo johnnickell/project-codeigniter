@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
 /**
+ * Class Cors
+ *
  * Cross-Origin Resource Sharing (CORS) Configuration
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -34,7 +38,7 @@ class Cors extends BaseConfig
          *   - ['http://localhost:8080']
          *   - ['https://www.example.com']
          */
-        'allowedOrigins' => [],
+        'allowedOrigins'         => [],
 
         /**
          * Origin regex patterns for the `Access-Control-Allow-Origin` header.
@@ -57,7 +61,7 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials
          */
-        'supportsCredentials' => false,
+        'supportsCredentials'    => false,
 
         /**
          * Set headers to allow.
@@ -68,7 +72,7 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
          */
-        'allowedHeaders' => [],
+        'allowedHeaders'         => [],
 
         /**
          * Set headers to expose.
@@ -79,7 +83,7 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers
          */
-        'exposedHeaders' => [],
+        'exposedHeaders'         => [],
 
         /**
          * Set methods to allow.
@@ -93,13 +97,13 @@ class Cors extends BaseConfig
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods
          */
-        'allowedMethods' => [],
+        'allowedMethods'         => [],
 
         /**
          * Set how many seconds the results of a preflight request can be cached.
          *
          * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age
          */
-        'maxAge' => 7200,
+        'maxAge'                 => 7200
     ];
 }

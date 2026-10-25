@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Database\Config;
 
 /**
+ * Class Database
+ *
  * Database Configuration
  */
 class Database extends Config
@@ -12,13 +16,11 @@ class Database extends Config
     /**
      * The directory that holds the Migrations and Seeds directories.
      */
-    public string $filesPath = APPPATH . 'Database' . DIRECTORY_SEPARATOR;
-
+    public string $filesPath = APPPATH.'Database'.DIRECTORY_SEPARATOR;
     /**
      * Lets you choose which connection group to use if no other is specified.
      */
     public string $defaultGroup = 'default';
-
     /**
      * The default database connection.
      *
@@ -47,10 +49,9 @@ class Database extends Config
         'dateFormat'   => [
             'date'     => 'Y-m-d',
             'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
+            'time'     => 'H:i:s'
+        ]
     ];
-
     //    /**
     //     * Sample database connection for SQLite3.
     //     *
@@ -169,7 +170,8 @@ class Database extends Config
         'password'    => '',
         'database'    => ':memory:',
         'DBDriver'    => 'SQLite3',
-        'DBPrefix'    => 'db_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
+        // Required to exercise prefixes against the native test database.
+        'DBPrefix'    => 'db_',
         'pConnect'    => false,
         'DBDebug'     => true,
         'charset'     => 'utf8',
@@ -186,10 +188,16 @@ class Database extends Config
         'dateFormat'  => [
             'date'     => 'Y-m-d',
             'datetime' => 'Y-m-d H:i:s',
-            'time'     => 'H:i:s',
-        ],
+            'time'     => 'H:i:s'
+        ]
     ];
 
+    /**
+     * Constructs Database
+     */
+    /**
+     * Constructs Database
+     */
     public function __construct()
     {
         parent::__construct();

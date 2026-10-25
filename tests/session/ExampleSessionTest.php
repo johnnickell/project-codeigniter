@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Tests\Session;
+
 use CodeIgniter\Test\CIUnitTestCase;
 
 /**

@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Log\Handlers\FileHandler;
 use CodeIgniter\Log\Handlers\HandlerInterface;
 
+/**
+ * Class Logger
+ */
 class Logger extends BaseConfig
 {
     /**
@@ -40,7 +45,6 @@ class Logger extends BaseConfig
      * @var int|list<int>
      */
     public $threshold = (ENVIRONMENT === 'production') ? 4 : 9;
-
     /**
      * --------------------------------------------------------------------------
      * Date Format for Logs
@@ -50,7 +54,6 @@ class Logger extends BaseConfig
      * codes to set your own date formatting
      */
     public string $dateFormat = 'Y-m-d H:i:s';
-
     /**
      * --------------------------------------------------------------------------
      * Log Handlers
@@ -84,7 +87,7 @@ class Logger extends BaseConfig
          */
         FileHandler::class => [
             // The log levels that this handler will handle.
-            'handles' => [
+            'handles'         => [
                 'critical',
                 'alert',
                 'emergency',
@@ -92,7 +95,7 @@ class Logger extends BaseConfig
                 'error',
                 'info',
                 'notice',
-                'warning',
+                'warning'
             ],
 
             /*
@@ -102,7 +105,7 @@ class Logger extends BaseConfig
              *
              * NOTE: Leaving it blank will default to 'log'.
              */
-            'fileExtension' => '',
+            'fileExtension'   => '',
 
             /*
              * The file system permissions to be applied on newly created log files.
@@ -118,8 +121,8 @@ class Logger extends BaseConfig
              * By default, logs are written to WRITEPATH . 'logs/'
              * Specify a different destination here, if desired.
              */
-            'path' => '',
-        ],
+            'path'            => ''
+        ]
 
         /*
          * The ChromeLoggerHandler requires the use of the Chrome web browser

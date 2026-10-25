@@ -1,6 +1,9 @@
 <?php
-use CodeIgniter\HTTP\Header;
+
+declare(strict_types=1);
+
 use CodeIgniter\CodeIgniter;
+use CodeIgniter\HTTP\Header;
 
 $errorId = uniqid('error', true);
 ?>
@@ -12,11 +15,11 @@ $errorId = uniqid('error', true);
 
     <title><?= esc($title) ?></title>
     <style>
-        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.css')) ?>
+        <?= preg_replace('#[\r\n\t ]+#', ' ', file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.css')) ?>
     </style>
 
     <script>
-        <?= file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'debug.js') ?>
+        <?= file_get_contents(__DIR__.DIRECTORY_SEPARATOR.'debug.js') ?>
     </script>
 </head>
 <body onload="init()">
@@ -30,10 +33,10 @@ $errorId = uniqid('error', true);
             Environment: <?= ENVIRONMENT ?>
         </div>
         <div class="container">
-            <h1><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
+            <h1><?= esc($title), esc($exception->getCode() ? ' #'.$exception->getCode() : '') ?></h1>
             <p>
                 <?= nl2br(esc($exception->getMessage())) ?>
-                <a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
+                <a href="https://www.duckduckgo.com/?q=<?= urlencode($title.' '.preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
                    rel="noreferrer" target="_blank">search &rarr;</a>
             </p>
         </div>
@@ -60,15 +63,15 @@ $errorId = uniqid('error', true);
 
     <pre>
     Caused by:
-    <?= esc($prevException::class), esc($prevException->getCode() ? ' #' . $prevException->getCode() : '') ?>
+            <?= esc($prevException::class), esc($prevException->getCode() ? ' #'.$prevException->getCode() : '') ?>
 
-    <?= nl2br(esc($prevException->getMessage())) ?>
-    <a href="https://www.duckduckgo.com/?q=<?= urlencode($prevException::class . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $prevException->getMessage())) ?>"
+            <?= nl2br(esc($prevException->getMessage())) ?>
+    <a href="https://www.duckduckgo.com/?q=<?= urlencode($prevException::class.' '.preg_replace('#\'.*\'|".*"#Us', '', $prevException->getMessage())) ?>"
        rel="noreferrer" target="_blank">search &rarr;</a>
-    <?= esc(clean_path($prevException->getFile()) . ':' . $prevException->getLine()) ?>
+            <?= esc(clean_path($prevException->getFile()).':'.$prevException->getLine()) ?>
     </pre>
 
-        <?php
+            <?php
         }
         ?>
     </div>
@@ -92,27 +95,26 @@ $errorId = uniqid('error', true);
 
                 <ol class="trace">
                 <?php foreach ($trace as $index => $row) : ?>
-
                     <li>
                         <p>
                             <!-- Trace info -->
                             <?php if (isset($row['file']) && is_file($row['file'])) : ?>
                                 <?php
                                 if (isset($row['function']) && in_array($row['function'], ['include', 'include_once', 'require', 'require_once'], true)) {
-                                    echo esc($row['function'] . ' ' . clean_path($row['file']));
+                                    echo esc($row['function'].' '.clean_path($row['file']));
                                 } else {
-                                    echo esc(clean_path($row['file']) . ' : ' . $row['line']);
+                                    echo esc(clean_path($row['file']).' : '.$row['line']);
                                 }
                                 ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 {PHP internal code}
                             <?php endif; ?>
 
                             <!-- Class/Method -->
                             <?php if (isset($row['class'])) : ?>
-                                &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc($row['class'] . $row['type'] . $row['function']) ?>
+                                &nbsp;&nbsp;&mdash;&nbsp;&nbsp;<?= esc($row['class'].$row['type'].$row['function']) ?>
                                 <?php if (! empty($row['args'])) : ?>
-                                    <?php $argsId = $errorId . 'args' . $index ?>
+                                    <?php $argsId = $errorId.'args'.$index ?>
                                     ( <a href="#" onclick="return toggle('<?= esc($argsId, 'attr') ?>');">arguments</a> )
                                     <div class="args" id="<?= esc($argsId, 'attr') ?>">
                                         <table cellspacing="0">
@@ -127,7 +129,7 @@ $errorId = uniqid('error', true);
 
                                         foreach ($row['args'] as $key => $value) : ?>
                                             <tr>
-                                                <td><code><?= esc(isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}") ?></code></td>
+                                                <td><code><?= esc(isset($params[$key]) ? '$'.$params[$key]->name : "#{$key}") ?></code></td>
                                                 <td><pre><?= esc(print_r($value, true)) ?></pre></td>
                                             </tr>
                                         <?php endforeach ?>
@@ -181,7 +183,7 @@ $errorId = uniqid('error', true);
                                 <td>
                                     <?php if (is_string($value)) : ?>
                                         <?= esc($value) ?>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
                                     <?php endif; ?>
                                 </td>
@@ -211,7 +213,7 @@ $errorId = uniqid('error', true);
                                 <td>
                                     <?php if (is_string($value)) : ?>
                                         <?= esc($value) ?>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
                                     <?php endif; ?>
                                 </td>
@@ -286,7 +288,7 @@ $errorId = uniqid('error', true);
                                 <td>
                                     <?php if (is_string($value)) : ?>
                                         <?= esc($value) ?>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
                                     <?php endif; ?>
                                 </td>
@@ -298,7 +300,6 @@ $errorId = uniqid('error', true);
                 <?php endforeach ?>
 
                 <?php if ($empty) : ?>
-
                     <div class="alert">
                         No $_GET, $_POST, or $_COOKIE Information to show.
                     </div>
@@ -307,7 +308,6 @@ $errorId = uniqid('error', true);
 
                 <?php $headers = $request->headers(); ?>
                 <?php if (! empty($headers)) : ?>
-
                     <h3>Headers</h3>
 
                     <table>
@@ -327,7 +327,7 @@ $errorId = uniqid('error', true);
                                     echo esc($value->getValueLine(), 'html');
                                 } else {
                                     foreach ($value as $i => $header) {
-                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine(), 'html');
+                                        echo ' ('.($i + 1).') '.esc($header->getValueLine(), 'html');
                                     }
                                 }
                                 ?>
@@ -349,7 +349,7 @@ $errorId = uniqid('error', true);
                 <table>
                     <tr>
                         <td style="width: 15em">Response Status</td>
-                        <td><?= esc($response->getStatusCode() . ' - ' . $response->getReasonPhrase()) ?></td>
+                        <td><?= esc($response->getStatusCode().' - '.$response->getReasonPhrase()) ?></td>
                     </tr>
                 </table>
 
@@ -374,7 +374,7 @@ $errorId = uniqid('error', true);
                                     echo esc($response->getHeaderLine($name), 'html');
                                 } else {
                                     foreach ($value as $i => $header) {
-                                        echo ' ('. $i+1 . ') ' . esc($header->getValueLine(), 'html');
+                                        echo ' ('.($i + 1).') '.esc($header->getValueLine(), 'html');
                                     }
                                 }
                                 ?>

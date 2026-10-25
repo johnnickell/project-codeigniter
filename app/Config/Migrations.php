@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
+/**
+ * Class Migrations
+ */
 class Migrations extends BaseConfig
 {
     /**
@@ -17,7 +22,6 @@ class Migrations extends BaseConfig
      * and disable it back when you're done.
      */
     public bool $enabled = true;
-
     /**
      * --------------------------------------------------------------------------
      * Migrations Table
@@ -28,7 +32,6 @@ class Migrations extends BaseConfig
      * files have already been run.
      */
     public string $table = 'migrations';
-
     /**
      * --------------------------------------------------------------------------
      * Timestamp Format
@@ -47,7 +50,6 @@ class Migrations extends BaseConfig
      * - Y_m_d_His_
      */
     public string $timestampFormat = 'Y-m-d-His_';
-
     /**
      * --------------------------------------------------------------------------
      * Enable/Disable Migration Lock

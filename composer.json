@@ -30,9 +30,16 @@
         "twilio/sdk": "^8.0"
     },
     "require-dev": {
+        "deptrac/deptrac": "4.7.2",
         "fakerphp/faker": "^1.9",
         "mikey179/vfsstream": "^1.6",
-        "phpunit/phpunit": "^10.5.16"
+        "nikic/php-parser": "5.8.0",
+        "phpstan/phpstan": "2.2.16",
+        "phpunit/phpunit": "^10.5.16",
+        "rector/rector": "2.6.7",
+        "slevomat/coding-standard": "8.31.1",
+        "squizlabs/php_codesniffer": "4.0.4",
+        "symfony/finder": "8.1.8"
     },
     "autoload": {
         "psr-4": {
@@ -45,10 +52,14 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\Support\\": "tests/_support"
+            "Tests\\Support\\": "tests/_support",
+            "Quality\\": "scripts/Quality/"
         }
     },
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false
+        },
         "platform": {
             "php": "8.5.12"
         },

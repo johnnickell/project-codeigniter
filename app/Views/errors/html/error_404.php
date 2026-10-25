@@ -1,3 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,9 +79,9 @@
 
         <p>
             <?php if (ENVIRONMENT !== 'production') : ?>
-                <?= nl2br(esc($message)) ?>
+                                        <?= nl2br(esc($message)) ?>
             <?php else : ?>
-                <?= lang('Errors.sorryCannotFind') ?>
+                                        <?= lang('Errors.sorryCannotFind') ?>
             <?php endif; ?>
         </p>
     </div>

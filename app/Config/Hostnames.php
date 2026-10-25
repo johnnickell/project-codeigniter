@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
+/**
+ * Class Hostnames
+ */
 class Hostnames
 {
     // List of known two-part TLDs for subdomain extraction
@@ -35,6 +40,6 @@ class Hostnames
         'com.bd', 'net.bd', 'org.bd', 'ac.bd', 'gov.bd', 'mil.bd',
         'com.ar', 'net.ar', 'org.ar', 'gov.ar', 'edu.ar', 'mil.ar',
         'gob.cl', 'com.pl', 'net.pl', 'org.pl', 'gov.pl', 'edu.pl',
-        'co.ir', 'ac.ir', 'org.ir', 'id.ir', 'gov.ir', 'sch.ir', 'net.ir',
+        'co.ir', 'ac.ir', 'org.ir', 'id.ir', 'gov.ir', 'sch.ir', 'net.ir'
     ];
 }

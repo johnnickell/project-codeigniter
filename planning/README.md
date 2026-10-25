@@ -43,14 +43,17 @@ stable pair and security refresh; the second now has an approved three-TASK deco
 [TASK-00016](tasks/00016-TASK.md) for one complete test run collecting coverage, aiming for 100% primarily through
 units with integration contribution, and [TASK-00017](tasks/00017-TASK.md) for complete once-only read-only gate
 orchestration after both. Its provider-check inventory explicitly assigns applicable checks, N/A and deferred
-upstream advisors. No enforcement implementation has started; use the Board for execution selection, with exact
-tools/configuration and coverage still requiring target evidence. The third is locally implemented through
+upstream advisors. TASK-00015's candidate A has independent Review acceptance and applicable non-visual QA PASS,
+with [qualified tool versions, paths and exceptions](agents/php-standards.md). At its administrative-closeout
+checkpoint, publication and final remote-head verification remain pending in the TASK's durable Land receipt;
+TASK-00016 is next in the executable Board frontier. Coverage and stronger orchestration remain unfinished. The third is locally implemented through
 [TASK-00013](tasks/00013-TASK.md) and the [target binding](agents/shared-workflows.md). Its parent closes
 automatically; independent Review accepted and applicable QA passed for the accepted candidate, and
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Hosted checks
 are optional and unrun. Source walkthroughs and safe discovery/status checks are labeled separately from
 unavailable live native selection/resume and child/log qualification; this is not full Pi capability certification.
-Enforcement TASK-00015/00016/00017 are allocated but not implemented; decomposition is not adoption completion.
+Enforcement TASK-00015 is locally implemented; TASK-00016/00017 remain unfinished. Neither decomposition nor
+the first coding rollout completes adoption.
 Package dependencies changed in TASK-00014, not in these planning operations.
 Investigation completion may close its narrowed parent, but cannot close the broader adoption EPIC while these
 requirements remain unfinished. Use the

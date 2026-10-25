@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support\Models;
 
 use CodeIgniter\Model;
 
+/**
+ * Class ExampleModel
+ */
 class ExampleModel extends Model
 {
     protected $table          = 'factories';
@@ -15,7 +20,7 @@ class ExampleModel extends Model
         'uid',
         'class',
         'icon',
-        'summary',
+        'summary'
     ];
     protected $useTimestamps      = true;
     protected $validationRules    = [];

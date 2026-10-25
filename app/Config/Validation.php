@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
@@ -8,6 +10,9 @@ use CodeIgniter\Validation\StrictRules\FileRules;
 use CodeIgniter\Validation\StrictRules\FormatRules;
 use CodeIgniter\Validation\StrictRules\Rules;
 
+/**
+ * Class Validation
+ */
 class Validation extends BaseConfig
 {
     // --------------------------------------------------------------------
@@ -24,9 +29,8 @@ class Validation extends BaseConfig
         Rules::class,
         FormatRules::class,
         FileRules::class,
-        CreditCardRules::class,
+        CreditCardRules::class
     ];
-
     /**
      * Specifies the views that are used to display the
      * errors.
@@ -35,7 +39,7 @@ class Validation extends BaseConfig
      */
     public array $templates = [
         'list'   => 'CodeIgniter\Validation\Views\list',
-        'single' => 'CodeIgniter\Validation\Views\single',
+        'single' => 'CodeIgniter\Validation\Views\single'
     ];
 
     // --------------------------------------------------------------------

@@ -1,0 +1,61 @@
+deptrac:
+  paths:
+    - ./app
+  analyser:
+    types:
+      - class
+      - function
+      - function_call
+      - file
+      - use
+  layers:
+    - name: Controllers
+      collectors:
+        - type: directory
+          value: app/Controllers/.*
+    - name: PresentationSupport
+      collectors:
+        - type: directory
+          value: app/Services/StarterGreeting\.php$
+    - name: Composition
+      collectors:
+        - type: directory
+          value: app/Config/.*
+    - name: Templates
+      collectors:
+        - type: directory
+          value: app/Views/.*
+    - name: NativeFunctions
+      collectors:
+        - type: directory
+          value: app/(Common|Language/.*)\.php$
+    - name: CommonDomain
+      collectors:
+        - type: classLike
+          value: ^Fight\\Common\\Domain\\.*
+    - name: CommonApplication
+      collectors:
+        - type: classLike
+          value: ^Fight\\Common\\Application\\.*
+    - name: CommonAdapters
+      collectors:
+        - type: classLike
+          value: ^Fight\\Common\\Adapter\\.*
+    - name: Framework
+      collectors:
+        - type: classLike
+          value: ^(CodeIgniter|Kint)\\.*
+    - name: LoggingContract
+      collectors:
+        - type: classLike
+          value: ^Psr\\Log\\.*
+    - name: Providers
+      collectors:
+        - type: classLike
+          value: ^(Symfony|Twig|Twilio|GuzzleHttp|League|Psr\\Http)\\.*
+  ruleset:
+    Controllers: [PresentationSupport, Framework, LoggingContract]
+    PresentationSupport: []
+    Composition: [PresentationSupport, Framework, LoggingContract, Providers, CommonDomain, CommonApplication, CommonAdapters]
+    Templates: [Framework]
+    NativeFunctions: []

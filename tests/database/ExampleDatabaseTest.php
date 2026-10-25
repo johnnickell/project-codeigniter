@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Tests\Database;
+
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
+use stdClass;
 use Tests\Support\Database\Seeds\ExampleSeeder;
 use Tests\Support\Models\ExampleModel;
 
@@ -39,7 +44,9 @@ final class ExampleDatabaseTest extends CIUnitTestCase
         $this->assertNull($model->find($object->id));
 
         // ... but it should still be in the database
-        $result = $model->builder()->where('id', $object->id)->get()->getResult();
+        $query = $model->builder()->where('id', $object->id)->get();
+        self::assertNotFalse($query);
+        $result = $query->getResult();
 
         $this->assertCount(1, $result);
     }

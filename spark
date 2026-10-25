@@ -10,6 +10,8 @@
  * the LICENSE file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 use CodeIgniter\Boot;
 use Config\Paths;
 
@@ -43,7 +45,7 @@ if (version_compare(PHP_VERSION, $minPhpVersion, '<')) {
     $message = sprintf(
         'Your PHP version must be %s or higher to run CodeIgniter. Current version: %s',
         $minPhpVersion,
-        PHP_VERSION,
+        PHP_VERSION
     );
 
     exit($message);
@@ -60,7 +62,7 @@ ini_set('display_errors', '1');
  */
 
 // Path to the front controller
-define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+define('FCPATH', __DIR__.DIRECTORY_SEPARATOR.'public'.DIRECTORY_SEPARATOR);
 
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);
@@ -76,12 +78,12 @@ chdir(FCPATH);
 
 // LOAD OUR PATHS CONFIG FILE
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
+require FCPATH.'../app/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
 
 $paths = new Paths();
 
 // LOAD THE FRAMEWORK BOOTSTRAP FILE
-require $paths->systemDirectory . '/Boot.php';
+require $paths->systemDirectory.'/Boot.php';
 
 exit(Boot::bootSpark($paths));

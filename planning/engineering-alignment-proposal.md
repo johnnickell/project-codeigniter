@@ -16,8 +16,10 @@ exact Unit-only 100% and a separate hard Domain/Application-only threshold are n
 versions, driver, analysis settings and exceptions below remain recommendations to qualify, not individually
 approved facts. The maintainer subsequently approved
 [TASK-00015/00016/00017](tickets/00009-TICKET.md#approved-task-decomposition), now written for coding checks,
-single-run coverage and complete read-only orchestration respectively. Implementation has not started; select
-execution through the TASK Board. The original proposal below is retained as evidence of its original scope and
+single-run coverage and complete read-only orchestration respectively. TASK-00015's candidate A has independent
+Review acceptance and applicable non-visual QA PASS, with [qualified native rules/exceptions](agents/php-standards.md).
+At the administrative-closeout checkpoint, publication and final remote-head verification remain pending in its
+durable Land receipt; coverage and stronger orchestration remain unfinished. Select execution through the TASK Board. The original proposal below is retained as evidence of its original scope and
 recommendations.
 
 Read this with [TICKET-00009](tickets/00009-TICKET.md)'s current engineering contract, not as permission to

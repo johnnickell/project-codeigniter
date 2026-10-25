@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Config\Publisher as BasePublisher;
 
 /**
+ * Class Publisher
+ *
  * Publisher Configuration
  *
  * Defines basic security restrictions for the Publisher class
@@ -23,6 +27,7 @@ class Publisher extends BasePublisher
      */
     public $restrictions = [
         ROOTPATH => '*',
-        FCPATH   => '#\.(s?css|js|map|html?|xml|json|webmanifest|ttf|eot|woff2?|gif|jpe?g|tiff?|png|webp|bmp|ico|svg)$#i',
+        // phpcs:ignore Generic.Files.LineLength -- Keep the native extension pattern literal.
+        FCPATH   => '#\.(s?css|js|map|html?|xml|json|webmanifest|ttf|eot|woff2?|gif|jpe?g|tiff?|png|webp|bmp|ico|svg)$#i'
     ];
 }

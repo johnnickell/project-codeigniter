@@ -5,13 +5,22 @@ Prepare the CodeIgniter runtime and locked dependencies before testing:
 ```sh
 ./bin/up
 ./bin/composer install --no-interaction --prefer-dist --no-progress
-./bin/phpunit
-./bin/phpunit --filter 'FightCommonIntegrationTest|FightTransactionIntegrationTest|HelloWorldTest'
 ./bin/build
 ```
 
 PHPUnit 10 uses CodeIgniter's native test bootstrap and helpers. `./bin/phpunit` is a focused iteration tool;
 only `./bin/build` is the complete local/hosted gate. Neither command installs or updates dependencies.
+The gate runs PHPUnit exactly once, unfiltered. Optional focused iteration is separate, not a canonical phase:
+
+```sh
+./bin/phpunit --filter 'FightCommonIntegrationTest|FightTransactionIntegrationTest|HelloWorldTest'
+```
+
+Tests use `Tests\\Feature`, `Tests\\Database`, `Tests\\Session` and `Tests\\Unit` namespaces while preserving
+native discovery and the existing single-suite layout. The two Fight integration files retain scenario-local
+doubles. See [PHP standards](../planning/agents/php-standards.md) for analysis boundaries and narrow exceptions.
+TASK-00015 retains every existing test and integration outcome; its extra assertions establish usable native
+query results before inspecting them. This is not a coverage claim or suite reorganization.
 
 ## Test boundaries
 

@@ -38,3 +38,19 @@ preserve causes and can retain diagnostic text; intercepted failure tests do not
 
 StreamId tuple/hash/JSON migration consequences are documented in the [README](README.md#stable-package-baseline).
 No repositories, schema/data migrations, new package capabilities or Wayfinder decisions are selected here.
+
+## Maintained native dependency checks
+
+TASK-00015 enforces the current responsibility map through `deptrac.yaml`: controllers depend on framework,
+logging and presentation support; `StarterGreeting` has no outward dependencies; configuration is the concrete
+composition root; views and native procedural registration remain explicit outer seams. Common Domain,
+Application and Adapter contracts are separate external layers, not a universal `Fight\\` allowance. There is no
+owned Domain/Application layer today. New unclassified source fails the unassigned-token check and needs a
+reviewed responsibility/ruleset rather than a catch-all collector.
+
+Reusable router, Guzzle, Twig and local-storage collaborators now use native shared registrations. Queue delivery
+still traverses the synchronous pipelines; selected connection/request/response lifecycles remain native.
+Dependency analysis cannot resolve dynamic service/view names or prove transaction, authorization or package
+ownership semantics. Review these explicitly. [PHP standards](planning/agents/php-standards.md) owns scan paths,
+precise tool adaptations/exceptions and their revisit triggers. No runtime analysis shim or second container is
+introduced.

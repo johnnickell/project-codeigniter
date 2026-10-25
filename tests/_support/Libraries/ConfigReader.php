@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Support\Libraries;
 
 use Config\App;
@@ -13,6 +15,9 @@ use Config\App;
  */
 class ConfigReader extends App
 {
+    /**
+     * Constructs ConfigReader
+     */
     public function __construct()
     {
     }

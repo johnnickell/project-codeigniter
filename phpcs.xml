@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<ruleset name="CodeIgniterStarter">
+    <description>Installed Fight Common rules on maintained native PHP</description>
+    <config name="installed_paths" value="vendor/slevomat/coding-standard,vendor/johnnickell/fight-common/src/Standards/Phpcs" />
+    <arg name="extensions" value="php" />
+    <file>app</file>
+    <file>tests</file>
+    <file>scripts</file>
+    <file>public</file>
+    <file>spark</file>
+    <file>preload.php</file>
+    <file>rector.php</file>
+    <rule ref="vendor/johnnickell/fight-common/src/Standards/Phpcs/ruleset.xml" />
+    <rule ref="PSR1.Methods.CamelCapsMethodName">
+        <exclude-pattern>tests/*</exclude-pattern>
+    </rule>
+    <!-- PHPUnit discovery names and colocated scenario doubles are intentional. -->
+    <rule ref="Squiz.Commenting.FunctionComment.Missing">
+        <exclude-pattern>tests/*</exclude-pattern>
+        <exclude-pattern>scripts/verify-production-profile.php</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
+        <exclude-pattern>tests/feature/FightCommonIntegrationTest.php</exclude-pattern>
+        <exclude-pattern>tests/feature/FightTransactionIntegrationTest.php</exclude-pattern>
+    </rule>
+    <!-- Native entrypoints define constants as part of boot. -->
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>app/Config/Boot/*</exclude-pattern>
+        <exclude-pattern>public/index.php</exclude-pattern>
+        <exclude-pattern>spark</exclude-pattern>
+        <exclude-pattern>preload.php</exclude-pattern>
+        <exclude-pattern>scripts/verify-production-profile.php</exclude-pattern>
+        <exclude-pattern>scripts/analysis-bootstrap.php</exclude-pattern>
+    </rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>preload.php</exclude-pattern>
+    </rule>
+    <rule ref="Squiz.Classes.ValidClassName.NotPascalCase">
+        <exclude-pattern>preload.php</exclude-pattern>
+    </rule>
+    <!-- Native data tables, renderer markup, and upstream doc examples retain literal lines. -->
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>app/Config/DocTypes.php</exclude-pattern>
+        <exclude-pattern>app/Views/errors/html/error_exception.php</exclude-pattern>
+        <exclude-pattern>app/Views/welcome_message.php</exclude-pattern>
+    </rule>
+</ruleset>

@@ -2,20 +2,31 @@
 
 declare(strict_types=1);
 
+namespace Tests\Feature;
+
 use CodeIgniter\Database\BaseConnection;
 use CodeIgniter\Test\CIUnitTestCase;
+use DomainException;
 use Fight\Common\Adapter\Persistence\CodeIgniter\CodeIgniterTransactionalUnitOfWork;
+use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
+use RuntimeException;
+use stdClass;
 
-/** Tests the selected adapter's failure contract; doubles do not prove database outcomes. */
+/**
+ * Tests the selected adapter's failure contract; doubles do not prove database outcomes
+ */
 final class FightTransactionIntegrationTest extends CIUnitTestCase
 {
+    /**
+     * @param 'transBegin'|'transStatus'|'transCommit' $method
+     */
     #[DataProvider('transactionFailures')]
     public function test_transaction_method_failures_do_not_run_or_publish_unconfirmed_work(
         string $method,
         bool $throws,
         bool $callbackRuns,
-        bool $cleanup,
+        bool $cleanup
     ): void {
         $connection = $this->connection();
         $failure = new RuntimeException('transaction acknowledgement failed');
@@ -32,10 +43,13 @@ final class FightTransactionIntegrationTest extends CIUnitTestCase
         $ran = false;
         $published = false;
         try {
-            (new CodeIgniterTransactionalUnitOfWork($connection))->commitTransactional(static function () use (&$ran): string {
-                $ran = true;
-                return 'unconfirmed';
-            });
+            (new CodeIgniterTransactionalUnitOfWork($connection))->commitTransactional(
+                static function () use (&$ran): string {
+                    $ran = true;
+
+                    return 'unconfirmed';
+                }
+            );
             $published = true;
             self::fail('Unconfirmed work must not return as committed.');
         } catch (RuntimeException $caught) {
@@ -53,6 +67,9 @@ final class FightTransactionIntegrationTest extends CIUnitTestCase
         self::assertFalse($published);
     }
 
+    /**
+     * @return iterable<string, array{'transBegin'|'transStatus'|'transCommit', bool, bool, bool}>
+     */
     public static function transactionFailures(): iterable
     {
         yield 'begin false' => ['transBegin', false, false, false];
@@ -90,6 +107,9 @@ final class FightTransactionIntegrationTest extends CIUnitTestCase
         }
     }
 
+    /**
+     * @return iterable<array{string}>
+     */
     public static function cleanupFailures(): iterable
     {
         yield ['rollback false'];
@@ -123,18 +143,40 @@ final class FightTransactionIntegrationTest extends CIUnitTestCase
                 } catch (LogicException $caught) {
                     self::assertSame('Nested transactional execution is not supported.', $caught->getMessage());
                 }
+
                 return 'confirmed';
             });
             self::assertSame('confirmed', $result);
             self::assertSame(0, $db->transDepth);
             $observed = [];
             $dispatcher = service('fightSynchronousEventDispatcher');
-            $dispatcher->register(new class($db, $observed) implements \Fight\Common\Application\Messaging\Event\EventSubscriber {
-                public function __construct(private BaseConnection $db, private array &$observed) {}
-                public static function eventRegistration(): array { return [TransactionCommittedEvent::class => 'publish']; }
+            $dispatcher->register(new class ($db, $observed) implements
+                \Fight\Common\Application\Messaging\Event\EventSubscriber
+            {
+                /**
+                 * @param BaseConnection $db
+                 * @param array $observed
+                 *
+                 * @phpstan-param BaseConnection<mixed, mixed> $db
+                 * @phpstan-param list<mixed> $observed
+                 */
+                public function __construct(
+                    private BaseConnection $db,
+                    // Assertions read the referenced collection outside this double.
+                    private array &$observed // @phpstan-ignore property.onlyWritten
+                ) {
+                }
+                public static function eventRegistration(): array
+                {
+                    return [TransactionCommittedEvent::class => 'publish'];
+                }
                 public function publish(\Fight\Common\Domain\Messaging\Event\EventMessage $message): void
                 {
-                    $this->observed = [$this->db->transDepth, $this->db->table('transaction_ordering')->get()->getRow()->value];
+                    $query = $this->db->table('transaction_ordering')->get();
+                    FightTransactionIntegrationTest::assertNotFalse($query);
+                    $row = $query->getRow();
+                    FightTransactionIntegrationTest::assertIsObject($row);
+                    $this->observed = [$this->db->transDepth, $row->value];
                     throw new RuntimeException('subscriber failed after commit');
                 }
             });
@@ -174,17 +216,38 @@ final class FightTransactionIntegrationTest extends CIUnitTestCase
         }
     }
 
+    /**
+     * @return BaseConnection<mixed, mixed>&\PHPUnit\Framework\MockObject\MockObject
+     */
     private function connection(): BaseConnection
     {
         return $this->getMockBuilder(BaseConnection::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['getConnection', 'transBegin', 'transStatus', 'transCommit', 'transRollback', 'resetTransStatus'])
+            ->onlyMethods([
+                'getConnection', 'transBegin', 'transStatus', 'transCommit', 'transRollback', 'resetTransStatus'
+            ])
             ->getMockForAbstractClass();
     }
 }
 
+/**
+ * Class TransactionCommittedEvent
+ */
 final class TransactionCommittedEvent implements \Fight\Common\Domain\Messaging\Event\Event
 {
-    public static function fromArray(array $data): static { return new self(); }
-    public function toArray(): array { return []; }
+    /**
+     * @inheritDoc
+     */
+    public static function fromArray(array $data): static
+    {
+        return new self();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function toArray(): array
+    {
+        return [];
+    }
 }

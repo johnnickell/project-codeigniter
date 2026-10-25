@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use CodeIgniter\Modules\Modules as BaseModules;
 
 /**
+ * Class Modules
+ *
  * Modules Configuration.
  *
  * NOTE: This class is required prior to Autoloader instantiation,
@@ -24,7 +28,6 @@ class Modules extends BaseModules
      * @var bool
      */
     public $enabled = true;
-
     /**
      * --------------------------------------------------------------------------
      * Enable Auto-Discovery Within Composer Packages?
@@ -36,7 +39,6 @@ class Modules extends BaseModules
      * @var bool
      */
     public $discoverInComposer = true;
-
     /**
      * The Composer package list for Auto-Discovery
      * This setting is optional.
@@ -59,7 +61,6 @@ class Modules extends BaseModules
      * @var array{only?: list<string>, exclude?: list<string>}
      */
     public $composerPackages = [];
-
     /**
      * --------------------------------------------------------------------------
      * Auto-Discovery Rules
@@ -77,6 +78,6 @@ class Modules extends BaseModules
         'filters',
         'registrars',
         'routes',
-        'services',
+        'services'
     ];
 }
