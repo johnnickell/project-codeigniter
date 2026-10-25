@@ -1,11 +1,30 @@
 # CodeIgniter engineering alignment — proposal
 
-**2026-10-24 · TASK-00010 · proposed, not enforced or accepted concrete policy.**
+**2026-10-24 · TASK-00010 · historical proposal, not implemented enforcement.**
 
-Read this when deciding [TICKET-00009](tickets/00009-TICKET.md)'s engineering contract, not as permission to
-change code or install tools. Adoption by default is approved; the recommendations and exceptions below still
-need maintainer acceptance. [TICKET-00007](tickets/00007-TICKET.md) owns this artifact;
-[TASK-00010](tasks/00010-TASK.md) records its local verification. No new enforcement TASKs are allocated.
+## Current decision overlay
+
+The maintainer subsequently accepted the engineering direction in
+[TICKET-00009's decision record](tickets/00009-TICKET.md#maintainer-decision--recorded-2026-10-24):
+run the complete suite exactly once, collect coverage in that run and aim for 100% meaningful owned-behavior
+coverage, primarily from units with integration contribution allowed. Keep CodeIgniter native. Use Fight Common's
+PHPCS standard, Deptrac, PHPStan and Rector, and inventory/adapt Fight Agent OS's existing and planned checks.
+Build on the already implemented package baseline and shared binding rather than redo them.
+
+That decision supersedes this proposal's unresolved coverage choice and acceptance questions. In particular,
+exact Unit-only 100% and a separate hard Domain/Application-only threshold are not the selected policy. Concrete
+versions, driver, analysis settings and exceptions below remain recommendations to qualify, not individually
+approved facts. The maintainer subsequently approved
+[TASK-00015/00016/00017](tickets/00009-TICKET.md#approved-task-decomposition), now written for coding checks,
+single-run coverage and complete read-only orchestration respectively. Implementation has not started; select
+execution through the TASK Board. The original proposal below is retained as evidence of its original scope and
+recommendations.
+
+Read this with [TICKET-00009](tickets/00009-TICKET.md)'s current engineering contract, not as permission to
+change code or install tools. At proposal delivery, adoption by default was approved but concrete choices awaited
+maintainer acceptance. [TICKET-00007](tickets/00007-TICKET.md) owns this artifact;
+[TASK-00010](tasks/00010-TASK.md) records its original local verification; current enforcement planning is owned
+by TICKET-00009 and its new TASKs.
 Local [architecture](../ARCHITECTURE.md), [instructions](../AGENTS.md) and
 [planning conventions](CONVENTIONS.md) remain canonical.
 
@@ -331,7 +350,7 @@ historical approval records. TICKET-00009 keeps the unresolved acceptance/enforc
 
 ## 8. Decisions, exceptions and outcome-based implementation boundaries
 
-**Maintainer decisions under TICKET-00009, before TASK allocation:**
+**Original maintainer questions under TICKET-00009 (subsequently resolved by the current decision overlay):**
 
 - **D1 — Coverage:** accept B's exact meaningful Domain/Application line threshold, separate unit attribution and
   practical counted outer/support goal, or retain A's stricter Unit-only obligation. Accept denominator/exclusions,

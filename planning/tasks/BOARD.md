@@ -32,8 +32,14 @@ Separately authorized [TASK-00010](00010-TASK.md) delivers the
 completed dependency edge is preserved. Local verification, independent review acceptance and applicable QA PASS
 are recorded in the TASK; PR publication and human review/merge remain separate delivery facts. Hosted checks are
 optional for this TASK and have not been run.
-[TICKET-00009](../tickets/00009-TICKET.md) retains maintainer acceptance of proposal decisions D1–D4 and actual
-enforcement. Exact Unit-only versus meaningful all-suite coverage remains a human choice, not an enforced rule.
+[TICKET-00009](../tickets/00009-TICKET.md#maintainer-decision--recorded-2026-10-24) now records the maintainer's
+accepted engineering direction: one complete suite execution collecting coverage, aiming for 100% meaningful
+owned-behavior coverage primarily from units with integration contribution; native CodeIgniter; Fight Common
+PHPCS, Deptrac, PHPStan, Rector and applicable existing/planned Agent OS checks. The maintainer approved the
+[three-TASK decomposition](../tickets/00009-TICKET.md#approved-task-decomposition):
+[TASK-00015](00015-TASK.md) delivers coding/architecture checks, [TASK-00016](00016-TASK.md) delivers single-run
+coverage, and [TASK-00017](00017-TASK.md) strengthens the complete read-only gate after both. Implementation
+has not started; TASK-00015 is first in Board order and its TASK-00014 prerequisite is complete.
 The separately authorized [TASK-00013](00013-TASK.md#current-delivery-status) delivered the
 [Pi/shared-skill compatibility requirement](../tickets/00010-TICKET.md#current-delivery-handoff) in the selected
 main checkout; automatic parent completion closes TICKET-00010. Independent Review accepted and applicable QA
@@ -41,8 +47,10 @@ passed the acceptance candidate. [PR #16](https://github.com/johnnickell/project
 against `develop` and awaits human review/merge; hosted checks are optional and unrun. None is implied by `done`;
 native selection/resume and Herdr child/log qualification remain unperformed. Its original seven planning paths
 were included in TASK-00009's commit by explicit instruction before the later Build implementation authority.
-Package-upgrade decomposition is complete through TASK-00014. Enforcement decomposition still awaits the
-delivered proposal's D1–D4 contract decisions. No enforcement TASKs were allocated.
+Package-upgrade decomposition is complete through TASK-00014. Enforcement decomposition is now complete through
+TASK-00015/00016/00017, with the [provider-check inventory](../tickets/00009-TICKET.md#existing-and-planned-provider-check-inventory)
+assigning applicable check outcomes, justified N/A and deferred upstream advisors. Planning approval is not
+execution authority; unavailable planned advisors are not claimed as delivered.
 The [adoption EPIC](../epics/00002-EPIC.md) remains `needs-info`, even when its investigation artifacts complete.
 
 Planning migration is locally complete in [TASK-00008](00008-TASK.md); independent review remains pending.
@@ -63,13 +71,14 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| None | — | — | — | — | — | — |
+| 1 | [TASK-00015](00015-TASK.md) | Enforce native PHP coding and architecture standards | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | — | — |
+| 2 | [TASK-00016](00016-TASK.md) | Collect meaningful coverage in one complete test run | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | — | — |
 
 ## Waiting
 
 | Order | TASK ID | Title | Parent TICKET | Status | Blocked by | PR |
 |---|---|---|---|---|---|---|
-| None | — | — | — | — | — | — |
+| 3 | [TASK-00017](00017-TASK.md) | Enforce a complete once-only read-only build locally and in CI | [TICKET-00009 — Enforce the CodeIgniter-adapted Agent OS engineering contract](../tickets/00009-TICKET.md) | ready-for-agent | [TASK-00015](00015-TASK.md), [TASK-00016](00016-TASK.md) | — |
 
 ## Needs Info
 
