@@ -13,8 +13,9 @@ remain pending. Use the new hierarchy to keep remaining adoption explicit:
    AccessControl v0.8.0 and a narrow HttpFoundation 8.1.9 security refresh. TASK-00009 has independent review
    acceptance, QA PASS and is merged in the selected base. The maintainer subsequently accepted the concrete
    migration/security/consumer scope and single-TASK decomposition: [TASK-00014](tasks/00014-TASK.md) now
-   implements the exact pair/security refresh with a passing local gate (26 tests / 127 assertions). Independent
-   Review, applicable QA and delivery remain outstanding.
+   implements the exact pair/security refresh with a passing local gate (26 tests / 127 assertions). Candidate A
+   has independent Review acceptance and applicable non-visual QA PASS; authorized delivery publication and final
+   remote-head verification remain pending.
    Separately authorized [TASK-00010](tasks/00010-TASK.md) delivers the
    [engineering proposal](engineering-alignment-proposal.md), not permission to upgrade packages or enforce
    undecided policy. Its local verification, independent review acceptance and applicable QA PASS are recorded in
@@ -36,8 +37,9 @@ requirements are tracked, not marked complete or silently enforced.
   TASK-00009's dated Common 1.4.0 / AccessControl 0.8.0 proposal, narrow HttpFoundation 8.1.9 security refresh and
   bounded consumer scope. [TASK-00014](tasks/00014-TASK.md) now completes the dependency/native-composition/
   verification/documentation slice locally; automatic parent completion closes TICKET-00008. Exactly three package
-  entries changed; native factories remain compatible. Independent Review and applicable QA are next, not
-  self-issued acceptance or delivery. Broader engineering adoption remains unfinished.
+  entries changed; native factories remain compatible. Candidate A has independent Review acceptance and applicable
+  non-visual QA PASS; authorized delivery publication and final remote-head verification are next. Broader
+  engineering adoption remains unfinished.
 - [TICKET-00009](tickets/00009-TICKET.md#decisions-and-progress): actual engineering enforcement. TASK
   decomposition awaits maintainer acceptance of TASK-00010's delivered proposal decisions D1–D4: competing
   coverage policies, native scope/exceptions, sourced candidate tools/gate phases and coordination. Target tool
@@ -51,8 +53,9 @@ requirements are tracked, not marked complete or silently enforced.
   TASK-00009 by explicit instruction; implementation authority came later from the user's Build invocation.
 
 The narrowed TICKET-00006/00007 investigations may complete without completing these delivery requirements.
-Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00014 is locally
-complete and awaits independent Review/QA; engineering-enforcement decomposition still requires TICKET-00009's
+Unfinished child TICKETs keep EPIC-00002 open under unchanged automatic parent completion. TASK-00014 candidate A
+has independent Review acceptance and applicable non-visual QA PASS; delivery publication and final remote-head
+verification remain with authorized Land. Engineering-enforcement decomposition still requires TICKET-00009's
 D1–D4 decisions.
 No full adoption decomposition or completion is claimed; the unrelated application Wayfinder stays gated.
 

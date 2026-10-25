@@ -24,9 +24,10 @@ selected TASK-00010 base. The maintainer subsequently accepted the exact release
 single-TASK decomposition under [TICKET-00008](../tickets/00008-TICKET.md).
 [TASK-00014 — Adopt the qualified stable Fight package baseline](00014-TASK.md) now implements Common 1.4.0 /
 AccessControl 0.8.0 and the narrow HttpFoundation 8.1.9 refresh in the authorized current checkout, including
-consumer verification and documentation. The local gate passes (26 tests / 127 assertions); independent Review
-and applicable QA remain outstanding before delivery. Native factories remain compatible. Automatic parent
-completion closes TICKET-00008, not the adoption EPIC.
+consumer verification and documentation. The local gate passes (26 tests / 127 assertions); candidate A has
+independent Review acceptance and applicable non-visual QA PASS. Authorized delivery publication and final
+remote-head verification remain pending. Native factories remain compatible. Automatic parent completion closes
+TICKET-00008, not the adoption EPIC.
 
 Separately authorized [TASK-00010](00010-TASK.md) delivers the
 [CodeIgniter engineering proposal](../engineering-alignment-proposal.md) using TASK-00009's findings; its

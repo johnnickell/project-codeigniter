@@ -106,8 +106,9 @@ and the [adoption EPIC](planning/epics/00002-EPIC.md) for scope and unresolved d
 Adoption of shared engineering, delivery and Pi/skill conventions is approved by default, with explicit
 CodeIgniter adaptations. Upgrading both Fight packages to their **latest mutually compatible stable releases**
 is the destination; exact releases must be qualified before implementation. TASK-00014 implements the accepted
-stable pair and security refresh with local consumer verification; independent Review, applicable QA and delivery
-remain separate. Engineering enforcement is **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
+stable pair and security refresh with local consumer verification; candidate A has independent Review acceptance
+and applicable non-visual QA PASS, while delivery publication and final remote-head verification remain separate
+Land work. Engineering enforcement is **not complete**. The [shared Pi binding](planning/agents/shared-workflows.md) supplies target
 substitutions, native selection/retained RPC boundaries and runtime-file hygiene;
 [TASK-00013](planning/tasks/00013-TASK.md#current-delivery-status) records accepted local delivery evidence;
 [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) awaits human review/merge. Native capability
