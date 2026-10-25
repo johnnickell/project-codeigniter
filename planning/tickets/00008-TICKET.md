@@ -84,7 +84,7 @@ verification and documentation in one PR. No evidenced compatibility boundary wa
 TASK-00009 dependency is preserved. TASK-00014 subsequently rechecked releases on 2026-10-25 and installed the exact stable pair plus HttpFoundation
 8.1.9, with exactly three updated package entries and no other dependency drift. Focused tests and the full local
 gate pass (26 tests / 127 assertions), with explicit transaction/provider/JSend/StreamId limits in the TASK.
-Native service factories need no adaptation. Candidate A has independent Review acceptance and applicable non-visual QA PASS; authorized delivery publication and final remote-head verification remain pending. Broader application journeys and Wayfinder decisions remain separate.
+Native service factories need no adaptation. Candidate A has independent Review acceptance and applicable non-visual QA PASS; [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun. Broader application journeys and Wayfinder decisions remain separate.
 
 TASK decomposition and accepted-scope local implementation/verification are complete. Automatic parent
 completion closes this TICKET with TASK-00014 in the same operation; that does not assert independent acceptance

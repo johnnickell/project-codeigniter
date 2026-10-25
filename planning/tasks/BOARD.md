@@ -25,9 +25,7 @@ single-TASK decomposition under [TICKET-00008](../tickets/00008-TICKET.md).
 [TASK-00014 — Adopt the qualified stable Fight package baseline](00014-TASK.md) now implements Common 1.4.0 /
 AccessControl 0.8.0 and the narrow HttpFoundation 8.1.9 refresh in the authorized current checkout, including
 consumer verification and documentation. The local gate passes (26 tests / 127 assertions); candidate A has
-independent Review acceptance and applicable non-visual QA PASS. Authorized delivery publication and final
-remote-head verification remain pending. Native factories remain compatible. Automatic parent completion closes
-TICKET-00008, not the adoption EPIC.
+independent Review acceptance and applicable non-visual QA PASS. [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification; hosted checks are optional and unrun. Native factories remain compatible. Automatic parent completion closes TICKET-00008, not the adoption EPIC.
 
 Separately authorized [TASK-00010](00010-TASK.md) delivers the
 [CodeIgniter engineering proposal](../engineering-alignment-proposal.md) using TASK-00009's findings; its
@@ -98,7 +96,7 @@ acceptance; no Wayfinder decision or external prerequisite was closed here.
 | 1 | [TASK-00008](00008-TASK.md) | Migrate planning to the EPIC TICKET TASK structure | [TICKET-00005 — Adopt the EPIC TICKET TASK planning structure](../tickets/00005-TICKET.md) | done | — | [PR #9](https://github.com/johnnickell/project-codeigniter/pull/9) |
 | 1 | [TASK-00009](00009-TASK.md) | Qualify the latest stable Fight package baseline | [TICKET-00006 — Qualify the latest stable Fight package upgrade](../tickets/00006-TICKET.md) | done | — | [PR #14](https://github.com/johnnickell/project-codeigniter/pull/14) |
 | 1 | [TASK-00012](00012-TASK.md) | Raise the PHP and NGINX security baseline | — (standalone bug) | done | — | [PR #13](https://github.com/johnnickell/project-codeigniter/pull/13) |
-| 1 | [TASK-00014](00014-TASK.md) | Adopt the qualified stable Fight package baseline | [TICKET-00008 — Upgrade both Fight packages to the qualified latest stable releases](../tickets/00008-TICKET.md) | done | — | — |
+| 1 | [TASK-00014](00014-TASK.md) | Adopt the qualified stable Fight package baseline | [TICKET-00008 — Upgrade both Fight packages to the qualified latest stable releases](../tickets/00008-TICKET.md) | done | — | [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) |
 | 2 | [TASK-00010](00010-TASK.md) | Define the CodeIgniter engineering alignment contract | [TICKET-00007 — Specify the CodeIgniter-adapted engineering contract](../tickets/00007-TICKET.md) | done | — | [PR #15](https://github.com/johnnickell/project-codeigniter/pull/15) |
 | 3 | [TASK-00013](00013-TASK.md) | Integrate CodeIgniter's shared Pi workflow binding | [TICKET-00010 — Integrate the shared Pi skills and next-work conventions](../tickets/00010-TICKET.md) | done | — | [PR #16](https://github.com/johnnickell/project-codeigniter/pull/16) |
 | — | [TASK-00001](00001-TASK.md) | Establish the Governed CodeIgniter Starter Foundation | [TICKET-00001 — CodeIgniter Starter Product and Walking-Slice Acceptance](../tickets/00001-TICKET.md) | done | — | — |

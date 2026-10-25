@@ -28,7 +28,7 @@ future upgrade. Independent review accepted and applicable QA passed for qualifi
 subsequently accepted the migration/security/consumer scope and one-TASK decomposition through
 [TASK-00014](tasks/00014-TASK.md). It now implements that exact baseline with a passing local gate
 (26 tests / 127 assertions); candidate A has independent Review acceptance and applicable non-visual QA PASS,
-while authorized delivery publication and final remote-head verification remain pending.
+while [PR #17](https://github.com/johnnickell/project-codeigniter/pull/17) is open against `develop` for human review/merge after Land's final remote-head verification. Hosted checks are optional and unrun.
 Separately authorized [TASK-00010](tasks/00010-TASK.md) now delivers the sourced
 [engineering alignment proposal](engineering-alignment-proposal.md), using those findings without changing
 packages, tools, runtime or gates. Its local verification, independent review acceptance and applicable QA PASS
