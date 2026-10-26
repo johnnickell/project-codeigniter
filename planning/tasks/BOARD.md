@@ -1,5 +1,13 @@
 # TASK Board
 
+## Current delivery handoffs
+
+<!-- planning:delivery -->
+| Subject | Recorded delivery | Exact PR |
+|---|---|---|
+| None | — | — |
+<!-- /planning:delivery -->
+
 ## Routing index
 
 Read only current human decisions and active work below; otherwise the first ready TASK.
@@ -12,6 +20,16 @@ Use the generated sections for execution priority; records own status, order, pa
 See the [Roadmap Planning Frontier](../ROADMAP.md#planning-frontier) for undecided/decomposition work.
 
 ## Current human decision
+
+Current delivery reconciliation (2026-10-26): PRs [#12](https://github.com/johnnickell/project-codeigniter/pull/12),
+[#16](https://github.com/johnnickell/project-codeigniter/pull/16), [#17](https://github.com/johnnickell/project-codeigniter/pull/17)
+and [#19](https://github.com/johnnickell/project-codeigniter/pull/19) are verified MERGED into `develop` and
+integrated in this checkout's base `1416893f053e5e60a1e36055164f0f09ddef2eaa`. No merge action remains for them.
+Their original publication statements below are historical checkpoints, not current instructions or recurring
+live-query subjects. Acceptance/security/runtime qualification remains separate; the existing planning frontier
+is unchanged. Exact head/merge/time/ancestry observations belong to central TASK-00519's implementation evidence.
+
+### Preserved planning and publication checkpoints
 
 [TASK-00011](00011-TASK.md)'s adoption-by-default planning amendment has independent review acceptance and QA
 PASS; [PR #12](https://github.com/johnnickell/project-codeigniter/pull/12) is published for human review/merge.
