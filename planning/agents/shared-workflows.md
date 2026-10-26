@@ -39,6 +39,30 @@ work; missing QA prerequisites go to evidence recovery. Accepted work with QA sa
 missing publication authority goes to the human. Required-hosted-only evidence and administrative-closeout cases
 follow the provider's handoff/landing definitions with target semantics, not invented implementation changes.
 
+## Integrated delivery and resource retirement
+
+At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` before record
+edits under [current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs). Inspect affected authored
+Board/Roadmap/README claims separately; preserve historical checkpoints and independent reports. Routing uses
+read-only `--check-delivery`; exact MERGED/integrated `done` resolves without routine cleanup requests.
+Review/QA/routing never write; exceptional/uncertain states hold their affected action for the exact owner/input.
+
+Before reconciliation, pre-publication and final handoff bind the live default against CodeIgniter's `develop`
+policy and existing subject PR using the resolved provider's `.pi/skills/land/scripts/bind-target.py` with target
+`--root`, `--policy develop` and existing `--pr`/`--head`. Retain the observation and use the bound base throughout;
+stale `origin/HEAD` is not authority. Default/policy/PR conflicts need explicit disposition, not silent retargeting.
+
+Consume the provider's `docs/engineering/LANDING.md` cleanup-only intake, inventory/preservation, live-consumer,
+Git/Docker retirement and postcondition/resume contract (TASK-00534 plus qualified TASK-00537), alongside local
+gates. Publication, document synchronization and eligible local retirement are separate required obligations;
+held resources mean incomplete cleanup. Verified merged cleanup-only needs no metadata correction PR or repeated
+acceptance gate. Discover orphan stacks independently of worktrees with source/path/topology/data corroboration.
+After worker exit continue from the safe checkout with original model/ledger/authority; preserve active sessions.
+Positively qualify Docker VM read-only sharing against all containers (including stopped), parent mounts, host
+cwd/writers and stable preservation manifests. Unknown readers hold; never stop the shared VM. Preserve active,
+dirty/shared resources, independent reports, credentials and durable data. Reobserve current consumers, resume
+only missing effects and verify exact postconditions with finite recovery actions.
+
 ## Native Pi and retained workspace
 
 Select `/skill:<name>` interactively in native Pi after confirming availability; carry the chosen TASK/checkout

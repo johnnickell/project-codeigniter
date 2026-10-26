@@ -6,7 +6,9 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to th
 before general project orientation. Read its current human decision and active work; otherwise select the first
 executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
 Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
-bounded evidence reads and planning handoffs. Recommend and stop; load execution guidance when work is invoked.
+bounded evidence reads and planning handoffs. Before repeating delivery actions run read-only
+`./bin/planning-check --check-delivery` for relevant markers; exact merged/integrated `done` resolves without routine
+cleanup requests. Recommend and stop; load execution guidance when work is invoked.
 This routing path does not require reading README, architecture, full project context, task history or receiving skills.
 
 ## Project guidance
@@ -19,6 +21,10 @@ Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/R
 For PHP, tests, composition or analysis changes, follow [maintained PHP standards](planning/agents/php-standards.md).
 For installed shared Pi skills, apply the concise [target workflow binding](planning/agents/shared-workflows.md)
 through provider references; resolve resources from actual session metadata/settings, not private paths.
+
+At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` before record
+edits under [current delivery handoffs](planning/CONVENTIONS.md#current-delivery-handoffs); inspect affected authored
+claims separately. Review/QA/routing never write. Ordinary checks and view refresh stay offline.
 
 ## Planning and authority
 
