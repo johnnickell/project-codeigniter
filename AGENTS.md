@@ -6,9 +6,8 @@ For “What's next?”, `next`, or an unqualified `/ask-matt`, go straight to th
 before general project orientation. Read its current human decision and active work; otherwise select the first
 executable ready TASK in Board order. Use the [Wayfinder index](planning/wayfinder/README.md) for map status and current frontier pointers.
 Follow [lightweight work routing](planning/CONVENTIONS.md#lightweight-work-routing) for validation,
-bounded evidence reads and planning handoffs. Before repeating delivery actions run read-only
-`./bin/planning-check --check-delivery` for relevant markers; exact merged/integrated `done` resolves without routine
-cleanup requests. Recommend and stop; load execution guidance when work is invoked.
+bounded evidence reads and planning handoffs. Historical publication checkpoints do not create current merge
+actions or recurring post-merge planning work. Recommend and stop; load execution guidance when work is invoked.
 This routing path does not require reading README, architecture, full project context, task history or receiving skills.
 
 ## Project guidance
@@ -22,9 +21,10 @@ For PHP, tests, composition or analysis changes, follow [maintained PHP standard
 For installed shared Pi skills, apply the concise [target workflow binding](planning/agents/shared-workflows.md)
 through provider references; resolve resources from actual session metadata/settings, not private paths.
 
-At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` before record
-edits under [current delivery handoffs](planning/CONVENTIONS.md#current-delivery-handoffs); inspect affected authored
-claims separately. Review/QA/routing never write. Ordinary checks and view refresh stay offline.
+Land owns [publication closeout](planning/CONVENTIONS.md#publication-closeout): independently accepted TASK/
+current-doc closure, exact live own-PR/default/head/remote validation and eligible owned local Git/Docker/storage
+retirement. Human merge and open-PR remote heads remain separate; no tracked delivery queue or recurring
+post-merge bookkeeping. Planning checks stay offline; preserve historical acceptance/publication and reports.
 
 ## Planning and authority
 

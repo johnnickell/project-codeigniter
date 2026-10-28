@@ -1,17 +1,9 @@
 # Roadmap
 
-## Current delivery handoffs
-
-<!-- planning:delivery -->
-| Subject | Recorded delivery | Exact PR |
-|---|---|---|
-| None | — | — |
-<!-- /planning:delivery -->
-
 ## Current priorities
 
-Current delivery actions use the [Board reconciliation](tasks/BOARD.md#current-human-decision) and explicit delivery
-view above. Earlier PR #12/#16/#17/#19 publication checkpoints below are preserved history; all four are verified
+[Land closeout](CONVENTIONS.md#publication-closeout) owns exact live subject validation and eligible local retirement.
+The [Board observation](tasks/BOARD.md#current-human-decision) preserves historical integration facts. Earlier PR #12/#16/#17/#19 publication checkpoints below are preserved history; all four are verified
 merged/integrated and create no merge request or historical requery. Planning/decomposition priorities remain unchanged.
 
 Planning migration [TASK-00008](tasks/00008-TASK.md) is locally complete; independent review and hosted verification

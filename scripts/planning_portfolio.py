@@ -12,8 +12,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-from planning_delivery import current_delivery, delivery_identity, verify_delivery, reconcile_delivery, delivery_table
-
 ROOT = Path(__file__).resolve().parents[1]
 PLANNING = ROOT / "planning"
 VALID_STATUSES = {
@@ -164,8 +162,7 @@ def complete_parents(records: dict) -> dict[Path, str]:
 
 
 def projections(records: dict) -> dict[tuple[Path, str], str]:
-    views = {(path, "delivery"): delivery_table(ROOT, records, path)
-             for path in (PLANNING / "tasks/BOARD.md", PLANNING / "ROADMAP.md")}
+    views: dict[tuple[Path, str], str] = {}
     board = PLANNING / "tasks/BOARD.md"
     tasks = [(key, path, data) for key, (path, data) in records.items()
              if key.startswith("TASK-") and "archive" not in path.parts]
@@ -284,12 +281,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--write", action="store_true", help="offline view refresh")
-    mode.add_argument("--check-delivery", nargs="*", metavar="TASK-ID", help="bounded read-only live verification")
-    mode.add_argument("--reconcile-delivery", nargs="*", metavar="TASK-ID", help="authorized evidence-preserving retirement and view refresh")
     args = parser.parse_args()
-    writing = args.write or args.reconcile_delivery is not None
+    writing = args.write
     records, errors = load_records()
-    errors.extend(delivery_identity(ROOT, records))
     for path in PLANNING.rglob("*.md"):
         if path.name.startswith("_"):
             continue
@@ -304,11 +298,6 @@ def main() -> int:
     if not errors:
         closures = complete_parents(records)
         pending = dict(closures) if writing else {}
-        if args.reconcile_delivery is not None:
-            resolved, delivery_errors = verify_delivery(ROOT, records, args.reconcile_delivery)
-            errors.extend(delivery_errors)
-            if not errors:
-                pending.update(reconcile_delivery(records, resolved))
         if not writing and closures:
             errors.append("parent completion out of sync; run ./bin/planning-check --write")
         for (path, name), content in projections(records).items():
@@ -337,11 +326,6 @@ def main() -> int:
         return 1
     active = sum(data["status"] not in TERMINAL for _, data in records.values())
     print(f"Planning validation passed: {len(records)} records, {active} active; generated views {'refreshed' if writing else 'current'}")
-    if args.check_delivery is not None:
-        _, errors = verify_delivery(ROOT, records, args.check_delivery)
-        for error in errors:
-            print(error)
-        return 1 if errors else 0
     return 0
 
 

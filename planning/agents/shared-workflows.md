@@ -41,11 +41,11 @@ follow the provider's handoff/landing definitions with target semantics, not inv
 
 ## Integrated delivery and resource retirement
 
-At authorized Work/Land/substantive planning intake run `./bin/planning-check --reconcile-delivery` before record
-edits under [current delivery handoffs](../CONVENTIONS.md#current-delivery-handoffs). Inspect affected authored
-Board/Roadmap/README claims separately; preserve historical checkpoints and independent reports. Routing uses
-read-only `--check-delivery`; exact MERGED/integrated `done` resolves without routine cleanup requests.
-Review/QA/routing never write; exceptional/uncertain states hold their affected action for the exact owner/input.
+Land closes independently accepted TASKs, eligible parents and applicable current Board/Roadmap/README/docs
+during delivery under [publication closeout](../CONVENTIONS.md#publication-closeout). Preserve historical
+acceptance/publication and canonical independent reports. Keep current delivery/cleanup results in the durable
+ignored receipt and actual PR, not tracked markers/tables, a persistent pending-merge queue or recurring
+post-merge planning chore. Planning checks stay offline; uncertain identity holds the affected action.
 
 Before reconciliation, pre-publication and final handoff bind the live default against CodeIgniter's `develop`
 policy and existing subject PR using the resolved provider's `.pi/skills/land/scripts/bind-target.py` with target
@@ -60,8 +60,13 @@ acceptance gate. Discover orphan stacks independently of worktrees with source/p
 After worker exit continue from the safe checkout with original model/ledger/authority; preserve active sessions.
 Positively qualify Docker VM read-only sharing against all containers (including stopped), parent mounts, host
 cwd/writers and stable preservation manifests. Unknown readers hold; never stop the shared VM. Preserve active,
-dirty/shared resources, independent reports, credentials and durable data. Reobserve current consumers, resume
-only missing effects and verify exact postconditions with finite recovery actions.
+dirty/shared resources, independent reports, credentials and durable data. Capture creating-container mounts
+and named/image-anonymous volume creation provenance before creator removal. Inventory created versus merely
+used/shared containers, networks, volumes, images and caches with size, discard authority, dependencies and
+disposition. Reobserve exact identity and all consumers, including stopped containers, before each normal exact
+effect; unknown/shared/durable/excluded or denied inspection holds without force/prune, shared shutdown or
+suppressed cleanup errors. Resume only missing authorized effects and verify absence/preservation with finite
+recovery actions. Human merge stays separate; preserve open-PR remote heads.
 
 ## Native Pi and retained workspace
 
