@@ -42,30 +42,20 @@ Roadmap status tables are generated views. Authored strategy and decision narrat
 rules adopt the Fight Agent OS structure; [MIGRATION.md](MIGRATION.md) preserves the old identities and
 [SOURCE-NOTICE.md](SOURCE-NOTICE.md) records the inspected baseline and tooling provenance.
 
-## Current delivery handoffs
+## Publication closeout
 
-A live TASK's explicit `delivery: awaiting-merge` plus canonical `pr` URL is a publication snapshot, not permanent
-OPEN/readiness authority. Land sets it only from verified publication; `done`, old links and historical prose
-never create it. Board/Roadmap `planning:delivery` blocks derive only from markers. Offline validation checks
-exact origin/URL/subject identity, rejects conflicting subjects/marked archives/parents and stale views.
+Land closes independently accepted TASKs, eligible parents and applicable current Board/Roadmap/README/docs
+during delivery under [the workflow binding](agents/shared-workflows.md#integrated-delivery-and-resource-retirement).
+Validate exact live own PR/repository/default/base/head/remote candidate and required delivery proof; missing or
+conflicting identity holds the affected effect. Human merge stays separate; preserve open-PR remote heads.
 
-`./bin/planning-check --check-delivery [TASK-ID …]` is read-only: at most 16 marked PRs, one 15-second/16-KiB
-lookup each. Exact repository/URL/number/title/develop policy base/subject feature branch/full head and complete
-state must agree. OPEN retains acceptance/QA/delivery holds; draft means Land prerequisites, not human merge.
-MERGED resolves only for already-`done` work with valid merge OID/time and published-head → merge → local-HEAD
-ancestry, using five-second local Git reads with replacement objects/lazy fetches disabled. Continue routing
-without routine cleanup requests. Nonterminal, unintegrated, CLOSED-without-merge, unavailable or mismatched
-evidence holds the affected route for its exact requirement/Git/Land/evidence owner; never infer acceptance.
-
-At authorized Work/Land/substantive planning intake run `--reconcile-delivery` before record edits. It verifies
-that same evidence, retires only resolved markers with exact PR/base/head/branch/merge/time/local-HEAD evidence,
-rolls up eligible parents and refreshes views. Inspect affected authored Board/Roadmap/README claims separately;
-preserve historical checkpoints and independent reports. Repetition is a no-op; retired history is not queried.
-Later merges resolve read-only until the next authorized mutation, not a watcher/post-exit update. Review/QA/
-routing never write or dispatch Land. Validation/live errors prevent planned writes; inspect disk after I/O
-failure before retry. All explicit modes are mutually exclusive. Ordinary checks and `--write` remain offline;
-live modes do not fetch, merge, publish, check CI or infer acceptance. Apply [the local workflow binding](agents/shared-workflows.md#integrated-delivery-and-resource-retirement)
-for target-default and qualified cleanup obligations.
+Keep live results in durable ignored receipts and the actual PR, not tracked delivery markers/tables, a persistent
+pending-merge queue or recurring post-merge planning chore. Preserve historical acceptance/publication and
+canonical independent reports. A TASK `pr` is publication history, not live merge proof. Planning checks and
+`--write` stay offline; routing does not query historical PRs or dispatch delivery. Land also owns eligible local
+Git/Docker/storage retirement with durable creation/mount provenance, fresh exact identity/all-consumer checks
+and verified absence/preservation. Unknown/shared/durable/excluded or denied inspection holds without force/prune,
+shared shutdown or suppressed cleanup errors. Resume only missing authorized effects with finite recovery.
 
 ## Hierarchy and paths
 
