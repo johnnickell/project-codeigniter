@@ -58,8 +58,8 @@ fixtures. Validate infrastructure and documentation directly with their owning t
 
 Ask current checkout versus isolated worktree unless already chosen. New branches use
 `feature/task-NNNNN-<slug>` from `develop`; never commit directly to `develop` or `main`. Preserve established
-branches and unrelated work. Scratch belongs in `.runs/<YYYY-MM-DD>-<slug>/`, isolated worktrees in
-`.runs/worktrees/`; both are ignored and must not be staged.
+branches and unrelated work. Scratch belongs in ignored `.runs/` subfolders; isolated source worktrees stay outside `.runs/`,
+such as in a sibling `.worktrees/` directory. Never stage scratch.
 
 ## Completion and pre-submit gate
 
