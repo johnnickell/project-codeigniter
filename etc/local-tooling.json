@@ -9,7 +9,8 @@
   "outputs": [
     "var/reports",
     "writable/cache",
-    "writable/logs"
+    "writable/logs",
+    "writable/fight-common-storage"
   ],
   "runtime_probes": [
     [

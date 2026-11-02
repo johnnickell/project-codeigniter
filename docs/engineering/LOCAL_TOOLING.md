@@ -109,3 +109,5 @@ CodeIgniter’s native generated `writable/cache` and `writable/logs` trees are 
 Local development builds set native `BUILDX_NO_DEFAULT_ATTESTATIONS=1` for the build command so cached executable layers retain a stable immutable image identity instead of a timestamped attestation index. Release/publication commands retain their own policy. Layers and actual image IDs remain verified; this does not permit publishing local images.
 
 Use `./bin/runtime docker ps` to list all selected-checkout containers and their published ports, including plain-run tool previews. `docker compose ps` lists Compose services only.
+
+CLI and Composer wrappers use the invoking host UID/GID, with a temporary home and checkout-local Composer cache, so generated files remain host-readable on Linux. The gate verifies `writable/fight-common-storage` as a generated output artifact; it preserves this application storage during preparation. Changed storage invalidates reuse. Existing unreadable storage is an explicit verification failure; tooling never changes its ownership or deletes it to obtain a cache hit.

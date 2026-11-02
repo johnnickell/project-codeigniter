@@ -136,3 +136,5 @@ _modules/*
 
 /var/cache/
 /var/reports/
+
+/writable/fight-common-storage/
