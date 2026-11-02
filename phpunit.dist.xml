@@ -9,13 +9,13 @@
     columns="max"
     failOnRisky="true"
     failOnWarning="true"
-    cacheDirectory="build/.phpunit.cache"
+    cacheDirectory="var/cache/phpunit"
 >
     <coverage pathCoverage="false" ignoreDeprecatedCodeUnits="true">
         <report>
-            <clover outputFile="build/logs/clover.xml"/>
-            <html outputDirectory="build/logs/html"/>
-            <php outputFile="build/logs/coverage.serialized"/>
+            <clover outputFile="var/reports/clover.xml"/>
+            <html outputDirectory="var/reports/html"/>
+            <php outputFile="var/reports/coverage.serialized"/>
             <text outputFile="php://stdout" showUncoveredFiles="false"/>
         </report>
     </coverage>
@@ -27,9 +27,9 @@
     </testsuites>
 
     <logging>
-        <testdoxHtml outputFile="build/logs/testdox.html"/>
-        <testdoxText outputFile="build/logs/testdox.txt"/>
-        <junit outputFile="build/logs/logfile.xml"/>
+        <testdoxHtml outputFile="var/reports/testdox.html"/>
+        <testdoxText outputFile="var/reports/testdox.txt"/>
+        <junit outputFile="var/reports/logfile.xml"/>
     </logging>
 
     <source>

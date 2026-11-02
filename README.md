@@ -57,29 +57,30 @@ observed in the hello-world starter. We disable unused upload-progress tracking 
 future configuration changes. Do not replace startup mitigation with application `ini_set()` or `.user.ini`;
 reassess it only against an upstream fix.
 
-Before refreshing, verify the Compose project, source mount and port ownership (`docker compose ls`,
-`docker compose config`, `docker compose ps -a`, and `docker ps --filter publish=18085`). Do not recreate another
-checkout's services. In an isolated checkout, export a unique `COMPOSE_PROJECT_NAME` for **every** preparation,
-wrapper and verification command; the fixed port must still be free. Shared proxy/worktree port design is not
-provided here. For the selected, owned project:
+Follow [local tooling](docs/engineering/LOCAL_TOOLING.md) for explicit main/worktree selection, native
+ownership guards, dynamic loopback ports and source removal. Ambient Compose project/file overrides do not
+select a worktree. Main retains port 18085; isolated ports come from `./bin/runtime docker compose ps`.
+For the selected registered isolated checkout:
+
 
 ```sh
 # Fetch current base images even when local build layers are cached.
-docker compose build --pull
+./bin/up --worktree "$PWD" --build-only
 # Recreate every FPM/NGINX worker; restarting old containers does not adopt new images.
-./bin/up --force-recreate
+./bin/up --worktree "$PWD"
 ./bin/composer install --no-interaction --prefer-dist --no-progress
 ./bin/exec php -v
 ./bin/exec php-fpm -tt
 ./bin/exec sh -c 'php-fpm -i | grep -E "PHP Version|Loaded Configuration|Scan this dir|session.upload_progress.enabled|session.serialize_handler"'
-docker compose exec -T web nginx -v
-docker compose exec -T web nginx -t
-curl --fail http://localhost:18085/
+./bin/runtime docker compose exec -T web nginx -v
+./bin/runtime docker compose exec -T web nginx -t
+address="$(./bin/runtime docker compose port web 80)"
+curl --fail "http://${address}/"
 ./bin/build
 ```
 
 Require PHP 8.5.12+ within the declared support range, NGINX 1.30.6 on the selected stable line, and effective
-FPM `session.upload_progress.enabled` Off. Inspect `docker compose exec -T web nginx -T` and the FPM startup
+FPM `session.upload_progress.enabled` Off. Inspect `./bin/runtime docker compose exec -T web nginx -T` and the FPM startup
 configuration for overrides. CLI version/INI output or cached image metadata alone does not prove the settings
 of a running FPM request worker; verify the recreated process/image identity and, when needed, query the owned
 FPM worker with a temporary non-public diagnostic outside `public/`, removing it afterward. Never publish
@@ -132,3 +133,5 @@ separate completed package implementation from unfinished engineering decisions.
 certification removal alone were not package adoption.
 
 This repository is MIT-licensed source, not a release or package-distribution claim. Do not add copied shared source, credentials, production data, login, persistence, browser journeys, tags, Packagist publication, template enablement, or create-project distribution without a separately approved local TASK.
+
+See [local Docker, worktree and build-cache operations](docs/engineering/LOCAL_TOOLING.md) for explicit main/worktree selection, guarded teardown and fresh versus reused gate evidence.

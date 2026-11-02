@@ -128,3 +128,11 @@ _modules/*
 /results/
 /phpunit.xml
 /.runs/
+
+# Local gate cache and native worktree configuration
+/var/build.json
+/var/build.lock
+/var/worktrees/
+
+/var/cache/
+/var/reports/
