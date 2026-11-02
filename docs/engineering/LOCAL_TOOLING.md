@@ -106,6 +106,6 @@ Validate these tools directly with native Compose/Worktrunk and normal gates, ou
 
 CodeIgniter’s native generated `writable/cache` and `writable/logs` trees are output artifacts: their final bytes are verified before reuse. Tracked files in output trees remain source inputs.
 
-Local development builds use native `--provenance=false` so cached executable layers retain a stable immutable image identity instead of a timestamped attestation index. Release/publication commands retain their own policy. Layers and actual image IDs remain verified; this does not permit publishing local images.
+Local development builds set native `BUILDX_NO_DEFAULT_ATTESTATIONS=1` for the build command so cached executable layers retain a stable immutable image identity instead of a timestamped attestation index. Release/publication commands retain their own policy. Layers and actual image IDs remain verified; this does not permit publishing local images.
 
 Use `./bin/runtime docker ps` to list all selected-checkout containers and their published ports, including plain-run tool previews. `docker compose ps` lists Compose services only.
