@@ -2,4 +2,4 @@
 set -eu
 
 cd "$(dirname "$0")/.."
-docker compose exec -T app composer "$@"
+exec ./bin/exec env COMPOSER_CACHE_DIR=/app/var/cache/composer composer "$@"

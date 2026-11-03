@@ -15,6 +15,10 @@ This routing path does not require reading README, architecture, full project co
 For execution or substantive planning changes, load the applicable guidance below. The read-only routing
 path above takes precedence over broad orientation reads; it does not waive engineering or delivery rules.
 
+For Docker preparation/teardown, isolated worktrees, guarded source removal and build-cache evidence, follow
+[local tooling](docs/engineering/LOCAL_TOOLING.md). Use normal `./bin/build` for fresh planning and qualified
+application reuse; use `--force` for deliberate fresh application execution.
+
 Repository-local instructions are canonical. Read `ARCHITECTURE.md`, `planning/README.md`,
 `planning/CONVENTIONS.md`, and applicable focused instructions in `planning/agents/` before changing behavior.
 For PHP, tests, composition or analysis changes, follow [maintained PHP standards](planning/agents/php-standards.md).
@@ -54,8 +58,8 @@ fixtures. Validate infrastructure and documentation directly with their owning t
 
 Ask current checkout versus isolated worktree unless already chosen. New branches use
 `feature/task-NNNNN-<slug>` from `develop`; never commit directly to `develop` or `main`. Preserve established
-branches and unrelated work. Scratch belongs in `.runs/<YYYY-MM-DD>-<slug>/`, isolated worktrees in
-`.runs/worktrees/`; both are ignored and must not be staged.
+branches and unrelated work. Scratch belongs in ignored `.runs/` subfolders; isolated source worktrees stay outside `.runs/`,
+such as in a sibling `.worktrees/` directory. Never stage scratch.
 
 ## Completion and pre-submit gate
 
