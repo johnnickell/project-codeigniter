@@ -16,7 +16,7 @@ Apply this guidance when changing PHP, native composition, tests or analysis con
 
 Vendor, `.runs/`, writable/cache/build output and non-PHP assets are outside these scans. Coverage exclusions do
 not exclude configuration or templates from syntax/style. Python/shell/configuration tools are validated directly
-by their owners, not by PHP product tests. Product suites must not test tooling or deliberately invalid fixtures.
+by their owners, not by PHP product tests. Product suites must not test tooling with deliberately invalid fixtures; application rejection cases remain useful behavior tests.
 
 Focused commands (inside the prepared runtime, **not additional PHPUnit phases**):
 
@@ -107,3 +107,44 @@ still proves bounded job processing/retry. Planned coverage and stronger read-on
 with TASK-00016/00017. TASK-00015 already passes the current complete gate with exactly one full PHPUnit run.
 The [provider inventory](../tickets/00009-TICKET.md#existing-and-planned-provider-check-inventory) owns applicable,
 N/A and deferred checks. Unavailable upstream AI advisors are not installed, simulated, called or required.
+
+## Test quality and suite balance
+
+Require **100% Unit-only line coverage** of owned unit-testable production behavior. Report the source
+denominator, covered/total executable lines, driver and exact justified exclusions; include unexecuted source.
+Generated/vendor code and non-behavioral composition may have explicit, justified exclusions. Do not exclude
+difficult behavior or simple DTOs to reach the number. Integration/Functional hits cannot fill Unit gaps.
+Report branch coverage separately where available. Missing proof or a result below 100% is an unmet requirement,
+not a pass. Preserve existing stronger gates; identify missing enforcement and its bounded correction honestly.
+This guidance alone does not change the gate or establish a coverage result.
+
+Current PHPUnit source includes `app/` and excludes `app/Views` and `app/Config/Routes.php`. These existing
+exclusions are not automatic exemptions for future behavior: qualify their scope and rationale when implementing
+the required denominator. Unit-only line enforcement remains planned with TASK-00016; this guidance supplies no
+new test setup or coverage result. Preserve the current single full PHPUnit run and TASK-00017 gate ownership.
+
+Test one behavior with clear setup, one execution and preferably one assertion. A few related assertions may
+prove one outcome; do not split cohesive checks or hide them in a giant Boolean expression to satisfy a count.
+Use the clearest helper: `self::assertSame(20, $total)` for an exact value, `self::assertTrue($allowed)` for a
+Boolean. Expected values must come from the contract, not copied production output. Names and whitespace can
+show Arrange/Act/Assert or Given/When/Then; redundant phase comments are unnecessary.
+
+Immutable Commands, Events and Queries carry important contracts. Test meaningful assignment, defaults,
+validation and transformations; do not discard them because they are small or repeatedly test PHP guarantees.
+Look for tautological tests (assertions guaranteed by their own setup), duplicated scenarios and assertions
+that would pass after the protected behavior broke. Before removing a test, identify its unique protection
+and retain equivalent proof. Remove redundant comments while preserving required docblocks and useful reasons.
+
+Review the suite against roughly **1000 Unit : 100 Integration : 10 Functional** expanded runnable cases,
+including data-provider cases; report skipped cases separately. This is a review guide, not a quota or a
+coverage ratio. Unit tests isolate behavior without real databases, filesystems, networks or processes;
+Integration tests prove real boundaries; Functional tests cover critical journeys and smoke behavior.
+Classify by actual behavior, not folder names. Record counts and measured runtime, use the cheapest boundary
+that proves the contract, and explain risk-based or small-project exceptions. Never pad Unit counts, relabel
+slow tests or delete unique security, concurrency or external-contract protection to meet the ratio.
+
+Do not add tests proving that Deptrac, PHPStan, wrappers, build/planning tools or test infrastructure detect
+seeded failures. Validate tooling directly with its owning command. Focused mutation analysis of application
+code is allowed: it checks whether assertions detect changed behavior, not whether a quality tool works.
+It is optional, not an automatic dependency installation or routine gate. Measure its runtime; surviving
+mutants can be equivalent code or missing assertions and are not a test-deletion list.
